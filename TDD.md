@@ -1,9 +1,13 @@
 # TDD : Test Driven Development
 
-#### 참고문서 
+#### 참고문서
+
 - [TDD Changed My Life](https://medium.com/javascript-scene/tdd-changed-my-life-5af0ce099f80)
+- [5 Common Misconceptions About TDD & Unit Tests
+  ](https://medium.com/javascript-scene/5-common-misconceptions-about-tdd-unit-tests-863d5beb3ce9)
 
 ## TDD ?
+
 ![tdd_process](https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_1024/https://marsner.com/wp-content/uploads/test-driven-development-TDD.png)
 프로세스 자체는 굉장히 심플하다.
 
@@ -31,6 +35,7 @@
 다만, 이것에 익숙해지기 시작하면, 마법같은 일이 일어나는데, 유닛테스트에 익숙해지면서 이전과는 비교가 안될 속도로 코드를 작성하는 것이다.
 
 ## 수동 테스트
+
 TDD라는 개념이고 뭐고, 테스트 코드란게 있는지 조차 몰랐을 적의 내 모습을 떠올려보자.
 
 HTML/CSS, JS를 작성하면서, 제대로 됐는지 확인을 해야한다. 당시에 내가 할 수 있는 유일한 '테스트'는 새로고침을 하고, 직접 버튼을 눌러보고, `console.log`로 직접 상태를 확인하는 것이었다.
@@ -44,20 +49,21 @@ HTML/CSS, JS를 작성하면서, 제대로 됐는지 확인을 해야한다. 당
 ## 테스트코드의 마법
 
 ```js
-describe('clipReducer/setClipStopTime', async assert => {
+describe("clipReducer/setClipStopTime", async (assert) => {
   const stopTime = 5;
   const clipState = {
     startTime: 2,
-    stopTime: Infinity
+    stopTime: Infinity,
   };
   assert({
-    given: 'clip stop time',
-    should: 'set clip stop time in state',
+    given: "clip stop time",
+    should: "set clip stop time in state",
     actual: clipReducer(clipState, setClipStopTime(stopTime)),
-    expected: { ...clipState, stopTime }
+    expected: { ...clipState, stopTime },
   });
 });
 ```
+
 이 코드를 보면 무슨 생각이 드는가? **테스트 한번 하겠다고 너무 코드를 길게 써야하는 것 아닌가??** 싶을 수도 있겠다. 근데 그게 바로 요점이다. 이 테스트 코드는 일종의 **명세서**같은 개념이다. 이렇게 문서화되어있는 대로 코드를 동작시키겠다는 일종의 증명이고, 그것이 있는 한, **내가 제대로 테스트했는지**에 대한 염려 자체를 할 필요가 없어진다.
 
 결국 테스트 코드를 쓰는데 얼마나 오래걸렸는지가 중요한 것이 아니다. **뭔가 잘못되었을때, 그것을 디버깅하기 위해 얼마나 걸리는지**가 중요한 것이지. 위 코드가 제대로 동작하지 않으면, 그 테스트 자체가 훌륭한 버그 리포트가 된다. 테스트 코드를 살펴보는 것만으로 어디가 문제인지를 알 수 있게 된다.
@@ -71,3 +77,23 @@ TDD는 가능한한 UI 컴포넌트들을 작게 유지함으로써 훨씬 간�
 모든 소프트웨어 개발은 **구성(Composition)**이다. 커다란 문제들을 작고 해결이 쉬운 많은 문제들로 분해하고, 그 문제들에 대한 해결책들을 만들어 애플리케이션을 만들어간다.
 
 유닛테스트에서의 **모킹**은 이렇게 구성된 애플리케이션의 구성이 실제로 그렇게 범접 못할 정도로 긴밀하게 뭉쳐져있지 않다는 것을 알려주며, 어떻게 하면 그 '분리점'을 발견해낼 수 있는지를 알려준다.
+
+## TDD에 대한 5가지 오해
+
+1. TDD는 시간 낭비다. 경영팀에서 절대 허용해줄 리가 없다.
+
+2. 디자인을 알기 전에는 테스트를 작성할 수 없다 & 코드를 실행시켜보기 전까진 그 디자인을 알 수 없다.
+
+3. 코드를 실행하기 전에 모든 테스트를 작성해야만 한다.
+
+4. Red, Green 이후 **항상** 리팩토링한다.
+
+5. 모든 것에 유닛테스트가 필요하다.
+
+## 모든 유닛테스트가 갖춰야 하는 5가지 질문
+
+1. 무엇을 테스트하는 중인가?(모듈 / 함수 / 클래스 / 뭐든)
+2. 그것이 무엇을 해야 하는가? (설명: description)
+3. 실제로 나온 결과가 무엇인가?
+4. 예상했던 결과는 무엇인가?
+5. 어떻게 '실패'를 만들어 낼 수 있는가?

@@ -61,3 +61,45 @@ let user = new User; // <-- 괄호가 없음
 // 아래 코드는 위 코드와 똑같이 동작합니다.
 let user = new User();
 ```
+
+## 2. `new Function()`
+
+함수 표현식과 함수 선언문 이외에 함수를 만들 수 있는 방법이 하나 더 있다. 
+
+이는 자주 사용하는 방법은 아니지만, 마땅한 대안이 없을 때 사용될 수 있다.
+
+`new Function`을 이용은 다음과 같다.
+
+```js
+let func = new Function ([arg1, arg2, ...argN], functionBody);
+```
+
+`new Function`을 이용하는 방법의 가장 큰 차이는 런타임 시점에 받는 문자열을 사용해 함수를 만들 수 있다는 점이다.
+
+```js
+let sum = new Function('a', 'b', 'return a + b');
+
+alert( sum(1, 2) ); // 3
+```
+
+### 클로저와의 미묘한 관계
+
+클로저를 떠올려보자, 반환받은 중첩함수는 `[[Environment]]` 프로퍼티 덕분에 본인이 생성된 렉시컬 외부 환경을 기억할 수 있었다.
+
+그런데, `new Function`을 이용해 함수를 만들게 되면 함수의 `[[Environment]]` 프로퍼티가 현재의 렉시컬 환경이 아닌 전역 렉시컬 환경을 참조하게 된다.
+
+따라서, `new Function`을 통해 만든 함수는 외부 블록의 변수에 접근할 수 없고, 오직 전역 변수에만 접근할 수 있다.
+
+```js
+function getFunc() {
+  let value = "test";
+
+  let func = new Function('alert(value)');
+
+  return func;
+}
+
+getFunc()(); // ReferenceError: value is not defined
+```
+
+이러한 특징은, 특정 함수 내부에서 이름이 겹치는 변수들을 사용해도 충돌을 하지 않는다는 이점이 있다.

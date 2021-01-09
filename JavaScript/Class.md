@@ -216,3 +216,103 @@ class User {
 
 new User().sayHi();
 ```
+
+### 클래스 필드 
+이는 비교적 최근에 생겨난 기능으로, 구식 브라우저에서는 폴리필이 필요할 수도 있다.
+
+지금까지 살펴본 예시엔 메서드가 하나만 있었다.
+
+'클래스 필드(Class Field)'라는 문법을 사용하면 어떤 종류의 프로퍼티도 클래스에 추가할 수 있다.
+
+클래스 `User`에 `name` 프로퍼티를 추가해보자.
+
+```js
+class User {
+  name = "John";
+
+  sayHi() {
+    alert(`Hello, ${this.name}!`);
+  }
+}
+
+new User().sayHi(); // Hello, John!
+```
+
+클래스를 정의할 때 `<프로퍼티명> = <값>`을 써주면 간단히 클래스 필드를 만들 수 있다.]
+
+클래스 필드의 중요한 특징 중 하나는 `User.prototype`이 아닌 개별 객체에**만** 클래스 필드가 설정된다는 점이다.
+
+```js
+class User {
+  name = "John";
+}
+
+let user = new User();
+alert(user.name); // John
+alert(User.prototype.name); // undefined
+```
+
+클래스 필드는 생성자가 그 역할을 다 한 이후에 처리된다. 따라서 복잡한 표현식이나 함수 호출 결과를 사용할 수 있다.
+
+```js
+class User {
+  name = prompt("이름을 알려주세요.", "보라");
+}
+
+let user = new User();
+alert(user.name); // 보라
+```
+
+
+### 클래스 필드로 바인딩 된 메서드 만들기
+
+JS의 함수는 알다시피 동적인 `this`를 갖는다.
+
+따라서 객체 메서드를 여기저기 전달해 다른 컨텍스트에서 호출하게 되면 `this`는 원래 객체를 참조하지 않는다.
+
+관련 예시를 살펴보자. 예시를 실행하면 `undefined`가 출력된다.
+
+
+```js
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+
+  click() {
+    alert(this.value);
+  }
+}
+
+let button = new Button("hello");
+
+setTimeout(button.click, 1000); // undefined
+```
+
+이렇게 `this`의 컨텍스트를 알수 없게 되어버리는 문제를 **Losing this**라고 한다.
+
+문제를 해결하기 위해선 두 개의 방법이 있다.
+
+1. `setTimeout(() => button.click(), 1000)`같이 래퍼 함수를 전달
+2. 생성자 안 등에서 메서드를 객체에 바인딩
+
+여기에 더해, 클래스 필드는 또 다른 훌륭한 방법을 제공한다.
+
+```js
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+  click = () => {
+    alert(this.value);
+  }
+}
+
+let button = new Button("hello");
+
+setTimeout(button.click, 1000); // hello
+```
+
+클래스 필드 `click = () => {...}`는 각 `Button` 객체마다 독립적인 함수를 만들고 함수의 `this`를 해당 객체에 바인딩시켜준다. 따라서 개발자는 `button.click`과 같은 메서드를 아무 곳에나 전달할 수 있고, `this`에는 항상 의도한 값이 들어가게 된다.
+
+대체로 클래스 필드의 이런 기능은 **브라우저 환경에서 메서드를 이벤트 리스너로 설정해야 할 때 특히 유용하다.**

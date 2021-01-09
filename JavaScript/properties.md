@@ -141,3 +141,55 @@ alert(user.surname); // Cooper
 > **set** – 인수가 하나인 함수로, 프로퍼티에 값을 쓸 때 호출됨
 > **enumerable** – 데이터 프로퍼티와 동일함
 > **configurable** – 데이터 프로퍼티와 동일함
+
+이는 앞서 `defineProperty`메서드 등을 사용할 때도 똑같이 적용된다.
+
+```js
+let user = {
+  name: "John",
+  surname: "Smith"
+};
+
+Object.defineProperty(user, 'fullName', {
+  get() {
+    return `${this.name} ${this.surname}`;
+  },
+
+  set(value) {
+    [this.name, this.surname] = value.split(" ");
+  }
+});
+
+alert(user.fullName); // John Smith
+
+for(let key in user) alert(key); // name, surname
+```
+
+프로퍼티는 접근자 프로퍼티나 데이터 프로퍼티 중 한 종류에만 속하고, 둘 다에 속할 수는 없다는 점을 유의하자.
+
+### getter와 setter 똑똑하게 써먹기
+
+`getter`와 `setter`를 실제 프로퍼티 값을 감싸 래퍼(wrapper)처럼 활용하면 프로퍼티값을 원하는대로 통제할 수 있다.
+
+```js
+let user = {
+  get name() {
+    return this._name;
+  },
+
+  set name(value) {
+    if (value.length < 4) {
+      alert("입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.");
+      return;
+    }
+    this._name = value;
+  }
+};
+
+user.name = "Pete";
+alert(user.name); // Pete
+
+user.name = ""; // 너무 짧은 이름을 할당하려 함
+```
+
+위에서 `user`의 이름은 `_name`에 저장되고, 프로퍼티에 접근하는 것은 getter와 setter를 통해 이루어진다. `_name`과 같이 밑줄 `_`로 시작하는 프로퍼티는 관습 상 외부에서 건드리지 않는다.

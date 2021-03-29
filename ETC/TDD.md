@@ -49,15 +49,15 @@ HTML/CSS, JS를 작성하면서, 제대로 됐는지 확인을 해야한다. 당
 ## 테스트코드의 마법
 
 ```js
-describe("clipReducer/setClipStopTime", async (assert) => {
+describe('clipReducer/setClipStopTime', async (assert) => {
   const stopTime = 5;
   const clipState = {
     startTime: 2,
     stopTime: Infinity,
   };
   assert({
-    given: "clip stop time",
-    should: "set clip stop time in state",
+    given: 'clip stop time',
+    should: 'set clip stop time in state',
     actual: clipReducer(clipState, setClipStopTime(stopTime)),
     expected: { ...clipState, stopTime },
   });

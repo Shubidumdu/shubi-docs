@@ -29,7 +29,7 @@ class User {
 }
 
 // 사용법:
-let user = new User("John");
+let user = new User('John');
 user.sayHi();
 ```
 
@@ -92,7 +92,7 @@ User.prototype.sayHi = function () {
 };
 
 // 사용법:
-let user = new User("John");
+let user = new User('John');
 user.sayHi();
 ```
 
@@ -131,7 +131,7 @@ alert(User); // class User { ... }
 ```js
 let User = class {
   sayHi() {
-    alert("Hello");
+    alert('Hello');
   }
 };
 ```
@@ -166,7 +166,7 @@ function makeClass(phrase) {
 }
 
 // 새로운 클래스를 만듦
-let User = makeClass("Hello");
+let User = makeClass('Hello');
 
 new User().sayHi(); // Hello
 ```
@@ -188,17 +188,17 @@ class User {
 
   set name(value) {
     if (value.length < 4) {
-      alert("이름이 너무 짧습니다.");
+      alert('이름이 너무 짧습니다.');
       return;
     }
     this._name = value;
   }
 }
 
-let user = new User("John");
+let user = new User('John');
 alert(user.name); // John
 
-user = new User(""); // 이름이 너무 짧습니다.
+user = new User(''); // 이름이 너무 짧습니다.
 ```
 
 이런 방법으로 클래스를 선언하면 `User.prototype`에 getter와 setter가 만들어지는 것과 동일하다.
@@ -209,15 +209,16 @@ user = new User(""); // 이름이 너무 짧습니다.
 
 ```js
 class User {
-  ["say" + "Hi"]() {
-    alert("Hello");
+  ['say' + 'Hi']() {
+    alert('Hello');
   }
 }
 
 new User().sayHi();
 ```
 
-### 클래스 필드 
+### 클래스 필드
+
 이는 비교적 최근에 생겨난 기능으로, 구식 브라우저에서는 폴리필이 필요할 수도 있다.
 
 지금까지 살펴본 예시엔 메서드가 하나만 있었다.
@@ -228,7 +229,7 @@ new User().sayHi();
 
 ```js
 class User {
-  name = "John";
+  name = 'John';
 
   sayHi() {
     alert(`Hello, ${this.name}!`);
@@ -244,7 +245,7 @@ new User().sayHi(); // Hello, John!
 
 ```js
 class User {
-  name = "John";
+  name = 'John';
 }
 
 let user = new User();
@@ -256,13 +257,12 @@ alert(User.prototype.name); // undefined
 
 ```js
 class User {
-  name = prompt("이름을 알려주세요.", "보라");
+  name = prompt('이름을 알려주세요.', '보라');
 }
 
 let user = new User();
 alert(user.name); // 보라
 ```
-
 
 ### 클래스 필드로 바인딩 된 메서드 만들기
 
@@ -271,7 +271,6 @@ JS의 함수는 알다시피 동적인 `this`를 갖는다.
 따라서 객체 메서드를 여기저기 전달해 다른 컨텍스트에서 호출하게 되면 `this`는 원래 객체를 참조하지 않는다.
 
 관련 예시를 살펴보자. 예시를 실행하면 `undefined`가 출력된다.
-
 
 ```js
 class Button {
@@ -284,7 +283,7 @@ class Button {
   }
 }
 
-let button = new Button("hello");
+let button = new Button('hello');
 
 setTimeout(button.click, 1000); // undefined
 ```
@@ -305,10 +304,10 @@ class Button {
   }
   click = () => {
     alert(this.value);
-  }
+  };
 }
 
-let button = new Button("hello");
+let button = new Button('hello');
 
 setTimeout(button.click, 1000); // hello
 ```

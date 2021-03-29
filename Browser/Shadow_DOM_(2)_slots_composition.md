@@ -46,9 +46,9 @@ customElements.define('user-card', class extends HTMLElement {
 
 섀도우 DOM에서, `<slot name='X'>`은 **삽입 지점**을 의미하며, 여기에는 추후 `slot='X'`를 light DOM에서 지정한 요소가 위치하게 된다.
 
-이후 브라우저는 **합성_composition**을 수행하는데, 이는 light DOM에서 요소를 가져와 이에 대응하는 shadow DOM의 slot에 렌더링시키는 과정이다.
+이후 브라우저는 **합성\_composition**을 수행하는데, 이는 light DOM에서 요소를 가져와 이에 대응하는 shadow DOM의 slot에 렌더링시키는 과정이다.
 
-스크립트가 동작한 후, 아직 **합성_composition**이 동작하지 않은 상태의 DOM 구조는 아래와 같다.
+스크립트가 동작한 후, 아직 **합성\_composition**이 동작하지 않은 상태의 DOM 구조는 아래와 같다.
 
 ```HTML
 <user-card>
@@ -73,17 +73,19 @@ customElements.define('user-card', class extends HTMLElement {
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
-      <slot name="username">
-        <!-- slotted element is inserted into the slot -->
-        <span slot="username">John Smith</span>
-      </slot>
-    </div>
-    <div>Birthday:
-      <slot name="birthday">
-        <span slot="birthday">01.01.2001</span>
-      </slot>
-    </div>
+  <div>
+    Name:
+    <slot name="username">
+      <!-- slotted element is inserted into the slot -->
+      <span slot="username">John Smith</span>
+    </slot>
+  </div>
+  <div>
+    Birthday:
+    <slot name="birthday">
+      <span slot="birthday">01.01.2001</span>
+    </slot>
+  </div>
 </user-card>
 ```
 
@@ -93,12 +95,13 @@ customElements.define('user-card', class extends HTMLElement {
 
 ```js
 // light DOM <span> nodes are still at the same place, under `<user-card>`
-alert( document.querySelectorAll('user-card span').length ); // 2
+alert(document.querySelectorAll('user-card span').length); // 2
 ```
 
 결국, flatten DOM은 shadow DOM에서 slot에 대한 삽입을 통해 만들어진다. 브라우저는 이를 렌더링, 스타일 상속, 이벤트 전파의 목적으로 활용한다. 하지만, JS는 여전히 flatten이 이루어지기 전의 문서만을 볼 수 있다.
 
 ### **유의!**
+
 ```html
 <user-card>
   <span slot="username">John Smith</span>
@@ -110,7 +113,6 @@ alert( document.querySelectorAll('user-card span').length ); // 2
 ```
 
 > `slot-'...'` 속성을 가진 태그는 최상위의 자식 노드여야 한다. 보다 깊은 곳에 위치한 노드들은 무시된다.
-
 
 한편, 똑같은 slot에 지정된 여러개의 요소들이 light DOM에 존재한다면, **이들은 갱신되는 것이 아니라, 순서대로 slot에 추가된다.**
 
@@ -145,7 +147,8 @@ alert( document.querySelectorAll('user-card span').length ); // 2
 만약, `<slot>`태그에 어떤 값이 존재한다면, 이는 **fallback**(대비책)이 된다. 다시말해, **default**값이 된다. 브라우저는 light DOM에서 상응하는 `slot='...'` 요소를 찾지 못하는 경우 해당 기본값을 렌더링한다.
 
 ```html
-<div>Name:
+<div>
+  Name:
   <slot name="username">Anonymous</slot>
 </div>
 ```
@@ -158,10 +161,12 @@ shadow DOM에서 `name`이 존재하지 않는 첫번째 `<slot>`은 **default s
 
 ```html
 <script>
-customElements.define('user-card', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.innerHTML = `
+  customElements.define(
+    'user-card',
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `
     <div>Name:
       <slot name="username"></slot>
     </div>
@@ -173,8 +178,9 @@ customElements.define('user-card', class extends HTMLElement {
       <slot></slot>
     </fieldset>
     `;
-  }
-});
+      }
+    },
+  );
 </script>
 
 <user-card>
@@ -225,6 +231,7 @@ customElements.define('user-card', class extends HTMLElement {
 보다 상세한 처리가 요구되는 경우, **MutationObserver**를 사용할 수도 있다.
 
 ## Slot API
+
 마지막으로, slot과 관련된 JS 메서드들을 살펴보자.
 
 앞서 말했듯, JS는 오직 실제 DOM만을 바라본다. flatten DOM에 대해선 신경쓰지 않는다.
@@ -247,30 +254,38 @@ customElements.define('user-card', class extends HTMLElement {
 </custom-menu>
 
 <script>
-customElements.define('custom-menu', class extends HTMLElement {
-  items = []
+  customElements.define(
+    'custom-menu',
+    class extends HTMLElement {
+      items = [];
 
-  connectedCallback() {
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.innerHTML = `<div class="menu">
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `<div class="menu">
       <slot name="title"></slot>
       <ul><slot name="item"></slot></ul>
     </div>`;
 
-    // slottable is added/removed/replaced
-    this.shadowRoot.firstElementChild.addEventListener('slotchange', e => {
-      let slot = e.target;
-      if (slot.name == 'item') {
-        this.items = slot.assignedElements().map(elem => elem.textContent);
-        alert("Items: " + this.items);
+        // slottable is added/removed/replaced
+        this.shadowRoot.firstElementChild.addEventListener(
+          'slotchange',
+          (e) => {
+            let slot = e.target;
+            if (slot.name == 'item') {
+              this.items = slot
+                .assignedElements()
+                .map((elem) => elem.textContent);
+              alert('Items: ' + this.items);
+            }
+          },
+        );
       }
-    });
-  }
-});
+    },
+  );
 
-// items update after 1 second
-setTimeout(() => {
-  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Cup Cake</li>')
-}, 1000);
+  // items update after 1 second
+  setTimeout(() => {
+    menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Cup Cake</li>');
+  }, 1000);
 </script>
 ```

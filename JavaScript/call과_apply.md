@@ -16,25 +16,26 @@ function slow(x) {
 function cachingDecorator(func) {
   let cache = new Map();
 
-  return function(x) {
-    if (cache.has(x)) {    // cache에 해당 키가 있으면
+  return function (x) {
+    if (cache.has(x)) {
+      // cache에 해당 키가 있으면
       return cache.get(x); // 대응하는 값을 cache에서 읽어옵니다.
     }
 
-    let result = func(x);  // 그렇지 않은 경우엔 func를 호출하고,
+    let result = func(x); // 그렇지 않은 경우엔 func를 호출하고,
 
-    cache.set(x, result);  // 그 결과를 캐싱(저장)합니다.
+    cache.set(x, result); // 그 결과를 캐싱(저장)합니다.
     return result;
   };
 }
 
 slow = cachingDecorator(slow);
 
-alert( slow(1) ); // slow(1)이 저장되었습니다.
-alert( "다시 호출: " + slow(1) ); // 동일한 결과
+alert(slow(1)); // slow(1)이 저장되었습니다.
+alert('다시 호출: ' + slow(1)); // 동일한 결과
 
-alert( slow(2) ); // slow(2)가 저장되었습니다.
-alert( "다시 호출: " + slow(2) ); // 윗줄과 동일한 결과
+alert(slow(2)); // slow(2)가 저장되었습니다.
+alert('다시 호출: ' + slow(2)); // 윗줄과 동일한 결과
 ```
 
 ## `func.call`로 컨텍스트 지정하기
@@ -52,13 +53,13 @@ let worker = {
     // CPU 집약적인 작업이라 가정
     alert(`slow(${x})을/를 호출함`);
     return x * this.someMethod(); // (*)
-  }
+  },
 };
 
 // 이전과 동일한 코드
 function cachingDecorator(func) {
   let cache = new Map();
-  return function(x) {
+  return function (x) {
     if (cache.has(x)) {
       return cache.get(x);
     }
@@ -68,11 +69,11 @@ function cachingDecorator(func) {
   };
 }
 
-alert( worker.slow(1) ); // 기존 메서드는 잘 동작합니다.
+alert(worker.slow(1)); // 기존 메서드는 잘 동작합니다.
 
 worker.slow = cachingDecorator(worker.slow); // 캐싱 데코레이터 적용
 
-alert( worker.slow(2) ); // 에러 발생!, Error: Cannot read property 'someMethod' of undefined
+alert(worker.slow(2)); // 에러 발생!, Error: Cannot read property 'someMethod' of undefined
 ```
 
 `func.call`은 이때 사용할 수 있는데, 이는 `this`를 명시적으로 고정해 함수를 호출할 수 있게 해주는 내장 함수 메서드다. 기본적으로는 아래와 같은 형태다.
@@ -85,18 +86,17 @@ func.call(context, arg1, arg2, ...)
 
 ```js
 func(1, 2, 3);
-func.call(obj, 1, 2, 3)
+func.call(obj, 1, 2, 3);
 ```
 
 위의 두 실행은 거의 동일하다. 유일한 차이점은 `func.call`에서의 `this`는 `obj`로 고정된다는 점이다.
-
 
 ## func.apply도 동일한 역할을 한다.
 
 `func.apply`를 사용해도 된다. 이는 아래와 같은 형태다.
 
 ```js
-func.apply(context, args)
+func.apply(context, args);
 ```
 
 `apply`는 `func`의 `this`를 `context`로 고정시켜주고, 유사 배열 객체 `args`를 인수로 사용할 수 있게 해준다. `call`과의 문법적 차이는 `call`이 여러 개의 인수들을 따로따로 받는 대신 `apply`는 배열을 인수로 받는 다는 점 뿐이다.
@@ -105,7 +105,7 @@ func.apply(context, args)
 
 ```js
 func.call(context, ...args);
-func.apply(context, args); 
+func.apply(context, args);
 ```
 
 이렇게 인수 전체를 다른 함수에 전달하는 것을 **콜 포워딩(Call Forwarding)** 이라고 한다.

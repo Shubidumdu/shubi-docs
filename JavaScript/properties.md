@@ -14,7 +14,6 @@
 
 프로퍼티 플래그는 특별한 경우가 아니라면 쓰이지 않는다. 평범한 방식으로 프로퍼티를 만들면 해당 프로퍼티 플래그는 모두 `true`가 되고, 이렇게 설정된 플래그는 언제든 수정할 수 있다.
 
-
 먼저 플래그를 얻는 방법에 대해 알아보자.
 
 `Object.getOwnPropertyDescriptor` 메서드는 특정 프로퍼티에 대한 정보를 모두 얻을 수 있게 해준다.
@@ -27,12 +26,12 @@ let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 
 ```js
 let user = {
-  name: "John"
+  name: 'John',
 };
 
 let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 
-alert( JSON.stringify(descriptor, null, 2 ) );
+alert(JSON.stringify(descriptor, null, 2));
 /* property descriptor:
 {
   "value": "John",
@@ -46,7 +45,7 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 `Object.defineProperty`를 사용하면 플래그를 변경할 수 있다.
 
 ```js
-Object.defineProperty(obj, propertyName, descriptor)
+Object.defineProperty(obj, propertyName, descriptor);
 ```
 
 이는 해당 프로퍼티가 이미 존재한다면, 해당 프로퍼티를 인자로 넘긴 플래그에 따라 변경해주고, 프로퍼티가 없으면 인수로 넘겨받은 정보를 통해 새로운 프로퍼티를 만든다. 플래그 정보가 따로 없는 경우는 자동으로 `false`가 된다.
@@ -55,8 +54,8 @@ Object.defineProperty(obj, propertyName, descriptor)
 
 ```js
 Object.defineProperties(user, {
-  name: { value: "John", writable: false },
-  surname: { value: "Smith", writable: false },
+  name: { value: 'John', writable: false },
+  surname: { value: 'Smith', writable: false },
   // ...
 });
 ```
@@ -84,7 +83,7 @@ let obj = {
 
   set propName(value) {
     // setter, obj.propName = value를 실행할 때 실행되는 코드
-  }
+  },
 };
 ```
 
@@ -92,17 +91,17 @@ let obj = {
 
 ```js
 let user = {
-  name: "John",
-  surname: "Smith",
+  name: 'John',
+  surname: 'Smith',
 
   get fullName() {
     return `${this.name} ${this.surname}`;
-  }
+  },
 };
 
 alert(user.fullName); // John Smith
 
-user.fullName = "Test"; // Error (프로퍼티에 getter 메서드만 있어서 에러가 발생합니다.)
+user.fullName = 'Test'; // Error (프로퍼티에 getter 메서드만 있어서 에러가 발생합니다.)
 ```
 
 또한, `getter`만 있는 경우는 값을 직접 할당할 수 없어 위와 같은 에러가 발생한다.
@@ -111,20 +110,20 @@ user.fullName = "Test"; // Error (프로퍼티에 getter 메서드만 있어서 
 
 ```js
 let user = {
-  name: "John",
-  surname: "Smith",
+  name: 'John',
+  surname: 'Smith',
 
   get fullName() {
     return `${this.name} ${this.surname}`;
   },
 
   set fullName(value) {
-    [this.name, this.surname] = value.split(" ");
-  }
+    [this.name, this.surname] = value.split(' ');
+  },
 };
 
 // 주어진 값을 사용해 set fullName이 실행됩니다.
-user.fullName = "Alice Cooper";
+user.fullName = 'Alice Cooper';
 
 alert(user.name); // Alice
 alert(user.surname); // Cooper
@@ -146,8 +145,8 @@ alert(user.surname); // Cooper
 
 ```js
 let user = {
-  name: "John",
-  surname: "Smith"
+  name: 'John',
+  surname: 'Smith',
 };
 
 Object.defineProperty(user, 'fullName', {
@@ -156,13 +155,13 @@ Object.defineProperty(user, 'fullName', {
   },
 
   set(value) {
-    [this.name, this.surname] = value.split(" ");
-  }
+    [this.name, this.surname] = value.split(' ');
+  },
 });
 
 alert(user.fullName); // John Smith
 
-for(let key in user) alert(key); // name, surname
+for (let key in user) alert(key); // name, surname
 ```
 
 프로퍼티는 접근자 프로퍼티나 데이터 프로퍼티 중 한 종류에만 속하고, 둘 다에 속할 수는 없다는 점을 유의하자.
@@ -179,17 +178,19 @@ let user = {
 
   set name(value) {
     if (value.length < 4) {
-      alert("입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.");
+      alert(
+        '입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.',
+      );
       return;
     }
     this._name = value;
-  }
+  },
 };
 
-user.name = "Pete";
+user.name = 'Pete';
 alert(user.name); // Pete
 
-user.name = ""; // 너무 짧은 이름을 할당하려 함
+user.name = ''; // 너무 짧은 이름을 할당하려 함
 ```
 
 위에서 `user`의 이름은 `_name`에 저장되고, 프로퍼티에 접근하는 것은 getter와 setter를 통해 이루어진다. `_name`과 같이 밑줄 `_`로 시작하는 프로퍼티는 관습 상 외부에서 건드리지 않는다.

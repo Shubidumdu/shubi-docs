@@ -2,7 +2,6 @@
 
 `MutationObserver`는 DOM 요소를 감시하다가 변화를 감지하면 콜백을 호출하는 내장 객체이다.
 
-
 ## 문법
 
 `MutationObserver`를 사용하는 것은 간단하다.
@@ -49,19 +48,19 @@ observer.observe(node, config);
 다음은 간단한 예시다.
 
 ```html
-<div contentEditable id="elem">Click and <b>edit</b>, please</div>
+<div contenteditable id="elem">Click and <b>edit</b>, please</div>
 
 <script>
-let observer = new MutationObserver(mutationRecords => {
-  console.log(mutationRecords); // console.log(the changes)
-});
+  let observer = new MutationObserver((mutationRecords) => {
+    console.log(mutationRecords); // console.log(the changes)
+  });
 
-// observe everything except attributes
-observer.observe(elem, {
-  childList: true, // observe direct children
-  subtree: true, // and lower descendants too
-  characterDataOldValue: true // pass old data to callback
-});
+  // observe everything except attributes
+  observer.observe(elem, {
+    childList: true, // observe direct children
+    subtree: true, // and lower descendants too
+    characterDataOldValue: true, // pass old data to callback
+  });
 </script>
 ```
 
@@ -99,7 +98,7 @@ observer.observe(elem, {
 
 ## 활용 사례
 
-그래서, 언제 이를  활용할 수 있을까?
+그래서, 언제 이를 활용할 수 있을까?
 
 만약, 서드파티 라이브러리를 사용하는데, 원치않는 광고가 포함되어 있다고 해보자. 이를테면 `<div class='ads'>...</ads>`와 같이.
 
@@ -129,14 +128,17 @@ observer.observe(elem, {
 그래서, 이제 이 메서드를 정확히 **언제** 사용해야 할까? `DOMContentLoaded` 이벤트 발생 시에 사용하는 것을 고려해볼 수 있겠다. 이후 각각의 코드 조각들에 대해 다음과 같이 하이라이팅을 적용시킬 수 있다.
 
 ```js
-document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
+document
+  .querySelectorAll('pre[class*="language"]')
+  .forEach(Prism.highlightElem);
 ```
 
 지금까지는 수월해보인다. 근데, 만약에 서버를 통해 또 다른 코드 조각들을 가져와서 화면에 띄워주어야 한다면, 이는 어떻게 해결할 수 있을까?
 
 ```js
-let article = /* fetch new content from server */
-articleElem.innerHTML = article;
+let article =
+  /* fetch new content from server */
+  (articleElem.innerHTML = article);
 
 let snippets = articleElem.querySelectorAll('pre[class*="language-"]');
 snippets.forEach(Prism.highlightElem);
@@ -147,12 +149,11 @@ snippets.forEach(Prism.highlightElem);
 결국, 이 역시 `MutationObserver`를 통해 페이지 내에 삽입되는 코드 조각들을 감지하여 처리할 수 있다.
 
 ```js
-let observer = new MutationObserver(mutations => {
-
-  for(let mutation of mutations) {
+let observer = new MutationObserver((mutations) => {
+  for (let mutation of mutations) {
     // examine new nodes, is there anything to highlight?
 
-    for(let node of mutation.addedNodes) {
+    for (let node of mutation.addedNodes) {
       // we track only elements, skip other nodes (e.g. text nodes)
       if (!(node instanceof HTMLElement)) continue;
 
@@ -162,17 +163,16 @@ let observer = new MutationObserver(mutations => {
       }
 
       // or maybe there's a code snippet somewhere in its subtree?
-      for(let elem of node.querySelectorAll('pre[class*="language-"]')) {
+      for (let elem of node.querySelectorAll('pre[class*="language-"]')) {
         Prism.highlightElement(elem);
       }
     }
   }
-
 });
 
 let demoElem = document.getElementById('highlight-demo');
 
-observer.observe(demoElem, {childList: true, subtree: true});
+observer.observe(demoElem, { childList: true, subtree: true });
 ```
 
 ## 추가적인 메서드

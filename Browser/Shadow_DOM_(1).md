@@ -1,15 +1,17 @@
 # Shadow DOM
+
 섀도우 DOM은 캡슐화를 위해 제공된다. 이는 하나의 컴포넌트가 스스로의 **shadow DOM tree**를 가질 수 있게 하며, 메인 문서에서 접근 할 수 없으며, 로컬 스타일 규칙을 보유할 수 있다.
 
 ## 빌트인 섀도우 DOM
+
 `<input type="range">`과 같은 것들은 브라우저마다 다른 자체적인 스타일을 보유한다. 이는 섀도우 DOM을 통해 브라우저 자체적으로 스타일링을 하고 있기 때문인데, 기본적으로 이는 이용자들로부터 숨겨져있다. 이를 보고자 한다면 개발자 도구의 옵션을 건드려야 한다.
 
-
 ## 섀도우 트리 (Shadow Tree)
+
 하나의 DOM 요소에는 두가지 유형의 DOM 서브트리가 존재한다.
 
 1. Light Tree - 일반적인 DOM 서브트리. 우리가 기존에 알고 쓰던 모든 서브트리는 이에 해당한다.
-2. Shadow Tree - 숨겨진 DOM  서브트리. HTML 상에 보여지지 않는다.
+2. Shadow Tree - 숨겨진 DOM 서브트리. HTML 상에 보여지지 않는다.
 
 만약, 두 가지 유형의 서브트리를 모두 갖는 요소가 있다면, 브라우저는 오직 섀도우 트리만을 렌더링한다. 물론 각각을 적절히 조합하도록 설정할 수도 있는데, 이에 대해선 추후에 설명한다.
 
@@ -19,14 +21,17 @@
 
 ```html
 <script>
-customElements.define('show-hello', class extends HTMLElement {
-  connectedCallback() {
-    const shadow = this.attachShadow({mode: 'open'});
-    shadow.innerHTML = `<p>
+  customElements.define(
+    'show-hello',
+    class extends HTMLElement {
+      connectedCallback() {
+        const shadow = this.attachShadow({ mode: 'open' });
+        shadow.innerHTML = `<p>
       Hello, ${this.getAttribute('name')}
     </p>`;
-  }
-});
+      }
+    },
+  );
 </script>
 
 <show-hello name="John"></show-hello>
@@ -34,8 +39,8 @@ customElements.define('show-hello', class extends HTMLElement {
 
 커스텀 요소를 만들기 위해서는 먼저 `elem.attachShadow({mode: ...})`를 호출해야 한다. 여기엔 두 가지 제한이 있다.
 
-  1. 각 요소 당 하나의 섀도우 루트(shadow-root)만 가질 수 있다. 
-  2. `elem`은 반드시 커스텀 요소이거나,  다음 중 하나여야 한다. (“article”, “aside”, “blockquote”, “body”, “div”, “footer”, “h1…h6”, “header”, “main” “nav”, “p”, “section”, “span”)
+1. 각 요소 당 하나의 섀도우 루트(shadow-root)만 가질 수 있다.
+2. `elem`은 반드시 커스텀 요소이거나, 다음 중 하나여야 한다. (“article”, “aside”, “blockquote”, “body”, “div”, “footer”, “h1…h6”, “header”, “main” “nav”, “p”, “section”, “span”)
 
 `mode`옵션은 캡슐화 레벨을 설정한다. 다음의 둘 중 하나여야 한다.
 
@@ -66,14 +71,16 @@ alert(elem.shadowRoot.host === elem); // true
 ```html
 <style>
   /* document style won't apply to the shadow tree inside #elem (1) */
-  p { color: red; }
+  p {
+    color: red;
+  }
 </style>
 
 <div id="elem"></div>
 
 <script>
-  elem.attachShadow({mode: 'open'});
-    // shadow tree has its own style (2)
+  elem.attachShadow({ mode: 'open' });
+  // shadow tree has its own style (2)
   elem.shadowRoot.innerHTML = `
     <style> p { font-weight: bold; } </style>
     <p>Hello, John!</p>

@@ -6,7 +6,6 @@
 
 GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는 것이다. 덕분에 항상 클라이언트가 기대한 결과값을 얻을 수 있다.
 
-
 ```graphql
 # query
 {
@@ -33,7 +32,7 @@ GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는
 }
 ```
 
-아래 예제에서 `licenses`는 배열을 반환하며, 배열 안 각각의 Item에 대해 `name`만을 가져온다. 
+아래 예제에서 `licenses`는 배열을 반환하며, 배열 안 각각의 Item에 대해 `name`만을 가져온다.
 
 쿼리문 자체는 모두 동일해보이지만, GraphQL 스키마를 기반으로 예상되는 결과를 알 수 있다.
 
@@ -73,8 +72,8 @@ GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는
 ```graphql
 # query
 {
-	user(login: "Shubidumdu") {
-    name,
+  user(login: "Shubidumdu") {
+    name
     location
   }
 }
@@ -93,13 +92,14 @@ GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는
 ```
 
 ## Aliases
+
 만약, 여러 결과 객체 필드가 동일한 이름을 갖는 경우(위에서는 `user`), 충돌이 일어난다. 아래는 닉네임을 통해 여러 유저의 정보를 가져오는 예시인데, 아래대로라면 에러가 발생한다.
 
 ```graphql
 # query
 {
-	user(login: "Shubidumdu") {
-    name,
+  user(login: "Shubidumdu") {
+    name
     location
   }
   user(login: "adam-p") {
@@ -142,8 +142,8 @@ GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는
 ```graphql
 # query
 {
-	me: user(login: "Shubidumdu") {
-    name,
+  me: user(login: "Shubidumdu") {
+    name
     location
   }
   not_me: user(login: "adam-p") {
@@ -178,7 +178,7 @@ GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는
 ```graphql
 # query
 {
-	me: user(login: "Shubidumdu") {
+  me: user(login: "Shubidumdu") {
     ...userInfo
   }
   not_me: user(login: "adam-p") {
@@ -187,7 +187,7 @@ GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는
 }
 
 fragment userInfo on User {
-  name,
+  name
   location
 }
 ```
@@ -218,7 +218,7 @@ fragment userInfo on User {
 
 ```graphql
 # query
-query UserInfos($avatarSize: Int = 100){
+query UserInfos($avatarSize: Int = 100) {
   me: user(login: "Shubidumdu") {
     ...userInfo
   }
@@ -253,27 +253,29 @@ fragment userInfo on User {
 ```
 
 ## Operation name (작업명)
+
 지금껏 `query` 키워드와 이름을 모두 생략한 채 `{ ... }`와 같은 형태로 쿼리를 요청했다.
 
 하지만 실제로 애플리케이션에 GraphQL을 적용하고자 할 때는 코드를 최대한 덜 헷갈리게 만드는 편이 좋다.
 
-바로 위의 쿼리에서는 `UserInfos`와 같은 식으로 이름을 지정했다. 
+바로 위의 쿼리에서는 `UserInfos`와 같은 식으로 이름을 지정했다.
 
 작업 타입은 `query`, `mutation`, `subscription`이 될 수 있으며, 해당 작업이 어떤 형태의 작업인지를 나타낸다.
 
 작업명은 명시적인 작업의 **이름**인데, 디버깅 및 로깅에 있어 매우 유용하다. 임의의 쿼리 결과를 찾아내는 것보다, 직접 쿼리명을 찾아내는 것이 훨씬 쉽기 때문이다.
 
 ## Variables (변수)
+
 지금껏 앞의 모든 예시에서 인자들은 쿼리 문자열에 함께 작성되었다. 허나, 대부분 필드에 대한 인자는 동적이다.
 
-클라이언트 측에서는 쿼리 문자열을 런타임 시점에 동적으로 조작하고, 이를 GraphQL의 특정 포맷으로 Serialize해야 한다. 
+클라이언트 측에서는 쿼리 문자열을 런타임 시점에 동적으로 조작하고, 이를 GraphQL의 특정 포맷으로 Serialize해야 한다.
 
 그렇기 때문에 동적 인자들을 쿼리 문자열에 직접 전달하는 것은 좋은 방법이 아니다. 그래서 GraphQL은 동적 값을 쿼리에서 없애고 이를 별도로 전달하는 방법을 제공하는데 이를 Variables(변수)라고 한다.
 
 ```graphql
 {
-	user(login: "Shubidumdu") {
-    name,
+  user(login: "Shubidumdu") {
+    name
     location
   }
 }
@@ -289,9 +291,9 @@ fragment userInfo on User {
 
 ```graphql
 # query
-query MyInfo($nickname: String!){
-	user(login: $nickname) {
-    name,
+query MyInfo($nickname: String!) {
+  user(login: $nickname) {
+    name
     location
   }
 }
@@ -299,7 +301,7 @@ query MyInfo($nickname: String!){
 
 ```json
 // variables
-{"nickname": "Shubidumdu"}
+{ "nickname": "Shubidumdu" }
 ```
 
 ```json
@@ -319,21 +321,23 @@ query MyInfo($nickname: String!){
 한편, 이런 방식은 쿼리의 어떤 Argument가 동적인 형태를 띠는지 나타내는 좋은 방법이기도 하다.
 
 ### 변수 정의
+
 변수 정의는 위 예시 쿼리에서 `($nickname: String!)`에 해당하는 부분이다. 정적타입 언어의 함수에 대한 인자 정의와 동일하다.
 
 **모든 변수는 scalars, enum, 또는 input object type 이어야 한다.** 복잡한 객체를 필드에 전달하려면 서버에서 일치하는 입력 타입을 알아야 하며, 이에 대해서는 문서를 통해 더 알아보자.
 
 변수 정의는 required 혹은 optional일 수 있다. 위에서는 `String!`으로 `!`가 붙었으므로 required scalar type에 해당한다. 반대로, `!`가 붙지 않았다면 이는 optional한 값이 된다.
 
-### 변수 기본값 
+### 변수 기본값
+
 타입 선언 다음에 기본값을 할당할 수도 있다.
 이 경우에는 별도로 Variable을 전달하지 않더라도 올바르게 동작한다.
 
 ```graphql
 # query
-query MyInfo($nickname: String = "Shubidumdu"){
-	user(login: $nickname) {
-    name,
+query MyInfo($nickname: String = "Shubidumdu") {
+  user(login: $nickname) {
+    name
     location
   }
 }
@@ -352,13 +356,13 @@ Directives는 GraphQL의 기능으로, 필드나 프래그먼트 안에 삽입�
 
 ```graphql
 # query
-query MyInfo($nickname: String!, $withAvatar: Boolean = false){
-	user(login: $nickname) {
-    name,
-    location,
+query MyInfo($nickname: String!, $withAvatar: Boolean = false) {
+  user(login: $nickname) {
+    name
+    location
     avatarUrl @include(if: $withAvatar)
   }
-}  
+}
 ```
 
 ```json
@@ -385,7 +389,10 @@ query MyInfo($nickname: String!, $withAvatar: Boolean = false){
 
 ```graphql
 # query
-query MyInfo($nickname: String = "Shubidumdu", $withItemShowcase: Boolean = false) {
+query MyInfo(
+  $nickname: String = "Shubidumdu"
+  $withItemShowcase: Boolean = false
+) {
   user(login: $nickname) {
     name
     location
@@ -438,16 +445,15 @@ REST의 경우, 사실 상 모든 요청이 사이드 이펙트를 일으킬 수
 # mutation
 mutation MyMutation($repoId: ID!) {
   __typename
-  addStar(input: {starrableId: $repoId, clientMutationId: "Star added!"}) {
-		clientMutationId
+  addStar(input: { starrableId: $repoId, clientMutationId: "Star added!" }) {
+    clientMutationId
   }
 }
-
 ```
 
 ```json
 // variables
-{"repoId": "MDEwOlJlcG9zaXRvcnkzMDYzNjgwMDY"}
+{ "repoId": "MDEwOlJlcG9zaXRvcnkzMDYzNjgwMDY" }
 ```
 
 ```json
@@ -474,10 +480,12 @@ Mutation은 쿼리와 마찬가지로 여러 필드를 포함할 수 있는데, 
 ```graphql
 mutation MyMutation($repoId: ID!) {
   __typename
-  addStar(input: {starrableId: $repoId, clientMutationId: "Star added!"}) {
+  addStar(input: { starrableId: $repoId, clientMutationId: "Star added!" }) {
     clientMutationId
   }
-  removeStar(input: {starrableId: $repoId, clientMutationId: "Star removed!"}) {
+  removeStar(
+    input: { starrableId: $repoId, clientMutationId: "Star removed!" }
+  ) {
     clientMutationId
   }
 }
@@ -485,7 +493,7 @@ mutation MyMutation($repoId: ID!) {
 
 ```json
 // variables
-{"repoId": "MDEwOlJlcG9zaXRvcnkzMDYzNjgwMDY"}
+{ "repoId": "MDEwOlJlcG9zaXRvcnkzMDYzNjgwMDY" }
 ```
 
 ```json
@@ -536,10 +544,9 @@ mutation MyMutation($repoId: ID!) {
 }
 ```
 
-위의 인자로 입력한 `id`를 통해 반환되는 값은 Node이자 User 타입이다. 
+위의 인자로 입력한 `id`를 통해 반환되는 값은 Node이자 User 타입이다.
 
 User를 반환받는 경우, `id`와 `name` 필드를 가져오도록 Inline Fragment (`... on User`)를 활용했기 때문에, `... on Organization {...}`은 완전히 무시된다.
-
 
 ### Meta fields
 

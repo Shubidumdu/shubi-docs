@@ -17,7 +17,7 @@ alert(i);
 ```js
 function sayHi() {
   if (true) {
-    var phrase = "Hello";
+    var phrase = 'Hello';
   }
 
   alert(phrase); // 제대로 출력됩니다.
@@ -43,7 +43,7 @@ alert(phrase); // Error
 
 ```js
 function sayHi() {
-  phrase = "Hello"; // (*)
+  phrase = 'Hello'; // (*)
 
   if (false) {
     var phrase;
@@ -54,13 +54,13 @@ function sayHi() {
 sayHi();
 ```
 
-다만, **선언**만 호이스팅되고 **할당**은 호이스팅 되지 않는다. 
+다만, **선언**만 호이스팅되고 **할당**은 호이스팅 되지 않는다.
 
 ```js
 function sayHi() {
   alert(phrase);
 
-  var phrase = "Hello";
+  var phrase = 'Hello';
 }
 
 sayHi();
@@ -74,30 +74,29 @@ function sayHi() {
 
   alert(phrase); // undefined
 
-  phrase = "Hello"; // 할당은 실행 흐름이 해당 코드에 도달했을 때 처리됩니다.
+  phrase = 'Hello'; // 할당은 실행 흐름이 해당 코드에 도달했을 때 처리됩니다.
 }
 
 sayHi();
 ```
 
-## IIFE(즉시 실행 함수 표현식) : `var`가 남긴 폐해의 잔재 
+## IIFE(즉시 실행 함수 표현식) : `var`가 남긴 폐해의 잔재
 
 과거에는 `var`만 쓸 수 있었고, 이를 쓰기 위해서 과거의 개발자들은 블록 레벨 스코프를 구현하기 위해 여러 방안을 고려했다. 그 결과 만들어진 것이 IIFE(Immediately Invoked Function Expressions)다.
 
 요즘에는 쓰지 않으나, 오래된 스크립트에서 만나볼 수 있다.
 
 ```js
-(function() {
-
-  let message = "Hello";
+(function () {
+  let message = 'Hello';
 
   alert(message); // Hello
-
 })();
 ```
 
 ## 결론
+
 결국, 두가지 끔찍한 이유 때문에 `var`를 사용하지 않는다.
 
-1) `var`는 함수 스코프를 갖는다.
-2) `var`는 호이스팅을 유발한다.
+1. `var`는 함수 스코프를 갖는다.
+2. `var`는 호이스팅을 유발한다.

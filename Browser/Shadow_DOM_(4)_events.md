@@ -16,19 +16,21 @@ shadow tree에 담긴 기본 아이디어는 컴포넌트 내부적인 실행 �
 <user-card></user-card>
 
 <script>
-customElements.define('user-card', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.innerHTML = `<p>
+  customElements.define(
+    'user-card',
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `<p>
       <button>Click me</button>
     </p>`;
-    this.shadowRoot.firstElementChild.onclick =
-      e => alert("Inner target: " + e.target.tagName);
-  }
-});
+        this.shadowRoot.firstElementChild.onclick = (e) =>
+          alert('Inner target: ' + e.target.tagName);
+      }
+    },
+  );
 
-document.onclick =
-  e => alert("Outer target: " + e.target.tagName);
+  document.onclick = (e) => alert('Outer target: ' + e.target.tagName);
 </script>
 ```
 
@@ -90,13 +92,14 @@ shadow 요소들을 포함한 원래 이벤트 타겟에 대한 전체 경로(fu
 </user-card>
 ```
 
-이제, `<span slot='username'>`을 클릭했을 때, `event.composedPath()`를 확인한다면, 다음 배열을 반환한다. 
+이제, `<span slot='username'>`을 클릭했을 때, `event.composedPath()`를 확인한다면, 다음 배열을 반환한다.
 
-```[span, slot, div, shadow-root, user-card, body, html, document, window]```
+`[span, slot, div, shadow-root, user-card, body, html, document, window]`
 
 이는 composition 이후 생성된 flatten DOM에서의 타겟 요소로부터 부모로 뻗어나가는 체이닝이다.
 
 ### 주의
+
 > shadow tree의 세부사항들은 오직 `{mode: 'open'}` 옵션이 있을 때만 제공된다.
 > 만약, 그렇지 않다면 `event.composedPath()`역시 `user-card`에서부터 시작한다.
 > 이는 shadow DOM이 동작하는 다른 메서드의 원칙과 유사한데, 닫힌(closed) 트리는 내부적으로 완전히 숨겨진다.
@@ -122,7 +125,7 @@ shadow 요소들을 포함한 원래 이벤트 타겟에 대한 전체 경로(fu
 - `mouseenter`, `mouseleave` (얘넨 애초에 버블링이 없다.)
 - `load`, `unload`, `abort`, `error`
 - `select`
-- `slotchange` 
+- `slotchange`
 
 해당 이벤트들은 오직 해당 요소가 동일하게 위치한 DOM 내에서만 확인될 수 있다.
 

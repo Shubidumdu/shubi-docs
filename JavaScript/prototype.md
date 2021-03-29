@@ -1,13 +1,14 @@
 # 프로토타입
 
 ## 1. 프로토타입 상속
+
 개발을 하다보면 기존에 있는 기능을 가져와 확장을 해야하는 경우가 생긴다.
 
 이는 자바스크립트의 고유 기능인 포로토타입 상속(Prototypal Inheritance)를 이용하면 실현할 수 있다.
 
-
 ### [[Prototype]]
-자바스크립트의 객체는 `[[Prototype]]`이라는 숨김 프로퍼티를 갖는다. 이 숨김 프로퍼티는 `null`이거나, 다른 객체에 대한 참조가 되는데 (**그 외의 자료형은 무시된다.**), 이것이 참조하는 대상을 **프로토타입(prototype)**이라고 부른다. 
+
+자바스크립트의 객체는 `[[Prototype]]`이라는 숨김 프로퍼티를 갖는다. 이 숨김 프로퍼티는 `null`이거나, 다른 객체에 대한 참조가 되는데 (**그 외의 자료형은 무시된다.**), 이것이 참조하는 대상을 **프로토타입(prototype)**이라고 부른다.
 
 JS는 객체에서 프로퍼티를 찾다가, 해당 프로퍼티가 없으면 **자동으로 프로토타입에서 프로퍼티를 찾는다.** 프로그래밍에서는 이런 동작 방식을 **프로토타입 상속**이라 부른다.
 
@@ -15,8 +16,8 @@ JS는 객체에서 프로퍼티를 찾다가, 해당 프로퍼티가 없으면 *
 
 그 중 하나는, `__proto__`를 사용해 값을 설정하는 것이다.
 
-> 참고로, `__proto__`는 `[[Prototype]]`용 getter / setter라는 점을 이해하자. 
-요즘에는 `__proto__`를 직접 쓰는 경우는 드물고, `Object.getPrototypeOf`나 `Object.setPrototypeOf`를 써서 프로토타입을 획득 혹은 설정한다. 왜 `__proto__`를 요즘은 쓰지 않는지에 대해서는 추후에 다루자.
+> 참고로, `__proto__`는 `[[Prototype]]`용 getter / setter라는 점을 이해하자.
+> 요즘에는 `__proto__`를 직접 쓰는 경우는 드물고, `Object.getPrototypeOf`나 `Object.setPrototypeOf`를 써서 프로토타입을 획득 혹은 설정한다. 왜 `__proto__`를 요즘은 쓰지 않는지에 대해서는 추후에 다루자.
 
 `obj.hasOwnProperty(key)`는 해당 객체의 `key`에 해당하는 프로퍼티가 상속받은 것이 아닌, 직접 구현된 프로퍼티일 경우 `true`를 반환한다. **프로토타입으로 부터의 프로퍼티인지**를 체크하는 역할을 한다고 보면 되겠다.
 
@@ -28,10 +29,9 @@ JS는 객체에서 프로퍼티를 찾다가, 해당 프로퍼티가 없으면 *
 
 여기서 `F.prototype`은 그저 일반 프로퍼티라는 점에 주의해야 한다.
 
-
 ```js
 let animal = {
-  eats: true
+  eats: true,
 };
 
 function Rabbit(name) {
@@ -40,9 +40,9 @@ function Rabbit(name) {
 
 Rabbit.prototype = animal;
 
-let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
+let rabbit = new Rabbit('White Rabbit'); //  rabbit.__proto__ == animal
 
-alert( rabbit.eats ); // true
+alert(rabbit.eats); // true
 ```
 
 ## `contructor` 프로퍼티
@@ -75,9 +75,9 @@ function Rabbit(name) {
   alert(name);
 }
 
-let rabbit = new Rabbit("White Rabbit");
+let rabbit = new Rabbit('White Rabbit');
 
-let rabbit2 = new rabbit.constructor("Black Rabbit");
+let rabbit2 = new rabbit.constructor('Black Rabbit');
 ```
 
 이 `constructor`는 객체가 있는데, 이 객체를 만드는데 어떤 생성자가 사용되었는지 알수 없는 경우에 사용된다. **단, 가장 중요한점은 JS가 알맞은 `constructor`값을 보장하진 않는다는 점이다.** 함수에 기본으로 `prototype`값이 설정되지만 그것이 전부다. `constructor`에 벌어지는 모든 일은 전적으로 개발자에게 맡겨지며, 만약 함수의 기본 `prototype`값을 다른 객체로 바꾼다면 이 객체엔 `constructor`가 없어진다.
@@ -89,7 +89,7 @@ function Rabbit() {}
 
 // Rabbit.prototype 전체를 덮어쓰지 말고
 // 원하는 프로퍼티는 그냥 추가하세요.
-Rabbit.prototype.jumps = true
+Rabbit.prototype.jumps = true;
 // 이렇게 하면 기본 Rabbit.prototype.constructor가 유지됩니다.
 ```
 
@@ -98,7 +98,7 @@ Rabbit.prototype.jumps = true
 ```js
 Rabbit.prototype = {
   jumps: true,
-  constructor: Rabbit
+  constructor: Rabbit,
 };
 
 // 수동으로 추가해 주었기 때문에 알맞은 constructor가 유지됩니다.
@@ -112,7 +112,7 @@ Rabbit.prototype = {
 
 ```js
 let obj = {};
-alert( obj ); // "[object Object]" ?
+alert(obj); // "[object Object]" ?
 ```
 
 여기서 `"[object Object]"`를 생성하는 코드는 대체 어디에 있을까?? `obj`는 비어있는데.
@@ -143,23 +143,25 @@ alert(Object.prototype.__proto__); // null
 체인 상의 프로토타입에는 중복 메서드가 있을 수도 있는데, 이 경우, 체인 상에서 가까운 메서드를 사용하며, `Array`의 경우, `Array.prototype`의 메서드가 `Object.prototype`의 메서드보다 가깝기 때문에 해당 메서드가 사용된다.
 
 ### 원시값(Primitive Value)
+
 그럼 원시값은요?? 이들을 프로토타입을 통해 다루는 것은 상당히 까다롭다.
 
 문자열과 숫자, 불린은 객체가 아니다. 그런데 이런 원시값들의 프로퍼티에 접근하려고 하면 내장 생성자 `String`, `Number`, `Boolean`을 사용하는 **임시 래퍼(Wrapper) 객체가 생성**된다. 이 래퍼 객체는 해당 메서드만 제공하고 나면 사라진다.
 
-래퍼 객체는 보이지 않는 곳에서 만들어지고, 엔진에 의해 최적화된다. 
+래퍼 객체는 보이지 않는 곳에서 만들어지고, 엔진에 의해 최적화된다.
 
 참고로 `null`과 `undefined`에 대응하는 래퍼 객체는 없다. 떄문에 메서드와 프로퍼티는 물론, 당연히 프로토타입도 사용할 수 없다.
 
 ### 네이티브 프로토타입 변경
+
 이런 네이티브 프로토타입을 직접 변경할 수도 있다.
 
 ```js
-String.prototype.show = function() {
+String.prototype.show = function () {
   alert(this);
 };
 
-"BOOM!".show(); // BOOM!
+'BOOM!'.show(); // BOOM!
 ```
 
 다만, 이는 좋은 생각이 아닌데, 기본적으로 네이티브 프로토타입은 전역으로 영향을 미치기 때문이다. 때문에 이런식으로 네이티브 프로토타입을 수정하게 되면 다른 라이브러리의 메서드와 충돌할 가능성이 크다.
@@ -176,14 +178,14 @@ String.prototype.show = function() {
 
 ```js
 let obj = {
-  0: "Hello",
-  1: "world!",
+  0: 'Hello',
+  1: 'world!',
   length: 2,
 };
 
 obj.join = Array.prototype.join;
 
-alert( obj.join(',') ); // Hello,world!
+alert(obj.join(',')); // Hello,world!
 ```
 
 ## **모던**하게 프로토타입을 다루기
@@ -198,7 +200,7 @@ alert( obj.join(',') ); // Hello,world!
 
 ```js
 let animal = {
-  eats: true
+  eats: true,
 };
 
 // 프로토타입이 animal인 새로운 객체를 생성합니다.
@@ -215,13 +217,13 @@ Object.setPrototypeOf(rabbit, {}); // rabbit의 프로토타입을 {}으로 바�
 
 ```js
 let animal = {
-  eats: true
+  eats: true,
 };
 
 let rabbit = Object.create(animal, {
   jumps: {
-    value: true
-  }
+    value: true,
+  },
 });
 
 alert(rabbit.jumps); // true
@@ -231,7 +233,10 @@ alert(rabbit.jumps); // true
 아래 코드는 `obj`의 모든 프로퍼티를 포함한 완벽한 사본을 만든다.
 
 ```js
-let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+let clone = Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj),
+);
 ```
 
 주의해야 할 점은, 앞선 메서드들로 객체의 `[[Prototype]]`을 수정하는데 기술적인 문제는 전혀 없으나, 이는 권장되는 사항이 아니다. 이는 객체 프로퍼티 접근 관련 최적화를 망치기 때문에, JS 엔진의 속도를 매우 느리게 한다. 때문에 `[[Prototype]]`은 객체를 처음 생성할 때만 설정하는 것이 일반적이다.

@@ -28,16 +28,19 @@ shadow DOM은 `<style>` 태그와 `<link rel='stylesheet' href='...'>` 태그를
 </template>
 
 <script>
-customElements.define('custom-dialog', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'}).append(tmpl.content.cloneNode(true));
-  }
-});
+  customElements.define(
+    'custom-dialog',
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' }).append(
+          tmpl.content.cloneNode(true),
+        );
+      }
+    },
+  );
 </script>
 
-<custom-dialog>
-  Hello!
-</custom-dialog>
+<custom-dialog> Hello! </custom-dialog>
 ```
 
 ## Cascading
@@ -50,9 +53,9 @@ shadow 호스트(`<custom-dialog>` 태그 그 자체)는 light DOM에 위치한�
 
 ```html
 <style>
-custom-dialog {
-  padding: 0;
-}
+  custom-dialog {
+    padding: 0;
+  }
 </style>
 ```
 
@@ -89,21 +92,21 @@ custom-dialog {
 </template>
 
 <script>
-customElements.define('custom-dialog', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'}).append(tmpl.content.cloneNode(true));
-  }
-});
+  customElements.define(
+    'custom-dialog',
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' }).append(
+          tmpl.content.cloneNode(true),
+        );
+      }
+    },
+  );
 </script>
 
+<custom-dialog centered> Centered! </custom-dialog>
 
-<custom-dialog centered>
-  Centered!
-</custom-dialog>
-
-<custom-dialog>
-  Not centered.
-</custom-dialog>
+<custom-dialog> Not centered. </custom-dialog>
 ```
 
 ## :host-context(selector)
@@ -133,7 +136,9 @@ slot 처리 된 요소 자체는 light DOM에서 온다. 따라서, 그들 요�
 
 ```html
 <style>
-  span { font-weight: bold }
+  span {
+    font-weight: bold;
+  }
 </style>
 
 <user-card>
@@ -141,17 +146,20 @@ slot 처리 된 요소 자체는 light DOM에서 온다. 따라서, 그들 요�
 </user-card>
 
 <script>
-customElements.define('user-card', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.innerHTML = `
+  customElements.define(
+    'user-card',
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `
       <style>
       span { background: red; }
       </style>
       Name: <slot name="username"></slot>
     `;
-  }
-});
+      }
+    },
+  );
 </script>
 ```
 
@@ -196,21 +204,24 @@ customElements.define('user-card', class extends HTMLElement {
 </user-card>
 
 <script>
-customElements.define('user-card', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.innerHTML = `
+  customElements.define(
+    'user-card',
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `
       <style>
       ::slotted(div) { border: 1px solid red; }
       </style>
       Name: <slot name="username"></slot>
     `;
-  }
-});
+      }
+    },
+  );
 </script>
 ```
 
-기억하자. `::slotted` 선택자는 하위 요소들을 확인하지 않는다. 
+기억하자. `::slotted` 선택자는 하위 요소들을 확인하지 않는다.
 
 ```css
 ::slotted(div span) {

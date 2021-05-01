@@ -13,7 +13,7 @@ Svelte에서 애플리케이션은 하나 이상의 컴포넌트들로 구성된
 ```svelte
 <script>
   let name = 'world';
-<script>
+</script>
 
 <h1>Hello {name}!</h1>
 ```
@@ -23,7 +23,7 @@ Svelte에서 애플리케이션은 하나 이상의 컴포넌트들로 구성된
 ```svelte
 <script>
   let src = 'some-image.png';
-<script>
+</script>
 
 <img src={src} alt="A man dances.">
 ```

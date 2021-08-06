@@ -26,6 +26,7 @@
       - [Styling](js/web-api/shadow-dom/styling.md)
       - [Events](js/web-api/shadow-dom/events.md)
     - [Canvas API](js/web-api/canvas/intro.md)
+      - [도형 그리기](js/web-api/canvas/shapes.md)
   - [Guides]()
     - [렌더링 최적화](js/guides/render-opt.md)
     - [Custom Element 체크리스트](js/guides/custom-el-checklist.md)

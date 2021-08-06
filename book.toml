@@ -1,0 +1,16 @@
+[book]
+title = "Shubi Docs"
+author = "Shubidumdu"
+
+[rust]
+edition = "2018"
+
+[build]
+build-dir = "build"
+
+[output.html.playpen]
+editable = true
+editor = "ace"
+
+[output.html.fold]
+enable = true

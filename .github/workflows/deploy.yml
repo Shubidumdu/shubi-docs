@@ -1,0 +1,22 @@
+name: Deploy to Github Page
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install
+      run: cargo install mdbook
+    - name: Build
+      run: mdbook build
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@4.1.3
+      with:
+        branch: gh-pages
+        folder: ./build

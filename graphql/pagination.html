@@ -1,0 +1,505 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Pagination - Shubi Docs</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Introduction</a></li><li class="chapter-item "><a href="../js/index.html"><strong aria-hidden="true">1.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/exec-ctx.html"><strong aria-hidden="true">1.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../js/class.html"><strong aria-hidden="true">1.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../js/arrow-func.html"><strong aria-hidden="true">1.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../js/binding-function.html"><strong aria-hidden="true">1.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../js/call-apply.html"><strong aria-hidden="true">1.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../js/closure.html"><strong aria-hidden="true">1.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../js/func-exp-and-dec.html"><strong aria-hidden="true">1.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../js/event-loop.html"><strong aria-hidden="true">1.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../js/new.html"><strong aria-hidden="true">1.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../js/properties.html"><strong aria-hidden="true">1.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../js/prototype.html"><strong aria-hidden="true">1.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../js/this.html"><strong aria-hidden="true">1.12.</strong> this</a></li><li class="chapter-item "><a href="../js/var.html"><strong aria-hidden="true">1.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../js/babel.html"><strong aria-hidden="true">1.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/intersection.html"><strong aria-hidden="true">1.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../js/web-api/mutation.html"><strong aria-hidden="true">1.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../js/web-api/template.html"><strong aria-hidden="true">1.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">1.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">1.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">1.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">1.15.4.3.</strong> Events</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">1.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/guides/render-opt.html"><strong aria-hidden="true">1.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../js/guides/custom-el-checklist.html"><strong aria-hidden="true">1.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../svelte/intro.html"><strong aria-hidden="true">2.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../svelte/reactivity.html"><strong aria-hidden="true">2.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../svelte/props.html"><strong aria-hidden="true">2.2.</strong> Props</a></li><li class="chapter-item "><a href="../svelte/logic.html"><strong aria-hidden="true">2.3.</strong> Logic</a></li><li class="chapter-item "><a href="../svelte/events.html"><strong aria-hidden="true">2.4.</strong> Events</a></li><li class="chapter-item "><a href="../svelte/bindings.html"><strong aria-hidden="true">2.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../svelte/lifecycle.html"><strong aria-hidden="true">2.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../svelte/stores.html"><strong aria-hidden="true">2.7.</strong> Stores</a></li><li class="chapter-item "><a href="../svelte/motion.html"><strong aria-hidden="true">2.8.</strong> Motion</a></li><li class="chapter-item "><a href="../svelte/transition.html"><strong aria-hidden="true">2.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../svelte/animations.html"><strong aria-hidden="true">2.10.</strong> Animations</a></li><li class="chapter-item "><a href="../svelte/actions.html"><strong aria-hidden="true">2.11.</strong> Actions</a></li><li class="chapter-item "><a href="../svelte/classes.html"><strong aria-hidden="true">2.12.</strong> Classes</a></li><li class="chapter-item "><a href="../svelte/composition.html"><strong aria-hidden="true">2.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../svelte/context.html"><strong aria-hidden="true">2.14.</strong> Context API</a></li><li class="chapter-item "><a href="../svelte/specials.html"><strong aria-hidden="true">2.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../svelte/module.html"><strong aria-hidden="true">2.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../svelte/debug.html"><strong aria-hidden="true">2.17.</strong> Debugging</a></li></ol></li><li class="chapter-item expanded "><a href="../graphql/intro.html"><strong aria-hidden="true">3.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../graphql/execution.html"><strong aria-hidden="true">3.1.</strong> Execution</a></li><li class="chapter-item "><a href="../graphql/query-mutation.html"><strong aria-hidden="true">3.2.</strong> Query &amp; Mutation</a></li><li class="chapter-item "><a href="../graphql/schema-type.html"><strong aria-hidden="true">3.3.</strong> Schema &amp; Type</a></li><li class="chapter-item expanded "><a href="../graphql/pagination.html" class="active"><strong aria-hidden="true">3.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../graphql/http.html"><strong aria-hidden="true">3.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../docker/setup.html"><strong aria-hidden="true">4.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../docker/sample.html"><strong aria-hidden="true">4.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../docker/update.html"><strong aria-hidden="true">4.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../docker/share.html"><strong aria-hidden="true">4.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../docker/persist.html"><strong aria-hidden="true">4.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../docker/bind-mounts.html"><strong aria-hidden="true">4.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../docker/multi.html"><strong aria-hidden="true">4.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../docker/docker-compose.html"><strong aria-hidden="true">4.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../docker/best-practices.html"><strong aria-hidden="true">4.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../etc/ssh.html"><strong aria-hidden="true">5.1.</strong> SSH</a></li><li class="chapter-item "><a href="../etc/tdd.html"><strong aria-hidden="true">5.2.</strong> TDD</a></li><li class="chapter-item "><a href="../etc/fp.html"><strong aria-hidden="true">5.3.</strong> 함수형 프로그래밍</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><a href="https://graphql-kr.github.io/learn/pagination/">여기</a>의 내용을 Github GraphQL API로 따라가보자.</p>
+<h1 id="pagination"><a class="header" href="#pagination">Pagination</a></h1>
+<h2 id="plurals"><a class="header" href="#plurals">Plurals</a></h2>
+<p>여러 개의 객체를 가져오기 위한 가장 간단한 방법은 Plurals(복수형) 타입을 반환하는 필드를 사용하는 것이다.</p>
+<pre><code class="language-graphql">licenses {
+  name
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;licenses&quot;: [
+      {
+        &quot;name&quot;: &quot;GNU Affero General Public License v3.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apache License 2.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;BSD 2-Clause \&quot;Simplified\&quot; License&quot;
+      },
+      {
+        &quot;name&quot;: &quot;BSD 3-Clause \&quot;New\&quot; or \&quot;Revised\&quot; License&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Boost Software License 1.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Creative Commons Zero v1.0 Universal&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Eclipse Public License 2.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;GNU General Public License v2.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;GNU General Public License v3.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;GNU Lesser General Public License v2.1&quot;
+      },
+      {
+        &quot;name&quot;: &quot;MIT License&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Mozilla Public License 2.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;The Unlicense&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<h2 id="slicing"><a class="header" href="#slicing">Slicing</a></h2>
+<p>헌데, 여기에 클라이언트가 가장 앞의 둘, 혹은 가장 뒤의 둘과 같은 식으로 Slicing을 원한다면, 아래와 같은 형태가 이루어질 수 있다.</p>
+<pre><code class="language-graphql">{
+  search(query: &quot;react&quot;, type: REPOSITORY, first: 2) {
+    nodes {
+      ... on Repository {
+        name
+        owner {
+          ... on User {
+            name
+          }
+          ... on Organization {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;search&quot;: {
+      &quot;nodes&quot;: [
+        {
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;name&quot;: &quot;Facebook&quot;
+          }
+        },
+        {
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;name&quot;: &quot;TypeScript Cheatsheets&quot;
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<h2 id="pagination-and-edges"><a class="header" href="#pagination-and-edges">Pagination and Edges</a></h2>
+<p>페이지네이션을 할 수 있는 방법은 여러 가지가 있다.</p>
+<ul>
+<li>
+<p><code>field(first: 2, offset: 2)</code> : 리스트로 다음 두 개를 요청</p>
+</li>
+<li>
+<p><code>field(first: 2, after: $id)</code> : 앞서 가져온 마지막 item의 id값을 통해 그 다음 두개를 요청</p>
+</li>
+<li>
+<p><code>field(first: 2, after: $fieldCursor)</code> : 마지막 항목으로부터 커서를 가져와 사용</p>
+</li>
+</ul>
+<p>이 중 가장 기능이 강력한 것은 마지막의 **커서 기반 페이지네이션(cursor-based pagination)**이며, 커서를 사용하면 향후 페이지네이션 모델이 변경될 경우에 추가적인 유연성이 제공된다.</p>
+<p>다만, 또 여기서 문제가 발생하는데, 객체에서 어떻게 커서를 가져오느냐 하는 것이다.</p>
+<p>기본적으로, 커서는 연결(<code>connection</code>)을 위한 필드이므로 이것이 객체 속성에 포함되는 것은 부적절해보인다.</p>
+<p>때문에 <code>edge</code>라고 하는 별도의 필드를 가지며, 이는 객체와 관련된 정보가 아닌 엣지와 관련된 자체 정보가 있는 경우에 유용하다.</p>
+<pre><code class="language-graphql"># query
+{
+  search(query: &quot;react&quot;, type: REPOSITORY, first: 3) {
+    edges {
+      cursor
+    }
+    nodes {
+      ... on Repository {
+        id
+        name
+        owner {
+          id
+          ... on User {
+            name
+          }
+          ... on Organization {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;search&quot;: {
+      &quot;edges&quot;: [
+        {
+          &quot;cursor&quot;: &quot;Y3Vyc29yOjE=&quot;
+        },
+        {
+          &quot;cursor&quot;: &quot;Y3Vyc29yOjI=&quot;
+        },
+        {
+          &quot;cursor&quot;: &quot;Y3Vyc29yOjM=&quot;
+        }
+      ],
+      &quot;nodes&quot;: [
+        {
+          &quot;id&quot;: &quot;MDEwOlJlcG9zaXRvcnkxMDI3MDI1MA==&quot;,
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;id&quot;: &quot;MDEyOk9yZ2FuaXphdGlvbjY5NjMx&quot;,
+            &quot;name&quot;: &quot;Facebook&quot;
+          }
+        },
+        {
+          &quot;id&quot;: &quot;MDEwOlJlcG9zaXRvcnkxMzU3ODYwOTM=&quot;,
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;id&quot;: &quot;MDEyOk9yZ2FuaXphdGlvbjUwMTg4MjY0&quot;,
+            &quot;name&quot;: &quot;TypeScript Cheatsheets&quot;
+          }
+        },
+        {
+          &quot;id&quot;: &quot;MDEwOlJlcG9zaXRvcnk3NTM5NjU3NQ==&quot;,
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;id&quot;: &quot;MDQ6VXNlcjMyNDk2NTM=&quot;,
+            &quot;name&quot;: &quot;肚皮&quot;
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<h2 id="end-of-list-counts-and-connections"><a class="header" href="#end-of-list-counts-and-connections">End-of-list, counts, and Connections</a></h2>
+<p>그렇다면 이런 식으로 pagination을 반복하다가 언제 <code>connection</code>이 끝났는지를 알 수 있을까?? 또한, 총 몇 개의 item이 존재하는지 어떻게 알 수 있을까??</p>
+<p>이를 위해 필드는 <code>connection</code> 객체를 반환할 수 있다.</p>
+<p><code>connection</code> 객체에는 엣지에 대한 필드 뿐만 아니라 다른 정보(ex. item 갯수, 다음 페이지 존재 여부)등을 담고 있다.</p>
+<p>이를 활용한다면, 다음과 같은 형태로 이용할 수 있다.</p>
+<pre><code class="language-graphql">{
+  search(query: &quot;react&quot;, type: REPOSITORY, first: 3) {
+    nodes {
+      ... on Repository {
+        id
+        name
+        owner {
+          id
+          ... on User {
+            name
+          }
+          ... on Organization {
+            name
+          }
+        }
+      }
+    }
+    repositoryCount
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;search&quot;: {
+      &quot;nodes&quot;: [
+        {
+          &quot;id&quot;: &quot;MDEwOlJlcG9zaXRvcnkxMDI3MDI1MA==&quot;,
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;id&quot;: &quot;MDEyOk9yZ2FuaXphdGlvbjY5NjMx&quot;,
+            &quot;name&quot;: &quot;Facebook&quot;
+          }
+        },
+        {
+          &quot;id&quot;: &quot;MDEwOlJlcG9zaXRvcnkxMzU3ODYwOTM=&quot;,
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;id&quot;: &quot;MDEyOk9yZ2FuaXphdGlvbjUwMTg4MjY0&quot;,
+            &quot;name&quot;: &quot;TypeScript Cheatsheets&quot;
+          }
+        },
+        {
+          &quot;id&quot;: &quot;MDEwOlJlcG9zaXRvcnk3NTM5NjU3NQ==&quot;,
+          &quot;name&quot;: &quot;react&quot;,
+          &quot;owner&quot;: {
+            &quot;id&quot;: &quot;MDQ6VXNlcjMyNDk2NTM=&quot;,
+            &quot;name&quot;: &quot;肚皮&quot;
+          }
+        }
+      ],
+      &quot;repositoryCount&quot;: 1979845,
+      &quot;pageInfo&quot;: {
+        &quot;startCursor&quot;: &quot;Y3Vyc29yOjE=&quot;,
+        &quot;endCursor&quot;: &quot;Y3Vyc29yOjM=&quot;,
+        &quot;hasPreviousPage&quot;: false,
+        &quot;hasNextPage&quot;: true
+      }
+    }
+  }
+}
+</code></pre>
+<p><code>pageInfo</code>내의 <code>startCursor</code>, <code>endCursor</code>를 통해 페이지네이션에 필요한 커서를 얻을 수 있으며, 더 이상 <code>edge</code>를 쿼리할 필요가 없어졌다.</p>
+<h2 id="complete-connection-model"><a class="header" href="#complete-connection-model">Complete Connection Model</a></h2>
+<p>이는 별도로 <code>~Connection</code>과 같은 필드를 추가하는 방식이다.</p>
+<p>단순히 복수 타입을 갖도록 하는 형태보다 훨씬 더 복잡하지만, 이러한 디자인을 채택함으로써 클라이언트를 위한 다양한 기능을 사용할 수 있게 된다.</p>
+<ul>
+<li>리스트의 페이지네이션 기능</li>
+<li><code>totalCount</code> 또는 <code>pageInfo</code>와 같은 연결 자체에 대한 정보를 요청하는 기능</li>
+<li><code>cursor</code> 등 엣지 자체에 대한 정보를 요청하는 기능</li>
+<li>백엔드 측에서 페이지네이션 방식 변경이 가능 (사용자가 불투명(<code>opaque</code>) 커서만을 사용하기 때문에)</li>
+</ul>
+<p>아래는 예시.</p>
+<pre><code class="language-graphql">{
+  hero {
+    name
+    friends {
+      name
+    }
+    friendsConnection(first: 3) {
+      totalCount
+      edges {
+        cursor
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;hero&quot;: {
+      &quot;name&quot;: &quot;R2-D2&quot;,
+      &quot;friends&quot;: [
+        {
+          &quot;name&quot;: &quot;Luke Skywalker&quot;
+        },
+        {
+          &quot;name&quot;: &quot;Han Solo&quot;
+        },
+        {
+          &quot;name&quot;: &quot;Leia Organa&quot;
+        }
+      ],
+      &quot;friendsConnection&quot;: {
+        &quot;totalCount&quot;: 3,
+        &quot;edges&quot;: [
+          {
+            &quot;cursor&quot;: &quot;Y3Vyc29yMQ==&quot;
+          },
+          {
+            &quot;cursor&quot;: &quot;Y3Vyc29yMg==&quot;
+          },
+          {
+            &quot;cursor&quot;: &quot;Y3Vyc29yMw==&quot;
+          }
+        ],
+        &quot;pageInfo&quot;: {
+          &quot;endCursor&quot;: &quot;Y3Vyc29yMw==&quot;,
+          &quot;hasNextPage&quot;: false
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../graphql/schema-type.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../graphql/http.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../graphql/schema-type.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../graphql/http.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

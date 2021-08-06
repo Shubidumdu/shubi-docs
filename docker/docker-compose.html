@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Docker Compose - Shubi Docs</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Introduction</a></li><li class="chapter-item "><a href="../js/index.html"><strong aria-hidden="true">1.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/exec-ctx.html"><strong aria-hidden="true">1.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../js/class.html"><strong aria-hidden="true">1.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../js/arrow-func.html"><strong aria-hidden="true">1.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../js/binding-function.html"><strong aria-hidden="true">1.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../js/call-apply.html"><strong aria-hidden="true">1.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../js/closure.html"><strong aria-hidden="true">1.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../js/func-exp-and-dec.html"><strong aria-hidden="true">1.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../js/event-loop.html"><strong aria-hidden="true">1.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../js/new.html"><strong aria-hidden="true">1.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../js/properties.html"><strong aria-hidden="true">1.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../js/prototype.html"><strong aria-hidden="true">1.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../js/this.html"><strong aria-hidden="true">1.12.</strong> this</a></li><li class="chapter-item "><a href="../js/var.html"><strong aria-hidden="true">1.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../js/babel.html"><strong aria-hidden="true">1.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/intersection.html"><strong aria-hidden="true">1.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../js/web-api/mutation.html"><strong aria-hidden="true">1.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../js/web-api/template.html"><strong aria-hidden="true">1.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">1.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">1.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">1.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">1.15.4.3.</strong> Events</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">1.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/guides/render-opt.html"><strong aria-hidden="true">1.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../js/guides/custom-el-checklist.html"><strong aria-hidden="true">1.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../svelte/intro.html"><strong aria-hidden="true">2.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../svelte/reactivity.html"><strong aria-hidden="true">2.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../svelte/props.html"><strong aria-hidden="true">2.2.</strong> Props</a></li><li class="chapter-item "><a href="../svelte/logic.html"><strong aria-hidden="true">2.3.</strong> Logic</a></li><li class="chapter-item "><a href="../svelte/events.html"><strong aria-hidden="true">2.4.</strong> Events</a></li><li class="chapter-item "><a href="../svelte/bindings.html"><strong aria-hidden="true">2.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../svelte/lifecycle.html"><strong aria-hidden="true">2.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../svelte/stores.html"><strong aria-hidden="true">2.7.</strong> Stores</a></li><li class="chapter-item "><a href="../svelte/motion.html"><strong aria-hidden="true">2.8.</strong> Motion</a></li><li class="chapter-item "><a href="../svelte/transition.html"><strong aria-hidden="true">2.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../svelte/animations.html"><strong aria-hidden="true">2.10.</strong> Animations</a></li><li class="chapter-item "><a href="../svelte/actions.html"><strong aria-hidden="true">2.11.</strong> Actions</a></li><li class="chapter-item "><a href="../svelte/classes.html"><strong aria-hidden="true">2.12.</strong> Classes</a></li><li class="chapter-item "><a href="../svelte/composition.html"><strong aria-hidden="true">2.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../svelte/context.html"><strong aria-hidden="true">2.14.</strong> Context API</a></li><li class="chapter-item "><a href="../svelte/specials.html"><strong aria-hidden="true">2.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../svelte/module.html"><strong aria-hidden="true">2.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../svelte/debug.html"><strong aria-hidden="true">2.17.</strong> Debugging</a></li></ol></li><li class="chapter-item "><a href="../graphql/intro.html"><strong aria-hidden="true">3.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../graphql/execution.html"><strong aria-hidden="true">3.1.</strong> Execution</a></li><li class="chapter-item "><a href="../graphql/query-mutation.html"><strong aria-hidden="true">3.2.</strong> Query &amp; Mutation</a></li><li class="chapter-item "><a href="../graphql/schema-type.html"><strong aria-hidden="true">3.3.</strong> Schema &amp; Type</a></li><li class="chapter-item "><a href="../graphql/pagination.html"><strong aria-hidden="true">3.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../graphql/http.html"><strong aria-hidden="true">3.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item expanded "><a href="../docker/setup.html"><strong aria-hidden="true">4.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../docker/sample.html"><strong aria-hidden="true">4.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../docker/update.html"><strong aria-hidden="true">4.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../docker/share.html"><strong aria-hidden="true">4.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../docker/persist.html"><strong aria-hidden="true">4.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../docker/bind-mounts.html"><strong aria-hidden="true">4.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../docker/multi.html"><strong aria-hidden="true">4.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item expanded "><a href="../docker/docker-compose.html" class="active"><strong aria-hidden="true">4.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../docker/best-practices.html"><strong aria-hidden="true">4.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../etc/ssh.html"><strong aria-hidden="true">5.1.</strong> SSH</a></li><li class="chapter-item "><a href="../etc/tdd.html"><strong aria-hidden="true">5.2.</strong> TDD</a></li><li class="chapter-item "><a href="../etc/fp.html"><strong aria-hidden="true">5.3.</strong> 함수형 프로그래밍</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><a href="https://docs.docker.com/compose/">Docker Compose</a>는 멀티 컨테이너 애플리케이션을 정의하고 공유하는 것을 돕고자 개발된 툴이다. Compose를 사용하면, YAML 파일을 생성하여 서비스를 정의한 후, 단일 명령을 통해 애플리케이션을 구축하거나 분해할 수 있다.</p>
+<p>Compose를 사용할 경우의 큰 이점은 바로 애플리케이션 스택을 하나의 파일로 정의할 수 있다는 점이다. 해당 파일은 프로젝트 저장소의 루트에 저장되며, 다른 이들이 이를 보고 프로젝트에 쉽게 기여할 수 있게 해준다. 그런 경우가 아니더라도, 단순히 repo를 클론하여 애플리케이션을 실행하기만 하면 된다는 점에서 편리하다. 이는 Github/GitLab 등에서 이루어지는 것과 유사하다.</p>
+<h2 id="docker-compose-설치"><a class="header" href="#docker-compose-설치">Docker Compose 설치</a></h2>
+<p>Windows나 Mac에서 Docker Desktop/Toolbox를 설치했다면, 이미 Docker Compose가 포함되어 있다. &quot;Play-with-Docker&quot; 인스턴스 역시 Docker Compose가 설치되어 있으며, Linux 머신을 사용하는 상황이라면, 별도로 <a href="https://docs.docker.com/compose/install/">설치</a>해주어야 한다.</p>
+<p>설치 이후, 아래 명령을 통해 버전 정보를 확인해보자.</p>
+<pre><code>docker-compose version
+</code></pre>
+<h2 id="compose-파일-생성"><a class="header" href="#compose-파일-생성">Compose 파일 생성</a></h2>
+<ol>
+<li>
+<p>프로젝트 루트에서, <code>docker-compose.yml</code> 이라는 이름의 파일을 생성한다.</p>
+</li>
+<li>
+<p>해당 파일에서, 우선 schema 버전을 정의하는 것부터 시작하자. 대부분의 경우에는 최신 지원 버전을 사용하는 것이 좋다. 현재 schema 버전에서 가능한 Compose file의 <a href="https://docs.docker.com/compose/compose-file/">레퍼런스</a>에 대해 확인하자.</p>
+</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+</code></pre>
+<ol start="3">
+<li>이후, 애플리케이션에 사용할 각각의 서비스(컨테이너)를 정의해준다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+</code></pre>
+<h2 id="앱-서비스-정의"><a class="header" href="#앱-서비스-정의">앱 서비스 정의</a></h2>
+<p>이전 챕터에서 우리는 앱 컨테이너를 정의하기 위해 아래와 같은 명령을 실행했다.</p>
+<pre><code class="language-bash">docker run -dp 3000:3000 \
+  -w /app -v &quot;$(pwd):/app&quot; \
+  --network todo-app \
+  -e MYSQL_HOST=mysql \
+  -e MYSQL_USER=root \
+  -e MYSQL_PASSWORD=secret \
+  -e MYSQL_DB=todos \
+  node:12-alpine \
+  sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+</code></pre>
+<p>PowerShell의 경우</p>
+<pre><code class="language-sh">docker run -dp 3000:3000 `
+  -w /app -v &quot;$(pwd):/app&quot; `
+  --network todo-app `
+  -e MYSQL_HOST=mysql `
+  -e MYSQL_USER=root `
+  -e MYSQL_PASSWORD=secret `
+  -e MYSQL_DB=todos `
+  node:12-alpine `
+  sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+</code></pre>
+<ol>
+<li>먼저, 컨테이너에 사용할 서비스 엔트리와 이미지를 정의한다. 서비스에는 어떤 이름이든 쓰여도 된다(여기에서는 <code>app</code>). 여기서의 이름은 자동으로 network alias가 되며, 이후 다른 서비스에서 해당 서비스를 활용할 때 유용하다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    image: node:12-alpine
+</code></pre>
+<ol start="2">
+<li>일반적으로 <code>command</code> 항목을 <code>image</code> 가까이에 정의하긴 하지만, 별도로 순서에 대한 요구 사항은 없다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    image: node:12-alpine
+    command: sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+</code></pre>
+<ol start="3">
+<li>서비스의 <code>ports</code>를 정의해준다. (<code>-p 3000:3000</code>) 이 부분에서는 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#short-syntax-1">짧게</a> 작성할 수도 있고, 좀 더 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#long-syntax-1">길게</a> 구체적으로 작성할 수도 있다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    image: node:12-alpine
+    command: sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+    ports:
+      - 3000:3000
+</code></pre>
+<ol start="4">
+<li>이제 <code>working_dir</code>과 <code>volumes</code> 항목을 통해 작업 디렉토리(<code>-w /app</code>)와 볼륨 매핑(<code>-v &quot;$(pwd):/app&quot;</code>)를 정의한다. 볼륨 역시 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#short-syntax-3">짧게</a> 혹은 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#long-syntax-3">길게</a> 작성될 수 있다.</li>
+</ol>
+<p>Docker Compose를 통해 볼륨을 정의하는 경우, 현재 디렉토리에서의 상대 경로를 사용할 수 있다는 장점이 있다.</p>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    image: node:12-alpine
+    command: sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+</code></pre>
+<ol start="5">
+<li>마지막으로, 사용하는 환경 변수를 <code>environment</code> 항목에서 지정해준다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    image: node:12-alpine
+    command: sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+</code></pre>
+<h2 id="mysql-서비스-정의"><a class="header" href="#mysql-서비스-정의">MySQL 서비스 정의</a></h2>
+<p>자, 이제 MySQL 서비스에 대해 정의해보자. 앞서 아래와 같은 명령을 통해 MySQL 컨테이너를 실행했다.</p>
+<pre><code class="language-bash">docker run -d \
+  --network todo-app --network-alias mysql \
+  -v todo-mysql-data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  -e MYSQL_DATABASE=todos \
+  mysql:5.7
+</code></pre>
+<p>PowerShell을 사용한다면</p>
+<pre><code class="language-sh">docker run -d `
+  --network todo-app --network-alias mysql `
+  -v todo-mysql-data:/var/lib/mysql `
+  -e MYSQL_ROOT_PASSWORD=secret `
+  -e MYSQL_DATABASE=todos `
+  mysql:5.7
+</code></pre>
+<ol>
+<li>먼저 새로운 서비스를 정의하고 <code>mysql</code>로 이름짓는다. 이를 통해 자동으로 network alias를 갖게 된다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    # The app service definition
+  mysql:
+    image: mysql:5.7
+</code></pre>
+<ol start="2">
+<li>다음으로, 볼륨 매핑을 정의한다. 기존에는 <code>docker run</code>을 통해 컨테이너를 실행하게 되면, named volume이 알아서 생성되었지만, Compose를 사용하는 경우에는 그렇지 않다. 최상단의 <code>volumes:</code> 항목에서 직접 볼륨을 정의하고, <code>services:</code> 의 각 항목 내에서 mountpoint를 지정해주어야 한다. 단순히 볼륨 네임만을 정의한다면 기본 옵션값들이 사용된다. 추가 옵션들에 대해서는 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#volume-configuration-reference">여기</a>를 참조하자.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    # The app service definition
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+
+volumes:
+  todo-mysql-data:
+</code></pre>
+<ol start="3">
+<li>마지막으로, 환경 변수들을 정의해준다.</li>
+</ol>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    # The app service definition
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+volumes:
+  todo-mysql-data:
+</code></pre>
+<p>최종적으로, 작성한 <code>docker-compose.yml</code>파일은 아래와 같은 형태가 된다.</p>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  app:
+    image: node:12-alpine
+    command: sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+volumes:
+  todo-mysql-data:
+</code></pre>
+<h2 id="애플리케이션-스택-실행"><a class="header" href="#애플리케이션-스택-실행">애플리케이션 스택 실행</a></h2>
+<p><code>docker-compose.yml</code> 파일을 갖고 있다면, 이제 애플리케이션들을 실행할 수 있다.</p>
+<ol>
+<li>
+<p>기존에 실행 중인 app 혹은 db가 없는지 확인한다. (<code>docker ps</code>와 <code>docker rm -f &lt;ids&gt;</code> 사용)</p>
+</li>
+<li>
+<p><code>docker-compose up</code>을 통해 애플리케이션 스택을 실행한다. <code>-d</code> 플래그를 통해 모든 스택들을 백그라운드 모드에서 실행한다.</p>
+</li>
+</ol>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+<p>명령 이후 아래와 같은 진행사항들이 출력된다.</p>
+<pre><code class="language-bash">Creating network &quot;app_default&quot; with the default driver
+Creating volume &quot;app_todo-mysql-data&quot; with default driver
+Creating app_app_1   ... done
+Creating app_mysql_1 ... done
+</code></pre>
+<p>네트워크와 볼륨들이 생성되는 것을 확인할 수 있다. 기본적으로, Docker Compose는 애플리케이션 스택 상에 정의된 네트워크를 생성한다. (별도로 compose 파일 내에서 네트워크를 정의하지 않은 이유다.)</p>
+<ol start="3">
+<li><code>docker-compose logs -f</code> 명령을 통해 로그를 확인할 수 있다. 각각의 서비스에서의 로그가 단일 스트림으로 인터리빙된것을 볼 수 있다. 이는 타이밍 관련 이슈들을 탐지하고자 하는 경우에 굉장히 유용하다. <code>-f</code> 플래그는 로그를 &quot;팔로우&quot;할 것을 의미하며, 실시간으로 재생되는 로그들을 제공받는다.</li>
+</ol>
+<pre><code>mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.
+mysql_1  | Version: '5.7.27'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+app_1    | Connected to mysql db at host mysql
+app_1    | Listening on port 3000
+</code></pre>
+<p>서비스 네임이 각 줄의 <code>|</code> 좌측에 출력되며, 만약 특정 서비스에 대한 로그만을 확인하고자 한다면, 로그 명령 끝에 원하는 서비스네임을 추가해주면 된다.</p>
+<pre><code>docker-compose logs -f app
+</code></pre>
+<blockquote>
+<p><strong>DB 실행 이후 App이 실행되도록 하기</strong> : Docker는 다른 컴포넌트가 완전히 구동되고 준비될 때까지 기다리도록 하는 내장 지원 기능이 별도로 없다. Node 기반의 프로젝트에서는 이를 위해 <a href="https://github.com/dwmkerr/wait-port">wait-port</a> 라이브러리를 사용할 수 있다. 다른 프레임워크 및 언어에 대해서도 유사한 것들이 존재한다.</p>
+</blockquote>
+<ol start="4">
+<li>이제 애플리케이션을 직접 열어 확인해보자.</li>
+</ol>
+<h2 id="대쉬보드에서-애플리케이션-스택-확인"><a class="header" href="#대쉬보드에서-애플리케이션-스택-확인">대쉬보드에서 애플리케이션 스택 확인</a></h2>
+<p>Docker 대쉬보드를 살펴보면 <code>app</code>이라는 이름으로 그룹이 생성되었음을 확인할 수 있다. 이는 Docker Compose에서 작성된 프로젝트 네임으로, 기본값으로 <code>docker-compose.yml</code>이 위치한 디렉토리의 이름이 사용된다.</p>
+<img src="https://docs.docker.com/get-started/images/dashboard-app-project-collapsed.png" />
+<p>애플리케이션 스택을 살펴보면, 앞서 compose 파일을 통해 정의한 두 컨테이너를 확인할 수 있다. 이들은 <code>&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>의 패턴을 따른다.</p>
+<img src="https://docs.docker.com/get-started/images/dashboard-app-project-expanded.png" />
+<h2 id="종료-및-제거"><a class="header" href="#종료-및-제거">종료 및 제거</a></h2>
+<p><code>docker-compose down</code>을 명령하거나 대쉬보드 상에서 휴지통 아이콘을 클릭하면 앱 스택을 종료할 수 있다. 관련된 모든 컨테이너들이 중지되고, 네트워크는 삭제된다.</p>
+<blockquote>
+<p><strong>주의</strong> : 기본적으로 compose 파일에서 정의된 named volume들은 <code>docker-compose down</code> 명령으로 제거되지 않는다. 볼륨들도 제거하고자 하는 경우, <code>--volumes</code> 플래그를 추가해주어야 한다.</p>
+<p>Docker 대쉬보드에서도 마찬가지로 애플리케이션 스택을 제거할 때 볼륨은 제거하지 않는다.</p>
+</blockquote>
+<p>앱 스택을 제거 한 이후, 다른 프로젝트를 작업할 때도 단순히 <code>docker-compose up</code>를 실행하기만 하면 된다.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../docker/multi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../docker/best-practices.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../docker/multi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../docker/best-practices.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

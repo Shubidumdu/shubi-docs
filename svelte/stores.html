@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Stores - Shubi Docs</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Introduction</a></li><li class="chapter-item "><a href="../js/index.html"><strong aria-hidden="true">1.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/exec-ctx.html"><strong aria-hidden="true">1.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../js/class.html"><strong aria-hidden="true">1.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../js/arrow-func.html"><strong aria-hidden="true">1.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../js/binding-function.html"><strong aria-hidden="true">1.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../js/call-apply.html"><strong aria-hidden="true">1.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../js/closure.html"><strong aria-hidden="true">1.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../js/func-exp-and-dec.html"><strong aria-hidden="true">1.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../js/event-loop.html"><strong aria-hidden="true">1.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../js/new.html"><strong aria-hidden="true">1.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../js/properties.html"><strong aria-hidden="true">1.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../js/prototype.html"><strong aria-hidden="true">1.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../js/this.html"><strong aria-hidden="true">1.12.</strong> this</a></li><li class="chapter-item "><a href="../js/var.html"><strong aria-hidden="true">1.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../js/babel.html"><strong aria-hidden="true">1.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/intersection.html"><strong aria-hidden="true">1.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../js/web-api/mutation.html"><strong aria-hidden="true">1.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../js/web-api/template.html"><strong aria-hidden="true">1.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">1.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">1.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">1.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">1.15.4.3.</strong> Events</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">1.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/guides/render-opt.html"><strong aria-hidden="true">1.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../js/guides/custom-el-checklist.html"><strong aria-hidden="true">1.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../svelte/intro.html"><strong aria-hidden="true">2.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../svelte/reactivity.html"><strong aria-hidden="true">2.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../svelte/props.html"><strong aria-hidden="true">2.2.</strong> Props</a></li><li class="chapter-item "><a href="../svelte/logic.html"><strong aria-hidden="true">2.3.</strong> Logic</a></li><li class="chapter-item "><a href="../svelte/events.html"><strong aria-hidden="true">2.4.</strong> Events</a></li><li class="chapter-item "><a href="../svelte/bindings.html"><strong aria-hidden="true">2.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../svelte/lifecycle.html"><strong aria-hidden="true">2.6.</strong> Life Cycle</a></li><li class="chapter-item expanded "><a href="../svelte/stores.html" class="active"><strong aria-hidden="true">2.7.</strong> Stores</a></li><li class="chapter-item "><a href="../svelte/motion.html"><strong aria-hidden="true">2.8.</strong> Motion</a></li><li class="chapter-item "><a href="../svelte/transition.html"><strong aria-hidden="true">2.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../svelte/animations.html"><strong aria-hidden="true">2.10.</strong> Animations</a></li><li class="chapter-item "><a href="../svelte/actions.html"><strong aria-hidden="true">2.11.</strong> Actions</a></li><li class="chapter-item "><a href="../svelte/classes.html"><strong aria-hidden="true">2.12.</strong> Classes</a></li><li class="chapter-item "><a href="../svelte/composition.html"><strong aria-hidden="true">2.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../svelte/context.html"><strong aria-hidden="true">2.14.</strong> Context API</a></li><li class="chapter-item "><a href="../svelte/specials.html"><strong aria-hidden="true">2.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../svelte/module.html"><strong aria-hidden="true">2.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../svelte/debug.html"><strong aria-hidden="true">2.17.</strong> Debugging</a></li></ol></li><li class="chapter-item "><a href="../graphql/intro.html"><strong aria-hidden="true">3.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../graphql/execution.html"><strong aria-hidden="true">3.1.</strong> Execution</a></li><li class="chapter-item "><a href="../graphql/query-mutation.html"><strong aria-hidden="true">3.2.</strong> Query &amp; Mutation</a></li><li class="chapter-item "><a href="../graphql/schema-type.html"><strong aria-hidden="true">3.3.</strong> Schema &amp; Type</a></li><li class="chapter-item "><a href="../graphql/pagination.html"><strong aria-hidden="true">3.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../graphql/http.html"><strong aria-hidden="true">3.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../docker/setup.html"><strong aria-hidden="true">4.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../docker/sample.html"><strong aria-hidden="true">4.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../docker/update.html"><strong aria-hidden="true">4.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../docker/share.html"><strong aria-hidden="true">4.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../docker/persist.html"><strong aria-hidden="true">4.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../docker/bind-mounts.html"><strong aria-hidden="true">4.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../docker/multi.html"><strong aria-hidden="true">4.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../docker/docker-compose.html"><strong aria-hidden="true">4.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../docker/best-practices.html"><strong aria-hidden="true">4.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../etc/ssh.html"><strong aria-hidden="true">5.1.</strong> SSH</a></li><li class="chapter-item "><a href="../etc/tdd.html"><strong aria-hidden="true">5.2.</strong> TDD</a></li><li class="chapter-item "><a href="../etc/fp.html"><strong aria-hidden="true">5.3.</strong> 함수형 프로그래밍</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="stores"><a class="header" href="#stores">Stores</a></h1>
+<h2 id="writable-stores"><a class="header" href="#writable-stores">Writable stores</a></h2>
+<p>Svelte에서는 <em>store</em>를 통해 상태 로직을 컴포넌트와 분리할 수 있다. store는 상태값이 변경되었을 때 관련 컴포넌트들에게 알려주는 <code>subscribe</code> 메서드를 가진 단순한 객체다.</p>
+<p>store 중에는 <strong>writable store</strong>가 있으며, 이는 <code>set</code>과 <code>update</code>메서드를 갖는다.</p>
+<pre><code class="language-svelte">&lt;script&gt;
+	import { count } from './stores.js';
+	import Incrementer from './Incrementer.svelte';
+	import Decrementer from './Decrementer.svelte';
+	import Resetter from './Resetter.svelte';
+
+	let count_value;
+
+	const unsubscribe = count.subscribe(value =&gt; {
+		count_value = value;
+	});
+&lt;/script&gt;
+</code></pre>
+<p><code>update</code>는 인수를 콜백함수로 받으며, <code>set</code>는 직접적인 값을 받는다.</p>
+<pre><code class="language-svelte">function increment() {
+	count.update(n =&gt; n + 1);
+}
+</code></pre>
+<pre><code class="language-svelte">function reset() {
+	count.set(0);
+}
+</code></pre>
+<h2 id="auto-subscriptions"><a class="header" href="#auto-subscriptions">Auto-subscriptions</a></h2>
+<p>만약, 컴포넌트가 초기화와 제거를 여러번 반복하게 되는 경우, <code>unsubscribe</code> 함수를 실행하지 않게되면 메모리 누수의 위험이 있다.</p>
+<p>따라서, 이를 방지하기 위해선 <code>onDestroy</code> 생명주기 메서드에서 이를 호출해주어야 한다.</p>
+<pre><code class="language-svelte">&lt;script&gt;
+	import { onDestroy } from 'svelte';
+	import { count } from './stores.js';
+	import Incrementer from './Incrementer.svelte';
+	import Decrementer from './Decrementer.svelte';
+	import Resetter from './Resetter.svelte';
+
+	let count_value;
+
+	const unsubscribe = count.subscribe(value =&gt; {
+		count_value = value;
+	});
+
+	onDestroy(unsubscribe);
+&lt;/script&gt;
+
+&lt;h1&gt;The count is {count_value}&lt;/h1&gt;
+</code></pre>
+<p>헌데, 여러 컴포넌트에 대해 동일한 작업을 해주어야 하는 상황이라면 이런 방법이 다소 번거롭게 느껴질 수 있다.(boilerplatey) Svelte는 <code>$</code>만 덧붙이면 store 값에 대해 앞선 작업들을 알아서 처리해준다.</p>
+<pre><code class="language-svelte">&lt;script&gt;
+	import { count } from './stores.js';
+	import Incrementer from './Incrementer.svelte';
+	import Decrementer from './Decrementer.svelte';
+	import Resetter from './Resetter.svelte';
+&lt;/script&gt;
+
+&lt;h1&gt;The count is {$count}&lt;/h1&gt;
+</code></pre>
+<p>이러한 Auto-subscription은 store의 변수들이 컴포넌트 최상위 스코프에서 선언 및 import 되었을 때만 제대로 동작한다.</p>
+<p><code>$</code>로 변수명을 시작하는 것은 store 값을 참조하겠다는 것으로 간주되며, 그렇지 않은 경우에 대해 Svelte는 <code>$</code>로 임의의 변수를 선언하는 것을 방지한다.</p>
+<h2 id="readable-stores"><a class="header" href="#readable-stores">Readable stores</a></h2>
+<p>모든 경우에 store를 참조하는 컴포넌트들에게 쓰기 권한을 부여할 필요는 없다. 이를테면, 시간, 마우스 위치, 지리적 위치 등을 다루는 경우가 그렇다.</p>
+<p>이러한 경우에 readable store를 사용할 수 있다.</p>
+<pre><code class="language-svelte">export const time = readable(new Date(), function start(set) {
+	const interval = setInterval(() =&gt; {
+		set(new Date());
+	}, 1000);
+
+	return function stop() {
+		clearInterval(interval);
+	};
+});
+</code></pre>
+<p><code>readable</code>의 첫번째 인수는 초기값이며, 설정할 필요가 없다면 <code>null</code> 혹은 <code>undefined</code>로 두면 된다.</p>
+<p>두번째 인수는 <code>start</code> 콜백함수이며, 이는 <code>set</code> 콜백함수를 파라미터로 받고 <code>stop</code> 함수를 반환하는 함수다. <code>start</code> 함수는 최초의 subscriber에 의해 상태값이 참조되는 경우에 호출되며, <code>stop</code>은 마지막 subscriber가 unscribe를 했을 때에 실행되는 cleanup 함수다.</p>
+<h2 id="derived-stores"><a class="header" href="#derived-stores">Derived stores</a></h2>
+<p>특정 store의 값에 의존하는 다른 값이 있는 경우, <code>derived</code>를 통해 새로운 store를 만들어 줄 수 있다. 아래는 특정 페이지가 열리고 나서의 시간을 측정한 상태값을 보유한 derived store다.</p>
+<pre><code class="language-svelte">export const elapsed = derived(
+	time,
+	$time =&gt; Math.round(($time - start) / 1000)
+);
+</code></pre>
+<p>여러 inputs들로부터 derive store를 갖추고, 값을 반환하는 대신 명시적으로 <code>set</code>를 통해 값을 변경해줄 수도 있다. 이에 대해서는 <a href="https://svelte.dev/docs#derived">여기</a>를 참조하자.</p>
+<h2 id="custom-stores"><a class="header" href="#custom-stores">Custom stores</a></h2>
+<p>어떤 객체든 <code>subscribe</code> 메서드가 적절하게 실행되기만 하면, 이는 store로 취급된다. 이를 통해 유저가 임의로 커스텀 store를 만들어 로직을 처리할 수 있다.</p>
+<p>해당 문서의 앞쪽에서 <code>writable</code>을 통해 store를 다루었던 내용을 커스텀 store를 통해 리팩토링해보자.</p>
+<pre><code class="language-svelte">function createCount() {
+	const { subscribe, set, update } = writable(0);
+
+	return {
+		subscribe,
+		increment: () =&gt; update(n =&gt; n + 1),
+		decrement: () =&gt; update(n =&gt; n - 1),
+		reset: () =&gt; set(0)
+	};
+}
+</code></pre>
+<h2 id="store-bindings"><a class="header" href="#store-bindings">Store bindings</a></h2>
+<p>writable store를 사용하는 경우, 로컬 컴포넌트의 상태값과 store의 값을 binding 해줄 수 있다.</p>
+<p>아래 예시에서는 <code>$name</code> store 값을 <code>input</code>의 <code>value</code>값에 바인딩을 해주는 예시다.</p>
+<pre><code class="language-svelte">&lt;input bind:value={$name}&gt;
+</code></pre>
+<p>이후, input의 <code>value</code>에 변경이 있다면 <code>name</code> store값 역시 자동으로 업데이트된다.</p>
+<p>컴포넌트 내부에서 값을 직접 할당해줄 수도 있다.</p>
+<pre><code class="language-svelte">&lt;button on:click=&quot;{() =&gt; $name += '!'}&quot;&gt;
+	Add exclamation mark!
+&lt;/button&gt;
+</code></pre>
+<p>위에서의 <code>$name += '!'</code>은 <code>name.set($name + '!')</code>의 호출과 동일하다.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../svelte/lifecycle.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../svelte/motion.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../svelte/lifecycle.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../svelte/motion.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -30,6 +30,8 @@
   - [Guides]()
     - [렌더링 최적화](js/guides/render-opt.md)
     - [Custom Element 체크리스트](js/guides/custom-el-checklist.md)
+- [React]()
+  - [왜 React인가?](react/why.md)
 - [Svelte](svelte/intro.md)
   - [Reactivity](svelte/reactivity.md)
   - [Props](svelte/props.md)

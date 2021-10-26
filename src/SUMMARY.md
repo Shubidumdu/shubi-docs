@@ -72,3 +72,6 @@
   - [TDD](etc/tdd.md)
   - [함수형 프로그래밍](etc/fp.md)
   - [반응형 프로그래밍](etc/rp.md)
+- [Machine Learning](ml/index.md)
+  - [Problem Framing](ml/problem-framing/index.md)
+    - [Common ML Problems](ml/problem-framing/common-problems.md)

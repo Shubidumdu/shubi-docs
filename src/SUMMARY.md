@@ -75,3 +75,4 @@
 - [Machine Learning](ml/index.md)
   - [Problem Framing](ml/problem-framing/index.md)
     - [Common ML Problems](ml/problem-framing/common-problems.md)
+    - [The ML Mindset](ml/problem-framing/mindset.md)

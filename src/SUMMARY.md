@@ -76,3 +76,4 @@
   - [Problem Framing](ml/problem-framing/index.md)
     - [Common ML Problems](ml/problem-framing/common-problems.md)
     - [The ML Mindset](ml/problem-framing/mindset.md)
+    - [Identifying Good Problems for ML](ml/problem-framing/good.md)

@@ -40,6 +40,7 @@
   - [타입스크립트의 타입 시스템](ts/types/index.md)
     - [편집기를 사용하여 타입 시스템 탐색하기](ts/types/use_editor.md)
     - [타입이 값들의 집합이라고 생각하기](ts/types/set.md)
+    - [타입 공간과 값 공간의 심벌 구분하기](ts/types/symbol.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

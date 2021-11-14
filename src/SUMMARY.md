@@ -39,6 +39,7 @@
     - [any 타입 지양하기](ts/intro/no_any.md)
   - [타입스크립트의 타입 시스템](ts/types/index.md)
     - [편집기를 사용하여 타입 시스템 탐색하기](ts/types/use_editor.md)
+    - [타입이 값들의 집합이라고 생각하기](ts/types/set.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

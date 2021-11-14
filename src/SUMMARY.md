@@ -37,6 +37,8 @@
     - [코드 생성과 타입이 관계없음을 이해하기](ts/intro/transpile.md)
     - [구조적 타이핑에 익숙해지기](ts/intro/typing.md)
     - [any 타입 지양하기](ts/intro/no_any.md)
+  - [타입스크립트의 타입 시스템](ts/types/index.md)
+    - [편집기를 사용하여 타입 시스템 탐색하기](ts/types/use_editor.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

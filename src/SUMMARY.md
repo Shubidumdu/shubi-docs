@@ -43,6 +43,7 @@
     - [타입 공간과 값 공간의 심벌 구분하기](ts/types/symbol.md)
     - [타입 단언보다는 타입 선언을 사용하기](ts/types/type-def.md)
     - [객체 래퍼 타입 피하기](ts/types/wrapper.md)
+    - [잉여 속성 체크의 한계 인지하기](ts/types/excess-type-check.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

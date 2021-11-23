@@ -93,3 +93,4 @@
     - [The ML Mindset](ml/problem-framing/mindset.md)
     - [Identifying Good Problems for ML](ml/problem-framing/good.md)
     - [Hard ML Problems](ml/problem-framing/hard.md)
+    - [Deciding on ML](ml/problem-framing/framing.md)

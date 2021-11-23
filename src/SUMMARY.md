@@ -44,6 +44,7 @@
     - [타입 단언보다는 타입 선언을 사용하기](ts/types/type-def.md)
     - [객체 래퍼 타입 피하기](ts/types/wrapper.md)
     - [잉여 속성 체크의 한계 인지하기](ts/types/excess-type-check.md)
+    - [함수 표현식에 타입 적용하기](ts/types/function-expression.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

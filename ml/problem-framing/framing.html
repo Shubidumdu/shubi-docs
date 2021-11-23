@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Deciding on ML - Shubi Docs</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">Introduction</a></li><li class="chapter-item "><a href="../../js/index.html"><strong aria-hidden="true">1.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/exec-ctx.html"><strong aria-hidden="true">1.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../../js/class.html"><strong aria-hidden="true">1.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../../js/arrow-func.html"><strong aria-hidden="true">1.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../../js/binding-function.html"><strong aria-hidden="true">1.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../../js/call-apply.html"><strong aria-hidden="true">1.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../../js/closure.html"><strong aria-hidden="true">1.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../../js/func-exp-and-dec.html"><strong aria-hidden="true">1.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../../js/event-loop.html"><strong aria-hidden="true">1.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../../js/new.html"><strong aria-hidden="true">1.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../../js/properties.html"><strong aria-hidden="true">1.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../../js/prototype.html"><strong aria-hidden="true">1.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../../js/this.html"><strong aria-hidden="true">1.12.</strong> this</a></li><li class="chapter-item "><a href="../../js/var.html"><strong aria-hidden="true">1.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../../js/babel.html"><strong aria-hidden="true">1.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/web-api/intersection.html"><strong aria-hidden="true">1.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../../js/web-api/mutation.html"><strong aria-hidden="true">1.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../../js/web-api/template.html"><strong aria-hidden="true">1.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">1.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">1.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">1.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">1.15.4.3.</strong> Events</a></li></ol></li><li class="chapter-item "><a href="../../js/web-api/canvas/intro.html"><strong aria-hidden="true">1.15.5.</strong> Canvas API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/web-api/canvas/shapes.html"><strong aria-hidden="true">1.15.5.1.</strong> 도형 그리기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">1.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/guides/render-opt.html"><strong aria-hidden="true">1.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../../js/guides/custom-el-checklist.html"><strong aria-hidden="true">1.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../ts/index.html"><strong aria-hidden="true">2.</strong> TypeScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ts/intro/index.html"><strong aria-hidden="true">2.1.</strong> 타입스크립트 알아보기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ts/intro/ts_js.html"><strong aria-hidden="true">2.1.1.</strong> TS와 JS의 관계</a></li><li class="chapter-item "><a href="../../ts/intro/setting.html"><strong aria-hidden="true">2.1.2.</strong> TS 설정 이해하기</a></li><li class="chapter-item "><a href="../../ts/intro/transpile.html"><strong aria-hidden="true">2.1.3.</strong> 코드 생성과 타입이 관계없음을 이해하기</a></li><li class="chapter-item "><a href="../../ts/intro/typing.html"><strong aria-hidden="true">2.1.4.</strong> 구조적 타이핑에 익숙해지기</a></li><li class="chapter-item "><a href="../../ts/intro/no_any.html"><strong aria-hidden="true">2.1.5.</strong> any 타입 지양하기</a></li></ol></li><li class="chapter-item "><a href="../../ts/types/index.html"><strong aria-hidden="true">2.2.</strong> 타입스크립트의 타입 시스템</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ts/types/use_editor.html"><strong aria-hidden="true">2.2.1.</strong> 편집기를 사용하여 타입 시스템 탐색하기</a></li><li class="chapter-item "><a href="../../ts/types/set.html"><strong aria-hidden="true">2.2.2.</strong> 타입이 값들의 집합이라고 생각하기</a></li><li class="chapter-item "><a href="../../ts/types/symbol.html"><strong aria-hidden="true">2.2.3.</strong> 타입 공간과 값 공간의 심벌 구분하기</a></li><li class="chapter-item "><a href="../../ts/types/type-def.html"><strong aria-hidden="true">2.2.4.</strong> 타입 단언보다는 타입 선언을 사용하기</a></li><li class="chapter-item "><a href="../../ts/types/wrapper.html"><strong aria-hidden="true">2.2.5.</strong> 객체 래퍼 타입 피하기</a></li><li class="chapter-item "><a href="../../ts/types/excess-type-check.html"><strong aria-hidden="true">2.2.6.</strong> 잉여 속성 체크의 한계 인지하기</a></li><li class="chapter-item "><a href="../../ts/types/function-expression.html"><strong aria-hidden="true">2.2.7.</strong> 함수 표현식에 타입 적용하기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">3.</strong> React</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../react/why.html"><strong aria-hidden="true">3.1.</strong> 왜 React인가?</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">4.</strong> Redux</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../redux/pure.html"><strong aria-hidden="true">4.1.</strong> 왜 Reducer는 순수해야 하는가?</a></li></ol></li><li class="chapter-item "><a href="../../svelte/intro.html"><strong aria-hidden="true">5.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../svelte/reactivity.html"><strong aria-hidden="true">5.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../../svelte/props.html"><strong aria-hidden="true">5.2.</strong> Props</a></li><li class="chapter-item "><a href="../../svelte/logic.html"><strong aria-hidden="true">5.3.</strong> Logic</a></li><li class="chapter-item "><a href="../../svelte/events.html"><strong aria-hidden="true">5.4.</strong> Events</a></li><li class="chapter-item "><a href="../../svelte/bindings.html"><strong aria-hidden="true">5.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../../svelte/lifecycle.html"><strong aria-hidden="true">5.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../../svelte/stores.html"><strong aria-hidden="true">5.7.</strong> Stores</a></li><li class="chapter-item "><a href="../../svelte/motion.html"><strong aria-hidden="true">5.8.</strong> Motion</a></li><li class="chapter-item "><a href="../../svelte/transition.html"><strong aria-hidden="true">5.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../../svelte/animations.html"><strong aria-hidden="true">5.10.</strong> Animations</a></li><li class="chapter-item "><a href="../../svelte/actions.html"><strong aria-hidden="true">5.11.</strong> Actions</a></li><li class="chapter-item "><a href="../../svelte/classes.html"><strong aria-hidden="true">5.12.</strong> Classes</a></li><li class="chapter-item "><a href="../../svelte/composition.html"><strong aria-hidden="true">5.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../../svelte/context.html"><strong aria-hidden="true">5.14.</strong> Context API</a></li><li class="chapter-item "><a href="../../svelte/specials.html"><strong aria-hidden="true">5.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../../svelte/module.html"><strong aria-hidden="true">5.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../../svelte/debug.html"><strong aria-hidden="true">5.17.</strong> Debugging</a></li></ol></li><li class="chapter-item "><a href="../../graphql/intro.html"><strong aria-hidden="true">6.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../graphql/execution.html"><strong aria-hidden="true">6.1.</strong> Execution</a></li><li class="chapter-item "><a href="../../graphql/query-mutation.html"><strong aria-hidden="true">6.2.</strong> Query &amp; Mutation</a></li><li class="chapter-item "><a href="../../graphql/schema-type.html"><strong aria-hidden="true">6.3.</strong> Schema &amp; Type</a></li><li class="chapter-item "><a href="../../graphql/pagination.html"><strong aria-hidden="true">6.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../../graphql/http.html"><strong aria-hidden="true">6.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../../docker/setup.html"><strong aria-hidden="true">7.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../docker/sample.html"><strong aria-hidden="true">7.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../../docker/update.html"><strong aria-hidden="true">7.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../../docker/share.html"><strong aria-hidden="true">7.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../../docker/persist.html"><strong aria-hidden="true">7.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../../docker/bind-mounts.html"><strong aria-hidden="true">7.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../../docker/multi.html"><strong aria-hidden="true">7.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../../docker/docker-compose.html"><strong aria-hidden="true">7.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../../docker/best-practices.html"><strong aria-hidden="true">7.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../etc/ssh.html"><strong aria-hidden="true">8.1.</strong> SSH</a></li><li class="chapter-item "><a href="../../etc/tdd.html"><strong aria-hidden="true">8.2.</strong> TDD</a></li><li class="chapter-item "><a href="../../etc/fp.html"><strong aria-hidden="true">8.3.</strong> 함수형 프로그래밍</a></li><li class="chapter-item "><a href="../../etc/rp.html"><strong aria-hidden="true">8.4.</strong> 반응형 프로그래밍</a></li></ol></li><li class="chapter-item expanded "><a href="../../ml/index.html"><strong aria-hidden="true">9.</strong> Machine Learning</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../ml/problem-framing/index.html"><strong aria-hidden="true">9.1.</strong> Problem Framing</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ml/problem-framing/common-problems.html"><strong aria-hidden="true">9.1.1.</strong> Common ML Problems</a></li><li class="chapter-item "><a href="../../ml/problem-framing/mindset.html"><strong aria-hidden="true">9.1.2.</strong> The ML Mindset</a></li><li class="chapter-item "><a href="../../ml/problem-framing/good.html"><strong aria-hidden="true">9.1.3.</strong> Identifying Good Problems for ML</a></li><li class="chapter-item "><a href="../../ml/problem-framing/hard.html"><strong aria-hidden="true">9.1.4.</strong> Hard ML Problems</a></li><li class="chapter-item expanded "><a href="../../ml/problem-framing/framing.html" class="active"><strong aria-hidden="true">9.1.5.</strong> Deciding on ML</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="deciding-on-ml"><a class="header" href="#deciding-on-ml">Deciding on ML</a></h1>
+<p>데이터를 본격적으로 다루기 전에, 준비되었는지 확인해보는 과정을 거치도록 하자.
+아래에서는 머신 러닝 문제들을 구성하기 전에 생각해야 할 몇가지 사항에 대해 간략하게 설명한다.</p>
+<h2 id="명확하고-간단하게-시작하라"><a class="header" href="#명확하고-간단하게-시작하라">명확하고 간단하게 시작하라.</a></h2>
+<p>말 그대로, ML 모델이 어떤 일을 했으면 좋겠는가?</p>
+<table class="green">
+  <tbody><tr><th>예시</th></tr>
+  <tr>
+    <td>ML 모델으로 방금 업로드된 동영상이 추후에 얼마나 인기를 끌지 예측하고 싶다.</td>
+  </tr>
+</tbody></table>
+<p>현 시점에서, 이에 대해 답하는 것은 다소 정성적인 목표가 될 수 있으나, 간접적인 목표가 아니라, 실제 목표를 지니고 있는지 확인하라.</p>
+<h2 id="어떤-결과가-이상적인가"><a class="header" href="#어떤-결과가-이상적인가">어떤 결과가 이상적인가?</a></h2>
+<p>시스템에 ML 모델을 추가하는 것은 이상적인 결과를 생산해야 한다. 이는 단순히 모델과 그 품질을 평가하는 것과는 다른 의미를 갖는다.</p>
+<table class="green">
+  <tbody><tr><th>예시</th><th></th></tr>
+  <tr>
+    <td>트랜스코딩</td>
+    <td>
+      <div>이상적인 목표는 덜 인기있는 영상에 대해 트랜스코딩을 거쳐 이들이 잡아먹는 리소스를 줄이는 것이다.</div>
+    </td>
+  </tr>
+    <tr>
+    <td>영상 추천</td>
+    <td>이상적인 목표는 사람들이 유용하고, 흥미로워하고, 가치가 있다고 판단하는 영상을 제안하는 것이다.</td>
+  </tr>
+</tbody></table>
+<blockquote>
+<p><strong>주의</strong>: 똑같은 모델로도 다른 이상적인 결과를 목표로 할 수 있다. 이것이 이상적인 결과를 명확하게 두어야 하는 이유다.</p>
+</blockquote>
+<p>이미 최적화를 하고 있는 서비스의 매트릭스에 갇혀있지 마라. 제품 및 서비스의 더 큰 목표에 집중해야 한다.</p>
+<h2 id="성공실패-매트릭스지표"><a class="header" href="#성공실패-매트릭스지표">성공/실패 매트릭스(지표)</a></h2>
+<h3 id="정량화하라"><a class="header" href="#정량화하라">정량화하라</a></h3>
+<p>시스템이 성공적인지 아닌지 어떻게 판단할 수 있을까?</p>
+<p>성공 및 실패 매트릭스는 정밀도, 재현율 또는 AUC와 같은 평가 매트릭스와 독립적으로 표현되어야 합니다.
+대신, 예상 결과를 구체화시켜야 합니다.
+시작하기 전에 미리 성공 매트릭스를 설정하세요.
+이는 매몰 비용으로 우리가 평범한 모델로부터 시작하게끔 하는 것을 막기 위해서 입니다.</p>
+<table class="green">
+  <tbody><tr><th>예시</th><th></th></tr>
+  <tr>
+    <td>트랜스코딩</td>
+    <td>성공 매트릭스는 CPU 리소스 사용률이다. 성공은 트랜스코딩을 위한 CPU 비용을 35% 줄이는 것을 의미한다. 반면 실패는 비용 절감이 모델 학습 및 제공을 위한 CPU 비용보다 적은 경우다.</td></tr>
+    <tr>
+    <td>영상 추천</td>
+    <td>성공 매트릭스는 모델을 통해 적절하게 예측한 영상의 개수가 된다. 성공은 업로드된 이후 28일 이내에 시청 시간을 기반으로 가장 인기있는 동영상의 95%를 예측하는 것을 의미한다. 반면 실패는 적절하게 예측된 인기 동영상의 수가 현재의 휴리스틱을 통한 예측보다 성능이 나쁜 경우다.</td>
+  </tr>
+</tbody></table>
+<h3 id="측정-가능한-매트릭스인가"><a class="header" href="#측정-가능한-매트릭스인가">측정 가능한 매트릭스인가?</a></h3>
+<p>측정가능한 지표는 실제로 적용하였을 때의 평가에 있어 충분한 정보를 제공한다.
+예를 들어, 과수원의 건강 상태를 모니터링하는 시스템은 병든 나무들의 비율을 줄이고자 한다.
+한편, &quot;어떤 나무가 병든 나무인가?&quot;에 대한 측정이 불가능하다면, 그다지 유용한 지표는 아니다.</p>
+<p>아래와 같은 질문들을 스스로 해보자.</p>
+<ul>
+<li>어떻게 지표를 측정하는가?</li>
+<li>언제 지표를 측정할 수 있는가?</li>
+<li>새로운 ML 시스템이 성공적인지 아닌지를 판단하는 데에 얼마나 많은 시간이 걸릴 것인가?</li>
+</ul>
+<p>이상적으로는, 빨리 실패하고자 할 것이다. 
+데이터의 신호(Signal)가 너무 적거나, 예측할 수 없는 데이터가 있는지를 확인하여 가설이 틀릴 수 있는지에 대해 판단하라.
+빠른 실패는 프로세스의 초기에 가설을 수정하고 시간 손실을 방지할 수 있다.</p>
+<table class="green">
+  <tbody><tr><th>예시</th></tr>
+  <tr>
+    <td>
+      이용자의 위치에 따라 어떤 영상이 시청되었지에 대해 판단하고 싶다.
+      이는 가능한 것처럼 보이지만, 막상 시도해보면, 신호가 너무 약하거나, 너무 많은 노이즈가 껴있어 제대로 이루어지기 어렵다.
+      얼마나 오래 해당 가설을 고수할 것인가?
+    </td>
+  </tr>
+</tbody></table>
+<p>보다 장기적인 관점에서 엔지니어링 및 유지 비용을 고려하라.</p>
+<h3 id="다른-실패-시나리오"><a class="header" href="#다른-실패-시나리오">다른 실패 시나리오</a></h3>
+<p>성공 지표와 관련이 없는 실패에 대해서도 확인하라.
+예를 들어, 영상 추천 시스템이 항상 &quot;어그로 영상&quot;들을 추천한다면 양질의 서비스를 제공해야한다는 관점에서 성공적이라고 할 수 없을 것이다.</p>
+<h2 id="ml-모델이-어떤-형태의-결과를-만들어냈으면-하는가"><a class="header" href="#ml-모델이-어떤-형태의-결과를-만들어냈으면-하는가">ML 모델이 어떤 형태의 결과를 만들어냈으면 하는가?</a></h2>
+<p>아래 테이블을 기반으로, 어떤 형태의 결과를 출력하는 것이 가장 적절할지에 대해 생각해보라.</p>
+<table class="blue">
+  <tbody><tr><th>Type of ML Problem</th><th>Description</th><th>Example</th></tr>
+  <tr>
+    <td>Classification (분류)</td>
+    <td>N개의 라벨 중 하나를 선택</td>
+    <td>cat, dog, horse, or bear</td>
+  </tr>
+    <tr>
+    <td>Regression (회귀)</td>
+      <td>수치에 대한 예측</td>
+      <td>클릭율</td>
+  </tr>
+    <tr>
+    <td>Clustering (군집화)</td>
+      <td>유사한 예시들을 그룹화시키기</td>
+      <td>가장 관련이 있는 문서 (비지도)</td>
+  </tr>
+   <tr>
+    <td>Association rule learning (연관 규칙 학습)</td>
+      <td>데이터에서 가능한 연관 패턴 추론</td>
+      <td>만약 햄버거 빵을 샀으면, 햄버거도 샀을 것이다. (비지도)</td>
+  </tr>
+    <tr>
+    <td>Structured output (구조적인 결과)</td>
+      <td>복잡한 출력 생성</td>
+      <td>자연어 파싱 트리, 이미지 인식 경계 박스</td>
+  </tr>
+</tbody></table>
+<blockquote>
+<p><strong>주의</strong> : 특정 ML 문제는 어떤 타입에서는 실패하지만, 어떤 타입에서는 성공적일 수 있습니다.</p>
+</blockquote>
+<h3 id="좋은-출력의-특징"><a class="header" href="#좋은-출력의-특징">좋은 출력의 특징</a></h3>
+<h4 id="모델이-만들어낸-출력은-명확한-정의가-가능한-정량적-결과여야-합니다"><a class="header" href="#모델이-만들어낸-출력은-명확한-정의가-가능한-정량적-결과여야-합니다"><strong>모델이 만들어낸 출력은 명확한 정의가 가능한 정량적 결과여야 합니다.</strong></a></h4>
+<table class="green">
+  <tbody><tr><th>Example</th></tr>
+  <tr>
+    <td>
+      이용자가 영상을 재밌게 보았는가? vs. 이용자가 영상을 공유하였는가?
+    </td>
+  </tr>
+</tbody></table>
+<p>이용자에게 직접 물어보지 않는 한, 이용자가 정말로 해당 영상을 즐겼는지에 대해 알 방도가 없다.
+만약 이를 판단하려면, 별도의 **<a href="https://developers.google.com/machine-learning/glossary?hl=ko#proxy_labels">프록시 레이블</a>**이 필요할 것이다.
+프록시 레이블은 실제를 대신할 대체 레이블을 의미하는데, 이용자의 공유 여부는 좋은 프록시 레이블이 된다.
+물론, 공유는 이용자가 영상을 재밌게 보았는지에 대한 완벽한 측정치가 될 수 없다.
+그러나, 공유는 정량적이고, 추적 가능하고, 수많은 예측 시그널을 제공한다는 점에서 더 적절하다.</p>
+<h4 id="출력은-앞서-정한-이상적인-결과와-관련이-있어야-한다"><a class="header" href="#출력은-앞서-정한-이상적인-결과와-관련이-있어야-한다"><strong>출력은 앞서 정한 이상적인 결과와 관련이 있어야 한다.</strong></a></h4>
+<p>모델은 출력을 올바른 방향으로 최적화해 나갈 것이다. 그러므로, 출력은 우리가 신경쓰고자 하는 실질적인 이상적인 목표와 관련이 있어야 한다.
+프록시 레이블이 종종 필수적인데, 항상 이상적인 결과를 직접 측정할 수 없기 때문이다.
+그러나, 레이블과 실제 결과 간의 연관성이 강할수록, 제대로 된 것을 최적화시켜 나가고 있다는 자신을 갖기도 용이하다.</p>
+<table class="green">
+  <tbody><tr><th>Output</th><th>Ideal Outcome</th></tr>
+  <tr><td>이용자가 기사를 공유할지 아닌지에 대한 예측</td><td>이용자들이 좋아하는 기사를 보여줌</td></tr>
+  <tr><td>비디오가 인기있을 것인지 아닌지에 대한 예측</td><td>이용자가 유용하고 가치있다고 판단하는 영상을 제공</td></tr>
+  <tr><td>이용자들이 앱 스토어에서 어떤 앱을 설치할지 아닌지에 대한 예측</td>
+    <td>이용자들이 좋아할만한 앱을 찾아줌</td></tr>
+  <tr class="alt"><td colspan="3"><b>둘 사이에 강한 연관성이 있는지 확인해야 한다!</b></td></tr>
+</tbody></table>
+<h4 id="연습-데이터로-사용할-예시-데이터들을-얻을-수-있는가"><a class="header" href="#연습-데이터로-사용할-예시-데이터들을-얻을-수-있는가"><strong>연습 데이터로 사용할 예시 데이터들을 얻을 수 있는가?</strong></a></h4>
+<p>어떻게, 어디서 데이터들을 가져올 것인가?</p>
+<p>지도 학습은 레이블 처리된 데이터에 의존한다. 
+만약 연습에 사용할 데이터를 얻는 것이 어려운 상황이라면, 앞선 단계를 다시 밟으면서 문제와 목표를 재정의하는 것이 필요할 것이다.
+앞서 시청 시간을 퍼센트 단위로 변환한 것처럼, 출력 예시는 엔지니어링 되어야 할 수도 있다.</p>
+<h2 id="출력-활용"><a class="header" href="#출력-활용">출력 활용</a></h2>
+<p>모델은 다음의 두 부분에서 예측을 수행할 수 있다.</p>
+<ul>
+<li>실제 사례, 이용자 활동에 따른 반응 (online)</li>
+<li>배치 또는 캐시로써 사용</li>
+</ul>
+<p>서비스에서 어떻게 예측을 활용할 것인가? 명심하라, ML은 단순히 예측을 하는 것이 아니라, 그것에 기반해 결정을 수행해야 한다.
+어떻게 모델의 예측 결과를 의사 결정으로 바꿀 수 있을까?</p>
+<table class="green">
+  <tbody><tr><th>Example</th></tr>
+  <tr>
+    <td>모델은 새 영상이 업로드될 때 영상의 인기도를 예측할 것이다. 그 결과에 기반하여 영상에 대한 트랜스코딩 알고리즘을 결정할 것이다.</td>
+  </tr>
+</tbody></table>
+<p>아래 예시처럼, 이용자의 클릭율을 예측하여 이를 통해 이용자에게 알림을 전달할 수도 있다.</p>
+<pre><code>click_probability = call_model(user)
+if click_probability &gt; 0.05:
+    send_notification(user)
+</code></pre>
+<p>다음으로, 아키텍처의 어디에 이러한 의사 결정 코드들이 위치할 지에 대해 판단하라.
+아래의 질문들이 중요한 도움이 될 것이다.</p>
+<ul>
+<li>모델을 호출할 때 어떤 데이터들이 필요한가?</li>
+<li>대기시간(latency) 요구사항이 있는가? UX를 위해 빠르게 실행해야 하는가, 아니면 이용자가 기다리지 않아도 되는 경우인가?</li>
+</ul>
+<p>위의 질문들은 모델의 실제 feature를 구성하는 데에도 영향을 준다. 
+모델을 호출할 때 사용할 수 있는 데이터들에 대해서만 feature를 결정하고 훈련시킬 수 있기 떄문이다.
+요구 대기시간 역시 feature 구성에 영향을 줄 수 있는데, 이를테면 카메라 앱에서 현재 날씨 데이터를 feature로 사용하고자 하는 경우, 해당 데이터를 다른 api 등을 통해 가져오는 데 비용이 너무 크게 소모되기 때문이다.</p>
+<p>마지막으로, 너무 오래된 데이터를 사용하지 않도록 해야한다.
+훈련 데이터가 며칠이 지난 경우가 있을 수 있다.
+실시간 트래픽에서 동작하는 경우, 최신 데이터에 대해 당장에 접근할 수 없는 경우가 발생할 수도 있다.</p>
+<h2 id="좋지-않은-목표"><a class="header" href="#좋지-않은-목표">좋지 않은 목표</a></h2>
+<p>적절하게 설정되기만 한다면, ML 시스템은 목표를 추구하기에 정말 유용하다.
+반대로, 적절하지 않은 목표에 기반을 둔다면, ML 시스템은 의도치 않은 결과를 생산해낼 것이다.
+그러므로, 어떤 문제를 해결하기 위하여 해당 시스템의 목표에 대해서 주의깊게 고려할 필요가 있다.</p>
+<p>유튜브에서 어떤 이용자가 다음에 볼 영상을 예측하는 모델의 경우를 생각해보자.
+아래는 모두 <strong>적절하지 않은 목표</strong>에 대한 예시이다.</p>
+<h3 id="클릭율을-최대한-높이기"><a class="header" href="#클릭율을-최대한-높이기">클릭율을 최대한 높이기</a></h3>
+<ul>
+<li>이용자가 어떤 것을 클릭할 순 있어도 그렇게 오래 머물러있지 않는 경우가 발생할 수 있다.</li>
+<li>이는 낚시 기사 내지는 어그로성 게시물들에 최적화될 것이며, 그렇기 때문에 다른 목표가 필요하다.</li>
+</ul>
+<h3 id="시청-시간-최대한-늘리기"><a class="header" href="#시청-시간-최대한-늘리기">시청 시간 최대한 늘리기</a></h3>
+<ul>
+<li>이용자가 오래동안 시청을 하더라도, 금방 세션에서 벗어날 수 있다.</li>
+<li>예를 들어, 마인크래프트의 0.1% 시청자만이 3시간 동안 영상을 보고, 8%는 5분 동안 영상을 본다. 그 외의 나머지는 시청을 완전히 중단한다. 시스템은 시청 시간을 최대화할 것이므로, 다음 시청 목록은 긴 마인크래프트 비디오로만 구성될 것이다.</li>
+<li>단순히 영상을 오래 보는 것 보다, 여러 짧은 동영상들을 많이 보게끔 하는 것이 더 중요하며, 전반적인 세션을 길게 유지하는 것 역시 중요하다.</li>
+</ul>
+<h3 id="세션-시청-시간을-최대한-늘리기"><a class="header" href="#세션-시청-시간을-최대한-늘리기">세션 시청 시간을 최대한 늘리기</a></h3>
+<ul>
+<li>앞선 예시처럼, 여전히 긴 영상을 선호하게 되는데, 이는 여전히 문제가 된다.</li>
+<li>이 경우, 특정 관심사에 대해서만 편향되기 매우 쉽다.</li>
+<li>예를 들어, 한 이용자가 르브론 제임스의 덩크 영상을 봤따면, 시스템은 해당 이용자에게 르브론 제임스의 모든 덩크 영상을 보여줄 것이다.</li>
+<li>영상 추천 시스템은 이를 정말 잘 수행하겠지만, 이용자 경험은 그다지 좋지 않을 것이다.</li>
+<li>이 경우 많은 이들이 유튜브를 단순히 특정 영상만 가득한 곳으로 판단할 것이며, 다양성이 사라지게 된다.</li>
+</ul>
+<h3 id="다양성-증가--세션-시청-시간을-최대한-늘리기"><a class="header" href="#다양성-증가--세션-시청-시간을-최대한-늘리기">다양성 증가 &amp; 세션 시청 시간을 최대한 늘리기</a></h3>
+<ul>
+<li>해당 목표에서는 어떤 문제가 발생할까? </li>
+<li>여기서는 굿하트의 법칙을 떠올리자. &quot;측정이 곧 목표가 된다면, 올바른 측정은 불가능하다.&quot;</li>
+</ul>
+<h2 id="휴리스틱"><a class="header" href="#휴리스틱">휴리스틱</a></h2>
+<p>어떻게 하면 ML 없이도 문제를 해결할 수 있을까?</p>
+<p>어떤 서비스를 당장 내일 제공해야 한다고 가정하자. 그렇다면 ML 보다는 당장에 비즈니스 로직을 하드코딩할 시간 정도밖에 없을 것이다.
+이 때는 아래 예시처럼 ML 없이 휴리스틱을 시도하고자 할 수 있다.</p>
+<table class="green">
+  <tbody><tr><th>Example</th></tr>
+  <tr>
+    <td>과거에 인기 있었던 영상들을 올린 사람이 새로 업로드하는 영상들 역시 인기있을 것이라고 가정한다.</td>
+  </tr>
+</tbody></table>
+<p>이러한 예시는 세상에서 제일 완벽한 휴리스틱은 아니겠지만, 토대를 마련하기에는 충분할 것이다.
+굳이 팬시한 ML 모델에 집착할 필요 없습니다. 굳이 휴리스틱을 이기지 못하는 ML 모델을 서비스로 제공할 필요가 없습니다.
+휴리스틱을 만드는 연습은 ML 모델에서 좋은 신호를 판단하는 데에 도움이 됩니다.</p>
+<p>ML이 아닌 해답은 대부분 ML을 통한 해답보다 유지보수가 더 쉽습니다.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../ml/problem-framing/hard.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../ml/problem-framing/hard.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

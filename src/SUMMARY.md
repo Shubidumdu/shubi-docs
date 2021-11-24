@@ -94,3 +94,4 @@
     - [Identifying Good Problems for ML](ml/problem-framing/good.md)
     - [Hard ML Problems](ml/problem-framing/hard.md)
     - [Deciding on ML](ml/problem-framing/framing.md)
+    - [Formulate Your Problem as an ML Problem](ml/problem-framing/formulate.md)

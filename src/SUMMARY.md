@@ -47,6 +47,7 @@
     - [함수 표현식에 타입 적용하기](ts/types/function-expression.md)
     - [타입과 인터페이스의 차이점 알기](ts/types/type-and-interface.md)
     - [타입 연산과 제너릭 사용으로 반복 줄이기](ts/types/generics.md)
+    - [동적 데이터에 인덱스 시그니처 사용하기](ts/types/index-signature.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

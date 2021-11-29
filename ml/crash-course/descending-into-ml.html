@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Descending into ML - Shubi Docs</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../index.html">Introduction</a></li><li class="chapter-item "><a href="../../js/index.html"><strong aria-hidden="true">1.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/exec-ctx.html"><strong aria-hidden="true">1.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../../js/class.html"><strong aria-hidden="true">1.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../../js/arrow-func.html"><strong aria-hidden="true">1.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../../js/binding-function.html"><strong aria-hidden="true">1.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../../js/call-apply.html"><strong aria-hidden="true">1.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../../js/closure.html"><strong aria-hidden="true">1.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../../js/func-exp-and-dec.html"><strong aria-hidden="true">1.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../../js/event-loop.html"><strong aria-hidden="true">1.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../../js/new.html"><strong aria-hidden="true">1.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../../js/properties.html"><strong aria-hidden="true">1.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../../js/prototype.html"><strong aria-hidden="true">1.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../../js/this.html"><strong aria-hidden="true">1.12.</strong> this</a></li><li class="chapter-item "><a href="../../js/var.html"><strong aria-hidden="true">1.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../../js/babel.html"><strong aria-hidden="true">1.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/web-api/intersection.html"><strong aria-hidden="true">1.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../../js/web-api/mutation.html"><strong aria-hidden="true">1.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../../js/web-api/template.html"><strong aria-hidden="true">1.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">1.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">1.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">1.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">1.15.4.3.</strong> Events</a></li></ol></li><li class="chapter-item "><a href="../../js/web-api/canvas/intro.html"><strong aria-hidden="true">1.15.5.</strong> Canvas API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/web-api/canvas/shapes.html"><strong aria-hidden="true">1.15.5.1.</strong> 도형 그리기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">1.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../js/guides/render-opt.html"><strong aria-hidden="true">1.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../../js/guides/custom-el-checklist.html"><strong aria-hidden="true">1.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../ts/index.html"><strong aria-hidden="true">2.</strong> TypeScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ts/intro/index.html"><strong aria-hidden="true">2.1.</strong> 타입스크립트 알아보기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ts/intro/ts_js.html"><strong aria-hidden="true">2.1.1.</strong> TS와 JS의 관계</a></li><li class="chapter-item "><a href="../../ts/intro/setting.html"><strong aria-hidden="true">2.1.2.</strong> TS 설정 이해하기</a></li><li class="chapter-item "><a href="../../ts/intro/transpile.html"><strong aria-hidden="true">2.1.3.</strong> 코드 생성과 타입이 관계없음을 이해하기</a></li><li class="chapter-item "><a href="../../ts/intro/typing.html"><strong aria-hidden="true">2.1.4.</strong> 구조적 타이핑에 익숙해지기</a></li><li class="chapter-item "><a href="../../ts/intro/no_any.html"><strong aria-hidden="true">2.1.5.</strong> any 타입 지양하기</a></li></ol></li><li class="chapter-item "><a href="../../ts/types/index.html"><strong aria-hidden="true">2.2.</strong> 타입스크립트의 타입 시스템</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ts/types/use_editor.html"><strong aria-hidden="true">2.2.1.</strong> 편집기를 사용하여 타입 시스템 탐색하기</a></li><li class="chapter-item "><a href="../../ts/types/set.html"><strong aria-hidden="true">2.2.2.</strong> 타입이 값들의 집합이라고 생각하기</a></li><li class="chapter-item "><a href="../../ts/types/symbol.html"><strong aria-hidden="true">2.2.3.</strong> 타입 공간과 값 공간의 심벌 구분하기</a></li><li class="chapter-item "><a href="../../ts/types/type-def.html"><strong aria-hidden="true">2.2.4.</strong> 타입 단언보다는 타입 선언을 사용하기</a></li><li class="chapter-item "><a href="../../ts/types/wrapper.html"><strong aria-hidden="true">2.2.5.</strong> 객체 래퍼 타입 피하기</a></li><li class="chapter-item "><a href="../../ts/types/excess-type-check.html"><strong aria-hidden="true">2.2.6.</strong> 잉여 속성 체크의 한계 인지하기</a></li><li class="chapter-item "><a href="../../ts/types/function-expression.html"><strong aria-hidden="true">2.2.7.</strong> 함수 표현식에 타입 적용하기</a></li><li class="chapter-item "><a href="../../ts/types/type-and-interface.html"><strong aria-hidden="true">2.2.8.</strong> 타입과 인터페이스의 차이점 알기</a></li><li class="chapter-item "><a href="../../ts/types/generics.html"><strong aria-hidden="true">2.2.9.</strong> 타입 연산과 제너릭 사용으로 반복 줄이기</a></li><li class="chapter-item "><a href="../../ts/types/index-signature.html"><strong aria-hidden="true">2.2.10.</strong> 동적 데이터에 인덱스 시그니처 사용하기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">3.</strong> React</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../react/why.html"><strong aria-hidden="true">3.1.</strong> 왜 React인가?</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">4.</strong> Redux</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../redux/pure.html"><strong aria-hidden="true">4.1.</strong> 왜 Reducer는 순수해야 하는가?</a></li></ol></li><li class="chapter-item "><a href="../../svelte/intro.html"><strong aria-hidden="true">5.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../svelte/reactivity.html"><strong aria-hidden="true">5.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../../svelte/props.html"><strong aria-hidden="true">5.2.</strong> Props</a></li><li class="chapter-item "><a href="../../svelte/logic.html"><strong aria-hidden="true">5.3.</strong> Logic</a></li><li class="chapter-item "><a href="../../svelte/events.html"><strong aria-hidden="true">5.4.</strong> Events</a></li><li class="chapter-item "><a href="../../svelte/bindings.html"><strong aria-hidden="true">5.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../../svelte/lifecycle.html"><strong aria-hidden="true">5.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../../svelte/stores.html"><strong aria-hidden="true">5.7.</strong> Stores</a></li><li class="chapter-item "><a href="../../svelte/motion.html"><strong aria-hidden="true">5.8.</strong> Motion</a></li><li class="chapter-item "><a href="../../svelte/transition.html"><strong aria-hidden="true">5.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../../svelte/animations.html"><strong aria-hidden="true">5.10.</strong> Animations</a></li><li class="chapter-item "><a href="../../svelte/actions.html"><strong aria-hidden="true">5.11.</strong> Actions</a></li><li class="chapter-item "><a href="../../svelte/classes.html"><strong aria-hidden="true">5.12.</strong> Classes</a></li><li class="chapter-item "><a href="../../svelte/composition.html"><strong aria-hidden="true">5.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../../svelte/context.html"><strong aria-hidden="true">5.14.</strong> Context API</a></li><li class="chapter-item "><a href="../../svelte/specials.html"><strong aria-hidden="true">5.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../../svelte/module.html"><strong aria-hidden="true">5.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../../svelte/debug.html"><strong aria-hidden="true">5.17.</strong> Debugging</a></li></ol></li><li class="chapter-item "><a href="../../graphql/intro.html"><strong aria-hidden="true">6.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../graphql/execution.html"><strong aria-hidden="true">6.1.</strong> Execution</a></li><li class="chapter-item "><a href="../../graphql/query-mutation.html"><strong aria-hidden="true">6.2.</strong> Query &amp; Mutation</a></li><li class="chapter-item "><a href="../../graphql/schema-type.html"><strong aria-hidden="true">6.3.</strong> Schema &amp; Type</a></li><li class="chapter-item "><a href="../../graphql/pagination.html"><strong aria-hidden="true">6.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../../graphql/http.html"><strong aria-hidden="true">6.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../../docker/setup.html"><strong aria-hidden="true">7.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../docker/sample.html"><strong aria-hidden="true">7.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../../docker/update.html"><strong aria-hidden="true">7.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../../docker/share.html"><strong aria-hidden="true">7.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../../docker/persist.html"><strong aria-hidden="true">7.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../../docker/bind-mounts.html"><strong aria-hidden="true">7.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../../docker/multi.html"><strong aria-hidden="true">7.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../../docker/docker-compose.html"><strong aria-hidden="true">7.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../../docker/best-practices.html"><strong aria-hidden="true">7.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">8.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../etc/ssh.html"><strong aria-hidden="true">8.1.</strong> SSH</a></li><li class="chapter-item "><a href="../../etc/tdd.html"><strong aria-hidden="true">8.2.</strong> TDD</a></li><li class="chapter-item "><a href="../../etc/fp.html"><strong aria-hidden="true">8.3.</strong> 함수형 프로그래밍</a></li><li class="chapter-item "><a href="../../etc/rp.html"><strong aria-hidden="true">8.4.</strong> 반응형 프로그래밍</a></li></ol></li><li class="chapter-item expanded "><a href="../../ml/index.html"><strong aria-hidden="true">9.</strong> Machine Learning</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ml/problem-framing/index.html"><strong aria-hidden="true">9.1.</strong> Problem Framing</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ml/problem-framing/common-problems.html"><strong aria-hidden="true">9.1.1.</strong> Common ML Problems</a></li><li class="chapter-item "><a href="../../ml/problem-framing/mindset.html"><strong aria-hidden="true">9.1.2.</strong> The ML Mindset</a></li><li class="chapter-item "><a href="../../ml/problem-framing/good.html"><strong aria-hidden="true">9.1.3.</strong> Identifying Good Problems for ML</a></li><li class="chapter-item "><a href="../../ml/problem-framing/hard.html"><strong aria-hidden="true">9.1.4.</strong> Hard ML Problems</a></li><li class="chapter-item "><a href="../../ml/problem-framing/framing.html"><strong aria-hidden="true">9.1.5.</strong> Deciding on ML</a></li><li class="chapter-item "><a href="../../ml/problem-framing/formulate.html"><strong aria-hidden="true">9.1.6.</strong> Formulate Your Problem as an ML Problem</a></li></ol></li><li class="chapter-item expanded "><a href="../../ml/crash-course/index.html"><strong aria-hidden="true">9.2.</strong> Crash Course</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../ml/crash-course/framing.html"><strong aria-hidden="true">9.2.1.</strong> Framing</a></li><li class="chapter-item expanded "><a href="../../ml/crash-course/descending-into-ml.html" class="active"><strong aria-hidden="true">9.2.2.</strong> Descending into ML</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="descending-into-ml"><a class="header" href="#descending-into-ml">Descending into ML</a></h1>
+<h2 id="linear-regression"><a class="header" href="#linear-regression">Linear Regression</a></h2>
+<p>귀뚜라미가 추운 날보다 더운 날에 더 자주 운다는 것은 익히 알려진 사실입니다. 지난 몇년간, 전문가들과 과학자들은 온도와 귀뚜라미의 울음 주기에 대한 데이터를 수집해왔습니다. 해당 데이터를 통해 둘 간의 상관 관계를 파악해봅시다.</p>
+<p>먼저, 플롯을 통해 데이터에 대해 시각적으로 살펴봅시다.</p>
+<img src="https://developers.google.com/machine-learning/crash-course/images/CricketPoints.svg?hl=ko" />
+<h4 id="그림-1-분당-울음횟수-vs-섭씨-온도"><a class="header" href="#그림-1-분당-울음횟수-vs-섭씨-온도">그림 1. 분당 울음횟수 vs. 섭씨 온도</a></h4>
+<p>예상한 대로, 온도가 올라갈 수록 귀뚜라미의 울음 주기도 많아집니다. 이것이 둘 사이의 상관관계 일까요? 맞습니다. 여기에 하나의 선을 그어 보면 그 관계를 더 뚜렷하게 알 수 있습니다.</p>
+<img src="https://developers.google.com/machine-learning/crash-course/images/CricketLine.svg?hl=ko" />
+<h4 id="그림-2-선형-관계"><a class="header" href="#그림-2-선형-관계">그림 2. 선형 관계</a></h4>
+<p>네, 맞습니다. 선이 모든 점들을 꿰뚫지는 않고 있죠. 하지만 위에 그은 선은 두 변수 간의 상관관계를 뚜렷하게 보여줍니다. 이걸 방정식으로 나타내본다면, 아래와 같은 형태겠죠.</p>
+<p>$$ y = mx + b $$</p>
+<ul>
+<li>$y$는 섭씨 온도입니다. -&gt; 예측하고자 하는 값이죠.</li>
+<li>$m$는 선의 기울기입니다.</li>
+<li>$x$는 귀뚜라미의 분당 울음 횟수입니다. -&gt; 입력 Feature로 주어지는 값이죠.</li>
+<li>$b$는 y-절편(intercept)입니다.</li>
+</ul>
+<p>이걸 머신러닝 컨벤션에 따라 작성한다면 약간 다르게 아래와 같은 방정식이 됩니다.</p>
+<p>$$ y' = b + w_1x_1 $$</p>
+<ul>
+<li>$y'$은 예측된 레이블입니다. (예상되는 결과)</li>
+<li>$b$는 bias(편향)입니다. 종종 $w_0$로 불리기도 합니다.</li>
+<li>$w_1$는 Feature1의 weight(가중치)입니다.</li>
+<li>$x_1$은 Feature(피쳐)입니다. (알려진 입력)</li>
+</ul>
+<p>새로운 분당 귀뚜라미 울음 횟수값인 $x_1$에 대한 온도 예측 $y'$을 알기 위해서는 단순히 $x_1$ 값을 위 모델에 집어넣기만 하면 됩니다.</p>
+<p>반면, 우리가 지금껏 살펴본 모델은 하나의 Feature만을 갖는 매우 단순한 모델입니다. 실제로 더 복잡한 모델은 더 많은 Feature들에 의존합니다. ($w_1$, $w_2$, ...) 예를 들어, Feature가 3개로 늘어난다면 아래와 같은 모델이 만들어지게 되는거죠.</p>
+<p>$$ y' = b + w_1x_1 + w_2x_2 + w_3x_3 $$</p>
+<h2 id="training-and-loss"><a class="header" href="#training-and-loss">Training and Loss</a></h2>
+<p>모델을 <strong>훈련</strong>시키는 것은 레이블 처리된 예시들로부터 적절한 가중치(Weight)와 편향(Bias)를 배우게 하는 것을 의미합니다. 지도 학습에서, 머신러닝 알고리즘은 수많은 예시들을 살펴보고 loss(손실)을 줄여나가면서 모델을 완성하게 됩니다. 이러한 과정을 Empirical Risk Minimization(경험적 위험 최소화)라고 합니다.</p>
+<p>loss는 좋지 않은 예측을 한 경우에 대한 페널티와 같은 개념입니다. 즉, <strong>loss</strong>는 하나의 예시에 대한 모델의 예측이 <b>얼마나 별로였나?</b>를 나타내는 값이죠. 만약 모델의 예측이 완벽했다면, loss는 0이 됩니다. 모델을 훈련시키는 것의 목적은 모든 예시에서 평균적으로 loss를 갖도록 하는 여러 가중치들과 편향을 찾아나가는 것입니다. 예를 들어, 아래의 그림3은 좌측에 loss가 큰 모델과 우측의 loss가 적은 모델을 각각 그래프로 나타내고 있습니다.</p>
+<ul>
+<li>화살표선은 loss를 나타냅니다.</li>
+<li>파란색 선은 prediction을 의미합니다.</li>
+</ul>
+<img src="https://developers.google.com/machine-learning/crash-course/images/LossSideBySide.png?hl=ko" >
+<h4 id="그림3-loss가-큰-왼쪽-모델-loss가-작은-오른쪽-모델"><a class="header" href="#그림3-loss가-큰-왼쪽-모델-loss가-작은-오른쪽-모델">그림3. loss가 큰 왼쪽 모델; loss가 작은 오른쪽 모델.</a></h4>
+<p>왼쪽의 각 화살표선들이 오른쪽의 각 화살표선보다 훨씬 길다는 것을 유의하세요. 이런 경우, 우측 모델이 명백히 <strong>더 나은 모델</strong>이 됩니다.</p>
+<p>이쯤 되면 수학적으로 어떻게 loss를 계산하는지에 대한 <b>Loss Function(손실 함수)</b>가 궁금할 겁니다.</p>
+<h3 id="squared-loss-가장-인기있는-손실-함수"><a class="header" href="#squared-loss-가장-인기있는-손실-함수">Squared Loss: 가장 인기있는 손실 함수</a></h3>
+<p>우리가 살펴볼 손실 함수는 $L_2$ loss 라고도 알려진 Squared Loss입니다. 이건 식으로 나타내자면 아래와 같습니다. $y$는 실제 Label의 값을, $y'$은 $x$에 대한 예측값 $prediction(x)$을 의미합니다.</p>
+<p>$$ (y - prediction(x))^2 $$</p>
+<p>평균제곱오차(Mean Square Error: MSE)는 전체 데이터셋의 각각에 대한 Squared Loss의 평균입니다. MSE를 계산하려면, 각각의 예시에 대한 Squared Loss를 전부 더하고, 예시의 갯수만큼 나누어주면 되죠.</p>
+<p>$$  MSE = \frac{1}{N} \sum_{(x,y)\in D} (y - prediction(x))^2  $$</p>
+<ul>
+<li>$(x, y)$ 는 아래를 의미합니다.
+<ul>
+<li>$x$는 모델의 예측에 사용될 Feature들의 집합입니다. (ex. 분당 귀뚜라미 울음 횟수, 나이, 성별..)</li>
+<li>$y$는 예시의 Label입니다. (ex. 온도)</li>
+</ul>
+</li>
+<li>$prediction(x)$는 여러 개의 Feature $x$와 가중치($w$), 편향($b$)의 조합으로 이루어진 함수입니다.</li>
+<li>$D$는 레이블 처리 된 많은 예시들을 담고 있는 데이터셋입니다. 이는 $(x, y)$의 쌍으로도 나타낼 수 있습니다.</li>
+<li>$N$은 $D$에 속하는 데이터 예시들의 갯수입니다.</li>
+</ul>
+<p>MSE는 머신러닝에서 일반적으로 사용되기는 하지만, 모든 상황에서 유일하게 사용되는 최상의 손실 함수는 아닙니다.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../ml/crash-course/framing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../ml/crash-course/framing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

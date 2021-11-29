@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="stores"><a class="header" href="#stores">Stores</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="stores"><a class="header" href="#stores">Stores</a></h1>
 <h2 id="writable-stores"><a class="header" href="#writable-stores">Writable stores</a></h2>
 <p>Svelte에서는 <em>store</em>를 통해 상태 로직을 컴포넌트와 분리할 수 있다. store는 상태값이 변경되었을 때 관련 컴포넌트들에게 알려주는 <code>subscribe</code> 메서드를 가진 단순한 객체다.</p>
 <p>store 중에는 <strong>writable store</strong>가 있으며, 이는 <code>set</code>과 <code>update</code>메서드를 갖는다.</p>
@@ -189,7 +190,7 @@
 
 &lt;h1&gt;The count is {count_value}&lt;/h1&gt;
 </code></pre>
-<p>헌데, 여러 컴포넌트에 대해 동일한 작업을 해주어야 하는 상황이라면 이런 방법이 다소 번거롭게 느껴질 수 있다.(boilerplatey) Svelte는 <code>$</code>만 덧붙이면 store 값에 대해 앞선 작업들을 알아서 처리해준다.</p>
+<p>헌데, 여러 컴포넌트에 대해 동일한 작업을 해주어야 하는 상황이라면 이런 방법이 다소 번거롭게 느껴질 수 있다.(boilerplatey) Svelte는 ``만 덧붙이면 store 값에 대해 앞선 작업들을 알아서 처리해준다.</p>
 <pre><code class="language-svelte">&lt;script&gt;
 	import { count } from './stores.js';
 	import Incrementer from './Incrementer.svelte';
@@ -197,10 +198,10 @@
 	import Resetter from './Resetter.svelte';
 &lt;/script&gt;
 
-&lt;h1&gt;The count is {$count}&lt;/h1&gt;
+&lt;h1&gt;The count is {count}&lt;/h1&gt;
 </code></pre>
 <p>이러한 Auto-subscription은 store의 변수들이 컴포넌트 최상위 스코프에서 선언 및 import 되었을 때만 제대로 동작한다.</p>
-<p><code>$</code>로 변수명을 시작하는 것은 store 값을 참조하겠다는 것으로 간주되며, 그렇지 않은 경우에 대해 Svelte는 <code>$</code>로 임의의 변수를 선언하는 것을 방지한다.</p>
+<p><code>&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.8888799999999999em;vertical-align:-0.19444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;mord hangul_fallback&quot;&gt;로변수명을시작하는것은&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;ore&lt;/span&gt;&lt;span class=&quot;mord hangul_fallback&quot;&gt;값을참조하겠다는것으로간주되며&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.16666666666666666em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord hangul_fallback&quot;&gt;그렇지않은경우에대해&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.05764em;&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.03588em;&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;lt&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;mord hangul_fallback&quot;&gt;는&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;‘&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;</code>로 임의의 변수를 선언하는 것을 방지한다.</p>
 <h2 id="readable-stores"><a class="header" href="#readable-stores">Readable stores</a></h2>
 <p>모든 경우에 store를 참조하는 컴포넌트들에게 쓰기 권한을 부여할 필요는 없다. 이를테면, 시간, 마우스 위치, 지리적 위치 등을 다루는 경우가 그렇다.</p>
 <p>이러한 경우에 readable store를 사용할 수 있다.</p>
@@ -220,7 +221,7 @@
 <p>특정 store의 값에 의존하는 다른 값이 있는 경우, <code>derived</code>를 통해 새로운 store를 만들어 줄 수 있다. 아래는 특정 페이지가 열리고 나서의 시간을 측정한 상태값을 보유한 derived store다.</p>
 <pre><code class="language-svelte">export const elapsed = derived(
 	time,
-	$time =&gt; Math.round(($time - start) / 1000)
+	&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69862em;vertical-align:-0.0391em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mrel&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:1em;vertical-align:-0.25em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.10903em;&quot;&gt;M&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;ro&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;mopen&quot;&gt;((&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;time - start) / 1000)
 );
 </code></pre>
 <p>여러 inputs들로부터 derive store를 갖추고, 값을 반환하는 대신 명시적으로 <code>set</code>를 통해 값을 변경해줄 수도 있다. 이에 대해서는 <a href="https://svelte.dev/docs#derived">여기</a>를 참조하자.</p>
@@ -240,16 +241,16 @@
 </code></pre>
 <h2 id="store-bindings"><a class="header" href="#store-bindings">Store bindings</a></h2>
 <p>writable store를 사용하는 경우, 로컬 컴포넌트의 상태값과 store의 값을 binding 해줄 수 있다.</p>
-<p>아래 예시에서는 <code>$name</code> store 값을 <code>input</code>의 <code>value</code>값에 바인딩을 해주는 예시다.</p>
-<pre><code class="language-svelte">&lt;input bind:value={$name}&gt;
+<p>아래 예시에서는 <code>name</code> store 값을 <code>input</code>의 <code>value</code>값에 바인딩을 해주는 예시다.</p>
+<pre><code class="language-svelte">&lt;input bind:value={name}&gt;
 </code></pre>
 <p>이후, input의 <code>value</code>에 변경이 있다면 <code>name</code> store값 역시 자동으로 업데이트된다.</p>
 <p>컴포넌트 내부에서 값을 직접 할당해줄 수도 있다.</p>
-<pre><code class="language-svelte">&lt;button on:click=&quot;{() =&gt; $name += '!'}&quot;&gt;
+<pre><code class="language-svelte">&lt;button on:click=&quot;{() =&gt; name += '!'}&quot;&gt;
 	Add exclamation mark!
 &lt;/button&gt;
 </code></pre>
-<p>위에서의 <code>$name += '!'</code>은 <code>name.set($name + '!')</code>의 호출과 동일하다.</p>
+<p>위에서의 <code>name += '!'</code>은 `name.set(<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathnormal">nam</span><span class="mord mathnormal">e</span><span class="mord"><span class="mbin">+</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">!</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">‘</span><span class="mord hangul_fallback">의호출과동일하다</span><span class="mord">.</span></span></span></span></p>
 
                     </main>
 

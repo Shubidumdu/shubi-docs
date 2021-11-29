@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="closure와-변수의-유효범위"><a class="header" href="#closure와-변수의-유효범위">Closure와 변수의 유효범위</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="closure와-변수의-유효범위"><a class="header" href="#closure와-변수의-유효범위">Closure와 변수의 유효범위</a></h1>
 <h2 id="렉시컬-환경-lexical-environment"><a class="header" href="#렉시컬-환경-lexical-environment">렉시컬 환경 (Lexical Environment)</a></h2>
 <p>렉시컬 환경은 JS가 어떻게 동작하는지 설명하기 위한 <strong>이론상의</strong> 객체이다.
 이를 이해하는 것이 클로저에 대한 명확한 이해를 돕기 때문에, 먼저 이에 대해 익혀보자.</p>
@@ -164,7 +165,7 @@ phrase = 'Bye';
 <pre><code class="language-js">let phrase = 'Hello';
 
 function say(name) {
-  alert(`${phrase}, ${name}`);
+  alert(`&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.8888799999999999em;vertical-align:-0.19444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.02778em;&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;se&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;{name}`);
 }
 </code></pre>
 <p><strong>함수를 호출해 실행하면 새로운 렉시컬 환경이 자동으로 만들어진다.</strong> 이 렉시컬 환경엔 함수 호출 시에 넘겨받은 매개변수와 함수의 지역 변수가 저장된다. 즉, 위에서 <code>say('John')</code>을 호출하면 함수를 위한 내부 렉시컬 환경과 내부 렉시컬 환경에서 가리키는 외부(여기서는 전역) 렉시컬 환경으로 두개를 갖게 된다.</p>

@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p>Canvas API에 대한 정리는 <a href="https://developer.mozilla.org/ko/docs/Web/API/Canvas_API/Tutorial/Basic_usage#%3Ccanvas%3E_%EC%9A%94%EC%86%8C">MDN</a>의 문서를 쭉 따라갈 예정입니다.</p>
 <p>먼저 <code>&lt;canvas&gt;</code> 태그의 형태에 대해 살펴봅시다.</p>
 <pre><code class="language-html">&lt;canvas id=&quot;tutorial&quot; width=&quot;150&quot; height=&quot;150&quot;&gt;&lt;/canvas&gt;
@@ -154,7 +155,7 @@
 <h2 id="대체-콘텐츠"><a class="header" href="#대체-콘텐츠">대체 콘텐츠</a></h2>
 <p><code>&lt;canvas&gt;</code> 태그 안에 콘텐츠가 삽입된 경우, <code>&lt;canvas&gt;</code> 태그를 지원하지 않는 브라우저에 대해서는 해당 콘텐츠를 보여줍니다. 브라우저가 <code>&lt;canvas&gt;</code>태그를 지원하는 경우, 이는 무시됩니다. 참고로, <code>&lt;canvas&gt;</code>는, 이러한 방식으로 인해 반드시 닫는 태그가 필요합니다.</p>
 <pre><code class="language-html">&lt;canvas id=&quot;stockGraph&quot; width=&quot;150&quot; height=&quot;150&quot;&gt;
-  current stock price: $3.15 +0.15
+  current stock price: 3.15 +0.15
 &lt;/canvas&gt;
 
 &lt;canvas id=&quot;clock&quot; width=&quot;150&quot; height=&quot;150&quot;&gt;

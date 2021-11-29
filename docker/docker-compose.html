@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p><a href="https://docs.docker.com/compose/">Docker Compose</a>는 멀티 컨테이너 애플리케이션을 정의하고 공유하는 것을 돕고자 개발된 툴이다. Compose를 사용하면, YAML 파일을 생성하여 서비스를 정의한 후, 단일 명령을 통해 애플리케이션을 구축하거나 분해할 수 있다.</p>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p><a href="https://docs.docker.com/compose/">Docker Compose</a>는 멀티 컨테이너 애플리케이션을 정의하고 공유하는 것을 돕고자 개발된 툴이다. Compose를 사용하면, YAML 파일을 생성하여 서비스를 정의한 후, 단일 명령을 통해 애플리케이션을 구축하거나 분해할 수 있다.</p>
 <p>Compose를 사용할 경우의 큰 이점은 바로 애플리케이션 스택을 하나의 파일로 정의할 수 있다는 점이다. 해당 파일은 프로젝트 저장소의 루트에 저장되며, 다른 이들이 이를 보고 프로젝트에 쉽게 기여할 수 있게 해준다. 그런 경우가 아니더라도, 단순히 repo를 클론하여 애플리케이션을 실행하기만 하면 된다는 점에서 편리하다. 이는 Github/GitLab 등에서 이루어지는 것과 유사하다.</p>
 <h2 id="docker-compose-설치"><a class="header" href="#docker-compose-설치">Docker Compose 설치</a></h2>
 <p>Windows나 Mac에서 Docker Desktop/Toolbox를 설치했다면, 이미 Docker Compose가 포함되어 있다. &quot;Play-with-Docker&quot; 인스턴스 역시 Docker Compose가 설치되어 있으며, Linux 머신을 사용하는 상황이라면, 별도로 <a href="https://docs.docker.com/compose/install/">설치</a>해주어야 한다.</p>
@@ -170,7 +171,7 @@ services:
 <h2 id="앱-서비스-정의"><a class="header" href="#앱-서비스-정의">앱 서비스 정의</a></h2>
 <p>이전 챕터에서 우리는 앱 컨테이너를 정의하기 위해 아래와 같은 명령을 실행했다.</p>
 <pre><code class="language-bash">docker run -dp 3000:3000 \
-  -w /app -v &quot;$(pwd):/app&quot; \
+  -w /app -v &quot;(pwd):/app&quot; \
   --network todo-app \
   -e MYSQL_HOST=mysql \
   -e MYSQL_USER=root \
@@ -181,7 +182,7 @@ services:
 </code></pre>
 <p>PowerShell의 경우</p>
 <pre><code class="language-sh">docker run -dp 3000:3000 `
-  -w /app -v &quot;$(pwd):/app&quot; `
+  -w /app -v &quot;(pwd):/app&quot; `
   --network todo-app `
   -e MYSQL_HOST=mysql `
   -e MYSQL_USER=root `
@@ -222,7 +223,7 @@ services:
       - 3000:3000
 </code></pre>
 <ol start="4">
-<li>이제 <code>working_dir</code>과 <code>volumes</code> 항목을 통해 작업 디렉토리(<code>-w /app</code>)와 볼륨 매핑(<code>-v &quot;$(pwd):/app&quot;</code>)를 정의한다. 볼륨 역시 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#short-syntax-3">짧게</a> 혹은 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#long-syntax-3">길게</a> 작성될 수 있다.</li>
+<li>이제 <code>working_dir</code>과 <code>volumes</code> 항목을 통해 작업 디렉토리(<code>-w /app</code>)와 볼륨 매핑(<code>-v &quot;(pwd):/app&quot;</code>)를 정의한다. 볼륨 역시 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#short-syntax-3">짧게</a> 혹은 <a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#long-syntax-3">길게</a> 작성될 수 있다.</li>
 </ol>
 <p>Docker Compose를 통해 볼륨을 정의하는 경우, 현재 디렉토리에서의 상대 경로를 사용할 수 있다는 장점이 있다.</p>
 <pre><code class="language-yaml">version: '3.7'

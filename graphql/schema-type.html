@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p><a href="https://graphql-kr.github.io/learn/schema/">여기</a> 문서에 따라, GraphQL 스키마 및 타입에 관해 직접 실습해보려고 한다.</p>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p><a href="https://graphql-kr.github.io/learn/schema/">여기</a> 문서에 따라, GraphQL 스키마 및 타입에 관해 직접 실습해보려고 한다.</p>
 <p>실습을 위해 Typescript 기반으로 Apollo를 이용한 임의의 GraphQL 서버를 생성했다.</p>
 <h1 id="schema--type"><a class="header" href="#schema--type">Schema &amp; Type</a></h1>
 <p>다음과 같은 쿼리를 받았다고 생각해보자.</p>
@@ -284,8 +285,8 @@ const server = new ApolloServer({
 <p><code>String</code>타입의 뒤에 느낌표 <code>!</code>를 추가해 Non-Null임을 나타냈다. 이제 서버는 해당 필드에 대해 항상 <code>null</code>이 아닐 것이라 기대하며, 만약 <code>null</code>이 반환되면 오류를 발생시킨다.</p>
 <p>Non-null 타입 수정자는 매개 변수를 정의할 때도 사용할 수 있는데, 이를 쿼리 시에 충족시키지 않는 경우 유효성 검사 오류를 반환하게끔 한다.</p>
 <pre><code class="language-graphql"># query
-query GameInfo($id: ID!) {
-  game(id: $id) {
+query GameInfo(id: ID!) {
+  game(id: id) {
     title
     tags
   }
@@ -301,7 +302,7 @@ query GameInfo($id: ID!) {
 {
   &quot;errors&quot;: [
     {
-      &quot;message&quot;: &quot;Variable \&quot;$id\&quot; of required type \&quot;ID!\&quot; was not provided.&quot;,
+      &quot;message&quot;: &quot;Variable \&quot;id\&quot; of required type \&quot;ID!\&quot; was not provided.&quot;,
       &quot;locations&quot;: [
         {
           &quot;line&quot;: 1,
@@ -336,8 +337,8 @@ enum ActionGenre {
 </code></pre>
 <p>이런 식으로 <code>Game</code>을 implement하는 모든 타입이 해당 인자와 리턴 타입을 가진 정확한 필드를 가져야함을 명시해줄 수 있다.</p>
 <p>만약, 앞선 쿼리의 형태에서 특정 타입에만 존재하는 필드를 가져오고자 하는 경우, 단순히 아래와 같은 형태는 에러가 발생한다.</p>
-<pre><code class="language-graphql">query GameInfo($id: ID!) {
-  game(id: $id) {
+<pre><code class="language-graphql">query GameInfo(id: ID!) {
+  game(id: id) {
     title
     genre # ActionGame 타입에만 존재
   }
@@ -362,8 +363,8 @@ enum ActionGenre {
 }
 </code></pre>
 <p>이러한 경우에 아래와 같은 형태로 인라인 프래그먼트를 사용하여 특정 객체 타입일 경우의 필드를 요청할 수 있다.</p>
-<pre><code class="language-graphql">query GameInfo($id: ID!) {
-  game(id: $id) {
+<pre><code class="language-graphql">query GameInfo(id: ID!) {
+  game(id: id) {
     title
     ... on ActionGame {
       genre
@@ -408,8 +409,8 @@ enum ActionGenre {
 }
 </code></pre>
 <pre><code class="language-graphql"># mutation
-mutation CreateReviewForGame($gameId: ID!, $review: ReviewInput!) {
-  createReview(gameId: $gameId, review: $review) {
+mutation CreateReviewForGame(gameId: ID!, review: ReviewInput!) {
+  createReview(gameId: gameId, review: review) {
     stars
     commentary
   }

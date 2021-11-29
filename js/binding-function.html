@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="함수-바인딩"><a class="header" href="#함수-바인딩">함수 바인딩</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="함수-바인딩"><a class="header" href="#함수-바인딩">함수 바인딩</a></h1>
 <p><code>setTimeout</code>에 메서드를 전달할 때처럼, 객체 메서드를 콜백으로 전달할 때는 <code>this</code>가 사라지는 문제가 생긴다.</p>
 <h2 id="사라진-this"><a class="header" href="#사라진-this">사라진 <code>this</code></a></h2>
 <p>앞서 다양한 예제를 통해 <code>this</code> 정보가 사라지는 문제를 경험했다. 객체 메서드가 객체 내부가 아닌 다른 곳에 전달되어 호출되면 <code>this</code>가 사라진다.</p>
@@ -150,7 +151,7 @@
 <pre><code class="language-js">let user = {
   firstName: 'John',
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Hello, {this.firstName}!`);
   },
 };
 
@@ -162,7 +163,7 @@ setTimeout(user.sayHi, 1000); // Hello, undefined!
 <pre><code class="language-js">let user = {
   firstName: 'John',
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Hello, {this.firstName}!`);
   },
 };
 
@@ -175,7 +176,7 @@ setTimeout(function () {
 <pre><code class="language-js">let user = {
   firstName: 'John',
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Hello, {this.firstName}!`);
   },
 };
 
@@ -204,7 +205,7 @@ let boundFunc = func.bind(context);
 <pre><code class="language-js">let user = {
   firstName: 'John',
   sayHi() {
-    alert(`Hello, ${this.firstName}!`);
+    alert(`Hello, {this.firstName}!`);
   },
 };
 

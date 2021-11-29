@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p><a href="https://graphql-kr.github.io/learn/queries/">여기</a> 문서에 따라, GraphQL의 쿼리를 직접 실습해보려고 한다.</p>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p><a href="https://graphql-kr.github.io/learn/queries/">여기</a> 문서에 따라, GraphQL의 쿼리를 직접 실습해보려고 한다.</p>
 <p>여기서는 실습을 위해 Github의 <a href="https://docs.github.com/en/graphql/overview/explorer">GraphQL API</a>를 활용했다.</p>
 <h2 id="fields"><a class="header" href="#fields">Fields</a></h2>
 <p>GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는 것이다. 덕분에 항상 클라이언트가 기대한 결과값을 얻을 수 있다.</p>
@@ -317,9 +318,9 @@ fragment userInfo on User {
 <p>결과는 동일하지만, 쿼리 시에 일일이 객체 필드를 작성해줄 필요가 없게 되었다.</p>
 <h3 id="fragment-안에서-매개변수variables-사용하기"><a class="header" href="#fragment-안에서-매개변수variables-사용하기">Fragment 안에서 매개변수(variables) 사용하기</a></h3>
 <p>쿼리 및 뮤테이션에다 선언한 변수는 Fragment를 통해서도 접근할 수 있다.</p>
-<p>아래는 기존의 <code>userInfo</code>에서 <code>$avatarSize</code> 변수를 통해 임의의 사이즈를 가진 avatar 이미지를 추가로 쿼리한 것이다.</p>
+<p>아래는 기존의 <code>userInfo</code>에서 <code>avatarSize</code> 변수를 통해 임의의 사이즈를 가진 avatar 이미지를 추가로 쿼리한 것이다.</p>
 <pre><code class="language-graphql"># query
-query UserInfos($avatarSize: Int = 100) {
+query UserInfos(avatarSize: Int = 100) {
   me: user(login: &quot;Shubidumdu&quot;) {
     ...userInfo
   }
@@ -331,7 +332,7 @@ query UserInfos($avatarSize: Int = 100) {
 fragment userInfo on User {
   name
   location
-  avatarUrl(size: $avatarSize)
+  avatarUrl(size: avatarSize)
 }
 </code></pre>
 <pre><code class="language-json">// result
@@ -369,14 +370,14 @@ fragment userInfo on User {
 </code></pre>
 <p>위의 쿼리를 Variables를 활용한 형태로 바꾸려면 다음과 같은 작업들이 필요하다.</p>
 <ol>
-<li>쿼리 내의 정적인 값을 <code>$variableName</code> 형태로 변경한다.</li>
-<li><code>$variableName</code>를 쿼리에서 받아오는 변수의 타입으로 선언한다.</li>
+<li>쿼리 내의 정적인 값을 <code>variableName</code> 형태로 변경한다.</li>
+<li><code>variableName</code>를 쿼리에서 받아오는 변수의 타입으로 선언한다.</li>
 <li>별도의 전송규약(일반적으로 JSON) 변수에 <code>variableName: value</code>를 전달한다.</li>
 </ol>
 <p>변수를 이용해 위의 쿼리를 재작성하면 아래와 같은 형태가 된다.</p>
 <pre><code class="language-graphql"># query
-query MyInfo($nickname: String!) {
-  user(login: $nickname) {
+query MyInfo(nickname: String!) {
+  user(login: nickname) {
     name
     location
   }
@@ -398,34 +399,34 @@ query MyInfo($nickname: String!) {
 <p>이제, 클라이언트 측에서는 완전히 새로운 쿼리를 작성하지 않고 손쉽게 다른 변수를 전달할 수 있다.</p>
 <p>한편, 이런 방식은 쿼리의 어떤 Argument가 동적인 형태를 띠는지 나타내는 좋은 방법이기도 하다.</p>
 <h3 id="변수-정의"><a class="header" href="#변수-정의">변수 정의</a></h3>
-<p>변수 정의는 위 예시 쿼리에서 <code>($nickname: String!)</code>에 해당하는 부분이다. 정적타입 언어의 함수에 대한 인자 정의와 동일하다.</p>
+<p>변수 정의는 위 예시 쿼리에서 <code>(nickname: String!)</code>에 해당하는 부분이다. 정적타입 언어의 함수에 대한 인자 정의와 동일하다.</p>
 <p><strong>모든 변수는 scalars, enum, 또는 input object type 이어야 한다.</strong> 복잡한 객체를 필드에 전달하려면 서버에서 일치하는 입력 타입을 알아야 하며, 이에 대해서는 문서를 통해 더 알아보자.</p>
 <p>변수 정의는 required 혹은 optional일 수 있다. 위에서는 <code>String!</code>으로 <code>!</code>가 붙었으므로 required scalar type에 해당한다. 반대로, <code>!</code>가 붙지 않았다면 이는 optional한 값이 된다.</p>
 <h3 id="변수-기본값"><a class="header" href="#변수-기본값">변수 기본값</a></h3>
 <p>타입 선언 다음에 기본값을 할당할 수도 있다.
 이 경우에는 별도로 Variable을 전달하지 않더라도 올바르게 동작한다.</p>
 <pre><code class="language-graphql"># query
-query MyInfo($nickname: String = &quot;Shubidumdu&quot;) {
-  user(login: $nickname) {
+query MyInfo(nickname: String = &quot;Shubidumdu&quot;) {
+  user(login: nickname) {
     name
     location
   }
 }
 </code></pre>
-<p><strong>여기에, <code>$nickname: String!</code>과 같이 required 변수를 요구하는 경우에는 기본값을 가질 수 없다는 점을 유의하자.</strong></p>
+<p><strong>여기에, <code>nickname: String!</code>과 같이 required 변수를 요구하는 경우에는 기본값을 가질 수 없다는 점을 유의하자.</strong></p>
 <h2 id="directives-지시어"><a class="header" href="#directives-지시어">Directives (지시어)</a></h2>
 <p>Directives는 GraphQL의 기능으로, 필드나 프래그먼트 안에 삽입되어, 쿼리 실행에 영향을 줄 수 있다.</p>
 <ul>
 <li><code>@include(if: Boolean)</code>: 인자가 <code>true</code>인 경우에만 이 필드를 결과에 포함한다.</li>
 <li><code>@skip(if: Boolean)</code>: 인자가 <code>true</code>인 경우에만 이 필드를 건너뛴다.</li>
 </ul>
-<p>이를 이용해 앞서 작성한 유저 정보 쿼리에서 <code>$withAvatar</code> 변수가 <code>true</code>인 경우에만 이미지를 함께 가져오게끔 해보자.</p>
+<p>이를 이용해 앞서 작성한 유저 정보 쿼리에서 <code>withAvatar</code> 변수가 <code>true</code>인 경우에만 이미지를 함께 가져오게끔 해보자.</p>
 <pre><code class="language-graphql"># query
-query MyInfo($nickname: String!, $withAvatar: Boolean = false) {
-  user(login: $nickname) {
+query MyInfo(&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;ni&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;knam&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mrel&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.8888799999999999em;vertical-align:-0.19444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;St&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.02778em;&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.03588em;&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;mclose&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;mpunct&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;withAvatar: Boolean = false) {
+  user(login: nickname) {
     name
     location
-    avatarUrl @include(if: $withAvatar)
+    avatarUrl @include(if: withAvatar)
   }
 }
 </code></pre>
@@ -448,14 +449,13 @@ query MyInfo($nickname: String!, $withAvatar: Boolean = false) {
 <p>물론, 필드가 객체를 참조하는 경우에도 활용할 수 있다.</p>
 <pre><code class="language-graphql"># query
 query MyInfo(
-  $nickname: String = &quot;Shubidumdu&quot;
-  $withItemShowcase: Boolean = false
+  &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-html&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;ni&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;knam&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mrel&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.8777699999999999em;vertical-align:-0.19444em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;St&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.02778em;&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.03588em;&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mrel&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mspace&quot; style=&quot;margin-right:0.2777777777777778em;&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;base&quot;&gt;&lt;span class=&quot;strut&quot; style=&quot;height:0.69444em;vertical-align:0em;&quot;&gt;&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot; style=&quot;margin-right:0.05764em;&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;bi&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;mord mathnormal&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;mord&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;withItemShowcase: Boolean = false
 ) {
-  user(login: $nickname) {
+  user(login: nickname) {
     name
     location
     company
-    itemShowcase @include(if: $withItemShowcase) {
+    itemShowcase @include(if: withItemShowcase) {
       items {
         totalCount
       }
@@ -490,9 +490,9 @@ query MyInfo(
 <p>이는 GraphQL 역시 마찬가지다. 기술적으로는 어떤 형태의 쿼리든 데이터에 수정을 가할 수 있으나, 사이드 이펙트를 유발하는 작업의 경우에는 Mutation을 통해 전송되어야 한다는 규칙이 있다.</p>
 <p>아래는 내 <code>shubi-docs</code> repo에 star를 추가하는 예시 Mutation이다.</p>
 <pre><code class="language-graphql"># mutation
-mutation MyMutation($repoId: ID!) {
+mutation MyMutation(repoId: ID!) {
   __typename
-  addStar(input: { starrableId: $repoId, clientMutationId: &quot;Star added!&quot; }) {
+  addStar(input: { starrableId: repoId, clientMutationId: &quot;Star added!&quot; }) {
     clientMutationId
   }
 }
@@ -515,13 +515,13 @@ mutation MyMutation($repoId: ID!) {
 <p>Mutation은 쿼리와 마찬가지로 여러 필드를 포함할 수 있는데, 둘 사이에 중요한 차이점이 있다.</p>
 <p><strong>쿼리 필드는 병렬로 실행되지만 뮤테이션 필드는 하나씩 차례대로 실행된다</strong>는 점이다.</p>
 <p>덕분에, 아래와 같이 여러 개의 뮤테이션을 요청하면, 순서가 보장되기 때문에 결국 추가한 star는 다시 사라진다.</p>
-<pre><code class="language-graphql">mutation MyMutation($repoId: ID!) {
+<pre><code class="language-graphql">mutation MyMutation(repoId: ID!) {
   __typename
-  addStar(input: { starrableId: $repoId, clientMutationId: &quot;Star added!&quot; }) {
+  addStar(input: { starrableId: repoId, clientMutationId: &quot;Star added!&quot; }) {
     clientMutationId
   }
   removeStar(
-    input: { starrableId: $repoId, clientMutationId: &quot;Star removed!&quot; }
+    input: { starrableId: repoId, clientMutationId: &quot;Star removed!&quot; }
   ) {
     clientMutationId
   }

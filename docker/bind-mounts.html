@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>이전 챕터에서, DB 내의 데이터를 보존하기 위한 <strong>named volume</strong>에 대해서 이야기했다. Named volume은 어디에 데이터를 저장하는지에 대해서는 신경쓰지 않기 때문에, 단순히 데이터를 저장하기 위한 용도로는 충분하다.</p>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p>이전 챕터에서, DB 내의 데이터를 보존하기 위한 <strong>named volume</strong>에 대해서 이야기했다. Named volume은 어디에 데이터를 저장하는지에 대해서는 신경쓰지 않기 때문에, 단순히 데이터를 저장하기 위한 용도로는 충분하다.</p>
 <p><strong>Bind mounts</strong>를 사용한다면, 우리가 직접 호스트의 정확한 &quot;mountpoint&quot;를 조작할 수 있다. Bind Mounts는 데이터를 보존하기 위해 사용할 수도 있지만, 컨테이너에 추가적인 데이터를 제공해야 하는 경우에 쓰이는 경우가 많다. 애플리케이션 개발 단계에서 Bind Mounts를 사용하면 소스 코드를 컨테이너에 마운트하여 코드 변경 사항을 확인하고, 즉각적인 변경 사항을 확인할 수 있다.</p>
 <p><a href="https://npmjs.com/package/nodemon">nodemon</a>은 NodeJS 애플리케이션에서 변경 사항을 파악하고, 재실행 시켜주는 툴이다. NodeJS 외의 언어 및 프레임워크에서는 다른 적합한 툴들이 존재할 것이다.</p>
 <h2 id="볼륨-타입-비교"><a class="header" href="#볼륨-타입-비교">볼륨 타입 비교</a></h2>
@@ -165,20 +166,20 @@
 <li>아래 명령을 입력한다. 아래쪽에서 해당 명령에 대해 상세히 설명하겠다.</li>
 </ol>
 <pre><code class="language-bash">docker run -dp 3000:3000 \
-    -w /app -v &quot;$(pwd):/app&quot; \
+    -w /app -v &quot;(pwd):/app&quot; \
     node:12-alpine \
     sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
 </code></pre>
 <p>PowerShell을 사용한다면 아래 명령을 사용해야 한다.</p>
 <pre><code class="language-shell">docker run -dp 3000:3000 `
-    -w /app -v &quot;$(pwd):/app&quot; `
+    -w /app -v &quot;(pwd):/app&quot; `
     node:12-alpine `
     sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;
 </code></pre>
 <ul>
 <li><code>-dp 3000:3000</code> - 포트 매핑 및 백그라운드 모드 (이전에 언급한 것과 같다.)</li>
 <li><code>-w /app</code> - 작업 디렉토리, 혹은 명령이 실행될 디렉토리를 지정</li>
-<li><code>-v &quot;$(pwd):/app&quot;</code> - 호스트의 현재 디렉토리(<code>pwd</code>)를 컨테이너의 <code>/app</code> 디렉토리와 <strong>bind mount</strong>시킴</li>
+<li><code>-v &quot;(pwd):/app&quot;</code> - 호스트의 현재 디렉토리(<code>pwd</code>)를 컨테이너의 <code>/app</code> 디렉토리와 <strong>bind mount</strong>시킴</li>
 <li><code>node:12-alpine</code> - 사용할 이미지. Dockerfile 내의 Base 이미지를 사용.</li>
 <li><code>sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</code> - 명령어. <code>sh</code>를 통해서 셸을 실행하고(alpine은 <code>bash</code>를 갖고있지 않다.) <code>yarn install</code>을 실행하여 모든 종속성을 설치한 뒤 <code>yarn run dev</code>로 개발 모드로 실행한다.</li>
 </ul>
@@ -186,7 +187,7 @@
 <li><code>docker logs -f &lt;container-id&gt;</code>를 통해 로그를 확인할 수 있다.</li>
 </ol>
 <pre><code class="language-bash"> docker logs -f &lt;container-id&gt;
- $ nodemon src/index.js
+  nodemon src/index.js
  [nodemon] 1.19.2
  [nodemon] to restart at any time, enter `rs`
  [nodemon] watching dir(s): *.*

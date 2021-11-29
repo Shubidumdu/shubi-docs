@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="module-context"><a class="header" href="#module-context">Module context</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="module-context"><a class="header" href="#module-context">Module context</a></h1>
 <h2 id="sharing-code"><a class="header" href="#sharing-code">Sharing code</a></h2>
 <p>지금껏 사용한 것 처럼, <code>&lt;script&gt;</code> 블록은 컴포넌트 초기화 시 각각의 컴포넌트 내에서 실행되는 로직들을 담고 있다. 그리고 대부분의 경우에는 이것으로 충분하다.</p>
 <p>헌데, 아주 가끔 컴포넌트 외부에서 로직을 처리하여, 여러 컴포넌트에 해당 코드를 &quot;공유&quot;해야하는 경우가 생긴다. 이를테면, 음악 플레이어 컴포넌트를 만든 이후, 한 플레이어가 재생 중일 때 다른 플레이어를 중지시키는 로직을 구현하고자 하는 경우가 그렇다.</p>

@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="보안-스캐닝"><a class="header" href="#보안-스캐닝">보안 스캐닝</a></h2>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h2 id="보안-스캐닝"><a class="header" href="#보안-스캐닝">보안 스캐닝</a></h2>
 <p>이미지를 빌드하고 나서, <code>docker scan</code> 명령으로 보안 취약점을 탐색하는 것이 좋다. Docker는 <a href="http://snyk.io/">Snyk</a>과 파트너쉽을 보유하여 취약점 탐색 서비스를 제공한다.</p>
 <p>예를 들어, <code>getting-started</code> 이미지에 대한 스캐닝을 진행해보자.</p>
 <pre><code class="language-bash">docker scan getting-started

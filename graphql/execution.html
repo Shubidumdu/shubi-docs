@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>이 <a href="https://graphql-kr.github.io/learn/execution/">문서</a>의 내용을 실습하며 따라가보려고 한다. (TypeScript를 사용)</p>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p>이 <a href="https://graphql-kr.github.io/learn/execution/">문서</a>의 내용을 실습하며 따라가보려고 한다. (TypeScript를 사용)</p>
 <p>GraphQL 쿼리의 각 필드는 특정한 타입의 값을 반환하는 함수로 생각할 수 있으며, 이는 사실 실제 GraphQL의 작동방식이기도 하다.</p>
 <p>타입의 각 필드는 GraphQL 서버 측의 <code>resolver</code> 함수에 대응되며, 해당 필드가 <code>string</code>이나 <code>number</code> 같은 스칼라 값을 반환하게 되면 실행이 완료된다.</p>
 <p>반면, 필드가 객체를 반환하는 경우, 쿼리는 해당 객체에 적용되는 다른 필드들을 포함하게 되며, 이는 스칼라 값에 도달할 때까지 반복된다.</p>

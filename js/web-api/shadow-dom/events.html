@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="shadow-dom-and-events"><a class="header" href="#shadow-dom-and-events">Shadow DOM and events</a></h1>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="shadow-dom-and-events"><a class="header" href="#shadow-dom-and-events">Shadow DOM and events</a></h1>
 <p>shadow tree에 담긴 기본 아이디어는 컴포넌트 내부적인 실행 세부사항에 대해 캡슐화를 적용하는 것이다.</p>
 <p><code>&lt;user-card&gt;</code>의 shadow DOM 내부에 클릭 이벤트가 발생했다고 가정하자. 이 때, 메인 문서는 shadow DOM 내부에 대해 알 수 있는 방법이 없다. 이는 특히 서드파티 라이브러리로부터의 컴포넌트를 활용할 때 더 두드러진다.</p>
 <p>따라서, 캡슐화를 유지하기 위해, 브라우저는 이벤트를 리타겟팅(<strong>retarget</strong>)한다.</p>
@@ -198,7 +199,7 @@ customElements.define('user-card', class extends HTMLElement {
   }
 });
 
-userCard.onclick = e =&gt; alert(`Outer target: ${e.target.tagName}`);
+userCard.onclick = e =&gt; alert(`Outer target: {e.target.tagName}`);
 &lt;/script&gt;
 </code></pre>
 <p>단, 위 예시에서 <code>&lt;b&gt;Name:&lt;/b&gt;</code>과 같이 slot에 해당하지 않는 요소로부터 발생한 이벤트는 마찬가지로 host를 타겟으로 삼는다.</p>

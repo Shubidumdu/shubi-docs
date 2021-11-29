@@ -142,7 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="js의-비동기성에-관하여"><a class="header" href="#js의-비동기성에-관하여">JS의 비동기성에 관하여</a></h2>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h2 id="js의-비동기성에-관하여"><a class="header" href="#js의-비동기성에-관하여">JS의 비동기성에 관하여</a></h2>
 <p>JS는 싱글 스레드 언어입니다. 이는 다시 말해, JS는 하나의 콜 스택만을 활용하기 때문에, 한번에 하나의 코드만을 실행시킬 수 있다는 뜻입니다.</p>
 <p>실제로, JS 엔진은 어떤 작업을 수행하고 있는 중에는 렌더링이나 새로운 이벤트에 대한 핸들링이 즉각적으로 일어나지 않습니다.</p>
 <p>근데 이상하죠? 우리는 이미 JS의 콜백 함수나, 프라미스, async를 통해 비동기 함수들을 다루어왔는데 말이죠.</p>

@@ -100,3 +100,4 @@
     - [Formulate Your Problem as an ML Problem](ml/problem-framing/formulate.md)
   - [Crash Course](ml/crash-course/index.md)
     - [Framing](ml/crash-course/framing.md)
+    - [Descending into ML](ml/crash-course/descending-into-ml.md)

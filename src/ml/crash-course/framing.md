@@ -18,9 +18,8 @@
 가장 단순한 형태의 ML 프로젝트는 단 하나의 피쳐만 사용함으로써 이루어집니다.
 반면, 엄청 섬세한 형태의 ML 프로젝트는 수십만개의 피쳐가 존재할수도 있죠.
 
-```
-x1,x2,...xN
-```
+
+$$ x_1,x_2,...x_N $$
 
 스팸 메일 분류기를 예시로 들자면, 피쳐는 아래와 같은 것들이 될 수 있습니다.
 
@@ -94,27 +93,29 @@ unlabeled examples: {features, ?}: (x, ?)
 
 아래는 위와 동일한 집값 데이터이지만, Label에 해당하는 `medianHouseValue`가 존재하지 않습니다.
 
-<tbody><tr>
-    <th>housingMedianAge<br>(feature)</th>
-    <th>totalRooms<br>(feature)</th>
-    <th>totalBedrooms<br>(feature)</th>
-  </tr>
-  <tr>
-    <td>42</td>
-    <td>1686</td>
-    <td>361</td>
-  </tr> 
-  <tr>
-    <td>34</td>
-    <td>1226</td>
-    <td>180</td>
-  </tr>
-  <tr>
-    <td>33</td>
-    <td>1077</td>
-    <td>271</td>
-  </tr>
-</tbody>
+<table>
+  <tbody><tr>
+      <th>housingMedianAge<br>(feature)</th>
+      <th>totalRooms<br>(feature)</th>
+      <th>totalBedrooms<br>(feature)</th>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>1686</td>
+      <td>361</td>
+    </tr> 
+    <tr>
+      <td>34</td>
+      <td>1226</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>1077</td>
+      <td>271</td>
+    </tr>
+  </tbody>
+</table>
 
 일단 우리가 레이블 처리된 모델을 훈련시키고 나면, 레이블이 없는 예시들에 대해서도 예측을 수행할 수 있습니다. 스팸 분류기에서 레이블이 없는 데이터는 사람들이 아직 레이블을 처리하지 않은 새로운 이메일이 되겠죠.
 
@@ -122,8 +123,8 @@ unlabeled examples: {features, ?}: (x, ?)
 
 **모델**은 Feature와 Label 간의 관계를 의미합니다. 예를 들어, 스팸 분류기 모델은 일부 Feature들은 스팸과 강하게 연관이 있다고 판단할 것입니다. 모델이 사용되는 두 단계에 대해서 살펴봅시다.
 
-- **Training(훈련)**은 모델을 만들고, **가르치는 것**을 의미합니다. 다시 말해, 모델에게 레이블처리된 예시를 보여주고, 점차 모델에게 Feature와 Label 간의 관계를 가르치는 것입니다.
-- **Inference(추론)**는 훈련이 완료된 모델을 레이블이 되어있지 않은 예시에 적용함을 의미합니다. 다시 말해, 유용한 예측(`y'`)을 수행할 수 있는 모델을 사용하는 것이죠. 앞선 경우를 예로 들자면, 레이블이 없는 예시에 대해 집값에 해당하는 Label인 `medianHouseValue`를 예측하는 것을 의미합니다.
+- <b>Training(훈련)</b>은 모델을 만들고, **가르치는 것**을 의미합니다. 다시 말해, 모델에게 레이블처리된 예시를 보여주고, 점차 모델에게 Feature와 Label 간의 관계를 가르치는 것입니다.
+- <b>Inference(추론)</b>는 훈련이 완료된 모델을 레이블이 되어있지 않은 예시에 적용함을 의미합니다. 다시 말해, 유용한 예측(`y'`)을 수행할 수 있는 모델을 사용하는 것이죠. 앞선 경우를 예로 들자면, 레이블이 없는 예시에 대해 집값에 해당하는 Label인 `medianHouseValue`를 예측하는 것을 의미합니다.
 
 ## Regression vs. Classification
 

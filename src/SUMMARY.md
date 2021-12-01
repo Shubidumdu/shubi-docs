@@ -101,3 +101,4 @@
   - [Crash Course](ml/crash-course/index.md)
     - [Framing](ml/crash-course/framing.md)
     - [Descending into ML](ml/crash-course/descending-into-ml.md)
+    - [Reducing Loss](ml/crash-course/reducing-loss.md)

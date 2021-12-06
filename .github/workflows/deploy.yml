@@ -1,3 +1,4 @@
+
 name: Deploy to Github Page
 
 on:
@@ -11,8 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install
+    - name: Install mdbook
       run: cargo install mdbook
+    - name: Install katex
+      run: cargo install mdbook-katex
     - name: Build
       run: mdbook build
     - name: Deploy

@@ -53,6 +53,7 @@
     - [매핑된 타입을 사용하여 값을 동기화하기](ts/types/mapped-type.md)
   - [타입 추론](ts/type-inference/index.md)
     - [추론 가능한 타입을 사용해 장황한 코드 방지하기](ts/type-inference/use-inferable-types.md)
+    - [다른 타입에는 다른 변수 사용하기](ts/type-inference/use-const.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

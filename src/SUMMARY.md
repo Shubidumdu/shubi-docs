@@ -50,6 +50,7 @@
     - [동적 데이터에 인덱스 시그니처 사용하기](ts/types/index-signature.md)
     - [number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기](ts/types/no-index-signature.md)
     - [변경 관련된 오류 방지를 위해 readonly 사용하기](ts/types/readonly.md)
+    - [매핑된 타입을 사용하여 값을 동기화하기](ts/types/mapped-type.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

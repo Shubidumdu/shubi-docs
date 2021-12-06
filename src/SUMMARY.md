@@ -51,6 +51,8 @@
     - [number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기](ts/types/no-index-signature.md)
     - [변경 관련된 오류 방지를 위해 readonly 사용하기](ts/types/readonly.md)
     - [매핑된 타입을 사용하여 값을 동기화하기](ts/types/mapped-type.md)
+  - [타입 추론](ts/type-inference/index.md)
+    - [추론 가능한 타입을 사용해 장황한 코드 방지하기](ts/type-inference/use-inferable-types.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

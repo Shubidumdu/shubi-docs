@@ -54,6 +54,7 @@
   - [타입 추론](ts/type-inference/index.md)
     - [추론 가능한 타입을 사용해 장황한 코드 방지하기](ts/type-inference/use-inferable-types.md)
     - [다른 타입에는 다른 변수 사용하기](ts/type-inference/use-const.md)
+    - [타입 넓히기](ts/type-inference/type-widening.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

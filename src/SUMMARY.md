@@ -58,6 +58,7 @@
     - [타입 좁히기](ts/type-inference/type-narrowing.md)
     - [한꺼번에 객체 생성하기](ts/type-inference/create-object-at-once.md)
     - [일관성있는 별칭 사용하기](ts/type-inference/avoid-aliasing.md)
+    - [비동기 코드에는 콜백 대신 async 함수 사용하기](ts/type-inference/use-async.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

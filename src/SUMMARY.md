@@ -56,6 +56,7 @@
     - [다른 타입에는 다른 변수 사용하기](ts/type-inference/use-const.md)
     - [타입 넓히기](ts/type-inference/type-widening.md)
     - [타입 좁히기](ts/type-inference/type-narrowing.md)
+    - [한꺼번에 객체 생성하기](ts/type-inference/create-object-at-once.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

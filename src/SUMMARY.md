@@ -61,6 +61,8 @@
     - [비동기 코드에는 콜백 대신 async 함수 사용하기](ts/type-inference/use-async.md)
     - [타입 추론에 문맥이 어떻게 사용되는지 이해하기](ts/type-inference/context-inference.md)
     - [함수형 기법과 라이브러리로 타입 흐름 유지하기](ts/type-inference/well-typed-lib.md)
+  - [타입 설계](ts/design/index.md)
+    - [유효한 상태만 표현하는 타입을 지향하기](ts/design/valid-states.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

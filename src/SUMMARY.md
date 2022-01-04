@@ -65,6 +65,7 @@
     - [유효한 상태만 표현하는 타입을 지향하기](ts/design/valid-states.md)
     - [사용할 때는 너그럽게, 생성할 때는 엄격하게](ts/design/loose-accept-strict-produce.md)
     - [문서에 타입 정보를 쓰지 않기](ts/design/jsdoc-repeat.md)
+    - [타입 주변에 null값 배치하기](ts/design/null-values-to-perimeter.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

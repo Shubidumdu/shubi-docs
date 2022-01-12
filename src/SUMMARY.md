@@ -71,6 +71,7 @@
     - [부정확한 타입보다는 미완성 타입을 사용하기](ts/design/incomplete-over-innacurate.md)
     - [데이터가 아닌, API와 명세를 보고 타입 만들기](ts/design/consider-codegen.md)
     - [해당 분야의 용어로 타입 이름 짓기](ts/design/language-of-domain.md)
+    - [공식 명칭에는 상표를 붙이기](ts/design/brands.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

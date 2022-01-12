@@ -74,6 +74,7 @@
     - [공식 명칭에는 상표를 붙이기](ts/design/brands.md)
   - [any 다루기](ts/any/index.md)
     - [any 타입은 가능한 한 좁은 범위에서만 사용하기](ts/any/narrowest-any.md)
+    - [any를 구체적으로 변형해서 사용하기](ts/any/specific-any.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

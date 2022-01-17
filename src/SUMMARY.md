@@ -78,6 +78,7 @@
     - [함수 안으로 타입 단언문 감추기](ts/any/hide-unsafe-casts.md)
     - [any의 진화를 이해하기](ts/any/evolving-any.md)
     - [모르는 타입의 값에는 any 대신 unknown을 사용하기](ts/any/never-unknown.md)
+    - [몽키 패치보다는 안전한 타입을 사용하기](ts/any/type-safe-monkey.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

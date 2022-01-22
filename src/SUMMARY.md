@@ -85,6 +85,7 @@
     - [타입 선언과 관련된 세 가지 버전 이해하기](ts/declarations/understand-ts-types.md)
     - [공개 API에 등장하는 모든 타입을 export하기](ts/declarations/export-your-types.md)
     - [API 주석에 TSDoc 사용하기](ts/declarations/use-tsdoc.md)
+    - [콜백에서 this에 대한 타입 제공하기](ts/declarations/this-in-callbacks.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

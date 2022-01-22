@@ -83,6 +83,7 @@
   - [타입 선언과 @types](ts/declarations/index.md)
     - [devDependencies에 typescript와 @types 추가하기](ts/declarations/dev-dependencies.md)
     - [타입 선언과 관련된 세 가지 버전 이해하기](ts/declarations/understand-ts-types.md)
+    - [공개 API에 등장하는 모든 타입을 export하기](ts/declarations/export-your-types.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

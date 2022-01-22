@@ -82,6 +82,7 @@
     - [타입 커버리지를 추적하여 타입 안정성 유지하기](ts/any/type-percentage.md)
   - [타입 선언과 @types](ts/declarations/index.md)
     - [devDependencies에 typescript와 @types 추가하기](ts/declarations/dev-dependencies.md)
+    - [타입 선언과 관련된 세 가지 버전 이해하기](ts/declarations/understand-ts-types.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

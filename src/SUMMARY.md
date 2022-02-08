@@ -87,6 +87,8 @@
     - [API 주석에 TSDoc 사용하기](ts/declarations/use-tsdoc.md)
     - [콜백에서 this에 대한 타입 제공하기](ts/declarations/this-in-callbacks.md)
     - [오버로딩 타입보다는 조건부 타입을 사용하기](ts/declarations/conditional-overload.md)
+    - [의존성 분리를 위해 미러 타입 사용하기](ts/declarations/mirror-types-for-deps.md)
+    - [테스팅 타입의 함정에 주의하기](ts/declarations/test-your-types.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

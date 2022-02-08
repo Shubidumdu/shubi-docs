@@ -89,6 +89,8 @@
     - [오버로딩 타입보다는 조건부 타입을 사용하기](ts/declarations/conditional-overload.md)
     - [의존성 분리를 위해 미러 타입 사용하기](ts/declarations/mirror-types-for-deps.md)
     - [테스팅 타입의 함정에 주의하기](ts/declarations/test-your-types.md)
+  - [코드를 작성하고 실행하기](ts/write-run/index.md)
+    - [타입스크립트 기능보다는 ECMASCript 기능을 사용하기](ts/write-run/avoid-non-ecma.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

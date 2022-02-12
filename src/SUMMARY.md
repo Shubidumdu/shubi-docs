@@ -93,6 +93,7 @@
     - [타입스크립트 기능보다는 ECMASCript 기능을 사용하기](ts/write-run/avoid-non-ecma.md)
     - [객체를 순회하는 노하우](ts/write-run/iterate-objects.md)
     - [DOM 계층 구조 이해하기](ts/write-run/understand-the-dom.md)
+    - [정보를 감추는 목적으로 private 사용하지 않기](ts/write-run/private-rely.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

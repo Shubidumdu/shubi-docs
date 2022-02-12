@@ -95,6 +95,8 @@
     - [DOM 계층 구조 이해하기](ts/write-run/understand-the-dom.md)
     - [정보를 감추는 목적으로 private 사용하지 않기](ts/write-run/private-rely.md)
     - [소스맵을 사용하여 타입스크립트 디버깅하기](ts/write-run/source-maps-debug.md)
+  - [타입스크립트로 마이그레이션하기](ts/migrate/index.md)
+    - [모던 자바스크립트로 작성하기](ts/migrate/write-modern-js.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

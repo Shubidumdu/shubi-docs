@@ -97,6 +97,7 @@
     - [소스맵을 사용하여 타입스크립트 디버깅하기](ts/write-run/source-maps-debug.md)
   - [타입스크립트로 마이그레이션하기](ts/migrate/index.md)
     - [모던 자바스크립트로 작성하기](ts/migrate/write-modern-js.md)
+    - [타입스크립트 도입 전에 @ts-check와 JsDoc으로 시험해 보기](ts/migrate/jsdoc-tscheck.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

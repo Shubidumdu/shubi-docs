@@ -100,6 +100,7 @@
     - [타입스크립트 도입 전에 @ts-check와 JsDoc으로 시험해 보기](ts/migrate/jsdoc-tscheck.md)
     - [allowJs로 타입스크립트와 자바스크립트 같이 사용하기](ts/migrate/allow-js.md)
     - [의존성 관계에 따라 모듈 단위로 전환하기](ts/migrate/convert-up-the-graph.md)
+    - [마이그레이션의 완성을 위해 noImplicitAny 설정하기](ts/migrate/start-loose.md)
 - [React]()
   - [왜 React인가?](react/why.md)
 - [Redux]()

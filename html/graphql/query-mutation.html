@@ -1,0 +1,659 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Query &amp; Mutation - Shubi Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Introduction</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.</strong> Web</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/web-performance/index.html"><strong aria-hidden="true">1.1.</strong> 웹 성능 최적화 기법</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/web-performance/what-is-web-performance.html"><strong aria-hidden="true">1.1.1.</strong> 웹 성능이란 무엇인가?</a></li><li class="chapter-item "><a href="../web/web-performance/web-optimization.html"><strong aria-hidden="true">1.1.2.</strong> 웹 최적화</a></li><li class="chapter-item "><a href="../web/web-performance/basic-optimization.html"><strong aria-hidden="true">1.1.3.</strong> 웹 사이트 성능을 개선하는 기본적인 방법</a></li></ol></li></ol></li><li class="chapter-item "><a href="../js/index.html"><strong aria-hidden="true">2.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/exec-ctx.html"><strong aria-hidden="true">2.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../js/class.html"><strong aria-hidden="true">2.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../js/arrow-func.html"><strong aria-hidden="true">2.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../js/binding-function.html"><strong aria-hidden="true">2.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../js/call-apply.html"><strong aria-hidden="true">2.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../js/closure.html"><strong aria-hidden="true">2.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../js/func-exp-and-dec.html"><strong aria-hidden="true">2.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../js/event-loop.html"><strong aria-hidden="true">2.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../js/new.html"><strong aria-hidden="true">2.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../js/properties.html"><strong aria-hidden="true">2.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../js/prototype.html"><strong aria-hidden="true">2.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../js/this.html"><strong aria-hidden="true">2.12.</strong> this</a></li><li class="chapter-item "><a href="../js/var.html"><strong aria-hidden="true">2.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../js/babel.html"><strong aria-hidden="true">2.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/intersection.html"><strong aria-hidden="true">2.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../js/web-api/mutation.html"><strong aria-hidden="true">2.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../js/web-api/template.html"><strong aria-hidden="true">2.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">2.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">2.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">2.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">2.15.4.3.</strong> Events</a></li></ol></li><li class="chapter-item "><a href="../js/web-api/canvas/intro.html"><strong aria-hidden="true">2.15.5.</strong> Canvas API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/canvas/shapes.html"><strong aria-hidden="true">2.15.5.1.</strong> 도형 그리기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">2.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/guides/render-opt.html"><strong aria-hidden="true">2.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../js/guides/custom-el-checklist.html"><strong aria-hidden="true">2.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../ts/index.html"><strong aria-hidden="true">3.</strong> TypeScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/intro/index.html"><strong aria-hidden="true">3.1.</strong> 타입스크립트 알아보기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/intro/ts_js.html"><strong aria-hidden="true">3.1.1.</strong> TS와 JS의 관계</a></li><li class="chapter-item "><a href="../ts/intro/setting.html"><strong aria-hidden="true">3.1.2.</strong> TS 설정 이해하기</a></li><li class="chapter-item "><a href="../ts/intro/transpile.html"><strong aria-hidden="true">3.1.3.</strong> 코드 생성과 타입이 관계없음을 이해하기</a></li><li class="chapter-item "><a href="../ts/intro/typing.html"><strong aria-hidden="true">3.1.4.</strong> 구조적 타이핑에 익숙해지기</a></li><li class="chapter-item "><a href="../ts/intro/no_any.html"><strong aria-hidden="true">3.1.5.</strong> any 타입 지양하기</a></li></ol></li><li class="chapter-item "><a href="../ts/types/index.html"><strong aria-hidden="true">3.2.</strong> 타입스크립트의 타입 시스템</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/types/use_editor.html"><strong aria-hidden="true">3.2.1.</strong> 편집기를 사용하여 타입 시스템 탐색하기</a></li><li class="chapter-item "><a href="../ts/types/set.html"><strong aria-hidden="true">3.2.2.</strong> 타입이 값들의 집합이라고 생각하기</a></li><li class="chapter-item "><a href="../ts/types/symbol.html"><strong aria-hidden="true">3.2.3.</strong> 타입 공간과 값 공간의 심벌 구분하기</a></li><li class="chapter-item "><a href="../ts/types/type-def.html"><strong aria-hidden="true">3.2.4.</strong> 타입 단언보다는 타입 선언을 사용하기</a></li><li class="chapter-item "><a href="../ts/types/wrapper.html"><strong aria-hidden="true">3.2.5.</strong> 객체 래퍼 타입 피하기</a></li><li class="chapter-item "><a href="../ts/types/excess-type-check.html"><strong aria-hidden="true">3.2.6.</strong> 잉여 속성 체크의 한계 인지하기</a></li><li class="chapter-item "><a href="../ts/types/function-expression.html"><strong aria-hidden="true">3.2.7.</strong> 함수 표현식에 타입 적용하기</a></li><li class="chapter-item "><a href="../ts/types/type-and-interface.html"><strong aria-hidden="true">3.2.8.</strong> 타입과 인터페이스의 차이점 알기</a></li><li class="chapter-item "><a href="../ts/types/generics.html"><strong aria-hidden="true">3.2.9.</strong> 타입 연산과 제너릭 사용으로 반복 줄이기</a></li><li class="chapter-item "><a href="../ts/types/index-signature.html"><strong aria-hidden="true">3.2.10.</strong> 동적 데이터에 인덱스 시그니처 사용하기</a></li><li class="chapter-item "><a href="../ts/types/no-index-signature.html"><strong aria-hidden="true">3.2.11.</strong> number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기</a></li><li class="chapter-item "><a href="../ts/types/readonly.html"><strong aria-hidden="true">3.2.12.</strong> 변경 관련된 오류 방지를 위해 readonly 사용하기</a></li><li class="chapter-item "><a href="../ts/types/mapped-type.html"><strong aria-hidden="true">3.2.13.</strong> 매핑된 타입을 사용하여 값을 동기화하기</a></li></ol></li><li class="chapter-item "><a href="../ts/type-inference/index.html"><strong aria-hidden="true">3.3.</strong> 타입 추론</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/type-inference/use-inferable-types.html"><strong aria-hidden="true">3.3.1.</strong> 추론 가능한 타입을 사용해 장황한 코드 방지하기</a></li><li class="chapter-item "><a href="../ts/type-inference/use-const.html"><strong aria-hidden="true">3.3.2.</strong> 다른 타입에는 다른 변수 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/type-widening.html"><strong aria-hidden="true">3.3.3.</strong> 타입 넓히기</a></li><li class="chapter-item "><a href="../ts/type-inference/type-narrowing.html"><strong aria-hidden="true">3.3.4.</strong> 타입 좁히기</a></li><li class="chapter-item "><a href="../ts/type-inference/create-object-at-once.html"><strong aria-hidden="true">3.3.5.</strong> 한꺼번에 객체 생성하기</a></li><li class="chapter-item "><a href="../ts/type-inference/avoid-aliasing.html"><strong aria-hidden="true">3.3.6.</strong> 일관성있는 별칭 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/use-async.html"><strong aria-hidden="true">3.3.7.</strong> 비동기 코드에는 콜백 대신 async 함수 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/context-inference.html"><strong aria-hidden="true">3.3.8.</strong> 타입 추론에 문맥이 어떻게 사용되는지 이해하기</a></li><li class="chapter-item "><a href="../ts/type-inference/well-typed-lib.html"><strong aria-hidden="true">3.3.9.</strong> 함수형 기법과 라이브러리로 타입 흐름 유지하기</a></li></ol></li><li class="chapter-item "><a href="../ts/design/index.html"><strong aria-hidden="true">3.4.</strong> 타입 설계</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/design/valid-states.html"><strong aria-hidden="true">3.4.1.</strong> 유효한 상태만 표현하는 타입을 지향하기</a></li><li class="chapter-item "><a href="../ts/design/loose-accept-strict-produce.html"><strong aria-hidden="true">3.4.2.</strong> 사용할 때는 너그럽게, 생성할 때는 엄격하게</a></li><li class="chapter-item "><a href="../ts/design/jsdoc-repeat.html"><strong aria-hidden="true">3.4.3.</strong> 문서에 타입 정보를 쓰지 않기</a></li><li class="chapter-item "><a href="../ts/design/null-values-to-perimeter.html"><strong aria-hidden="true">3.4.4.</strong> 타입 주변에 null값 배치하기</a></li><li class="chapter-item "><a href="../ts/design/union-of-interfaces.html"><strong aria-hidden="true">3.4.5.</strong> 유니온의 인터페이스보다는 인터페이스의 유니온 사용하기</a></li><li class="chapter-item "><a href="../ts/design/avoid-strings.html"><strong aria-hidden="true">3.4.6.</strong> string 타입보다 더 구체적인 타입 사용하기</a></li><li class="chapter-item "><a href="../ts/design/incomplete-over-innacurate.html"><strong aria-hidden="true">3.4.7.</strong> 부정확한 타입보다는 미완성 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/design/consider-codegen.html"><strong aria-hidden="true">3.4.8.</strong> 데이터가 아닌, API와 명세를 보고 타입 만들기</a></li><li class="chapter-item "><a href="../ts/design/language-of-domain.html"><strong aria-hidden="true">3.4.9.</strong> 해당 분야의 용어로 타입 이름 짓기</a></li><li class="chapter-item "><a href="../ts/design/brands.html"><strong aria-hidden="true">3.4.10.</strong> 공식 명칭에는 상표를 붙이기</a></li></ol></li><li class="chapter-item "><a href="../ts/any/index.html"><strong aria-hidden="true">3.5.</strong> any 다루기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/any/narrowest-any.html"><strong aria-hidden="true">3.5.1.</strong> any 타입은 가능한 한 좁은 범위에서만 사용하기</a></li><li class="chapter-item "><a href="../ts/any/specific-any.html"><strong aria-hidden="true">3.5.2.</strong> any를 구체적으로 변형해서 사용하기</a></li><li class="chapter-item "><a href="../ts/any/hide-unsafe-casts.html"><strong aria-hidden="true">3.5.3.</strong> 함수 안으로 타입 단언문 감추기</a></li><li class="chapter-item "><a href="../ts/any/evolving-any.html"><strong aria-hidden="true">3.5.4.</strong> any의 진화를 이해하기</a></li><li class="chapter-item "><a href="../ts/any/never-unknown.html"><strong aria-hidden="true">3.5.5.</strong> 모르는 타입의 값에는 any 대신 unknown을 사용하기</a></li><li class="chapter-item "><a href="../ts/any/type-safe-monkey.html"><strong aria-hidden="true">3.5.6.</strong> 몽키 패치보다는 안전한 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/any/type-percentage.html"><strong aria-hidden="true">3.5.7.</strong> 타입 커버리지를 추적하여 타입 안정성 유지하기</a></li></ol></li><li class="chapter-item "><a href="../ts/declarations/index.html"><strong aria-hidden="true">3.6.</strong> 타입 선언과 @types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/declarations/dev-dependencies.html"><strong aria-hidden="true">3.6.1.</strong> devDependencies에 typescript와 @types 추가하기</a></li><li class="chapter-item "><a href="../ts/declarations/understand-ts-types.html"><strong aria-hidden="true">3.6.2.</strong> 타입 선언과 관련된 세 가지 버전 이해하기</a></li><li class="chapter-item "><a href="../ts/declarations/export-your-types.html"><strong aria-hidden="true">3.6.3.</strong> 공개 API에 등장하는 모든 타입을 export하기</a></li><li class="chapter-item "><a href="../ts/declarations/use-tsdoc.html"><strong aria-hidden="true">3.6.4.</strong> API 주석에 TSDoc 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/this-in-callbacks.html"><strong aria-hidden="true">3.6.5.</strong> 콜백에서 this에 대한 타입 제공하기</a></li><li class="chapter-item "><a href="../ts/declarations/conditional-overload.html"><strong aria-hidden="true">3.6.6.</strong> 오버로딩 타입보다는 조건부 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/mirror-types-for-deps.html"><strong aria-hidden="true">3.6.7.</strong> 의존성 분리를 위해 미러 타입 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/test-your-types.html"><strong aria-hidden="true">3.6.8.</strong> 테스팅 타입의 함정에 주의하기</a></li></ol></li><li class="chapter-item "><a href="../ts/write-run/index.html"><strong aria-hidden="true">3.7.</strong> 코드를 작성하고 실행하기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/write-run/avoid-non-ecma.html"><strong aria-hidden="true">3.7.1.</strong> 타입스크립트 기능보다는 ECMASCript 기능을 사용하기</a></li><li class="chapter-item "><a href="../ts/write-run/iterate-objects.html"><strong aria-hidden="true">3.7.2.</strong> 객체를 순회하는 노하우</a></li><li class="chapter-item "><a href="../ts/write-run/understand-the-dom.html"><strong aria-hidden="true">3.7.3.</strong> DOM 계층 구조 이해하기</a></li><li class="chapter-item "><a href="../ts/write-run/private-rely.html"><strong aria-hidden="true">3.7.4.</strong> 정보를 감추는 목적으로 private 사용하지 않기</a></li><li class="chapter-item "><a href="../ts/write-run/source-maps-debug.html"><strong aria-hidden="true">3.7.5.</strong> 소스맵을 사용하여 타입스크립트 디버깅하기</a></li></ol></li><li class="chapter-item "><a href="../ts/migrate/index.html"><strong aria-hidden="true">3.8.</strong> 타입스크립트로 마이그레이션하기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/migrate/write-modern-js.html"><strong aria-hidden="true">3.8.1.</strong> 모던 자바스크립트로 작성하기</a></li><li class="chapter-item "><a href="../ts/migrate/jsdoc-tscheck.html"><strong aria-hidden="true">3.8.2.</strong> 타입스크립트 도입 전에 @ts-check와 JsDoc으로 시험해 보기</a></li><li class="chapter-item "><a href="../ts/migrate/allow-js.html"><strong aria-hidden="true">3.8.3.</strong> allowJs로 타입스크립트와 자바스크립트 같이 사용하기</a></li><li class="chapter-item "><a href="../ts/migrate/convert-up-the-graph.html"><strong aria-hidden="true">3.8.4.</strong> 의존성 관계에 따라 모듈 단위로 전환하기</a></li><li class="chapter-item "><a href="../ts/migrate/start-loose.html"><strong aria-hidden="true">3.8.5.</strong> 마이그레이션의 완성을 위해 noImplicitAny 설정하기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">4.</strong> React</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../react/why.html"><strong aria-hidden="true">4.1.</strong> 왜 React인가?</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> Redux</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../redux/pure.html"><strong aria-hidden="true">5.1.</strong> 왜 Reducer는 순수해야 하는가?</a></li></ol></li><li class="chapter-item "><a href="../svelte/intro.html"><strong aria-hidden="true">6.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../svelte/reactivity.html"><strong aria-hidden="true">6.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../svelte/props.html"><strong aria-hidden="true">6.2.</strong> Props</a></li><li class="chapter-item "><a href="../svelte/logic.html"><strong aria-hidden="true">6.3.</strong> Logic</a></li><li class="chapter-item "><a href="../svelte/events.html"><strong aria-hidden="true">6.4.</strong> Events</a></li><li class="chapter-item "><a href="../svelte/bindings.html"><strong aria-hidden="true">6.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../svelte/lifecycle.html"><strong aria-hidden="true">6.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../svelte/stores.html"><strong aria-hidden="true">6.7.</strong> Stores</a></li><li class="chapter-item "><a href="../svelte/motion.html"><strong aria-hidden="true">6.8.</strong> Motion</a></li><li class="chapter-item "><a href="../svelte/transition.html"><strong aria-hidden="true">6.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../svelte/animations.html"><strong aria-hidden="true">6.10.</strong> Animations</a></li><li class="chapter-item "><a href="../svelte/actions.html"><strong aria-hidden="true">6.11.</strong> Actions</a></li><li class="chapter-item "><a href="../svelte/classes.html"><strong aria-hidden="true">6.12.</strong> Classes</a></li><li class="chapter-item "><a href="../svelte/composition.html"><strong aria-hidden="true">6.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../svelte/context.html"><strong aria-hidden="true">6.14.</strong> Context API</a></li><li class="chapter-item "><a href="../svelte/specials.html"><strong aria-hidden="true">6.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../svelte/module.html"><strong aria-hidden="true">6.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../svelte/debug.html"><strong aria-hidden="true">6.17.</strong> Debugging</a></li></ol></li><li class="chapter-item expanded "><a href="../graphql/intro.html"><strong aria-hidden="true">7.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../graphql/execution.html"><strong aria-hidden="true">7.1.</strong> Execution</a></li><li class="chapter-item expanded "><a href="../graphql/query-mutation.html" class="active"><strong aria-hidden="true">7.2.</strong> Query & Mutation</a></li><li class="chapter-item "><a href="../graphql/schema-type.html"><strong aria-hidden="true">7.3.</strong> Schema & Type</a></li><li class="chapter-item "><a href="../graphql/pagination.html"><strong aria-hidden="true">7.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../graphql/http.html"><strong aria-hidden="true">7.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../docker/setup.html"><strong aria-hidden="true">8.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../docker/sample.html"><strong aria-hidden="true">8.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../docker/update.html"><strong aria-hidden="true">8.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../docker/share.html"><strong aria-hidden="true">8.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../docker/persist.html"><strong aria-hidden="true">8.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../docker/bind-mounts.html"><strong aria-hidden="true">8.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../docker/multi.html"><strong aria-hidden="true">8.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../docker/docker-compose.html"><strong aria-hidden="true">8.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../docker/best-practices.html"><strong aria-hidden="true">8.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../etc/ssh.html"><strong aria-hidden="true">9.1.</strong> SSH</a></li><li class="chapter-item "><a href="../etc/tdd.html"><strong aria-hidden="true">9.2.</strong> TDD</a></li><li class="chapter-item "><a href="../etc/fp.html"><strong aria-hidden="true">9.3.</strong> 함수형 프로그래밍</a></li><li class="chapter-item "><a href="../etc/rp.html"><strong aria-hidden="true">9.4.</strong> 반응형 프로그래밍</a></li></ol></li><li class="chapter-item "><a href="../ml/index.html"><strong aria-hidden="true">10.</strong> Machine Learning</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/problem-framing/index.html"><strong aria-hidden="true">10.1.</strong> Problem Framing</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/problem-framing/common-problems.html"><strong aria-hidden="true">10.1.1.</strong> Common ML Problems</a></li><li class="chapter-item "><a href="../ml/problem-framing/mindset.html"><strong aria-hidden="true">10.1.2.</strong> The ML Mindset</a></li><li class="chapter-item "><a href="../ml/problem-framing/good.html"><strong aria-hidden="true">10.1.3.</strong> Identifying Good Problems for ML</a></li><li class="chapter-item "><a href="../ml/problem-framing/hard.html"><strong aria-hidden="true">10.1.4.</strong> Hard ML Problems</a></li><li class="chapter-item "><a href="../ml/problem-framing/framing.html"><strong aria-hidden="true">10.1.5.</strong> Deciding on ML</a></li><li class="chapter-item "><a href="../ml/problem-framing/formulate.html"><strong aria-hidden="true">10.1.6.</strong> Formulate Your Problem as an ML Problem</a></li></ol></li><li class="chapter-item "><a href="../ml/crash-course/index.html"><strong aria-hidden="true">10.2.</strong> Crash Course</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/crash-course/framing.html"><strong aria-hidden="true">10.2.1.</strong> Framing</a></li><li class="chapter-item "><a href="../ml/crash-course/descending-into-ml.html"><strong aria-hidden="true">10.2.2.</strong> Descending into ML</a></li><li class="chapter-item "><a href="../ml/crash-course/reducing-loss.html"><strong aria-hidden="true">10.2.3.</strong> Reducing Loss</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">11.</strong> AWS</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../aws/iam.html"><strong aria-hidden="true">11.1.</strong> IAM</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p><a href="https://graphql-kr.github.io/learn/queries/">여기</a> 문서에 따라, GraphQL의 쿼리를 직접 실습해보려고 한다.</p>
+<p>여기서는 실습을 위해 Github의 <a href="https://docs.github.com/en/graphql/overview/explorer">GraphQL API</a>를 활용했다.</p>
+<h2 id="fields"><a class="header" href="#fields">Fields</a></h2>
+<p>GraphQL의 핵심은 쿼리와 결과가 거의 동일한 형태를 보인다는 것이다. 덕분에 항상 클라이언트가 기대한 결과값을 얻을 수 있다.</p>
+<pre><code class="language-graphql"># query
+{
+  viewer {
+    email
+    interactionAbility {
+      origin
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;viewer&quot;: {
+      &quot;email&quot;: &quot;&quot;,
+      &quot;interactionAbility&quot;: {
+        &quot;origin&quot;: &quot;USER&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>아래 예제에서 <code>licenses</code>는 배열을 반환하며, 배열 안 각각의 Item에 대해 <code>name</code>만을 가져온다.</p>
+<p>쿼리문 자체는 모두 동일해보이지만, GraphQL 스키마를 기반으로 예상되는 결과를 알 수 있다.</p>
+<pre><code class="language-graphql"># query
+{
+  licenses {
+    name
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;licenses&quot;: [
+      {
+        &quot;name&quot;: &quot;GNU Affero General Public License v3.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Apache License 2.0&quot;
+      },
+      {
+        &quot;name&quot;: &quot;BSD 2-Clause \&quot;Simplified\&quot; License&quot;
+      },
+      ...
+    ]
+  }
+}
+</code></pre>
+<h2 id="arguments"><a class="header" href="#arguments">Arguments</a></h2>
+<p>필드에 인자를 전달할 수도 있다.</p>
+<pre><code class="language-graphql"># query
+{
+  user(login: &quot;Shubidumdu&quot;) {
+    name
+    location
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;
+    }
+  }
+}
+</code></pre>
+<h2 id="aliases"><a class="header" href="#aliases">Aliases</a></h2>
+<p>만약, 여러 결과 객체 필드가 동일한 이름을 갖는 경우(위에서는 <code>user</code>), 충돌이 일어난다. 아래는 닉네임을 통해 여러 유저의 정보를 가져오는 예시인데, 아래대로라면 에러가 발생한다.</p>
+<pre><code class="language-graphql"># query
+{
+  user(login: &quot;Shubidumdu&quot;) {
+    name
+    location
+  }
+  user(login: &quot;adam-p&quot;) {
+    name
+    location
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+// 에러 발생!
+{
+  &quot;errors&quot;: [
+    {
+      &quot;path&quot;: [],
+      &quot;extensions&quot;: {
+        &quot;code&quot;: &quot;fieldConflict&quot;,
+        &quot;fieldName&quot;: &quot;user&quot;,
+        &quot;conflicts&quot;: &quot;{login:\&quot;\\\&quot;Shubidumdu\\\&quot;\&quot;} or {login:\&quot;\\\&quot;adam-p\\\&quot;\&quot;}&quot;
+      },
+      &quot;locations&quot;: [
+        {
+          &quot;line&quot;: 2,
+          &quot;column&quot;: 2
+        },
+        {
+          &quot;line&quot;: 6,
+          &quot;column&quot;: 3
+        }
+      ],
+      &quot;message&quot;: &quot;Field 'user' has an argument conflict: {login:\&quot;\\\&quot;Shubidumdu\\\&quot;\&quot;} or {login:\&quot;\\\&quot;adam-p\\\&quot;\&quot;}?&quot;
+    }
+  ]
+}
+</code></pre>
+<p>이러한 상황에서 Alias를 사용할 수 있다. 각각의 <code>user</code> 결과에 대해 이름을 지정해주자.</p>
+<pre><code class="language-graphql"># query
+{
+  me: user(login: &quot;Shubidumdu&quot;) {
+    name
+    location
+  }
+  not_me: user(login: &quot;adam-p&quot;) {
+    name
+    location
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;me&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;
+    },
+    &quot;not_me&quot;: {
+      &quot;name&quot;: &quot;Adam Pritchard&quot;,
+      &quot;location&quot;: &quot;Toronto, Canada&quot;
+    }
+  }
+}
+</code></pre>
+<h2 id="fragments"><a class="header" href="#fragments">Fragments</a></h2>
+<p>상대적으로 복잡한 페이지의 경우, Fragment라는 <strong>재사용 가능한 단위</strong>가 사용될 수 있다. 이를 사용하면 미리 필드셋을 구성한 다음 쿼리에 포함시킬 수 있다.</p>
+<p>앞서 여러 유저들의 정보를 가져오는 쿼리를 Fragment를 통해 다시 만들어보면 아래와 같아진다.</p>
+<pre><code class="language-graphql"># query
+{
+  me: user(login: &quot;Shubidumdu&quot;) {
+    ...userInfo
+  }
+  not_me: user(login: &quot;adam-p&quot;) {
+    ...userInfo
+  }
+}
+
+fragment userInfo on User {
+  name
+  location
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;me&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;
+    },
+    &quot;not_me&quot;: {
+      &quot;name&quot;: &quot;Adam Pritchard&quot;,
+      &quot;location&quot;: &quot;Toronto, Canada&quot;
+    }
+  }
+}
+</code></pre>
+<p>결과는 동일하지만, 쿼리 시에 일일이 객체 필드를 작성해줄 필요가 없게 되었다.</p>
+<h3 id="fragment-안에서-매개변수variables-사용하기"><a class="header" href="#fragment-안에서-매개변수variables-사용하기">Fragment 안에서 매개변수(variables) 사용하기</a></h3>
+<p>쿼리 및 뮤테이션에다 선언한 변수는 Fragment를 통해서도 접근할 수 있다.</p>
+<p>아래는 기존의 <code>userInfo</code>에서 <code>$avatarSize</code> 변수를 통해 임의의 사이즈를 가진 avatar 이미지를 추가로 쿼리한 것이다.</p>
+<pre><code class="language-graphql"># query
+query UserInfos($avatarSize: Int = 100) {
+  me: user(login: &quot;Shubidumdu&quot;) {
+    ...userInfo
+  }
+  not_me: user(login: &quot;adam-p&quot;) {
+    ...userInfo
+  }
+}
+
+fragment userInfo on User {
+  name
+  location
+  avatarUrl(size: $avatarSize)
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;me&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;,
+      &quot;avatarUrl&quot;: &quot;https://avatars.githubusercontent.com/u/54790378?s=100&amp;u=9fa9c08aa2c952a873633a1baf3ea342a4c45855&amp;v=4&quot;
+    },
+    &quot;not_me&quot;: {
+      &quot;name&quot;: &quot;Adam Pritchard&quot;,
+      &quot;location&quot;: &quot;Toronto, Canada&quot;,
+      &quot;avatarUrl&quot;: &quot;https://avatars.githubusercontent.com/u/425687?s=100&amp;v=4&quot;
+    }
+  }
+}
+</code></pre>
+<h2 id="operation-name-작업명"><a class="header" href="#operation-name-작업명">Operation name (작업명)</a></h2>
+<p>지금껏 <code>query</code> 키워드와 이름을 모두 생략한 채 <code>{ ... }</code>와 같은 형태로 쿼리를 요청했다.</p>
+<p>하지만 실제로 애플리케이션에 GraphQL을 적용하고자 할 때는 코드를 최대한 덜 헷갈리게 만드는 편이 좋다.</p>
+<p>바로 위의 쿼리에서는 <code>UserInfos</code>와 같은 식으로 이름을 지정했다.</p>
+<p>작업 타입은 <code>query</code>, <code>mutation</code>, <code>subscription</code>이 될 수 있으며, 해당 작업이 어떤 형태의 작업인지를 나타낸다.</p>
+<p>작업명은 명시적인 작업의 <strong>이름</strong>인데, 디버깅 및 로깅에 있어 매우 유용하다. 임의의 쿼리 결과를 찾아내는 것보다, 직접 쿼리명을 찾아내는 것이 훨씬 쉽기 때문이다.</p>
+<h2 id="variables-변수"><a class="header" href="#variables-변수">Variables (변수)</a></h2>
+<p>지금껏 앞의 모든 예시에서 인자들은 쿼리 문자열에 함께 작성되었다. 허나, 대부분 필드에 대한 인자는 동적이다.</p>
+<p>클라이언트 측에서는 쿼리 문자열을 런타임 시점에 동적으로 조작하고, 이를 GraphQL의 특정 포맷으로 Serialize해야 한다.</p>
+<p>그렇기 때문에 동적 인자들을 쿼리 문자열에 직접 전달하는 것은 좋은 방법이 아니다. 그래서 GraphQL은 동적 값을 쿼리에서 없애고 이를 별도로 전달하는 방법을 제공하는데 이를 Variables(변수)라고 한다.</p>
+<pre><code class="language-graphql">{
+  user(login: &quot;Shubidumdu&quot;) {
+    name
+    location
+  }
+}
+</code></pre>
+<p>위의 쿼리를 Variables를 활용한 형태로 바꾸려면 다음과 같은 작업들이 필요하다.</p>
+<ol>
+<li>쿼리 내의 정적인 값을 <code>$variableName</code> 형태로 변경한다.</li>
+<li><code>$variableName</code>를 쿼리에서 받아오는 변수의 타입으로 선언한다.</li>
+<li>별도의 전송규약(일반적으로 JSON) 변수에 <code>variableName: value</code>를 전달한다.</li>
+</ol>
+<p>변수를 이용해 위의 쿼리를 재작성하면 아래와 같은 형태가 된다.</p>
+<pre><code class="language-graphql"># query
+query MyInfo($nickname: String!) {
+  user(login: $nickname) {
+    name
+    location
+  }
+}
+</code></pre>
+<pre><code class="language-json">// variables
+{ &quot;nickname&quot;: &quot;Shubidumdu&quot; }
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;
+    }
+  }
+}
+</code></pre>
+<p>이제, 클라이언트 측에서는 완전히 새로운 쿼리를 작성하지 않고 손쉽게 다른 변수를 전달할 수 있다.</p>
+<p>한편, 이런 방식은 쿼리의 어떤 Argument가 동적인 형태를 띠는지 나타내는 좋은 방법이기도 하다.</p>
+<h3 id="변수-정의"><a class="header" href="#변수-정의">변수 정의</a></h3>
+<p>변수 정의는 위 예시 쿼리에서 <code>($nickname: String!)</code>에 해당하는 부분이다. 정적타입 언어의 함수에 대한 인자 정의와 동일하다.</p>
+<p><strong>모든 변수는 scalars, enum, 또는 input object type 이어야 한다.</strong> 복잡한 객체를 필드에 전달하려면 서버에서 일치하는 입력 타입을 알아야 하며, 이에 대해서는 문서를 통해 더 알아보자.</p>
+<p>변수 정의는 required 혹은 optional일 수 있다. 위에서는 <code>String!</code>으로 <code>!</code>가 붙었으므로 required scalar type에 해당한다. 반대로, <code>!</code>가 붙지 않았다면 이는 optional한 값이 된다.</p>
+<h3 id="변수-기본값"><a class="header" href="#변수-기본값">변수 기본값</a></h3>
+<p>타입 선언 다음에 기본값을 할당할 수도 있다.
+이 경우에는 별도로 Variable을 전달하지 않더라도 올바르게 동작한다.</p>
+<pre><code class="language-graphql"># query
+query MyInfo($nickname: String = &quot;Shubidumdu&quot;) {
+  user(login: $nickname) {
+    name
+    location
+  }
+}
+</code></pre>
+<p><strong>여기에, <code>$nickname: String!</code>과 같이 required 변수를 요구하는 경우에는 기본값을 가질 수 없다는 점을 유의하자.</strong></p>
+<h2 id="directives-지시어"><a class="header" href="#directives-지시어">Directives (지시어)</a></h2>
+<p>Directives는 GraphQL의 기능으로, 필드나 프래그먼트 안에 삽입되어, 쿼리 실행에 영향을 줄 수 있다.</p>
+<ul>
+<li><code>@include(if: Boolean)</code>: 인자가 <code>true</code>인 경우에만 이 필드를 결과에 포함한다.</li>
+<li><code>@skip(if: Boolean)</code>: 인자가 <code>true</code>인 경우에만 이 필드를 건너뛴다.</li>
+</ul>
+<p>이를 이용해 앞서 작성한 유저 정보 쿼리에서 <code>$withAvatar</code> 변수가 <code>true</code>인 경우에만 이미지를 함께 가져오게끔 해보자.</p>
+<pre><code class="language-graphql"># query
+query MyInfo($nickname: String!, $withAvatar: Boolean = false) {
+  user(login: $nickname) {
+    name
+    location
+    avatarUrl @include(if: $withAvatar)
+  }
+}
+</code></pre>
+<pre><code class="language-json">// variables
+{
+  &quot;nickname&quot;: &quot;Shubidumdu&quot;,
+  &quot;withAvatar&quot;: true
+}
+</code></pre>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;,
+      &quot;avatarUrl&quot;: &quot;https://avatars.githubusercontent.com/u/54790378?u=9fa9c08aa2c952a873633a1baf3ea342a4c45855&amp;v=4&quot;
+    }
+  }
+}
+</code></pre>
+<p>물론, 필드가 객체를 참조하는 경우에도 활용할 수 있다.</p>
+<pre><code class="language-graphql"># query
+query MyInfo(
+  $nickname: String = &quot;Shubidumdu&quot;
+  $withItemShowcase: Boolean = false
+) {
+  user(login: $nickname) {
+    name
+    location
+    company
+    itemShowcase @include(if: $withItemShowcase) {
+      items {
+        totalCount
+      }
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// variables
+{
+  &quot;withItemShowcase&quot;: true
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;user&quot;: {
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;,
+      &quot;location&quot;: &quot;Seoul, South Korea&quot;,
+      &quot;company&quot;: &quot;The Mong, Inc.&quot;,
+      &quot;itemShowcase&quot;: {
+        &quot;items&quot;: {
+          &quot;totalCount&quot;: 6
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="mutation"><a class="header" href="#mutation">Mutation</a></h2>
+<p>지금까지는 전부 데이터 가져오기(<code>fetch</code>)에만 초점을 뒀다.</p>
+<p>REST의 경우, 사실 상 모든 요청이 사이드 이펙트를 일으킬 수 있지만, 데이터 수정에 있어서는 <code>GET</code>을 사용하지 않는다는 규칙이 정해져 있다.</p>
+<p>이는 GraphQL 역시 마찬가지다. 기술적으로는 어떤 형태의 쿼리든 데이터에 수정을 가할 수 있으나, 사이드 이펙트를 유발하는 작업의 경우에는 Mutation을 통해 전송되어야 한다는 규칙이 있다.</p>
+<p>아래는 내 <code>shubi-docs</code> repo에 star를 추가하는 예시 Mutation이다.</p>
+<pre><code class="language-graphql"># mutation
+mutation MyMutation($repoId: ID!) {
+  __typename
+  addStar(input: { starrableId: $repoId, clientMutationId: &quot;Star added!&quot; }) {
+    clientMutationId
+  }
+}
+</code></pre>
+<pre><code class="language-json">// variables
+{ &quot;repoId&quot;: &quot;MDEwOlJlcG9zaXRvcnkzMDYzNjgwMDY&quot; }
+</code></pre>
+<pre><code class="language-json">// result
+// 실제로 repo에 star가 추가된다.
+{
+  &quot;data&quot;: {
+    &quot;__typename&quot;: &quot;Mutation&quot;,
+    &quot;addStar&quot;: {
+      &quot;clientMutationId&quot;: &quot;Star added!&quot;
+    }
+  }
+}
+</code></pre>
+<h3 id="다중-필드-mutation"><a class="header" href="#다중-필드-mutation">다중 필드 Mutation</a></h3>
+<p>Mutation은 쿼리와 마찬가지로 여러 필드를 포함할 수 있는데, 둘 사이에 중요한 차이점이 있다.</p>
+<p><strong>쿼리 필드는 병렬로 실행되지만 뮤테이션 필드는 하나씩 차례대로 실행된다</strong>는 점이다.</p>
+<p>덕분에, 아래와 같이 여러 개의 뮤테이션을 요청하면, 순서가 보장되기 때문에 결국 추가한 star는 다시 사라진다.</p>
+<pre><code class="language-graphql">mutation MyMutation($repoId: ID!) {
+  __typename
+  addStar(input: { starrableId: $repoId, clientMutationId: &quot;Star added!&quot; }) {
+    clientMutationId
+  }
+  removeStar(
+    input: { starrableId: $repoId, clientMutationId: &quot;Star removed!&quot; }
+  ) {
+    clientMutationId
+  }
+}
+</code></pre>
+<pre><code class="language-json">// variables
+{ &quot;repoId&quot;: &quot;MDEwOlJlcG9zaXRvcnkzMDYzNjgwMDY&quot; }
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;__typename&quot;: &quot;Mutation&quot;,
+    &quot;addStar&quot;: {
+      &quot;clientMutationId&quot;: &quot;Star added!&quot;
+    },
+    &quot;removeStar&quot;: {
+      &quot;clientMutationId&quot;: &quot;Star removed!&quot;
+    }
+  }
+}
+</code></pre>
+<h2 id="inline-fragments"><a class="header" href="#inline-fragments">Inline Fragments</a></h2>
+<p>다른 여러 타입과 마찬가지로 GraphQL 스키마에는 인터페이스와 유니온 타입을 정의하는 기능이 포함되어 있다.</p>
+<p>만약, 인터페이스나 유니언 타입을 반환하는 필드를 쿼리하는 경우, Inline Fragement를 사용할 수 있는데, 다음과 같은 형태다.</p>
+<pre><code class="language-graphql"># query
+{
+  node(id: &quot;MDQ6VXNlcjU0NzkwMzc4&quot;) {
+    id
+    ... on User {
+      name
+    }
+    ... on Organization {
+      email
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;node&quot;: {
+      &quot;id&quot;: &quot;MDQ6VXNlcjU0NzkwMzc4&quot;,
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;
+    }
+  }
+}
+</code></pre>
+<p>위의 인자로 입력한 <code>id</code>를 통해 반환되는 값은 Node이자 User 타입이다.</p>
+<p>User를 반환받는 경우, <code>id</code>와 <code>name</code> 필드를 가져오도록 Inline Fragment (<code>... on User</code>)를 활용했기 때문에, <code>... on Organization {...}</code>은 완전히 무시된다.</p>
+<h3 id="meta-fields"><a class="header" href="#meta-fields">Meta fields</a></h3>
+<p>만약, GraphQL 상에서 리턴될 타입을 모르는 상황인 경우, 클라이언트에서 해당 데이터를 처리할 방법을 결정하기 위해 타입이 요구되는 경우가 있다.</p>
+<p>GraphQL은 쿼리의 어느 지점에서건 메타 필드인 <code>__typename</code>을 요청해 그 시점에서의 객체 타입의 이름을 가져올 수 있다.</p>
+<pre><code class="language-graphql"># query
+{
+  node(id: &quot;MDQ6VXNlcjU0NzkwMzc4&quot;) {
+    __typename
+    id
+    ... on User {
+      name
+    }
+    ... on Organization {
+      email
+    }
+  }
+}
+</code></pre>
+<pre><code class="language-json">// result
+{
+  &quot;data&quot;: {
+    &quot;node&quot;: {
+      &quot;__typename&quot;: &quot;User&quot;,
+      &quot;id&quot;: &quot;MDQ6VXNlcjU0NzkwMzc4&quot;,
+      &quot;name&quot;: &quot;Won Gyo Seo&quot;
+    }
+  }
+}
+</code></pre>
+<p>위 쿼리에서 <code>__typename</code>을 추가해 클라이언트 측에서 타입을 구분할 수 있게끔 해주었다.</p>
+<p>GraphQL은 이 외에도 몇 가지 메타필드를 제공하며, 이들은 <strong>introspection</strong>의 일부다. 이에 대해서는 다른 문서를 통해 설명하겠다.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../graphql/execution.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../graphql/schema-type.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../graphql/execution.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../graphql/schema-type.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

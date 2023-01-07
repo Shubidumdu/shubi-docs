@@ -13,9 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install mdbook
-      run: cargo install mdbook
+      run: cargo install mdbook --version 0.4.21
     - name: Install katex
-      run: cargo install mdbook-katex
+      run: cargo install mdbook-katex --version 0.2.10
     - name: Build
       run: mdbook build
     - name: Deploy

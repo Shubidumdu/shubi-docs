@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>IAM - Shubi Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Introduction</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.</strong> Web</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/web-performance/index.html"><strong aria-hidden="true">1.1.</strong> 웹 성능 최적화 기법</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/web-performance/what-is-web-performance.html"><strong aria-hidden="true">1.1.1.</strong> 웹 성능이란 무엇인가?</a></li><li class="chapter-item "><a href="../web/web-performance/web-optimization.html"><strong aria-hidden="true">1.1.2.</strong> 웹 최적화</a></li><li class="chapter-item "><a href="../web/web-performance/basic-optimization.html"><strong aria-hidden="true">1.1.3.</strong> 웹 사이트 성능을 개선하는 기본적인 방법</a></li></ol></li></ol></li><li class="chapter-item "><a href="../js/index.html"><strong aria-hidden="true">2.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/exec-ctx.html"><strong aria-hidden="true">2.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../js/class.html"><strong aria-hidden="true">2.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../js/arrow-func.html"><strong aria-hidden="true">2.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../js/binding-function.html"><strong aria-hidden="true">2.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../js/call-apply.html"><strong aria-hidden="true">2.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../js/closure.html"><strong aria-hidden="true">2.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../js/func-exp-and-dec.html"><strong aria-hidden="true">2.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../js/event-loop.html"><strong aria-hidden="true">2.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../js/new.html"><strong aria-hidden="true">2.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../js/properties.html"><strong aria-hidden="true">2.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../js/prototype.html"><strong aria-hidden="true">2.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../js/this.html"><strong aria-hidden="true">2.12.</strong> this</a></li><li class="chapter-item "><a href="../js/var.html"><strong aria-hidden="true">2.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../js/babel.html"><strong aria-hidden="true">2.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/intersection.html"><strong aria-hidden="true">2.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../js/web-api/mutation.html"><strong aria-hidden="true">2.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../js/web-api/template.html"><strong aria-hidden="true">2.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">2.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">2.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">2.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">2.15.4.3.</strong> Events</a></li></ol></li><li class="chapter-item "><a href="../js/web-api/canvas/intro.html"><strong aria-hidden="true">2.15.5.</strong> Canvas API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/canvas/shapes.html"><strong aria-hidden="true">2.15.5.1.</strong> 도형 그리기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">2.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/guides/render-opt.html"><strong aria-hidden="true">2.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../js/guides/custom-el-checklist.html"><strong aria-hidden="true">2.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../ts/index.html"><strong aria-hidden="true">3.</strong> TypeScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/intro/index.html"><strong aria-hidden="true">3.1.</strong> 타입스크립트 알아보기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/intro/ts_js.html"><strong aria-hidden="true">3.1.1.</strong> TS와 JS의 관계</a></li><li class="chapter-item "><a href="../ts/intro/setting.html"><strong aria-hidden="true">3.1.2.</strong> TS 설정 이해하기</a></li><li class="chapter-item "><a href="../ts/intro/transpile.html"><strong aria-hidden="true">3.1.3.</strong> 코드 생성과 타입이 관계없음을 이해하기</a></li><li class="chapter-item "><a href="../ts/intro/typing.html"><strong aria-hidden="true">3.1.4.</strong> 구조적 타이핑에 익숙해지기</a></li><li class="chapter-item "><a href="../ts/intro/no_any.html"><strong aria-hidden="true">3.1.5.</strong> any 타입 지양하기</a></li></ol></li><li class="chapter-item "><a href="../ts/types/index.html"><strong aria-hidden="true">3.2.</strong> 타입스크립트의 타입 시스템</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/types/use_editor.html"><strong aria-hidden="true">3.2.1.</strong> 편집기를 사용하여 타입 시스템 탐색하기</a></li><li class="chapter-item "><a href="../ts/types/set.html"><strong aria-hidden="true">3.2.2.</strong> 타입이 값들의 집합이라고 생각하기</a></li><li class="chapter-item "><a href="../ts/types/symbol.html"><strong aria-hidden="true">3.2.3.</strong> 타입 공간과 값 공간의 심벌 구분하기</a></li><li class="chapter-item "><a href="../ts/types/type-def.html"><strong aria-hidden="true">3.2.4.</strong> 타입 단언보다는 타입 선언을 사용하기</a></li><li class="chapter-item "><a href="../ts/types/wrapper.html"><strong aria-hidden="true">3.2.5.</strong> 객체 래퍼 타입 피하기</a></li><li class="chapter-item "><a href="../ts/types/excess-type-check.html"><strong aria-hidden="true">3.2.6.</strong> 잉여 속성 체크의 한계 인지하기</a></li><li class="chapter-item "><a href="../ts/types/function-expression.html"><strong aria-hidden="true">3.2.7.</strong> 함수 표현식에 타입 적용하기</a></li><li class="chapter-item "><a href="../ts/types/type-and-interface.html"><strong aria-hidden="true">3.2.8.</strong> 타입과 인터페이스의 차이점 알기</a></li><li class="chapter-item "><a href="../ts/types/generics.html"><strong aria-hidden="true">3.2.9.</strong> 타입 연산과 제너릭 사용으로 반복 줄이기</a></li><li class="chapter-item "><a href="../ts/types/index-signature.html"><strong aria-hidden="true">3.2.10.</strong> 동적 데이터에 인덱스 시그니처 사용하기</a></li><li class="chapter-item "><a href="../ts/types/no-index-signature.html"><strong aria-hidden="true">3.2.11.</strong> number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기</a></li><li class="chapter-item "><a href="../ts/types/readonly.html"><strong aria-hidden="true">3.2.12.</strong> 변경 관련된 오류 방지를 위해 readonly 사용하기</a></li><li class="chapter-item "><a href="../ts/types/mapped-type.html"><strong aria-hidden="true">3.2.13.</strong> 매핑된 타입을 사용하여 값을 동기화하기</a></li></ol></li><li class="chapter-item "><a href="../ts/type-inference/index.html"><strong aria-hidden="true">3.3.</strong> 타입 추론</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/type-inference/use-inferable-types.html"><strong aria-hidden="true">3.3.1.</strong> 추론 가능한 타입을 사용해 장황한 코드 방지하기</a></li><li class="chapter-item "><a href="../ts/type-inference/use-const.html"><strong aria-hidden="true">3.3.2.</strong> 다른 타입에는 다른 변수 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/type-widening.html"><strong aria-hidden="true">3.3.3.</strong> 타입 넓히기</a></li><li class="chapter-item "><a href="../ts/type-inference/type-narrowing.html"><strong aria-hidden="true">3.3.4.</strong> 타입 좁히기</a></li><li class="chapter-item "><a href="../ts/type-inference/create-object-at-once.html"><strong aria-hidden="true">3.3.5.</strong> 한꺼번에 객체 생성하기</a></li><li class="chapter-item "><a href="../ts/type-inference/avoid-aliasing.html"><strong aria-hidden="true">3.3.6.</strong> 일관성있는 별칭 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/use-async.html"><strong aria-hidden="true">3.3.7.</strong> 비동기 코드에는 콜백 대신 async 함수 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/context-inference.html"><strong aria-hidden="true">3.3.8.</strong> 타입 추론에 문맥이 어떻게 사용되는지 이해하기</a></li><li class="chapter-item "><a href="../ts/type-inference/well-typed-lib.html"><strong aria-hidden="true">3.3.9.</strong> 함수형 기법과 라이브러리로 타입 흐름 유지하기</a></li></ol></li><li class="chapter-item "><a href="../ts/design/index.html"><strong aria-hidden="true">3.4.</strong> 타입 설계</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/design/valid-states.html"><strong aria-hidden="true">3.4.1.</strong> 유효한 상태만 표현하는 타입을 지향하기</a></li><li class="chapter-item "><a href="../ts/design/loose-accept-strict-produce.html"><strong aria-hidden="true">3.4.2.</strong> 사용할 때는 너그럽게, 생성할 때는 엄격하게</a></li><li class="chapter-item "><a href="../ts/design/jsdoc-repeat.html"><strong aria-hidden="true">3.4.3.</strong> 문서에 타입 정보를 쓰지 않기</a></li><li class="chapter-item "><a href="../ts/design/null-values-to-perimeter.html"><strong aria-hidden="true">3.4.4.</strong> 타입 주변에 null값 배치하기</a></li><li class="chapter-item "><a href="../ts/design/union-of-interfaces.html"><strong aria-hidden="true">3.4.5.</strong> 유니온의 인터페이스보다는 인터페이스의 유니온 사용하기</a></li><li class="chapter-item "><a href="../ts/design/avoid-strings.html"><strong aria-hidden="true">3.4.6.</strong> string 타입보다 더 구체적인 타입 사용하기</a></li><li class="chapter-item "><a href="../ts/design/incomplete-over-innacurate.html"><strong aria-hidden="true">3.4.7.</strong> 부정확한 타입보다는 미완성 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/design/consider-codegen.html"><strong aria-hidden="true">3.4.8.</strong> 데이터가 아닌, API와 명세를 보고 타입 만들기</a></li><li class="chapter-item "><a href="../ts/design/language-of-domain.html"><strong aria-hidden="true">3.4.9.</strong> 해당 분야의 용어로 타입 이름 짓기</a></li><li class="chapter-item "><a href="../ts/design/brands.html"><strong aria-hidden="true">3.4.10.</strong> 공식 명칭에는 상표를 붙이기</a></li></ol></li><li class="chapter-item "><a href="../ts/any/index.html"><strong aria-hidden="true">3.5.</strong> any 다루기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/any/narrowest-any.html"><strong aria-hidden="true">3.5.1.</strong> any 타입은 가능한 한 좁은 범위에서만 사용하기</a></li><li class="chapter-item "><a href="../ts/any/specific-any.html"><strong aria-hidden="true">3.5.2.</strong> any를 구체적으로 변형해서 사용하기</a></li><li class="chapter-item "><a href="../ts/any/hide-unsafe-casts.html"><strong aria-hidden="true">3.5.3.</strong> 함수 안으로 타입 단언문 감추기</a></li><li class="chapter-item "><a href="../ts/any/evolving-any.html"><strong aria-hidden="true">3.5.4.</strong> any의 진화를 이해하기</a></li><li class="chapter-item "><a href="../ts/any/never-unknown.html"><strong aria-hidden="true">3.5.5.</strong> 모르는 타입의 값에는 any 대신 unknown을 사용하기</a></li><li class="chapter-item "><a href="../ts/any/type-safe-monkey.html"><strong aria-hidden="true">3.5.6.</strong> 몽키 패치보다는 안전한 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/any/type-percentage.html"><strong aria-hidden="true">3.5.7.</strong> 타입 커버리지를 추적하여 타입 안정성 유지하기</a></li></ol></li><li class="chapter-item "><a href="../ts/declarations/index.html"><strong aria-hidden="true">3.6.</strong> 타입 선언과 @types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/declarations/dev-dependencies.html"><strong aria-hidden="true">3.6.1.</strong> devDependencies에 typescript와 @types 추가하기</a></li><li class="chapter-item "><a href="../ts/declarations/understand-ts-types.html"><strong aria-hidden="true">3.6.2.</strong> 타입 선언과 관련된 세 가지 버전 이해하기</a></li><li class="chapter-item "><a href="../ts/declarations/export-your-types.html"><strong aria-hidden="true">3.6.3.</strong> 공개 API에 등장하는 모든 타입을 export하기</a></li><li class="chapter-item "><a href="../ts/declarations/use-tsdoc.html"><strong aria-hidden="true">3.6.4.</strong> API 주석에 TSDoc 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/this-in-callbacks.html"><strong aria-hidden="true">3.6.5.</strong> 콜백에서 this에 대한 타입 제공하기</a></li><li class="chapter-item "><a href="../ts/declarations/conditional-overload.html"><strong aria-hidden="true">3.6.6.</strong> 오버로딩 타입보다는 조건부 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/mirror-types-for-deps.html"><strong aria-hidden="true">3.6.7.</strong> 의존성 분리를 위해 미러 타입 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/test-your-types.html"><strong aria-hidden="true">3.6.8.</strong> 테스팅 타입의 함정에 주의하기</a></li></ol></li><li class="chapter-item "><a href="../ts/write-run/index.html"><strong aria-hidden="true">3.7.</strong> 코드를 작성하고 실행하기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/write-run/avoid-non-ecma.html"><strong aria-hidden="true">3.7.1.</strong> 타입스크립트 기능보다는 ECMASCript 기능을 사용하기</a></li><li class="chapter-item "><a href="../ts/write-run/iterate-objects.html"><strong aria-hidden="true">3.7.2.</strong> 객체를 순회하는 노하우</a></li><li class="chapter-item "><a href="../ts/write-run/understand-the-dom.html"><strong aria-hidden="true">3.7.3.</strong> DOM 계층 구조 이해하기</a></li><li class="chapter-item "><a href="../ts/write-run/private-rely.html"><strong aria-hidden="true">3.7.4.</strong> 정보를 감추는 목적으로 private 사용하지 않기</a></li><li class="chapter-item "><a href="../ts/write-run/source-maps-debug.html"><strong aria-hidden="true">3.7.5.</strong> 소스맵을 사용하여 타입스크립트 디버깅하기</a></li></ol></li><li class="chapter-item "><a href="../ts/migrate/index.html"><strong aria-hidden="true">3.8.</strong> 타입스크립트로 마이그레이션하기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/migrate/write-modern-js.html"><strong aria-hidden="true">3.8.1.</strong> 모던 자바스크립트로 작성하기</a></li><li class="chapter-item "><a href="../ts/migrate/jsdoc-tscheck.html"><strong aria-hidden="true">3.8.2.</strong> 타입스크립트 도입 전에 @ts-check와 JsDoc으로 시험해 보기</a></li><li class="chapter-item "><a href="../ts/migrate/allow-js.html"><strong aria-hidden="true">3.8.3.</strong> allowJs로 타입스크립트와 자바스크립트 같이 사용하기</a></li><li class="chapter-item "><a href="../ts/migrate/convert-up-the-graph.html"><strong aria-hidden="true">3.8.4.</strong> 의존성 관계에 따라 모듈 단위로 전환하기</a></li><li class="chapter-item "><a href="../ts/migrate/start-loose.html"><strong aria-hidden="true">3.8.5.</strong> 마이그레이션의 완성을 위해 noImplicitAny 설정하기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">4.</strong> React</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../react/why.html"><strong aria-hidden="true">4.1.</strong> 왜 React인가?</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> Redux</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../redux/pure.html"><strong aria-hidden="true">5.1.</strong> 왜 Reducer는 순수해야 하는가?</a></li></ol></li><li class="chapter-item "><a href="../svelte/intro.html"><strong aria-hidden="true">6.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../svelte/reactivity.html"><strong aria-hidden="true">6.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../svelte/props.html"><strong aria-hidden="true">6.2.</strong> Props</a></li><li class="chapter-item "><a href="../svelte/logic.html"><strong aria-hidden="true">6.3.</strong> Logic</a></li><li class="chapter-item "><a href="../svelte/events.html"><strong aria-hidden="true">6.4.</strong> Events</a></li><li class="chapter-item "><a href="../svelte/bindings.html"><strong aria-hidden="true">6.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../svelte/lifecycle.html"><strong aria-hidden="true">6.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../svelte/stores.html"><strong aria-hidden="true">6.7.</strong> Stores</a></li><li class="chapter-item "><a href="../svelte/motion.html"><strong aria-hidden="true">6.8.</strong> Motion</a></li><li class="chapter-item "><a href="../svelte/transition.html"><strong aria-hidden="true">6.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../svelte/animations.html"><strong aria-hidden="true">6.10.</strong> Animations</a></li><li class="chapter-item "><a href="../svelte/actions.html"><strong aria-hidden="true">6.11.</strong> Actions</a></li><li class="chapter-item "><a href="../svelte/classes.html"><strong aria-hidden="true">6.12.</strong> Classes</a></li><li class="chapter-item "><a href="../svelte/composition.html"><strong aria-hidden="true">6.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../svelte/context.html"><strong aria-hidden="true">6.14.</strong> Context API</a></li><li class="chapter-item "><a href="../svelte/specials.html"><strong aria-hidden="true">6.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../svelte/module.html"><strong aria-hidden="true">6.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../svelte/debug.html"><strong aria-hidden="true">6.17.</strong> Debugging</a></li></ol></li><li class="chapter-item "><a href="../graphql/intro.html"><strong aria-hidden="true">7.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../graphql/execution.html"><strong aria-hidden="true">7.1.</strong> Execution</a></li><li class="chapter-item "><a href="../graphql/query-mutation.html"><strong aria-hidden="true">7.2.</strong> Query & Mutation</a></li><li class="chapter-item "><a href="../graphql/schema-type.html"><strong aria-hidden="true">7.3.</strong> Schema & Type</a></li><li class="chapter-item "><a href="../graphql/pagination.html"><strong aria-hidden="true">7.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../graphql/http.html"><strong aria-hidden="true">7.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../docker/setup.html"><strong aria-hidden="true">8.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../docker/sample.html"><strong aria-hidden="true">8.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../docker/update.html"><strong aria-hidden="true">8.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../docker/share.html"><strong aria-hidden="true">8.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../docker/persist.html"><strong aria-hidden="true">8.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../docker/bind-mounts.html"><strong aria-hidden="true">8.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../docker/multi.html"><strong aria-hidden="true">8.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../docker/docker-compose.html"><strong aria-hidden="true">8.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../docker/best-practices.html"><strong aria-hidden="true">8.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../etc/ssh.html"><strong aria-hidden="true">9.1.</strong> SSH</a></li><li class="chapter-item "><a href="../etc/tdd.html"><strong aria-hidden="true">9.2.</strong> TDD</a></li><li class="chapter-item "><a href="../etc/fp.html"><strong aria-hidden="true">9.3.</strong> 함수형 프로그래밍</a></li><li class="chapter-item "><a href="../etc/rp.html"><strong aria-hidden="true">9.4.</strong> 반응형 프로그래밍</a></li></ol></li><li class="chapter-item "><a href="../ml/index.html"><strong aria-hidden="true">10.</strong> Machine Learning</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/problem-framing/index.html"><strong aria-hidden="true">10.1.</strong> Problem Framing</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/problem-framing/common-problems.html"><strong aria-hidden="true">10.1.1.</strong> Common ML Problems</a></li><li class="chapter-item "><a href="../ml/problem-framing/mindset.html"><strong aria-hidden="true">10.1.2.</strong> The ML Mindset</a></li><li class="chapter-item "><a href="../ml/problem-framing/good.html"><strong aria-hidden="true">10.1.3.</strong> Identifying Good Problems for ML</a></li><li class="chapter-item "><a href="../ml/problem-framing/hard.html"><strong aria-hidden="true">10.1.4.</strong> Hard ML Problems</a></li><li class="chapter-item "><a href="../ml/problem-framing/framing.html"><strong aria-hidden="true">10.1.5.</strong> Deciding on ML</a></li><li class="chapter-item "><a href="../ml/problem-framing/formulate.html"><strong aria-hidden="true">10.1.6.</strong> Formulate Your Problem as an ML Problem</a></li></ol></li><li class="chapter-item "><a href="../ml/crash-course/index.html"><strong aria-hidden="true">10.2.</strong> Crash Course</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/crash-course/framing.html"><strong aria-hidden="true">10.2.1.</strong> Framing</a></li><li class="chapter-item "><a href="../ml/crash-course/descending-into-ml.html"><strong aria-hidden="true">10.2.2.</strong> Descending into ML</a></li><li class="chapter-item "><a href="../ml/crash-course/reducing-loss.html"><strong aria-hidden="true">10.2.3.</strong> Reducing Loss</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">11.</strong> AWS</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../aws/iam.html" class="active"><strong aria-hidden="true">11.1.</strong> IAM</a></li><li class="chapter-item "><a href="../aws/ec2.html"><strong aria-hidden="true">11.2.</strong> EC2</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="iam"><a class="header" href="#iam">IAM</a></h1>
+<ul>
+<li>IAM = Identity and Access Management</li>
+<li>글로벌 서비스에 해당함. (별도로 지역이 정의되어 있지 않다.)</li>
+<li>기본적으로는 계정 생성 시에 **루트 계정(Root account)**이 생성된다.
+<ul>
+<li>루트 계정은 AWS 리소스에 대한 모든 권한을 갖는다.</li>
+<li>하지만, 모든 권한을 갖는 만큼, 위험하기 때문에 루트 계정은 당장에 계정 세팅이 필요한 경우에만 사용하고, 그 이후에는 이용하거나 공유하지 말아야 한다.</li>
+</ul>
+</li>
+<li>루트 계정을 사용하는 대신, **유저(User)**를 만들어 주어야 하는데, 이는 한 조직 내 하나의 이용자를 가리키며, 그룹에 속할 수 있다.</li>
+<li>**그룹(Group)**은 오직 유저만 포함할 수 있으며, 다른 그룹은 포함할 수 없다.</li>
+<li>유저가 꼭 하나의 그룹에 속해야 할 필요는 없으며, 동시에 여러 개의 그룹에 속하는 것도 가능하다.</li>
+</ul>
+<pre><code>// example
+Group: Developers
+  - Alice
+  - Bob
+  - Charles
+
+Group: Operations
+  - David
+  - Edward
+
+Group: Audit Team
+  - Charles
+  - David
+
+User: (아무 그룹에도 속하지 않음)
+  - Fred 
+</code></pre>
+<h2 id="권한-permissions"><a class="header" href="#권한-permissions">권한 (Permissions)</a></h2>
+<ul>
+<li><strong>유저</strong>와 <strong>그룹</strong>은 **정책(Policy)**이라고 불리는 JSON 문서로 할당될 수 있다.</li>
+<li>**정책(Policy)**은 곧 유저들이 갖춘 권한을 의미한다.</li>
+<li>AWS에서는 Least Privilege Principle (최소 권한의 원칙)을 적용하는데, 이는 곧 &quot;이용자가 필요한 것 이상으로 권한을 부여하지 않음&quot;을 의미한다.</li>
+</ul>
+<h3 id="정책-policy-구조"><a class="header" href="#정책-policy-구조">정책 (Policy) 구조</a></h3>
+<pre><code class="language-JSON">// EC2 정책에 대한 예시
+{
+    &quot;Version&quot;: &quot;2012-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Action&quot;: [
+                &quot;ec2:AttachVolume&quot;,
+                &quot;ec2:DetachVolume&quot;
+            ],
+            &quot;Resource&quot;: [
+                &quot;arn:aws:ec2:*:*:volume/*&quot;,
+                &quot;arn:aws:ec2:*:*:instance/*&quot;
+            ],
+            &quot;Condition&quot;: {
+                &quot;ArnEquals&quot;: {&quot;ec2:SourceInstanceARN&quot;: &quot;arn:aws:ec2:*:*:instance/instance-id&quot;}
+            }
+        }
+    ]
+}
+</code></pre>
+<ul>
+<li>Version : 정책 언어의 버전, 거의 대부분 <code>2012-10-17</code>이 된다.</li>
+<li>Id : 정책에 대한 구분 명칭 (선택)</li>
+<li>Statement : 하나 이상의 독립적인 Statement (<strong>필수</strong>)
+<ul>
+<li>Sid : Statement에 대한 구분 명칭 (선택)</li>
+<li>Effect : 특정 api 접근에 대한 허용/거부에 대한 여부 (Allow/Deny)</li>
+<li>Principal : 해당 정책이 적용될 계정(account)/유저(user)/역할(role)</li>
+<li>Action : 해당 정책이 허용하거나 거절할 액션 목록</li>
+<li>Resource : 액션이 적용될 리소스의 목록</li>
+<li>Condition : 해당 정책이 적용되는 조건 (선택)</li>
+</ul>
+</li>
+</ul>
+<h2 id="password-policy-패스워드-정책"><a class="header" href="#password-policy-패스워드-정책">Password Policy (패스워드 정책)</a></h2>
+<ul>
+<li>강력한 패스워드 = 계정에 대해 더 강력한 보안</li>
+<li>AWS에서는 패스워드 정책을 갖추도록 할 수 있다.
+<ul>
+<li>패스워드 최소 길이</li>
+<li>특정 타입의 문자 요구 ~ 대/소문자, 숫자, 특수문자 등...</li>
+<li>IAM 유저가 패스워드를 본인 임의로 수정할 수 있도록 허용</li>
+<li>유저가 특정 기간 이후 패스워드를 변경하도록 요구 (password expiration)</li>
+<li>동일한 패스워드를 재사용할 수 없도록 함</li>
+</ul>
+</li>
+</ul>
+<h2 id="mfa--multi-factor-authentication"><a class="header" href="#mfa--multi-factor-authentication">MFA ~ Multi Factor Authentication</a></h2>
+<ul>
+<li>MFA = 알고 있는 패스워드 + 보유한 특정 보안 기기</li>
+<li>패스워드와 MFA 토큰을 조합하여 로그인하도록 함</li>
+<li><strong>패스워드를 도용당하더라도, 계정은 보호할 수 있음</strong></li>
+<li>이용 가능한 MFA 디바이스 옵션
+<ul>
+<li>Virtual MFA devices ~ Google Authenticator, Authy, 등...
+<ul>
+<li>하나의 디바이스에 여러 토큰을 사용</li>
+</ul>
+</li>
+<li>Universal 2nd Factor (U2F) Security Key ~ YubiKey
+<ul>
+<li>하나의 보안 키로 여러 루트 계정과 IAM 이용자들을 지원</li>
+</ul>
+</li>
+<li>Hardware Key Fob MFA Device</li>
+<li>Hardware Key Fob MFA Device for AWS GovCloud</li>
+</ul>
+</li>
+</ul>
+<h2 id="aws에-접근하는-여러가지-방법"><a class="header" href="#aws에-접근하는-여러가지-방법">AWS에 접근하는 여러가지 방법</a></h2>
+<ul>
+<li>AWS Management Console ~ 패스워드 및 MFA로 보호</li>
+<li>AWS CLI (Command Line Interface) - Access Key로 보호</li>
+<li>AWS SDK (Software Developer Kit) - Access Key로 보호</li>
+</ul>
+<h3 id="access-key"><a class="header" href="#access-key">Access Key</a></h3>
+<ul>
+<li>액세스 키는 AWS Console을 통해 생성</li>
+<li>유저는 각자 본인의 Access key를 관리하게 됨</li>
+<li><strong>Access Key는 패스워드와 마찬가지로, 비밀리에 관리되어야 하며, 공유해선 안된다.</strong></li>
+<li>Access Key ID ~= username</li>
+<li>Secret Access Key ~= password</li>
+</ul>
+<h2 id="aws-cli-"><a class="header" href="#aws-cli-">AWS CLI ?</a></h2>
+<ul>
+<li>AWS 서비스를 커맨드라인 셸을 통해 상호작용할 수 있게끔 하는 툴</li>
+<li>AWS 서비스의 퍼블릭 api에 직접 접근할 수 있으며, 리소스들을 관리하는 별도의 스크립트를 작성할 수도 있다.</li>
+<li>오픈 소스이며, AWS 관리 콘솔 대신 사용할 수도 있다.</li>
+</ul>
+<h2 id="aws-sdk-"><a class="header" href="#aws-sdk-">AWS SDK ?</a></h2>
+<ul>
+<li>특정 언어로 사용할 수 있는 API</li>
+<li>AWS 서비스를 프로그래밍적인 방식으로 접근 및 관리할 수 있음</li>
+<li>애플리케이션 자체에 포함될 수 있다.</li>
+<li>지원
+<ul>
+<li>SDKs, Mobile SDKs, IoT Device SDKs...</li>
+</ul>
+</li>
+<li>Ex.) AWS CLI 자체가 AWS SDK for Python으로 작성된 것이다.</li>
+</ul>
+<h2 id="aws-cloudshell"><a class="header" href="#aws-cloudshell">AWS CloudShell</a></h2>
+<ul>
+<li>AWS CLI가 탑재된 브라우저 기반의 셸</li>
+<li>아직은 지역에 따라 지원 여부가 다름 (서울은 안 됨)</li>
+</ul>
+<h2 id="iam-roles-for-services"><a class="header" href="#iam-roles-for-services">IAM Roles for Services</a></h2>
+<ul>
+<li>일부 AWS 서비스는 특정한 동작을 수행할 필요가 있다.</li>
+<li>이를 위해서, 이러한 AWS 서비스들이 이에 대한 권한을 가져야 하는데, 이것을 <strong>IAM Roles</strong>를 통해서 부여할 수 있다.</li>
+<li>일반적인 Roles:
+<ul>
+<li>EC2 Instance Roles</li>
+<li>Lambda Function Roles</li>
+<li>Roles for CloudFormation</li>
+</ul>
+</li>
+</ul>
+<h2 id="iam-security-tools"><a class="header" href="#iam-security-tools">IAM Security Tools</a></h2>
+<ul>
+<li>IAM Credentials Report (account-level)
+<ul>
+<li>루트 계정에 속한 모든 유저와 그들의 증명에 대한 다양한 상태에 대한 리포트</li>
+</ul>
+</li>
+<li>IAM Access Advisor (user-level)
+<ul>
+<li>한 유저에게 부여된 서비스 권한 및 그 유저가 접근한 서비스에 대해 보여줌</li>
+<li>정책을 개정하는 데 있어 해당 정보를 활용할 수 있음 (권한을 늘리거나 줄임)</li>
+</ul>
+</li>
+</ul>
+<h2 id="iam-guidelines--best-practices"><a class="header" href="#iam-guidelines--best-practices">IAM Guidelines &amp; Best Practices</a></h2>
+<ul>
+<li>AWS 계정 설정을 위한 경우를 제외하고는 루트 계정을 사용하지 말 것</li>
+<li>한 명의 실제 이용자 = 하나의 AWS User</li>
+<li>여러 유저를 Group에 할당하고, 해당 그룹에 Permission을 부여함</li>
+<li>강력한 패스워드 정책을 사용</li>
+<li>MFA를 사용</li>
+<li>AWS 서비스에 권한을 부여하기 위해 Role을 사용</li>
+<li>프로그래밍적인 방식의 접근을 위해서는 Access Key를 사용 (CLI / SDK)</li>
+<li>IAM Credentials Report를 사용해 계정 권한을 점검</li>
+<li><strong>IAM 유저 및 Access Key는 절대 공유되어선 안됨</strong></li>
+</ul>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<ul>
+<li>Users: AWS 콘솔에 접근할 수 있는 이용자, password 부여</li>
+<li>Groups: 여러 User들이 포함</li>
+<li>Policies: 유저 및 그룹에 대한 권한에 대해 설명하는 JSON 문서</li>
+<li>Roles: EC2와 같은 AWS 서비스에 부여하는 권한</li>
+<li>Security: MFA + Password Policy</li>
+<li>Access Keys: AWS CLI or SDK에 사용되는 접근 키</li>
+<li>Audit: IAM Credential Reports &amp; IAM Access Advisor</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ml/crash-course/reducing-loss.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../aws/ec2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ml/crash-course/reducing-loss.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../aws/ec2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

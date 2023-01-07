@@ -15,5 +15,7 @@ editor = "ace"
 [output.html.fold]
 enable = true
 
+[output.katex]
+
 [preprocessor.katex]
-command = "mdbook-katex"
+renderers = ["html"]

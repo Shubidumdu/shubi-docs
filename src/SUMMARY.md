@@ -162,3 +162,4 @@
     - [Reducing Loss](ml/crash-course/reducing-loss.md)
 - [AWS]()
   - [IAM](aws/iam.md)
+  - [EC2](aws/ec2.md)

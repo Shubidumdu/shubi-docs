@@ -225,3 +225,115 @@
   - diversified: 모든 pool에 대해 광범위하게 적용 (great for availability, long workloads)
   - capacityOptimized: 인스턴스 개수 대비 최적의 용량을 가진 pool부터 시도
 - **Spot Fleet은 Spot Instance에 대한 요청을 최소화된 비용으로 자동으로 처리할 수 있도록 해줌.**
+
+## Elastic IPs
+
+- EC2 인스턴스를 중지/실행할 때마다, 퍼블릭 IP가 변경될 수 있다.
+- 만약, 인스턴스의 퍼블릭 IP를 고정시키고자 한다면, Elastic IP가 필요하다.
+- Elastic IP는 퍼블릭 IPv4 IP에 해당하며, 삭제하지 않는 이상 유지된다.
+- 한번에 하나의 인스턴스에 대해서만 부여할 수 있다.
+- Elastic IP 주소를 사용하면, 인스턴스 또는 소프트웨어에 문제가 발생했을 때, 해당 주소를 다른 인스턴스에 부여해서 문제에 대처할 수 있다.
+- 단, Elastic IP 주소는 한 계정 당 오직 5개까지만 가질 수 있다. (AWS에 더 달라고 요청할 수는 있다.)
+- 결론적으로, **Elastic IP를 쓰는 것을 피하는 것이 좋다.**
+
+  - 일반적으로는 좋지 않은 결정이다.
+  - 대신에, 랜덤 퍼블릭 IP를 사용하고, 그것에 대한 DNS 네임을 등록하는 편이 좋다.
+  - 또는, 로드 밸런서를 사용하면서 퍼블릭 IP 자체를 사용하지 않는 방법도 있는데, 이 방법이 가장 최적이다.
+
+### Private vs Public IP in AWS EC2
+
+- 기본적으로, EC2 머신에서
+  - 프라이빗 IP는 AWS 내부 네트워크를 위해서,
+  - 퍼블릭 IP는 WWW를 위해서 사용된다.
+
+- 만약, EC2 머신에 SSH 연결을 시도한다면
+  - (VPN이 구축되어 있지 않다면) 프라이빗 IP가 아닌, 퍼블릭 IP를 써야한다. 동일한 네트워크에 놓여있는 것이 아니기 때문.
+
+- 머신이 중지/재실행된다면, **퍼블릭 IP는 바뀔 수 있다.**
+
+## Placement Groups
+
+- EC2 인스턴스의 배치 전략(placement strategy)을 조정하고 싶을 때, **Placement group**을 정의할 수 있다.
+- Placement group은 다음의 전략 중 하나를 선택할 수 있다.
+  - Cluster - 하나의 AZ 내에 low-latency group으로 인스턴스들을 밀집
+  - Spread - 소규모 인스턴스 그룹을 다른 기본 하드웨어(underlying hardware)로 분산하여 오류를 줄임 (각 AZ의 그룹 당 최대 7개 인스턴스), 중요한 애플리케이션에서 활용.
+  - Partition - 인스턴스들을 하나의 AZ 내의 파티션 별로 다른 기본 하드웨어로 분산하여 오류를 줄임.
+
+### Placement Groups - Cluster
+
+![Cluster](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/images/placement-group-cluster.png)
+
+- 장점 : 높은 네트워크 성능 (인스턴스 간 latency가 작음)
+- 단점 : 하드웨어 상 결함이 발생한다면, 모든 인스턴스가 다 같이 실패함.
+- 사례
+  - 빠르게 수행되어야 하는 거대한 데이터 기반의 작업
+  - 극도로 낮은 latency와 높은 네트워크 throughput을 보장해야하는 애플리케이션
+
+### Placement Groups - Spread
+
+![Spread](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/images/placement-group-spread.png)
+
+- 장점
+  - 동일한 지역의 여러 AZ로 확장할 수 있음
+  - 동시에 인스턴스들이 실패할 위험을 줄일 수 있음
+- 단점
+  - 각 Placement group 내 하나의 AZ에 최대 7개의 인스턴스로 제한됨.
+- 사례
+  - 최대한 높은 가용성(availability)을 확보해야 하는 애플리케이션
+  - 인스턴스 서로가 각자의 동작 실패로부터 격리되어야 하는 중요한 애플리케이션
+
+### Placement Groups - Partition
+
+![Partition](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/images/placement-group-partition.png)
+
+- AZ 당 최대 7개의 파티션
+- 동일한 지역 내 여러 AZ로 확장 가능
+- 최대 100개의 인스턴스를 파티션 설정에 사용할 수 있음
+- 하나의 파티션 내에 있는 인스턴스들은 다른 파티션의 인스턴스들과 rack을 공유하지 않음
+- 하나의 파티션 내에서 발생한 문제는 해당 파티션에 속한 인스턴스들에는 영향을 끼칠 수 있으나, 그 외의 파티션에는 영향을 끼치지 않음.
+- EC2 인스턴스들은 메타데이터를 통해 파티션 정보에 접근할 수 있음
+- **사례** : HDFS, HBase, Cassandra, Kafka
+
+## Elastic Network Interfaces (ENI)
+
+- **가상의 네트워크 카드(virtual network card)를 나타내는 VPC 내 논리적 네트워킹 컴포넌트**
+- ENI는 다음과 같은 속성을 갖출 수 있음
+  - 기본(primary) 프라이빗 IPv4, 하나 또는 그 이상의 보조(secondary) IPv4
+  - 하나의 프라이빗 IPv4 당 하나의 Elastic IP (IPv4)
+  - 하나의 퍼블릭 IPv4
+  - 하나 이상의 Security groups
+  - Mac address
+- ENI를 독립적으로 생성하고, EC2 인스턴스가 실패했을 때에 대비하여 인스턴스에 적용(attach)한다.
+- 하나의 특정한 AZ에 격리된다.
+
+## EC2 Hibernate
+
+- 인스턴스의 중지(stop) / 종료(terminate)
+  - **Stop** - 디스크에 저장된 데이터(EBS)가 다음 인스턴스의 실행까지 유지됨
+  - **Termninate** - 삭제 될 것으로 설정된 특정 EBS 볼륨(root)은 사라짐
+- 인스턴스의 실행 시, 다음과 같은 일이 일어난다.
+  - 최초 실행 시 : OS 부팅 & EC2 User Data Script가 실행됨
+  - 그 이후의 실행 시 : OS 부팅
+  - 위의 각 단계 이후에 애플리케이션이 실행되고, 캐시가 웜업(warm-up) 된다.
+
+### EC2 Hibernate 란?
+
+- in-memory(RAM) 상태를 보존할 수 있음
+- 인스턴스 부팅이 훨씬 빨라짐 (OS가 중지되거나 재실행되지 않음)
+- 원리 : RAM의 상태가 루트 EBS 볼륨에 하나의 파일로 작성되어 보존.
+  - 즉, 루트 EBS 볼륨이 반드시 암호화되어야 함.
+- 사례 :
+  - 오래 동안 진행되어야 하는 프로세싱
+  - RAM 상태를 저장해야 하는 경우
+  - 초기화에 시간이 많이 걸리는 서비스
+- 그 밖의 특징
+  - 지원하는 인스턴스 패밀리 - C3, C4, C5, I3, M3, M4, R3, R4, T2, T3, ...
+  - 인스턴스 RAM 사이즈 - 150GB 미만 이어야 함
+  - 인스턴스 사이즈 - 베어 메탈 인스턴스(bare metal instance)에는 지원하지 않음
+  - AMI - Amazon Linux 2, Linux AMI, Ubuntu, RHEL, CentOS & Windows, ...
+  - 루트 볼륨 - 반드시 다음의 속성을 갖춘 EBS여야 함
+    - encrypted
+    - not instance store
+    - large
+  - On-Demand, Reserved, Spot 인스턴스 모두에 적용 가능.
+  - 인스턴스는 60일을 초과해서 hibernate 할 수 없음.

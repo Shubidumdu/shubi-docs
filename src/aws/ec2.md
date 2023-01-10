@@ -337,3 +337,13 @@
     - large
   - On-Demand, Reserved, Spot 인스턴스 모두에 적용 가능.
   - 인스턴스는 60일을 초과해서 hibernate 할 수 없음.
+
+## EC2 Instance Store
+
+- EBS 볼륨은 **네트워크 드라이브**에 해당하여 좋은 점도 있지만, **제한된 성능**을 갖는다.
+- **만약, 고성능의 하드웨어 디스크가 필요한 상황이라면, EC2 Instance Store의 사용을 고려해야 한다.**
+- 더 나은 I/O 성능을 제공
+- EC2 Instance Store는 인스턴스가 멈추게 되면 데이터가 사라진다. (ephemeral = 일시적임)
+- buffer / cache / scratch data / temporary content에 유용함
+- 하드웨어 문제가 발생하는 경우 데이터가 사라질 수 있음
+- 백업 및 복제(replication)는 이용자가 직접 처리해야 함

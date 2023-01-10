@@ -163,3 +163,7 @@
 - [AWS]()
   - [IAM](aws/iam.md)
   - [EC2](aws/ec2.md)
+  - [AMI](aws/ami.md)
+  - [EBS](aws/ebs.md)
+  - [EFS](aws/efs.md)
+  - [EBS vs. EFS](aws/ebs-vs-efs.md)

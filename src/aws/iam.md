@@ -29,6 +29,7 @@ User: (아무 그룹에도 속하지 않음)
 ```
 
 ## 권한 (Permissions)
+
 - **유저**와 **그룹**은 **정책(Policy)**이라고 불리는 JSON 문서로 할당될 수 있다.
 - **정책(Policy)**은 곧 유저들이 갖춘 권한을 의미한다.
 - AWS에서는 Least Privilege Principle (최소 권한의 원칙)을 적용하는데, 이는 곧 "이용자가 필요한 것 이상으로 권한을 부여하지 않음"을 의미한다.
@@ -79,6 +80,7 @@ User: (아무 그룹에도 속하지 않음)
   - 동일한 패스워드를 재사용할 수 없도록 함
 
 ## MFA ~ Multi Factor Authentication
+
 - MFA = 알고 있는 패스워드 + 보유한 특정 보안 기기
 - 패스워드와 MFA 토큰을 조합하여 로그인하도록 함
 - **패스워드를 도용당하더라도, 계정은 보호할 수 있음**
@@ -91,11 +93,13 @@ User: (아무 그룹에도 속하지 않음)
   - Hardware Key Fob MFA Device for AWS GovCloud
 
 ## AWS에 접근하는 여러가지 방법
+
 - AWS Management Console ~ 패스워드 및 MFA로 보호
 - AWS CLI (Command Line Interface) - Access Key로 보호
 - AWS SDK (Software Developer Kit) - Access Key로 보호
 
 ### Access Key
+
 - 액세스 키는 AWS Console을 통해 생성
 - 유저는 각자 본인의 Access key를 관리하게 됨
 - **Access Key는 패스워드와 마찬가지로, 비밀리에 관리되어야 하며, 공유해선 안된다.**
@@ -103,11 +107,13 @@ User: (아무 그룹에도 속하지 않음)
 - Secret Access Key ~= password
 
 ## AWS CLI ?
+
 - AWS 서비스를 커맨드라인 셸을 통해 상호작용할 수 있게끔 하는 툴
 - AWS 서비스의 퍼블릭 api에 직접 접근할 수 있으며, 리소스들을 관리하는 별도의 스크립트를 작성할 수도 있다.
 - 오픈 소스이며, AWS 관리 콘솔 대신 사용할 수도 있다.
 
 ## AWS SDK ?
+
 - 특정 언어로 사용할 수 있는 API
 - AWS 서비스를 프로그래밍적인 방식으로 접근 및 관리할 수 있음
 - 애플리케이션 자체에 포함될 수 있다.
@@ -116,10 +122,12 @@ User: (아무 그룹에도 속하지 않음)
 - Ex.) AWS CLI 자체가 AWS SDK for Python으로 작성된 것이다.
 
 ## AWS CloudShell
+
 - AWS CLI가 탑재된 브라우저 기반의 셸
 - 아직은 지역에 따라 지원 여부가 다름 (서울은 안 됨)
 
 ## IAM Roles for Services
+
 - 일부 AWS 서비스는 특정한 동작을 수행할 필요가 있다.
 - 이를 위해서, 이러한 AWS 서비스들이 이에 대한 권한을 가져야 하는데, 이것을 **IAM Roles**를 통해서 부여할 수 있다.
 - 일반적인 Roles:
@@ -128,6 +136,7 @@ User: (아무 그룹에도 속하지 않음)
   - Roles for CloudFormation
 
 ## IAM Security Tools
+
 - IAM Credentials Report (account-level)
   - 루트 계정에 속한 모든 유저와 그들의 증명에 대한 다양한 상태에 대한 리포트
 - IAM Access Advisor (user-level)
@@ -135,6 +144,7 @@ User: (아무 그룹에도 속하지 않음)
   - 정책을 개정하는 데 있어 해당 정보를 활용할 수 있음 (권한을 늘리거나 줄임)
 
 ## IAM Guidelines & Best Practices
+
 - AWS 계정 설정을 위한 경우를 제외하고는 루트 계정을 사용하지 말 것
 - 한 명의 실제 이용자 = 하나의 AWS User
 - 여러 유저를 Group에 할당하고, 해당 그룹에 Permission을 부여함
@@ -146,6 +156,7 @@ User: (아무 그룹에도 속하지 않음)
 - **IAM 유저 및 Access Key는 절대 공유되어선 안됨**
 
 ## Summary
+
 - Users: AWS 콘솔에 접근할 수 있는 이용자, password 부여
 - Groups: 여러 User들이 포함
 - Policies: 유저 및 그룹에 대한 권한에 대해 설명하는 JSON 문서

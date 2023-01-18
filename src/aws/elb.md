@@ -85,3 +85,35 @@
 
 - 대체로는 새로운 세대의 로드 밸런서를 이용하는 것이 추천된다. 더 많은 기능을 보유하기 때문이다.
 - 일부 로드 밸런서는 internal(private) 또는 external (public) ELB로써 설정될 수 있다.
+
+## Application Load Balancer (v2)
+
+- Application load balancer는 레이어 7(Application Layer)에 해당
+- 여러 머신들로 여러 HTTP 애플리케이션에 대한 로드 밸런싱 (target groups)
+- 동일한 머신 내 여러 애플리케이션에 대한 로드 밸런싱 (Ex: containers)
+- HTTP/2와 웹 소켓을 지원
+- 리다이렉트 지원 (from HTTP to HTTPS for example)
+- 다른 타겟 그룹(target group)에 대한 라우팅 테이블
+  - URL 내 path에 기반한 라우팅 (example.com`/users` & example.com`/posts`)
+  - URL 내 hostname에 기반한 라우팅 (`one.example.com` & `other.example.com`)
+  - 쿼리스트링, 헤더에 기반한 라우팅 (example.com/users?`id=123&order=false`)
+- ALB는 마이크로 서비스 & 컨테이너 기반 애플리케이션에 매우 적합함. (ex. Docker & Amazon ECS)
+- ECS의 다이나믹 포트로 리다이렉트 해주는 포트 매핑(port mapping) 기능이 있음.
+- CLB(Classic Load Balancer)로 치면, 각각의 애플리케이션에 여러 개의 CLB를 두는 것과 유사함.
+
+### Application Load Balancer (v2) ~ Target Groups
+
+- 어떤 것들이 Target group이 될 수 있는가?
+  - EC2 인스턴스 (Auto Scaling Group으로 관리될 수 있음) - HTTP
+  - ECS tasks (ECS 자체적으로 관리됨) - HTTP
+  - Lambda functions - HTTP 요청이 JSON 이벤트로 변환
+  - IP Addresses - 반드시 private IP들이어야 함
+- ALB는 여러 개의 target group에 라우팅을 할 수 있음
+- 헬스 체크(health check)는 target group level에서 수행됨
+
+### Application Load Balancer (v2) ~ Good to Know
+
+- 호스트네임(hostname)이 고정됨 ~ (XXX.region.elb.amazonaws.com)
+- 애플리케이션 서버는 클라이언트의 IP를 직접 볼 수 없음
+  - 클라이언트의 진짜 IP는 `X-Forwarded-For` 헤더에 삽입됨
+  - 포트(`X-Forwarded-Port`)와 프로토콜(`X-Forwarded-Proto`)도 알 수 있음

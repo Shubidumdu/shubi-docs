@@ -117,3 +117,35 @@
 - 애플리케이션 서버는 클라이언트의 IP를 직접 볼 수 없음
   - 클라이언트의 진짜 IP는 `X-Forwarded-For` 헤더에 삽입됨
   - 포트(`X-Forwarded-Port`)와 프로토콜(`X-Forwarded-Proto`)도 알 수 있음
+
+## Network Load Balancer (v2)
+
+- Network load balancers (Layer 4)는
+  - **인스턴스들에 TCP & UDP 트래픽을 포워딩**
+  - 매초 수백만(million)의 요청을 처리할 수 있음
+  - ALB(400ms)보다 더 낮은 레이턴시 (~100ms)
+- ***각 AZ마다 하나의 정적 IP*를 가지며, Elastic IP 할당을 지원** (특정 IP에 대한 화이트리스팅(whitelisting)에 유용함)
+- NLB는 극도의 성능과 함께 TCP 또는 UDP 트래픽을 다루어야 하는 경우에 사용됨.
+- AWS 프리티어에 해당하지 않음.
+
+### Network Load Balancer (v2) - Target Groups
+
+- EC2 instances
+- IP Addresses - 반드시 private IPs
+- Application Load Balancer (ALB)
+- **TCP, HTTP, HTTPS 프로토콜에 대한 헬스 체크를 지원**
+
+## Gateway Load Balancer
+
+- 3rd party network virtual appliance들을 배포, 확장, 관리할 수 있음
+  - Ex.) Firewalls, Intrusion Detection and Prevention systems, Deep Packet Inspection Systems, payload manipulation
+- Layer 3(Network Layer)에서 동작 - IP 패킷
+- 아래 기능들을 합친 것
+  - **Transparent Network Gateway** - 모든 트래픽에 대한 단일 entry/exit
+  - **Load Balancer** - virtual appliance에 대한 트래픽 분산
+- **6081 포트에 GENEVE 프로토콜을 사용**
+
+### Gateway Load Balancer - Target Groups
+
+- EC2 instances
+- IP Addresses - must be private IPs

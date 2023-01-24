@@ -13423,6 +13423,80 @@ User: (아무 그룹에도 속하지 않음)
 <li>EC2 instances</li>
 <li>IP Addresses - must be private IPs</li>
 </ul>
+<h2 id="sticky-sessions-session-affinity"><a class="header" href="#sticky-sessions-session-affinity">Sticky Sessions (Session Affinity)</a></h2>
+<ul>
+<li>stickiness를 구현하여 동일한 클라이언트는 로드 밸런서를 거치더라도 항상 동일한 인스턴스로 리다이렉트되도록 할 수 있음</li>
+<li>Classic Load Balancer &amp; Application Load Balancer에서 사용 가능</li>
+<li>stickiness를 위해 사용되는 쿠키는 임의로 조정할 수 있는 expiration date가 존재</li>
+<li>사례 : 이용자가 세션 데이터를 잃어버리지 않도록 해야하는 경우</li>
+<li>stickiness의 적용은 EC2 인스턴스의 부하에 불균형을 일으킬 가능성도 있음.</li>
+</ul>
+<h3 id="sticky-sessions---cookie-names"><a class="header" href="#sticky-sessions---cookie-names">Sticky Sessions - Cookie Names</a></h3>
+<ul>
+<li>Application-based Cookies
+<ul>
+<li>Custom cookie
+<ul>
+<li>타겟에 의해 생성</li>
+<li>애플리케이션에서 요구되는 커스텀 속성들을 추가할 수 있음</li>
+<li>각 타겟 그룹에 대해 독립적으로 정의되어야 함</li>
+<li><strong>AWSALB</strong>, <strong>AWSALBAPP</strong>, <strong>AWSALBTG</strong>는 사용할 수 없음 (ELB 자체적으로 사용됨)</li>
+</ul>
+</li>
+<li>Application cookie
+<ul>
+<li>로드 밸런서에 의해 생성</li>
+<li><strong>AWSALBAPP</strong>이 쿠키명이 됨</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Duration-based Cookies
+<ul>
+<li>로드 밸런서에 의해 생성되는 쿠키</li>
+<li>ALB의 경우 <strong>AWSALB</strong>, CLB의 경우 <strong>AWSELB</strong>라는 쿠키명이 됨.</li>
+</ul>
+</li>
+</ul>
+<h2 id="cross-zone-load-balancing"><a class="header" href="#cross-zone-load-balancing">Cross-Zone Load Balancing</a></h2>
+<p><img src="https://docs.aws.amazon.com/images/elasticloadbalancing/latest/userguide/images/cross_zone_load_balancing_enabled.png" alt="With CZLB" /></p>
+<ul>
+<li>Cross Zone Load Balancing을 이용하는 경우:
+<ul>
+<li>각각의 로드 밸런서 인스턴스가 모든 AZ에 있는 모든 등록 인스턴스 너머로 균일하게 로드를 분산시킴</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://docs.aws.amazon.com/images/elasticloadbalancing/latest/userguide/images/cross_zone_load_balancing_disabled.png" alt="Without CZLB" /></p>
+<ul>
+<li>
+<p>Cross Zone Load Balancing을 이용하지 않는 경우:</p>
+<ul>
+<li>Elastic Load Balancer의 노드 내에 있는 인스턴스들 내에서만 균일하게 분산시킴</li>
+</ul>
+</li>
+<li>
+<p>Application Load Balancer</p>
+<ul>
+<li>기본적으로 활성화되어 있음 (타겟 그룹 단위로 비활성화 가능)</li>
+<li>AZ 간 데이터(inter AZ data)에 부과되는 비용 없음</li>
+</ul>
+</li>
+<li>
+<p>Network Load Balancer &amp; Gateway Load Balancer</p>
+<ul>
+<li>기본적으로 비활성화</li>
+<li>활성화 시에는 AZ 간 데이터(inter AZ data)에 비용이 부과됨</li>
+</ul>
+</li>
+<li>
+<p>Classic Load Balancer</p>
+<ul>
+<li>기본적으로 비활성화</li>
+<li>활성화 시에는 AZ 간 데이터(inter AZ data)에 비용이 부과됨</li>
+</ul>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

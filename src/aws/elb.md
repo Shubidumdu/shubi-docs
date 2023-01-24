@@ -149,3 +149,48 @@
 
 - EC2 instances
 - IP Addresses - must be private IPs
+
+## Sticky Sessions (Session Affinity)
+
+- stickiness를 구현하여 동일한 클라이언트는 로드 밸런서를 거치더라도 항상 동일한 인스턴스로 리다이렉트되도록 할 수 있음
+- Classic Load Balancer & Application Load Balancer에서 사용 가능
+- stickiness를 위해 사용되는 쿠키는 임의로 조정할 수 있는 expiration date가 존재
+- 사례 : 이용자가 세션 데이터를 잃어버리지 않도록 해야하는 경우
+- stickiness의 적용은 EC2 인스턴스의 부하에 불균형을 일으킬 가능성도 있음.
+
+### Sticky Sessions - Cookie Names
+
+- Application-based Cookies
+  - Custom cookie
+    - 타겟에 의해 생성
+    - 애플리케이션에서 요구되는 커스텀 속성들을 추가할 수 있음
+    - 각 타겟 그룹에 대해 독립적으로 정의되어야 함
+    - **AWSALB**, **AWSALBAPP**, **AWSALBTG**는 사용할 수 없음 (ELB 자체적으로 사용됨)
+  - Application cookie
+    - 로드 밸런서에 의해 생성
+    - **AWSALBAPP**이 쿠키명이 됨
+- Duration-based Cookies
+  - 로드 밸런서에 의해 생성되는 쿠키
+  - ALB의 경우 **AWSALB**, CLB의 경우 **AWSELB**라는 쿠키명이 됨.
+
+## Cross-Zone Load Balancing
+
+![With CZLB](https://docs.aws.amazon.com/images/elasticloadbalancing/latest/userguide/images/cross_zone_load_balancing_enabled.png)
+
+- Cross Zone Load Balancing을 이용하는 경우:
+  - 각각의 로드 밸런서 인스턴스가 모든 AZ에 있는 모든 등록 인스턴스 너머로 균일하게 로드를 분산시킴
+
+![Without CZLB](https://docs.aws.amazon.com/images/elasticloadbalancing/latest/userguide/images/cross_zone_load_balancing_disabled.png)
+
+- Cross Zone Load Balancing을 이용하지 않는 경우:
+  - Elastic Load Balancer의 노드 내에 있는 인스턴스들 내에서만 균일하게 분산시킴
+
+- Application Load Balancer
+  - 기본적으로 활성화되어 있음 (타겟 그룹 단위로 비활성화 가능)
+  - AZ 간 데이터(inter AZ data)에 부과되는 비용 없음
+- Network Load Balancer & Gateway Load Balancer
+  - 기본적으로 비활성화
+  - 활성화 시에는 AZ 간 데이터(inter AZ data)에 비용이 부과됨
+- Classic Load Balancer
+  - 기본적으로 비활성화
+  - 활성화 시에는 AZ 간 데이터(inter AZ data)에 비용이 부과됨

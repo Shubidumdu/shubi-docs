@@ -13497,6 +13497,69 @@ User: (아무 그룹에도 속하지 않음)
 </ul>
 </li>
 </ul>
+<h2 id="ssltls---basics"><a class="header" href="#ssltls---basics">SSL/TLS - Basics</a></h2>
+<ul>
+<li>SSL 인증서는 클라이언트와 로드밸런서 간의 트래픽을 전송 중에(in transit) 암호화해주는 역할을 한다. (in-flight encryption)</li>
+<li><strong>SSL</strong> : Secure Socket Layer, 암호화 연결을 위해 사용</li>
+<li><strong>TLS</strong> : Transport Layer Security, SSL의 새 버전</li>
+<li>요즘은 <strong>TLS 인증서가 주로 사용</strong>되지만, 사람들은 여전히 이걸 SSL이라는 명칭으로 부른다.</li>
+<li>공공 SSL 인증서는 Certificate Authorities(CA)에서 발급함
+<ul>
+<li>ex.) Comodo, Symantec, GoDaddy, GlobalSign, Digicert, Letsencrypt, etc...</li>
+</ul>
+</li>
+<li>SSL 인증서는 (직접 정하는) 만료일이 존재하며, 반드시 정기적으로 갱신되어야 한다.</li>
+</ul>
+<h3 id="load-balancer---ssl-certificates"><a class="header" href="#load-balancer---ssl-certificates">Load Balancer - SSL Certificates</a></h3>
+<ul>
+<li>로드 밸런서는 X.509 인증서를 사용함 (SSL/TLS server certificate)</li>
+<li>ACM(AWS Certificate Manager)를 통해서 인증서를 관리할 수 있음</li>
+<li>원한다면 직접 본인이 소유한 인증서를 업로드할 수도 있음</li>
+<li>HTTPS listener:
+<ul>
+<li>기본 인증서를 지정해야 함</li>
+<li>다중 도메인(multiple domains)을 지원하기 위해 선택적 인증서 목록(optional list of certs)을 추가할 수 있음</li>
+<li>클라이언트는 본인이 도달한 호스트 네임을 지정하기 위해 SNI (Server Name Indication) 을 사용할 수 있음</li>
+<li>구 버전의 SSL/TLS을 지원하고자 하는 경우, HTTPS에 특정 보안 정책을 설정할 수 있음 (legacy clients)</li>
+</ul>
+</li>
+</ul>
+<h3 id="ssl---server-name-indication-sni"><a class="header" href="#ssl---server-name-indication-sni">SSL - Server Name Indication (SNI)</a></h3>
+<ul>
+<li>SNI는 <strong>하나의 웹 서버에서 여러 SSL 인증서들이 로드되는 문제를 해결</strong>함 (여러 웹사이트를 서빙하기 위해)</li>
+<li>이는 새로운 프로토콜이며, 클라이언트에게 처음 SSL 핸드셰이크를 할 때에 <strong>타겟 서버의 호스트네임을 알려주는(indicate) 역할</strong>을 함</li>
+<li>클라이언트는 이를 바탕으로 올바른 인증서를 찾거나, 또는 기본 인증서를 반환함</li>
+<li>유의점:
+<ul>
+<li>ALB와 NLB, 그리고 CloudFront에서만 동작 (신세대)</li>
+<li>CLB에는 적용할 수 없음 (구세대)</li>
+</ul>
+</li>
+</ul>
+<h2 id="elastic-load-balancers---ssl-certificates"><a class="header" href="#elastic-load-balancers---ssl-certificates">Elastic Load Balancers - SSL Certificates</a></h2>
+<ul>
+<li>
+<p>Classic Load Balancer (v1)</p>
+<ul>
+<li>오직 하나의 SSL 인증서만 지원</li>
+<li>여러개의 SSL 인증서를 가진 여러 개의 호스트네임을 위해서는 반드시 여러 개의 CLB를 사용해야만 함</li>
+</ul>
+</li>
+<li>
+<p>Application Load Balancer (v2)</p>
+<ul>
+<li>여러 개의 SSL 인증서를 가진 여러 개의 리스너를 지원함</li>
+<li>이것이 가능하게 하도록 SNI (Server Name Indication)을 사용함</li>
+</ul>
+</li>
+<li>
+<p>Network Load Balancer (v2)</p>
+<ul>
+<li>여러 개의 SSL 인증서를 가진 여러 개의 리스너를 지원함</li>
+<li>이것이 가능하게 하도록 SNI (Server Name Indication)을 사용함</li>
+</ul>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

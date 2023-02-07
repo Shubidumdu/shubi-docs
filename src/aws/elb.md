@@ -194,3 +194,47 @@
 - Classic Load Balancer
   - 기본적으로 비활성화
   - 활성화 시에는 AZ 간 데이터(inter AZ data)에 비용이 부과됨
+
+## SSL/TLS - Basics
+
+- SSL 인증서는 클라이언트와 로드밸런서 간의 트래픽을 전송 중에(in transit) 암호화해주는 역할을 한다. (in-flight encryption)
+- **SSL** : Secure Socket Layer, 암호화 연결을 위해 사용
+- **TLS** : Transport Layer Security, SSL의 새 버전
+- 요즘은 **TLS 인증서가 주로 사용**되지만, 사람들은 여전히 이걸 SSL이라는 명칭으로 부른다.
+- 공공 SSL 인증서는 Certificate Authorities(CA)에서 발급함
+  - ex.) Comodo, Symantec, GoDaddy, GlobalSign, Digicert, Letsencrypt, etc...
+- SSL 인증서는 (직접 정하는) 만료일이 존재하며, 반드시 정기적으로 갱신되어야 한다.
+
+### Load Balancer - SSL Certificates
+
+- 로드 밸런서는 X.509 인증서를 사용함 (SSL/TLS server certificate)
+- ACM(AWS Certificate Manager)를 통해서 인증서를 관리할 수 있음
+- 원한다면 직접 본인이 소유한 인증서를 업로드할 수도 있음
+- HTTPS listener:
+  - 기본 인증서를 지정해야 함
+  - 다중 도메인(multiple domains)을 지원하기 위해 선택적 인증서 목록(optional list of certs)을 추가할 수 있음
+  - 클라이언트는 본인이 도달한 호스트 네임을 지정하기 위해 SNI (Server Name Indication) 을 사용할 수 있음
+  - 구 버전의 SSL/TLS을 지원하고자 하는 경우, HTTPS에 특정 보안 정책을 설정할 수 있음 (legacy clients)
+
+### SSL - Server Name Indication (SNI)
+
+- SNI는 **하나의 웹 서버에서 여러 SSL 인증서들이 로드되는 문제를 해결**함 (여러 웹사이트를 서빙하기 위해)
+- 이는 새로운 프로토콜이며, 클라이언트에게 처음 SSL 핸드셰이크를 할 때에 **타겟 서버의 호스트네임을 알려주는(indicate) 역할**을 함
+- 클라이언트는 이를 바탕으로 올바른 인증서를 찾거나, 또는 기본 인증서를 반환함
+- 유의점:
+  - ALB와 NLB, 그리고 CloudFront에서만 동작 (신세대)
+  - CLB에는 적용할 수 없음 (구세대)
+
+## Elastic Load Balancers - SSL Certificates
+
+- Classic Load Balancer (v1)
+  - 오직 하나의 SSL 인증서만 지원
+  - 여러개의 SSL 인증서를 가진 여러 개의 호스트네임을 위해서는 반드시 여러 개의 CLB를 사용해야만 함
+
+- Application Load Balancer (v2)
+  - 여러 개의 SSL 인증서를 가진 여러 개의 리스너를 지원함
+  - 이것이 가능하게 하도록 SNI (Server Name Indication)을 사용함
+
+- Network Load Balancer (v2)
+  - 여러 개의 SSL 인증서를 가진 여러 개의 리스너를 지원함
+  - 이것이 가능하게 하도록 SNI (Server Name Indication)을 사용함

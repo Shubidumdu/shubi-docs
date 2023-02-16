@@ -238,3 +238,52 @@
 - Network Load Balancer (v2)
   - 여러 개의 SSL 인증서를 가진 여러 개의 리스너를 지원함
   - 이것이 가능하게 하도록 SNI (Server Name Indication)을 사용함
+
+## Connection Draining
+
+- 명칭
+  - Connection Draining - CLB의 경우
+  - Deregistration Delay - ALB & NLB의 경우
+
+- 인스턴스가 de-registering(등록 해제) 또는 unhealthy 상태인 동안에 이루어진 "in-flight requests"를 완수하는 시점
+- de-registering 상태인 EC2 인스턴스에 대한 새 요청들을 멈춤
+- 1 ~ 3600초 사이 (기본 300초)
+- 비활성화 가능 (0초로 설정할 경우)
+- 요청들이 짧게 이루어지는 경우라면 낮은 값으로 설정
+
+## Auto Scaling Group - ASG
+
+- 현실에서, 웹사이트와 애플리케이션에 대한 부하(load)는 변할 수 있음
+- 클라우드에서는 서버를 매우 빠르게 자유롭게 생성하고 앲앨 수 없음
+
+- Auto Scaling Group (ASG)의 목표는
+  - Scale out (EC2 인스턴스의 추가) ~ 더 높은 부하에 대응
+  - Scale in (EC2 인스턴스 제거) ~ 더 낮은 부하에 대응
+  - 작동 중인 EC2 인스턴스의 최소/최대 개수를 보장
+  - 하나의 로드 밸런서에 새 인스턴스들을 자동으로 등록(register)
+  - 이전의 인스턴스가 종료되는 경우(ex. unhealthy인 경우), EC2 인스턴스를 재생성
+
+- ASG는 무료 (EC2 인스턴스에 대한 값만 지불)
+
+### Auto Scaling Group Attributes
+
+- **Launch Template** (구 Launch Configurations ~ deprecated)
+  - AMI + Instance Type
+  - EC2 User Data
+  - EBS Volumes
+  - Security Groups
+  - SSH Key Pair
+  - IAM Roles for your EC2 Instances
+  - Network + Subnets Information
+  - Load Balancer Information
+- Min Size / Max Size / Initial Capacity
+- Scaling Policies
+
+### Auto Scaling - CloudWatch Alarms & Scaling
+
+- CloudWatch 알람에 기반하여 ASG를 스케일링할 수 있음
+- 알람은 metric을 모니터함 (**Average CPU, 또는 커스텀 metric**)
+- **Average CPU와 같은 Metric들은 ASG 인스턴스 전체에 대하여 계산됨**
+- 이러한 알람에 기반해서
+  - scale-out 정책을 생성 (인스턴스 개수 증가)
+  - scale-in 정책을 생성 (인스턴스 개수 감소)

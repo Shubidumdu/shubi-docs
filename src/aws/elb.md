@@ -287,3 +287,34 @@
 - 이러한 알람에 기반해서
   - scale-out 정책을 생성 (인스턴스 개수 증가)
   - scale-in 정책을 생성 (인스턴스 개수 감소)
+
+### Auto Scaling Groups - Dynamic Scaling Policies
+
+- Target Tracking Scaling
+  - 제일 간단하고 셋업하기 쉬움
+  - 예시: 평균 ASG CPU를 40% 정도에 머무르게 하고 싶음
+- Simple / Step Scaling
+  - CloudWatch 알람이 트리거 될 때 (ex. CPU > 70%), 유닛을 2개  추가
+  - CloudWatch 알람이 트리거 될 때 (ex. CPU < 30%), 유닛을 하나 제거
+
+### Auto Scaling Groups - Scheduled Actions
+
+- 알려진 사용 패턴(known usage patterns)에 기반하여 스케일링을 기대(anticipate)하는 것
+- 예시: 금요일 10시부터 5시에는 최소 가용량을 증가시킴
+
+### Auto Scaling Groups - Predictive Scaling
+
+- **Predictive scaling**: 지속적으로 부하를 예측하고, 스케일링을 미리 스케줄함 (머신러닝 기반)
+
+### Good metrics to scale on
+
+- **CPUUtilization**: 인스턴스 전반적인 평균 CPU 활성량
+- **RequestCountPerTarget**: 각 EC2 인스턴스 별 안정적인 요청의 개수를 보장
+- **Average Network In / Out** (애플리케이션이 네트워크 영역(bound)에 있는 경우)
+- **Any custom metric** (CloudWatch를 통해 push 가능)
+
+### Auto Scaling Groups - Scaling Cooldowns
+
+- 스케일링 활동이 일어난 이후에는, **cooldown period**를 갖는다. (**기본 300초**)
+- 이 cooldown period 동안에는, ASG가 추가로 인스턴스를 실행하거나 종료하지 않음 (metrics가 안정화되는 시간을 갖게하기 위해서)
+- **조언**: ready-to-use AMI를 사용하여 인스턴스의 설정 시간 줄여 요청에 대한 처리를 빠르게 하고, cooldown period를 줄일 수 있도록 하자.

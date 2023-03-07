@@ -75,3 +75,55 @@
   - 스냅샷이 찍힘
   - 새 DB가 새로운 AZ에서 앞서 찍은 스냅샷을 통해 복구됨.
   - 두 DB 사이에 동기화(synchronization) 작업이 이루어짐.
+
+## RDS Custom
+
+- **OS와 DB에 대한 커스터마이징이 가능한 관리형 Oracle 또는 Microsoft SQL Server 데이터베이스**
+- RDS: AWS 내 DB의 설정, 작업, 스케일링의 자동화
+- Custom: 그 아래 놓인 DB와 OS에 대한 접근으로, 다음과 같은 일들을 할 수 있음.
+  - Configure settings
+  - Install patches
+  - Enable native features
+  - **SSH 또는 SSM Session Manager**를 통해 RDS 아래의 EC2 인스턴스에 접근
+- 커스터마이징을 하려면 **Automation Mode**를 비활성화 해야함 -> 그 전에 DB 스냅샷을 찍어두는 것을 권장
+- RDS vs. RDS Custom
+  - RDS: AWS로부터 관리되는 DB와 OS 전체
+  - RDS Custom: 그 아래 놓인 OS와 DB에 대해 완전한 어드민 접근
+
+## Amazon Aurora
+
+- Aurora는 AWS가 소유한(proprietary) 자체적인 기술 (오픈 소스가 아님)
+- Postgres와 MySQL 모두 Aurora DB와 호환됨 (= Aurora를 Postgres나 MySQL DB처럼 사용할 수 있음)
+- Aurora는 AWS 클라우드에 최적화되어 있어, RDS의 MySQL보다 5배, RDS의 Postgres보다 3배 더 높은 성능 향상을 기대할 수 있음
+- Aurora 스토리지는 자동으로 10GB까지 증가될 수 있으며, 최대 128TB까지.
+- Aurora는 15개의 replica를 가질 수 있음. (MySQL은 5개까지) 또한 이러한 replication 과정이 빠름 (10ms 미만의 replica lag)
+- Aurora의 장애조치(Failover)는 즉각적(instantaneous)이며, High-Availity(HA) native임.
+- Aurora는 RDS보다 높은 가격(20% 이상)이지만, 더 효율적임.
+
+### Aurora High Availability and Read Scaling
+
+- 3개의 AZ에 걸쳐 6개의 데이터 사본이 생성됨
+  - 쓰기 시 6개 중 4개 필요
+  - 읽기 시 6개 중 3개 필요
+  - peer-to-peer 복제를 통한 자가 복구
+  - 스토리지가 100개의 볼륨에 걸쳐 스트라이프 처리
+- 하나의 Aurora 인스턴스가 쓰기 작업을 처리 (master)
+- 마스터에 대한 장애조치는 30초 이내로 처리됨
+- master에 더해, 최대 15개의 Aurora Read Replicas가 읽기 작업을 처리
+- Cross Region Replication을 지원함
+
+### Aurora DB Cluster
+
+![Aurora Cluster](https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2017/11/01/AZ-Cluster-Endpoint.jpg)
+
+### Features of Aurora
+
+- 자동 장애조치
+- 백업 및 복구
+- 격리(isolation) 및 보안
+- 산업 규정 준수 (industry compliance)
+- Push-button scaling
+- Zero downtime으로 자동화된 패칭(Patching)
+- 고급 모니터링(Advanced Monitoring)
+- Routine maintenace
+- 백트래킹(Backtrack): 백업 없이 특정한 시점으로 데이터를 복구

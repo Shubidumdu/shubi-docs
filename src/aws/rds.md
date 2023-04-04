@@ -127,3 +127,52 @@
 - 고급 모니터링(Advanced Monitoring)
 - Routine maintenace
 - 백트래킹(Backtrack): 백업 없이 특정한 시점으로 데이터를 복구
+
+### Aurora Replicas - Auto Scaling
+
+![Aurora auto scaling](https://velog.velcdn.com/images%2Fcombi_jihoon%2Fpost%2F79a5fe80-4bb1-4883-a750-62b40d4d2c69%2F%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202022-03-07%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.38.10.png)
+
+### Aurora - Custom Endpoints
+
+![Aurora custom endpoint](https://miro.medium.com/v2/resize:fit:1200/1*VC6IYPGQ_JR4ZDam1VktJw.png)
+
+- Aurora Instance의 부분 집합을 커스텀 엔드포인트로 정의
+- Ex. 특정 replica(사본)들에서만 분석 쿼리를 실행
+- Custom Endpoint의 정의 이후에 일반적으로 Reader Endpoint는 사용되지 않음.
+
+### Aurora Serverless
+
+- 실제 사용에 기반한 자동화된 데이터베이스 인스턴스화(Instantiation)와 오토 스케일링
+- 비주기적(infrequent)이고, 간헐적(intermittent)이며, 예측 불가능한(unpredictable) 워크로드의 경우에 유용함
+- capacity planning(특정 capacity를 선택해야 할 필요)가없음
+- 매초마다 비용을 지불하며, 더 비용 효율적임(cost-effective).
+  
+### Aurora Multi-Master
+
+- write node 에 대한 즉각적인 failover를 원할 때 (high availability)
+- 모든 노드가 R/W를 수행 - vs. 하나의 Read replica를 새로운 master로 승격
+
+### Global Aurora
+
+- Aurora Cross Region Read Replicas:
+  - disaster recovery(장애 조치)에 유용
+  - 설치가 간편함
+- Aurora Global Database (recommended):
+  - 하나의 주요 리전 (Read / Write)
+  - 5개 까지의 보조 리전(Read 전용), 복제에 걸리는 지연 시간이 1초 미만임
+  - 각 보조 리전 당 16개까지의 Read Replica
+  - latency 감소에 도움
+  - 또다른 리전 승격(장애 조치 목적)은 RTO(= Recovery Time Objective)가 1분 미만
+  - **일반적인 cross-region 복제는 1초 미만이 소요됨**
+
+### Aurora Machine Learning
+
+![Aurora Machin Learning](https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2019/11/23/aurora-ml-integrations.png)
+
+- SQL을 통해 애플리케이션에 대한 ML 기반 예측 활성화
+- 간단하고, 최적화되어 있으며, 안전하게 통합된 Aurora와 AWS ML 서비스
+- 지원되는 서비스
+  - Amazon SageMaker (어떤 ML 모델도 사용 가능)
+  - Amazon Comprehend (감성 분석 용도)
+- 굳이 ML 경험을 필요로 하지 않음
+- 이용 사례: 사기 감지(fraud detection), 광고 타겟팅(ads targeting), 감성 분석(sentiment analysis), 제품 추천(product recommendation)

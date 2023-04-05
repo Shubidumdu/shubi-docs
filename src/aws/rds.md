@@ -176,3 +176,69 @@
   - Amazon Comprehend (감성 분석 용도)
 - 굳이 ML 경험을 필요로 하지 않음
 - 이용 사례: 사기 감지(fraud detection), 광고 타겟팅(ads targeting), 감성 분석(sentiment analysis), 제품 추천(product recommendation)
+
+## Backups
+
+### RDS Backups
+
+- Automated backups:
+  - 매일 데이터베이스 전체를 백업 (window 백업 도중)
+  - 매 5분마다 Transaction log가 RDS에 의해 백업됨
+    - 백업된 시점의 어디로든 복구가 가능함 (가장 오래된 백업부터, 최소 5분 전까지)
+  - 1일에서 35일까지 보존(retention), 0으로 설정하면 automated backup을 비활성화
+- Manual DB Snapshots
+  - 말 그대로 수동으로 백업
+  - 원하는 기간만큼 백업 보존
+- **요령:** RDS 데이터베이스를 중지하더라도, 여전히 storage에 대한 비용은 청구됨. 따라서, DB를 오랜기간 동안 중지하고자 한다면, 중지하는 대신에 스냅샷을 찍어놓고, 복구를 시키는 편이 더 좋음.
+
+### Aurora Backups (RDS와 유사)
+
+- Automated backups:
+  - 1일에서 35일까지 (비활성화 불가능)
+  - 위 해당 기간의 특정 시점으로 복구 가능
+
+- Manual DB Snapshots
+  - 수동으로 백업
+  - 원하는 기간만큼 백업 보존
+
+### RDS & Aurora Restore Options
+
+- **RDS / Aurora 백업 또는 스냅샷의 복구는 새로운 DB를 생성함**
+- **S3로부터 MySQL RDS DB를 복구**
+  - 온-프로미스 DB의 백업을 생성
+  - AWS S3에 이를 저장
+  - MySQL을 실행하는 새로운 RDS 인스턴스로 백업 파일을 복구
+- **S3로부터 MySQL Aurora cluster를 복구**
+  - Percona XtraBackup을 사용하는 온-프로미스 DB의 백업 생성
+  - AWS S3에 이를 저장
+  - MySQL을 실행하는 새로운 Aurora cluster로 백업 파일을 복구
+
+### Aurora Database Cloning
+
+- 기존에 갖고있던 Aurora DB 클러스터를 새로 복제하여 생성
+- 스냅샷을 찍고 이를 복구하는 것보다 빠름
+- **copy-on-write** 프로토콜을 사용
+  - 최초에 새로 생성된 DB 클러스터는 기존의 DB클러스터와 동일한 데이터 볼륨을 사용함 (빠르고 효율적임 -> 데이터를 따로 복제할 필요가 없음)
+  - 새로운 DB 클러스터 데이터에 업데이트가 이루어지면, 그제서야 새로운 스토리지가 할당되고, 데이터가 복제 및 분리됨
+- 매우 빠르고 비용 효율적
+- **프로덕션 DB에는 영향을 주지 않으면서 프로덕션 DB로부터 staging DB를 새로 생성하기에 유용함**
+
+## RDS & Aurora Security
+
+- **At-rest encryption**
+
+  - DB master & replica는 AWS KMS를 통해 암호화됨 -> 실행 시점에 정의되어야 함
+  - master가 암호화되지 않았다면, read replica도 암호화될 수 없음
+  - 암호화되지 않은 DB를 암호화하려면, DB 스냅샷을 찍은 후, 암호화된 형태로 복구해야 함
+
+- **In-flight encryption**
+  - 기본적으로 TLS-ready, 클라이언트 측에서는 AWS TLS 루트 인증서를 사용
+
+- **IAM Authentication**
+
+  - DB에 접속하기 위한 IAM role (username/pw 대신)
+- **Security Groups**
+  - RDS / Aurora DB에 대한 네트워크 접근을 통제
+
+- **RDS Custom이 아니라면 SSH 접근은 허용하지 않음**
+- **Audit Logs를 활성화한다면** 더 장기적인 보관을 위해 Cloudwatch Log로 전송할 수 있음

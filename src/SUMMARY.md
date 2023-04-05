@@ -169,5 +169,6 @@
   - [EBS vs. EFS](aws/ebs-vs-efs.md)
   - [ELB](aws/elb.md)
   - [RDS](aws/rds.md)
+  - [Route 53](aws/route53.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

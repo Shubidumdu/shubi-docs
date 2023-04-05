@@ -14045,6 +14045,66 @@ User: (아무 그룹에도 속하지 않음)
 </ul>
 </li>
 </ul>
+<h3 id="elasticache---cache-security"><a class="header" href="#elasticache---cache-security">ElastiCache - Cache Security</a></h3>
+<ul>
+<li>ElastiCache는 <strong>Redis에 대한 IAM 인증</strong>을 지원</li>
+<li>ElastiCache에 대한 IAM 정책은 오직 AWS API 레벨의 보안을 위해서만 사용됨</li>
+<li><strong>Redis AUTH</strong>
+<ul>
+<li>Redis 클러스터 생성 시 &quot;password/token&quot;을 설정할 수 있음</li>
+<li>이는 캐시에 대한 추가 보안 수준에 해당함 (보안 그룹에 더해서)</li>
+<li>flight encryption 내 SSL 지원</li>
+</ul>
+</li>
+<li>Memcached
+<ul>
+<li>SASL 기반의 인증 지원</li>
+</ul>
+</li>
+</ul>
+<h3 id="patterns-for-elasticache"><a class="header" href="#patterns-for-elasticache">Patterns for ElastiCache</a></h3>
+<ul>
+<li><strong>Lazy Loading</strong>: 모든 읽기 데이터가 캐시되며, 이에 따라 데이터가 캐시 내에서 stale한 상태가 될 수 있음</li>
+<li><strong>Write Through</strong>: DB 내에 쓰기 작업이 이루어 질때, 캐시에 데이터를 추가하거나 업데이트 (stale data가 없음)</li>
+<li><strong>Session Store</strong>: 캐시 내에 일시적인 세션 데이터를 저장 (TTL 기능을 사용)
+<blockquote>
+<p>There are only two hard things in Computer Science: cache invalidation and naming things</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="elasticache---redis-use-case"><a class="header" href="#elasticache---redis-use-case">ElastiCache - Redis Use Case</a></h3>
+<ul>
+<li>게임 리더보드 -&gt; 계산하기 복잡함</li>
+<li><strong>Redis Sorted Sets</strong>는 요소의 고유함(uniqueness)와 순서를 보장함</li>
+<li>새로운 요소가 추가될 때마다, 랭킹이 실시간으로 반영되고, 이에 따라 올바른 순서로 추가됨</li>
+</ul>
+<h2 id="list-of-ports-to-be-familiar-with"><a class="header" href="#list-of-ports-to-be-familiar-with">List of Ports to be familiar with</a></h2>
+<ul>
+<li>
+<p>아래는 최소한 한번쯤 봤을 법한, <strong>일반적인</strong> 포트 번호의 목록이며, 이를 외울 필요는 없지만, 주요한 포트 번호들과 DB 포트를 각각 구분할 줄은 아는 것이 좋다.</p>
+</li>
+<li>
+<p><strong>Important ports</strong>:</p>
+<ul>
+<li>FTP: 21</li>
+<li>SSH: 22</li>
+<li>SFTP: 22 (SSH와 동일)</li>
+<li>HTTP: 80</li>
+<li>HTTPS: 443</li>
+</ul>
+</li>
+<li>
+<p><strong>RDS Databases ports</strong>:</p>
+<ul>
+<li>PostgreSQL: 5432</li>
+<li>MySQL: 3306</li>
+<li>Oracle RDS: 1521</li>
+<li>MSSQL Server: 1433</li>
+<li>MariaDB: 3306 (MySQL과 동일)</li>
+<li>Aurora: 5432(postgreSQL 호환의 경우) 또는 3306 (MySQL 호환의 경우)</li>
+</ul>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

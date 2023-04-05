@@ -295,3 +295,46 @@
   - **비영구적 (Non persistent)**
   - **백업 및 복구 기능 없음**
   - 멀티 쓰레드 기반의 아키텍처
+
+### ElastiCache - Cache Security
+
+- ElastiCache는 **Redis에 대한 IAM 인증**을 지원
+- ElastiCache에 대한 IAM 정책은 오직 AWS API 레벨의 보안을 위해서만 사용됨
+- **Redis AUTH**
+  - Redis 클러스터 생성 시 "password/token"을 설정할 수 있음
+  - 이는 캐시에 대한 추가 보안 수준에 해당함 (보안 그룹에 더해서)
+  - flight encryption 내 SSL 지원
+- Memcached
+  - SASL 기반의 인증 지원
+
+### Patterns for ElastiCache
+
+- **Lazy Loading**: 모든 읽기 데이터가 캐시되며, 이에 따라 데이터가 캐시 내에서 stale한 상태가 될 수 있음
+- **Write Through**: DB 내에 쓰기 작업이 이루어 질때, 캐시에 데이터를 추가하거나 업데이트 (stale data가 없음)
+- **Session Store**: 캐시 내에 일시적인 세션 데이터를 저장 (TTL 기능을 사용)
+  > There are only two hard things in Computer Science: cache invalidation and naming things
+
+### ElastiCache - Redis Use Case
+
+- 게임 리더보드 -> 계산하기 복잡함
+- **Redis Sorted Sets**는 요소의 고유함(uniqueness)와 순서를 보장함
+- 새로운 요소가 추가될 때마다, 랭킹이 실시간으로 반영되고, 이에 따라 올바른 순서로 추가됨
+
+## List of Ports to be familiar with
+
+- 아래는 최소한 한번쯤 봤을 법한, **일반적인** 포트 번호의 목록이며, 이를 외울 필요는 없지만, 주요한 포트 번호들과 DB 포트를 각각 구분할 줄은 아는 것이 좋다.
+
+- **Important ports**:
+  - FTP: 21
+  - SSH: 22
+  - SFTP: 22 (SSH와 동일)
+  - HTTP: 80
+  - HTTPS: 443
+
+- **RDS Databases ports**:
+  - PostgreSQL: 5432
+  - MySQL: 3306
+  - Oracle RDS: 1521
+  - MSSQL Server: 1433
+  - MariaDB: 3306 (MySQL과 동일)
+  - Aurora: 5432(postgreSQL 호환의 경우) 또는 3306 (MySQL 호환의 경우)

@@ -254,3 +254,44 @@
 - 대부분 앱의 경우, 별도로 요구되는 코드 변경이 없음
 - **DB에 대한 IAM 인증을 강화하며, AWS Secrets Manager 내에 안전하게 credential들을 저장**
 - **RDS Proxy는 절대 공개적으로 접근할 수 없음 (반드시 VPC를 통해 접근되어야 함)**
+
+## ElastiCache
+
+### ElastiCache Overview
+
+- ElastiCache는 관리형 Redis 또는 Memcached라고 할 수 있다.
+- Cache는 인-메모리(in-memory) DB로, 매우 높은 성능과 낮은 레이턴시를 보유한다.
+- 읽기 집약적인 워크로드에 대한 데이터베이스 부하를 줄이는 데에 도움을 준다.
+- 애플리케이션을 무상태성(stateless)으로 만드는데에 도움을 준다.
+- AWS는 OS 유지 보수 / 패칭(patch), 최적화, 설정, 구성, 모니터링, 장애 조치 및 백업을 관리해준다.
+- **ElastiCache의 사용은 애플리케이션에 많은 코드 변경을 요구한다.**
+- 과정
+  - 애플리케이션이 ElastiCache에 쿼리를 보내고, 그것이 처리가 불가능하다면, 그 결과를 RDS로부터 가져와 ElastiCache에 저장
+  - 이로부터 RDS에 대한 부하를 완화할 수 있음
+  - 가장 최신의 데이터가 사용될 수 있도록, 캐시는 반드시 비활성화 전략을 갖추어야 함
+
+### ElastiCache - User Session Store
+
+- 과정
+  - 이용자가 애플리케이션의 어디로든 로그인
+  - 애플리케이션이 ElastiCache에 세션 데이터를 작성
+  - 이용자가 애플리케이션의 다른 인스턴스로 접근
+  - 해당 인스턴스는 앞서 작성한 세션 데이터를 검색하여 사용하고, 이에 따라 이용자는 로그인 상태를 유지할 수 있음
+
+### ElastiCache - Redis vs Memcached
+
+- Redis
+
+  - Auto-failover와 함께 **Multi AZ**
+  - 읽기 확장(scale read)를 위한 **Read Replica**와 함께, **High availability**를 보유
+  - AOF persistence를 통한 Data Durability(데이터 내구성)
+  - **백업과 복구 기능**
+  - **Sets와 Sorted Sets 기능 지원**
+
+- Memcached
+
+  - 데이터의 파티셔닝을 위한 멀티 노드 (sharding)
+  - **High availability (replication) 없음**
+  - **비영구적 (Non persistent)**
+  - **백업 및 복구 기능 없음**
+  - 멀티 쓰레드 기반의 아키텍처

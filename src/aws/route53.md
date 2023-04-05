@@ -106,3 +106,47 @@
 - Global Accelerator accelerator
 - 동일한 hosted zone 내의 Route53 record
 - **EC2 DNS 네임을 ALIAS 레코드로 지정할 수는 없음**
+
+## Route 53 - Routing Policies
+
+- Route 53이 DNS 쿼리에 어떻게 응답할지 정의
+- "Routing"이라는 명칭으로 인해 혼동하지 말 것
+  - LB 관점에서의 트래픽 라우팅과는 다름
+  - DNS는 어떤 트래픽도 라우트하지 않음, 단지 DNS 쿼리에 응답을 해줄 뿐임
+- Route 53은 아래의 Routing 정책들을 지원함
+  - Simple
+  - Weighted
+  - Failover
+  - Latency based
+  - Geolocation
+  - Multi-Value Answer
+  - Geoproximity (using Route 53 Traffic Flow feature)
+
+### Routing Policies - Simple
+
+- 일반적으로, 트래픽을 하나의 리소스로 라우팅
+- 동일한 레코드에 여러 값을 정의할 수도 있음
+- **만약, 여러 값이 정의된 경우, 클라이언트에 의해 무작위 값 하나가 선택됨**
+- Alias가 활성화된 경우, 하나의 AWS만 정의할 수 있음
+- 헬스 체크에 연결할 수 없음
+
+### Routing Policies - Weighted
+
+- 각각의 특정 리소스마다 요청 비율을 관리
+- 각각의 레코드에 상대적 가중치를 할당 (합계가 꼭 100이어야 할 필요 없음)
+
+$$ traffic(\%) = \frac{weight \space for \space a \space specific \space record}{Sum \space of \space all \space the \space weight \space for \space all \space records}$$
+
+- DNS 레코드들은 반드시 동일한 이름과 타입을 지녀야 함
+- 헬스 체크에 연결할 수 있음
+- 유스 케이스: 리전 간의 로드 밸런싱, 새로운 애플리케이션 버전에 대한 테스트
+- **가중치를 0으로 할당하는 경우, 레코드는 해당 리소스로는 트래픽을 전송하지 않음**
+- **만약 모든 레코드의 가중치가 0이라면, 모든 레코드들이 동일한 가중치로 반환됨**
+
+### Routing Policies - Latency-based
+
+- 이용자에게 가장 적은 레이턴시를 제공할 수 있는(가장 가까운) 리소스로 리다이렉트
+- 이용자들에 대한 레이턴시 보장이 최우선인 경우 매우 유용
+- **레이턴시는 이용자와 AWS 리전 사이의 트래픽에 근거하여 결정됨**
+  - e.g.) 독일인 이용자는 아마 US로 리다이렉트될 것 (만약 그쪽이 제일 레이턴시가 낮다면)
+- 헬스 체크에 연결될 수 있음 (failover capability ~ 장애조치 기능)

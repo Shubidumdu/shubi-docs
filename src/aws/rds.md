@@ -242,3 +242,15 @@
 
 - **RDS Custom이 아니라면 SSH 접근은 허용하지 않음**
 - **Audit Logs를 활성화한다면** 더 장기적인 보관을 위해 Cloudwatch Log로 전송할 수 있음
+
+## RDS Proxy
+
+- RDS를 위한 완전 관리형(Fully managed) DB 프록시
+- 앱들이 pooling 하거나, DB에 연결된 DB 커넥션들을 공유할 수 있도록 해줌
+- **DB 리소스들에 대한 부하를 줄이고, open connection들을 최소화(+ timeout 추가) 함으로써 DB 효율성을 높임**
+- 서버리스, 오토스케일링, High available (multi-AZ)
+- **RDS & Aurora의 failover 시간을 최대 66%까지 단축**
+- RDS(MySQL, PostgreSQL, MariaDB)와 Aurora(MySQL, PostgreSQL)에 대해 지원
+- 대부분 앱의 경우, 별도로 요구되는 코드 변경이 없음
+- **DB에 대한 IAM 인증을 강화하며, AWS Secrets Manager 내에 안전하게 credential들을 저장**
+- **RDS Proxy는 절대 공개적으로 접근할 수 없음 (반드시 VPC를 통해 접근되어야 함)**

@@ -170,5 +170,6 @@
   - [ELB](aws/elb.md)
   - [RDS](aws/rds.md)
   - [Route 53](aws/route53.md)
+  - [Elastic Beanstalk](aws/eb.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

@@ -145,8 +145,97 @@ $$ traffic(\%) = \frac{weight \space for \space a \space specific \space record}
 
 ### Routing Policies - Latency-based
 
-- 이용자에게 가장 적은 레이턴시를 제공할 수 있는(가장 가까운) 리소스로 리다이렉트
+- 이용자에게 가장 적은 레이턴시를 제공할 수 있는(아마도 가장 가까운) 리소스로 리다이렉트
 - 이용자들에 대한 레이턴시 보장이 최우선인 경우 매우 유용
 - **레이턴시는 이용자와 AWS 리전 사이의 트래픽에 근거하여 결정됨**
   - e.g.) 독일인 이용자는 아마 US로 리다이렉트될 것 (만약 그쪽이 제일 레이턴시가 낮다면)
 - 헬스 체크에 연결될 수 있음 (failover capability ~ 장애조치 기능)
+
+### Routing Policies - Failover (Active-Passive)
+
+- 먼저 주 인스턴스(primary)에 헬스체크를 시도한 이후, 그것이 실패하면 장애 조치 목적의 보조 인스턴스(secondary)로 라우팅
+
+### Routing Policies - Geolocation
+
+- Latency-based와는 차이가 있음
+- **이용자의 위치 자체에 근거하여 결정됨**
+- 대륙, 국가, 또는 주(미국)으로 위치를 정의 (겹치는 상황이라면, 가장 좁은 범위로 선택됨)
+- **기본 레코드**를 생성하는 편이 좋음 (해당하는 위치가 없는 경우)
+- 사례 - 웹사이트 localization, 컨텐츠 배포를 제한, 로드 밸런싱, ...
+- 헬스 체크와 연결 가능
+
+### Geoproximity Routing Policies - Geoproximity
+
+- 이용자와 리소스의 지리적인 위치에 기반하여 트래픽을 라우팅
+- 정의된 **바이어스**(bias)에 기반하여 **더 많은 트래픽을 각 리소스에 할당**
+- 지리학적 지역의 크기를 변경하려면, 바이어스의 값을 정의
+  - 확장(expand)하고자 하는 경우 (1 ~ 99): 해당 리소스에 더 많은 트래픽
+  - 축소(shrink)하고자 하는 경우 (-1 ~ -99): 해당 리소스에 더 적은 트래픽
+
+- 리소스는 아래와 같은 것이 될 수 있음
+  - AWS 리소스 (AWS 리전 명시)
+  - Non-AWS 리소스 (위도, 경도 명시)
+- 해당 기능을 사용하기 위해서는 반드시 Route 53 Traffic Flow(고급)를 사용해야 함
+
+### Routing Policies - IP-based Routing
+
+- **클라이언트의 IP 주소에 기반하여 라우팅**
+- **클라이언트의 CIDR와 엔드포인트/로케이션 목록을 제공** (이용자 IP-엔드포인트 매핑)
+- 사례: 성능 최적화, 네트워크 비용 감축
+- e.g., 특정 ISP로부터의 엔드 유저를 특정 엔드포인트로 라우팅
+
+### Routing Policies - Multi-Value
+
+- 트래픽을 여러 개의 리소스에 라우팅하고자 할 때 사용
+- Route 53이 여러 개의 값/리소스를 반환
+- 헬스 체크 연결 가능 (healthy resources에 대한 값들만 반환해줌)
+- 각각의 Multi-Value 쿼리에 대해 최대 8개까지의 healthy record만 반환됨
+- **Multi-Value가 ELB를 대체할 수는 없음**
+
+## Route 53 - Health Checks
+
+- HTTP 헬스 체크는 오직 **public 리소스** 들에만 적용 가능
+- 헬스 체크 -> 자동화된 DNS 장애 조치:
+
+  1. 엔드포인트에 대한 모니터링 (애플리케이션, 서버, 그 외 AWS 리소스)
+  2. 다른 헬스 체크에 대한 모니터링 (Calculated Health Checks)
+  3. CloudWatch 알람(완전 제어)에 대한 모니터링 - e.g., DynamoDB 쓰로틀링, RDS 알람, 커스텀 메트릭스, ... (private 리소스들의 경우에 유용)
+
+- 헬스체크는 CloudWatch metrics와 함께 사용될 수 있음
+
+### Health Checks - Monitor an Endpoint
+
+- **약 15개의 글로벌 헬스 체커가 엔드포인트 헬스 상태를 체크**
+  - Healthy/Unhealthy Threshold - 3 (default)
+  - Interval - 30초 (10초로도 지정 가능 - 더 높은 비용)
+  - 지원 프로토콜: HTTP, HTTPS, TCP
+  - 약 18% 이상의 헬스 체커가 엔드포인트가 healthy 하다고 리포트한다면, Route 53은 이를 **Healthy**하다고 간주, 그렇지 않다면, **Unhealthy**
+  - Route 53이 헬스 체크에 사용할 위치(location)이 어디인지 선택할 수 있음
+- 헬스 체크는 오직 엔드포인트가 2xx, 3xx 상태 코드를 응답할 때만 통과
+- 헬스 체크는 응답의 첫 **5120 bytes**의 텍스트에 기반하여 pass / fail 상태를 설정 (특정 텍스트를 체크)
+- Route 53 헬스 체커로부터 오는 요청은 라우터/방화벽이 허용하도록 설정해야 함
+
+### Health Checks - Calculated Health Checks
+
+- 여러 개의 헬스 체크 결과를 하나의 헬스 체크로 통합
+- **OR, AND, NOT** 조건을 사용 가능
+- 최대 256개의 자식 헬스 체크(child health check)를 모니터링할 수 있음
+- 부모의 헬스 체크를 통과시키려면 얼마나 많은 자식의 헬스 체크가 필요한지 정의 가능
+- e.g., 모든 헬스 체크가 실패하도록 하지 않으면서 웹사이트를 유지보수하고자 할 때
+
+### Health Checks - Private Hosted Zones
+
+- Route 53 헬스체커는 VPC 외부에 존재
+- 따라서 **private 엔드포인트**에 접근할 수 없음 (private VPC 또는 온-프로미스 리소스)
+- 이에 대처하기 위해, **CloudWatch Metric**을 만들고, 여기에 **CloudWatch Alarm**을 연결 후 해당 알람 자체를 체크하는 헬스 체크를 만들면 됨
+
+## Domain Registar vs. DNS Service
+
+- **Domain Registrar != DNS Service**
+- 일반적으로 매년 비용을 청구하며 Domain Registrar로부터 도메인 네임을 구매하거나 등록
+- Domain Registrar는 보통 DNS 레코드 관리를 위해 DNS 서비스도 함께 제공하는 경우가 많음
+- 하지만, DNS 레코드 관리를 위해 다른 DNS 서비스를 사용할 수도 있음
+- e.g.) GoDaddy에서 구매한 도메인을 Route 53에서 DNS 레코드 관리
+- 어떻게?
+  - Route 53에 Hosted Zone을 생성
+  - 써드파티 웹사이트(도메인 제공 업체 ~ ex. GoDaddy)에서 NS 레코드를 Route 53의 **네임 서버**로 변경

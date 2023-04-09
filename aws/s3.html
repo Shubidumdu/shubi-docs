@@ -743,6 +743,128 @@
 <li>시험에 잘 나옴</li>
 <li>특정 오리진 또는 *(모든 오리진)을 허용할 수 있음</li>
 </ul>
+<h2 id="s3---mfa-delete"><a class="header" href="#s3---mfa-delete">S3 - MFA Delete</a></h2>
+<ul>
+<li><strong>MFA (Multi-Factor Authentication)</strong> - 이용자가 S3에서 중요한 작업을 수행하기 전에, 디바이스(주로 모바일 또는 하드웨어)를 통해 코드를 생성하여 인증하도록 강제</li>
+<li>MFA는 다음과 같은 경우에 요구됨
+<ul>
+<li>오브젝트 버전을 영구적으로 삭제</li>
+<li>버킷의 버저닝을 중지</li>
+</ul>
+</li>
+<li>MFA가 요구되지 않는 경우
+<ul>
+<li>버저닝의 활성화</li>
+<li>삭제된 버전의 리스팅</li>
+</ul>
+</li>
+<li>MFA Delete를 사용하려면, <strong>버킷에 반드시 버저닝이 활성화되어야 함</strong></li>
+<li><strong>버킷 소유자(루트 계정)만이 오직 MFA Delete를 활성화/비활성화할 수 있음</strong></li>
+</ul>
+<h2 id="s3---access-logs"><a class="header" href="#s3---access-logs">S3 - Access Logs</a></h2>
+<ul>
+<li>감사(audit) 목적으로, S3에 대한 모든 액세스를 로그하고 싶을 수 있음</li>
+<li>인증 유무에 상관없이 어떤 계정이든 S3에 이루어진 어떤 요청이 다른 S3 버킷에 로깅됨</li>
+<li>데이터 분석 툴을 통해 분석될 수 있음</li>
+<li>타깃이 되는 로그 버킷(로그가 저장되는 버킷)은 동일한 AWS 리전 내에 있어야 함</li>
+</ul>
+<details>
+  <summary>로그 포맷</summary>
+<pre><code>79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DOC-EXAMPLE-BUCKET1 [06/Feb/2019:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 3E57427F3EXAMPLE REST.GET.VERSIONING - &quot;GET /DOC-EXAMPLE-BUCKET1?versioning HTTP/1.1&quot; 200 - 113 - 7 - &quot;-&quot; &quot;S3Console/0.4&quot; - s9lzHYrFp76ZVxRcpX9+5cjAnEH2ROuNkd2BHfIa6UkFVdtjf5mKR3/eTPFvsiP/XV/VLi31234= SigV4 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader DOC-EXAMPLE-BUCKET1.s3.us-west-1.amazonaws.com TLSV1.2 arn:aws:s3:us-west-1:123456789012:accesspoint/example-AP Yes
+79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DOC-EXAMPLE-BUCKET1 [06/Feb/2019:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 891CE47D2EXAMPLE REST.GET.LOGGING_STATUS - &quot;GET /DOC-EXAMPLE-BUCKET1?logging HTTP/1.1&quot; 200 - 242 - 11 - &quot;-&quot; &quot;S3Console/0.4&quot; - 9vKBE6vMhrNiWHZmb2L0mXOcqPGzQOI5XLnCtZNPxev+Hf+7tpT6sxDwDty4LHBUOZJG96N1234= SigV4 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader DOC-EXAMPLE-BUCKET1.s3.us-west-1.amazonaws.com TLSV1.2 - -
+79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DOC-EXAMPLE-BUCKET1 [06/Feb/2019:00:00:38 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be A1206F460EXAMPLE REST.GET.BUCKETPOLICY - &quot;GET /DOC-EXAMPLE-BUCKET1?policy HTTP/1.1&quot; 404 NoSuchBucketPolicy 297 - 38 - &quot;-&quot; &quot;S3Console/0.4&quot; - BNaBsXZQQDbssi6xMBdBU2sLt+Yf5kZDmeBUP35sFoKa3sLLeMC78iwEIWxs99CRUrbS4n11234= SigV4 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader DOC-EXAMPLE-BUCKET1.s3.us-west-1.amazonaws.com TLSV1.2 - Yes
+79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DOC-EXAMPLE-BUCKET1 [06/Feb/2019:00:01:00 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be 7B4A0FABBEXAMPLE REST.GET.VERSIONING - &quot;GET /DOC-EXAMPLE-BUCKET1?versioning HTTP/1.1&quot; 200 - 113 - 33 - &quot;-&quot; &quot;S3Console/0.4&quot; - Ke1bUcazaN1jWuUlPJaxF64cQVpUEhoZKEG/hmy/gijN/I1DeWqDfFvnpybfEseEME/u7ME1234= SigV4 ECDHE-RSA-AES128-GCM-SHA256 AuthHeader DOC-EXAMPLE-BUCKET1.s3.us-west-1.amazonaws.com TLSV1.2 - -
+79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DOC-EXAMPLE-BUCKET1 [06/Feb/2019:00:01:57 +0000] 192.0.2.3 79a59df900b949e55d96a1e698fbacedfd6e09d98eacf8f8d5218e7cd47ef2be DD6CC733AEXAMPLE REST.PUT.OBJECT s3-dg.pdf &quot;PUT /DOC-EXAMPLE-BUCKET1/s3-dg.pdf HTTP/1.1&quot; 200 - - 4406583 41754 28 &quot;-&quot; &quot;S3Console/0.4&quot; - 10S62Zv81kBW7BB6SX4XJ48o6kpcl6LPwEoizZQQxJd5qDSCTLX0TgS37kYUBKQW3+bPdrg1234= SigV4 ECDHE-RSA-AES128-SHA AuthHeader DOC-EXAMPLE-BUCKET1.s3.us-west-1.amazonaws.com TLSV1.2 - Yes
+</code></pre>
+</details>
+<h3 id="s3---access-logs-warning"><a class="header" href="#s3---access-logs-warning">S3 - Access Logs: Warning</a></h3>
+<ul>
+<li>모니터링 버킷(감시 대상이 되는 버킷)을 로깅 버킷으로 설정해서는 안됨</li>
+<li>이 경우, 로깅 루프를 유발하여, <strong>버킷이 무한정 커지게 됨</strong></li>
+</ul>
+<h2 id="s3---pre-signed-urls"><a class="header" href="#s3---pre-signed-urls">S3 - Pre-Signed URLs</a></h2>
+<ul>
+<li><strong>S3 콘솔, AWS CLI 또는 SDK</strong>를 통해, pre-signed URL을 생성</li>
+<li><strong>URL Expiration</strong>
+<ul>
+<li><strong>S3 Console</strong> - 1분에서 720분(12시간)까지</li>
+<li><strong>AWS CLI</strong> - <code>--expires-in</code> 파라미터로 초 단위 유효기간 설정 가능 (기본 3600초, 최대 604800초 ~ 168시간)</li>
+</ul>
+</li>
+<li>pre-signed URL를 전달받은 이용자는 GET/PUT에 대한 URL을 생성한 이용자의 권한을 상속받음</li>
+<li>예시:
+<ul>
+<li>로그인을 한 유저에게만 S3 버킷으로부터 프리미엄 비디오를 다운로드할 수 있도록 하는 경우</li>
+<li>끊임없이 변화하는 이용자 목록들에게만 파일 다운로드 경로를 동적으로 제공하고자 하는 경우</li>
+<li>S3 버킷의 특정한 위치에 이용자가 파일을 업로드하도록 일시적으로 허용하고자 하는 경우</li>
+</ul>
+</li>
+</ul>
+<h2 id="s3---glacier-vault-lock"><a class="header" href="#s3---glacier-vault-lock">S3 - Glacier Vault Lock</a></h2>
+<ul>
+<li>WORM(Write Once Read Many) 모델 적용</li>
+<li>Vault Lock Policy를 생성</li>
+<li>추후의 변경에 대해 policy를 잠금 (더 이상 변경되거나 삭제될 수 없음)</li>
+<li>규정 준수(compliance)와 데이터 보관(data retention)에 유용</li>
+</ul>
+<h2 id="s3---object-lock-versioning-must-be-enabled"><a class="header" href="#s3---object-lock-versioning-must-be-enabled">S3 - Object Lock (versioning must be enabled)</a></h2>
+<ul>
+<li>WORM(Write Once Read Many) 모델 적용</li>
+<li>특정 시간 동안 오브젝트 버전의 삭제를 막음</li>
+<li><strong>Retention mode - Compliance</strong>:
+<ul>
+<li>루트 이용자를 포함해 그 누구도 버전을 덮어씌우거나 삭제할 수 없음</li>
+<li>해당 모드는 변경될 수 없고, 정해진 기간도 더 줄일 수 없음</li>
+</ul>
+</li>
+<li><strong>Retention mode - Governance</strong>:
+<ul>
+<li>대부분의 이용자들은 오브젝트 버전을 덮어씌우거나 삭제하거나, 잠겨진 세팅을 변경할 수 없음</li>
+<li>일부 이용자들에게 보관된 내용을 변경하거나, 오브젝트를 삭제할 수 있는 특별한 권한을 부여할 수 있음</li>
+</ul>
+</li>
+<li><strong>Retention Period</strong>:
+<ul>
+<li>정해진 기간 동안 특정한 오브젝트를 보호하며, 연장될 수 없음</li>
+</ul>
+</li>
+<li><strong>Legal Hold</strong>:
+<ul>
+<li>보관 기간과 무관하게 오브젝트를 무기한 보호</li>
+<li><code>s3:PutObjectLegalHold</code> IAM 권한을 통해 보호를 해제하거나, 오브젝트를 삭제할 수 있음</li>
+</ul>
+</li>
+</ul>
+<h2 id="s3---access-points"><a class="header" href="#s3---access-points">S3 - Access Points</a></h2>
+<ul>
+<li><strong>Access Point는 S3 버킷에 대한 보안 관리를 쉽게 만들어줌</strong></li>
+<li><strong>각각의 Access Point는 다음을 가짐</strong>:
+<ul>
+<li>본인의 DNS 네임 (인터넷 오리진 or VPC 오리진)</li>
+<li>액세스 포인트 정책 (버킷 정책과 유사함) - 규모에 따라 보안을 관리</li>
+</ul>
+</li>
+</ul>
+<h3 id="s3---access-points--vpc-origin"><a class="header" href="#s3---access-points--vpc-origin">S3 - Access Points ~ VPC Origin</a></h3>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/e1822db470e60d090affd0956d743cb0e7cdf113/2020/10/12/Set-up-S3-Access-Points-for-an-Amazon-S3-bucket-and-use-it-with-VPC-endpoints.png" alt="S3 Access Points by VPC Origin" /></p>
+<ul>
+<li>VPC 내에서만 액세스할 수 있도록 액세스 포인트를 정의할 수도 있음</li>
+<li>반드시 액세스 포인트로 액세스하는 VPC 엔드포인트를 만들어야 함 (Gateway 또는 Interface 엔드포인트)</li>
+<li>반드시 타깃 버킷과 액세스 포인트에 대한 액세스를 VPC 엔드포인트 정책 상으로 허용하고 있어야 함</li>
+</ul>
+<h2 id="s3-object-lambda"><a class="header" href="#s3-object-lambda">S3 Object Lambda</a></h2>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2021/03/16/s3-object-lambda-architecture-1.png" alt="S3 Object Lambda" /></p>
+<ul>
+<li>호출 애플리케이션(caller application)에 의해 오브젝트가 조회되기 전에, AWS 람다 함수를 오브젝트에 적용할 수 있음</li>
+<li><strong>S3 Access Point</strong>와 <strong>S3 Object Lambda Access Points</strong>를 갖고 있는 하나의 S3 버킷만 필요함</li>
+<li>사례:
+<ul>
+<li>분석 또는 비프로덕션 환경을 위한 개인 식별 정보 삭제</li>
+<li>데이터 포맷 간의 변환 (ex. XML to JSON)</li>
+<li>오브젝트를 요청한 사용자 등 호출 세부 정보(caller-specific detail)를 사용하여 즉석에서 이미지 크기를 조정하거나, 워터마킹을 할 수 있음</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 

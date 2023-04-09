@@ -14826,6 +14826,255 @@ User: (아무 그룹에도 속하지 않음)
 </ul>
 </li>
 </ul>
+<h2 id="s3---moving-between-storage-classes"><a class="header" href="#s3---moving-between-storage-classes">S3 - Moving between Storage Classes</a></h2>
+<p><img src="https://docs.aws.amazon.com/images/AmazonS3/latest/userguide/images/lifecycle-transitions-v3.png" alt="S3 Lifecycle" /></p>
+<ul>
+<li>오브젝트들을 각 스토리지 클래스 간에 전환할 수 있음</li>
+<li>자주 액세스되지 않는 오브젝트의 경우, <strong>Standard IA</strong>로 이동</li>
+<li>빠른 액세스가 요구되지 않는, 아카이빙 오브젝트의 경우 <strong>Glacier 또는 Glacier Deep Archive</strong>로 이동</li>
+<li>오브젝트의 이동은 <strong>Lifecycle Rules</strong>를 통해 자동화 될 수 있음</li>
+</ul>
+<h2 id="s3---lifecycle-rules"><a class="header" href="#s3---lifecycle-rules">S3 - Lifecycle Rules</a></h2>
+<ul>
+<li>
+<p><strong>Transition Actions</strong> - 오브젝트를 다른 스토리지 클래스로 전환하도록 설정</p>
+<ul>
+<li>생성 이후 60일이 지나면 Standard IA 클래스로 오브젝트 이동</li>
+<li>6개월이 지나면 Glacier로 이동</li>
+</ul>
+</li>
+<li>
+<p><strong>Expiration Actions</strong> - 일부 시간이 지나면 오브젝트를 만료(삭제)하도록 설정</p>
+<ul>
+<li>액세스 로그 파일들은 365일이 지난 이후에는 삭제되도록 설정</li>
+<li><strong>오래된 버전의 파일들은 삭제되도록 설정 (버저닝이 활성화되어 있는 경우)</strong></li>
+<li>불완전한 Multi-Part 업로드들에 대해서는 삭제하도록 설정</li>
+</ul>
+</li>
+<li>
+<p>특정한 prefix를 가진 경우에 대해서만 적용할 수도 있음 (ex. <code>s3://mybucket/mp3/*</code>)</p>
+</li>
+<li>
+<p>특정한 오브젝트 태그를 가진 경우에만 적용할 수도 있음 (ex. <code>Department: Finance</code>)</p>
+</li>
+</ul>
+<h3 id="s3---lifecycle-rules-scenario-1"><a class="header" href="#s3---lifecycle-rules-scenario-1">S3 - Lifecycle Rules (Scenario 1)</a></h3>
+<blockquote>
+<p>내 EC2 애플리케이션은 프로필 사진을 썸네일로 만들어 업로드한다. 이 썸네일들은 쉽게 재생성될 수 있고, 60일 동안 보존되어야 한다. 소스 이미지들은 60일 동안 즉각적으로 조회될 수 있어야하고, 60일이 지난 이후에는 6시간까지 기다릴 수 있다. 이를 어떻게 구현할 수 있을까?</p>
+</blockquote>
+<ul>
+<li>S3 소스 이미지는 <strong>Standard</strong>로 두고, 60일이 지나면 <strong>Glacier</strong>로 전환하도록 라이프사이클 설정을 할 수 있다.</li>
+<li>S3 썸네일 이미지는 <strong>One-Zone IA</strong>로 두고, 60일이 지나면 이것이 만료되도록(삭제하도록) 설정할 수 있다.</li>
+</ul>
+<h3 id="s3---lifecycle-rules-scenario-2"><a class="header" href="#s3---lifecycle-rules-scenario-2">S3 - Lifecycle Rules (Scenario 2)</a></h3>
+<blockquote>
+<p>내 회사에는 삭제된 S3 오브젝트를 30일 동안은 드물긴 하겠지만 즉각적으로 복구할 수 있어야 한다는 룰이 성명되어 있다. 또 30일이 지난 이후, 최대 365일 동안은 삭제된 오브젝트들이 48시간 내에는 복구 가능(recoverable)한 상태에 있어야 한다.</p>
+</blockquote>
+<ul>
+<li>오브젝트들이 버전을 갖도록 <strong>S3 버저닝을 활성화</strong>한다. 이를 통해, &quot;삭제된 오브젝트&quot;는 실제로 삭제된 것이 아니라, &quot;delete marker&quot;를 가짐으로써, 사실을 숨김 처리가 되었을 뿐, 복구 가능한 상태가 된다.</li>
+<li>오브젝트의 비현재 버전(noncurrent version)들을 <strong>Standard IA</strong>로 전환한다.</li>
+<li>시간이 지난 이후에는 비현재 버전(noncurrent version)들을  <strong>Glacier Deep Archive</strong>로 전환한다.</li>
+</ul>
+<h3 id="s3---storage-class-analysis"><a class="header" href="#s3---storage-class-analysis">S3 - Storage Class Analysis</a></h3>
+<ul>
+<li>오브젝트를 적절한 스토리지 클래스로 전환할 때 결정을 도와줌</li>
+<li><strong>Standard</strong>와 <strong>Standard IA</strong>의 경우 추천
+<ul>
+<li>One-Zone IA나 Glacier에는 적용되지 않음</li>
+</ul>
+</li>
+<li>1일 단위로 리포트가 업데이트됨</li>
+<li>데이터 분석 시작까지 24 ~ 48시간</li>
+<li>라이프사이클 룰을 적용(또는 향상)하기 위한 좋은 시작</li>
+</ul>
+<h2 id="s3---requester-pays"><a class="header" href="#s3---requester-pays">S3 - Requester Pays</a></h2>
+<ul>
+<li>일반적으로 버킷 소유자는 S3 스토리지와 해당 스토리지와 관련된 모든 데이터 전송 비용을 지불함</li>
+<li>하지만 <strong>Requester Pays</strong> 버킷을 사용하면, 버킷 소유자가 아닌 요청자(requester)가 버킷으로부터의 데이터 다운로드 및 요청 비용을 지불</li>
+<li>다른 계정과 거대한 데이터셋을 공유하고자 할 때 유용함</li>
+<li>requester는 반드시 AWS 상에서 인증되어야 함 (익명 이용자가 될 수 없음)</li>
+</ul>
+<h2 id="s3---event-notifications"><a class="header" href="#s3---event-notifications">S3 - Event Notifications</a></h2>
+<ul>
+<li>S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication...</li>
+<li>오브젝트 명칭에 대한 필터링 가능 (ex. <code>*.jpg</code>)</li>
+<li><strong>사례</strong>: S3로 업로드되는 이미지에 대한 썸네일 생성</li>
+<li><strong>원하는 만큼의 &quot;S3 이벤트&quot;를 생성할 수 있음</strong></li>
+<li>AWS SNS, SQS, Lambda와 연동 (EventBridge를 통해 더 많은 Destination과 연동 가능)</li>
+<li>S3 event notifications는 이벤트 전달에 일반적으로 몇 초 정도가 소요되지만, 가끔 1분, 또는 그 이상이 소요될 수 있음</li>
+</ul>
+<h3 id="s3---event-notifications-with-amazon-eventbridge"><a class="header" href="#s3---event-notifications-with-amazon-eventbridge">S3 - Event Notifications with Amazon EventBridge</a></h3>
+<ul>
+<li>JSON 룰을 이용한 <strong>고급 필터링</strong> (메타 데이터, 오브젝트 크기, 명칭...)</li>
+<li><strong>Multiple Destinations</strong> - ex. Step functions, Kinesis Streams / Firehose...</li>
+<li><strong>EventBridge Capabilities</strong> - Archive, Replay Event, Reliable delivery</li>
+</ul>
+<h2 id="s3---baseline-performance"><a class="header" href="#s3---baseline-performance">S3 - Baseline Performance</a></h2>
+<ul>
+<li>S3는 많은 요청 횟수를 처리하고 100-200ms의 레이턴시를 보유하도록 자동으로 스케일링됨</li>
+<li><strong>하나의 버킷에 각 prefix 당 매초 최소 3,500 개의 PUT/COPY/POST/DELETE 또는 5,500 GET/HEAD 요청 작업을</strong> 수행할 수 있음</li>
+<li>하나의 버킷에 가질 수 있는 prefix 갯수의 제한은 없음</li>
+<li><strong>예시 (object path =&gt; prefix)</strong>:
+<ul>
+<li>bucket/folder1/sub1/file =&gt; /folder1/sub1/</li>
+<li>bucket/folder1/sub2/file =&gt; /folder1/sub2/</li>
+<li>bucket/1/file =&gt; /1/</li>
+<li>bucket/2/file =&gt; /2/</li>
+</ul>
+</li>
+<li>위 4개의 prefix 모두에 균등하게 읽기를 분산시키면, GET과 HEAD에 대해 초당 22,000건의 요청을 달성할 수 있음</li>
+</ul>
+<h2 id="s3---performance"><a class="header" href="#s3---performance">S3 - Performance</a></h2>
+<ul>
+<li><strong>Multi-Part upload</strong>:
+<ul>
+<li>100MB 이상의 파일에 추천</li>
+<li>5GB 이상의 파일에는 필수</li>
+<li>업로드를 병렬화(parallelize)할 수 있음 (전송 속도 상승)</li>
+</ul>
+</li>
+<li><strong>S3 Transfer Acceleration</strong>
+<ul>
+<li>타깃 리전에 해당하는 S3 버킷으로 데이터를 전달하는 AWS 엣지 로케이션으로 파일을 전송하여 전송 속도를 향상시킴</li>
+<li>Multi-part upload와 호환 가능함</li>
+</ul>
+</li>
+</ul>
+<h3 id="s3---performance--s3-byte-range-fetches"><a class="header" href="#s3---performance--s3-byte-range-fetches">S3 - Performance ~ S3 Byte-Range Fetches</a></h3>
+<ul>
+<li>특정 바이트 범위(byte range)에 대한 요청을 보내서 GET 요청을 병렬화</li>
+<li>장애 발생 시 복원력(resilience) 향상</li>
+<li><strong>다운로드 속도를 향상시킬 수 있음</strong></li>
+<li><strong>데이터의 일부만 조회하는데에 사용할 수 있음</strong> (ex. 파일 헤드)</li>
+</ul>
+<h2 id="s3---select--glacier-select"><a class="header" href="#s3---select--glacier-select">S3 - Select &amp; Glacier Select</a></h2>
+<ul>
+<li>SQL을 사용하는 <strong>서버사이드 필터링</strong>을 적용하여 적은 데이터를 조회할 수 있음</li>
+<li>row &amp; column으로 필터링 가능 (간단한 SQL 문)</li>
+<li>더 적은 양의 네트워크 전송이 이루어지고, 또 더 적은 클라이언트 측 CPU 비용이 발생</li>
+</ul>
+<h2 id="s3---batch-operations"><a class="header" href="#s3---batch-operations">S3 - Batch Operations</a></h2>
+<ul>
+<li>
+<p>존재하는 S3 오브젝트들에 하나의 요청을 통해 대량 작업을 수행</p>
+<ul>
+<li>오브젝트의 메타데이터와 프로퍼티를 수정</li>
+<li>S3 버킷 간에 오브젝트 복사</li>
+<li><strong>비암호화된 오브젝트를 암호화</strong></li>
+<li>ACL과 태그를 수정</li>
+<li>S3 Glacier로부터 오브젝트들을 복구</li>
+<li>각 오브젝트에 커스텀 액션을 수행하는 람다 함수를 실행</li>
+</ul>
+</li>
+<li>
+<p>대상 오브젝트 목록, 수행할 액션, 옵션 파라미터로 하나의 작업이 구성됨</p>
+</li>
+<li>
+<p>S3 Batch Operation로 재시도를 관리하고, 진행 상황을 추적하고, 완료 알림을 보내고, 리포트를 생성할 수 있음</p>
+</li>
+<li>
+<p><strong>대상 오브젝트 목록을 얻기위해 S3 Inventory를 사용할 수 있고, 그 목록을 필터링하기 위해 S3 Select를 사용할 수 있음</strong></p>
+</li>
+</ul>
+<h2 id="s3---object-encryption"><a class="header" href="#s3---object-encryption">S3 - Object Encryption</a></h2>
+<ul>
+<li>
+<p>S3 버킷 내 오브젝트들은 아래 4가지 방법 중 하나로 암호화할 수 있음 ~ 어떤 상황에서 어떤 암호화를 적용할 지 이해하는 것이 중요함</p>
+</li>
+<li>
+<p><strong>Server-Side Encryption (SSE)</strong></p>
+<ul>
+<li><strong>Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3)</strong> - <em><strong>기본 활성화</strong></em>
+<ul>
+<li>AWS로부터 소유/관리되는 키를 통해 S3 오브젝트를 암호화</li>
+</ul>
+</li>
+<li><strong>Server-Side Encryption with KMS Keys stored in AWS KMS (SSE-KMS)</strong>
+<ul>
+<li>암호화 키 관리를 위해 AWS Key Management Service (AWS KMS)를 활용</li>
+</ul>
+</li>
+<li><strong>Server-Side Encryption with Customer-Provided Keys (SSE-C)</strong>
+<ul>
+<li>본인의 커스텀 암호화 키로 관리하고자 할 때</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Client-Side Encryption</strong></p>
+</li>
+</ul>
+<h3 id="s3-encryption---sse-s3"><a class="header" href="#s3-encryption---sse-s3">S3 Encryption - SSE-S3</a></h3>
+<ul>
+<li>AWS가 다루고, 관리하고, 소유한 키를 통해 암호화</li>
+<li>오브젝트는 서버사이드에서 암호화됨</li>
+<li>암호화 타입은 <strong>AES-256</strong></li>
+<li>반드시 헤더에 다음을 포함 =&gt; <strong>&quot;x-amz-server-side-encryption&quot;: &quot;AES256&quot;</strong></li>
+<li><strong>새로 만든 버킷 &amp; 새로운 오브젝트들에는 기본적으로 활성화되어 있음</strong></li>
+</ul>
+<h3 id="s3-encryption---sse-kms"><a class="header" href="#s3-encryption---sse-kms">S3 Encryption - SSE-KMS</a></h3>
+<ul>
+<li>AWS KMS(Key Management Service)를 통해 관리되는 키로 암호화</li>
+<li>KMS 이점: 이용자 통제 + CloudTrail을 사용한 키 사용 감사(audit)</li>
+<li>오브젝트는 서버사이드에서 암호화됨</li>
+<li>반드시 헤더에 다음을 포함 =&gt; <strong>&quot;x-amz-server-side-encryption&quot;: &quot;aws:kms&quot;</strong></li>
+</ul>
+<h3 id="sse-kms-limitation"><a class="header" href="#sse-kms-limitation">SSE-KMS Limitation</a></h3>
+<ul>
+<li>SSE-KMS를 사용하는 경우, KMS의 한계에 부딫힐 수도 있음</li>
+<li>업로드 시에, <strong>GenerateDataKey</strong> KMS API를 호출함</li>
+<li>다운로드 시에, <strong>Decrypt</strong> KMS API를 호출함</li>
+<li>초당 KMS 할당량(quota)에 포함됨 (리전에 따라 5500, 10000, 30000 req/s)</li>
+<li>Service Quotas Console을 사용해서 quota 증량을 요청할 수 있음</li>
+</ul>
+<h3 id="s3-encryption---sse-c"><a class="header" href="#s3-encryption---sse-c">S3 Encryption - SSE-C</a></h3>
+<ul>
+<li>AWS 외부의, 이용 고객으로부터 완전히 관리되는 키를 통한 서버사이드 암호화</li>
+<li>S3는 관리자(나)가 제공하는 암호화 키를 <strong>보관하지 않음</strong></li>
+<li><strong>HTTPS 필수</strong></li>
+<li>모든 HTTP 요청의 HTTP 헤더에 암호화 키가 제공되어야 함</li>
+</ul>
+<h3 id="se-encryption---client-side-encryption"><a class="header" href="#se-encryption---client-side-encryption">SE Encryption - Client-Side Encryption</a></h3>
+<ul>
+<li><strong>Amazon S3 클라이언트 사이드 암호화 라이브러리</strong>같은 클라이언트 라이브러리를 사용</li>
+<li>클라이언트 쪽에서 S3로 데이터를 전송하기 전에 반드시 스스로 암호화를 해서 보내야 함</li>
+<li>클라이언트 쪽에서 S3로부터 데이터를 조회할 때도 반드시 스스로 복호화를 해야함</li>
+<li>AWS 이용고객(나)가 key와 암호화 사이클을 모두 관리해야함</li>
+</ul>
+<h3 id="s3---encryption-in-transit-ssltls"><a class="header" href="#s3---encryption-in-transit-ssltls">S3 - Encryption in transit (SSL/TLS)</a></h3>
+<ul>
+<li>
+<p>전송 중 암호화(Encryption in flight)는 SSL/TLS로도 불림</p>
+</li>
+<li>
+<p>S3는 다음의 두가지 엔드포인트를 노출</p>
+<ul>
+<li><strong>HTTP Endpoint</strong> - 비암호화</li>
+<li><strong>HTTPS Endpoint</strong> - encryption in flight</li>
+</ul>
+</li>
+<li>
+<p><strong>HTTPS가 권장됨</strong></p>
+</li>
+<li>
+<p><strong>HTTPS는 SSE-C를 사용하고자 하는 경우 필수</strong></p>
+</li>
+<li>
+<p>대부분의 클라이언트들은 기본적으로 HTTPS 엔드포인트를 사용</p>
+</li>
+</ul>
+<h3 id="s3---force-encryption-in-transit"><a class="header" href="#s3---force-encryption-in-transit">S3 - Force encryption in Transit</a></h3>
+<p><img src="https://docs.aws.amazon.com/images/whitepapers/latest/efs-encrypted-file-systems/images/image8.jpeg" alt="Secure Transport" /></p>
+<ul>
+<li><code>aws:SecureTransport</code>를 사용</li>
+</ul>
+<h3 id="s3---default-encryption-vs-bucket-policies"><a class="header" href="#s3---default-encryption-vs-bucket-policies">S3 - Default Encryption vs. Bucket Policies</a></h3>
+<ul>
+<li><strong>SSE-S3 암호화는 S3 버킷에 저장되는 새 오브젝트들에 자동으로 적용됨</strong></li>
+<li>선택적으로, bucket policy를 활용하여 암호화를 강제하거나, ecnryption header(SSE-KMS 또는 SSE-C)가 없는 경우는 PutObject API 호출을 거부할수도 있음</li>
+<li><strong>중요</strong>: Bucker Policy는 <strong>Default Encryption</strong>보다 우선하여 적용됨</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

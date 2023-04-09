@@ -15075,6 +15075,30 @@ User: (아무 그룹에도 속하지 않음)
 <li>선택적으로, bucket policy를 활용하여 암호화를 강제하거나, ecnryption header(SSE-KMS 또는 SSE-C)가 없는 경우는 PutObject API 호출을 거부할수도 있음</li>
 <li><strong>중요</strong>: Bucker Policy는 <strong>Default Encryption</strong>보다 우선하여 적용됨</li>
 </ul>
+<h2 id="s3---cors"><a class="header" href="#s3---cors">S3 - CORS</a></h2>
+<h3 id="what-is-cors"><a class="header" href="#what-is-cors">What is CORS?</a></h3>
+<ul>
+<li>Cross-Origin Resource Sharing (CORS)</li>
+<li>Origin = scheme (protocol) + host (domain) + port
+<ul>
+<li>ex.) <code>https://www.example.com</code> (포트 - 443 for HTTPS, 80 for HTTP)</li>
+</ul>
+</li>
+<li><strong>웹 브라우저</strong>는 기본 오리진을 방문하는 동안, 다른 오리진에 대한 요청을 허용
+<ul>
+<li>동일 오리진: <code>http://example.com/app1</code> &amp; <code>http://example.com/app2</code></li>
+<li>서로 다른 오리진: <code>http://www.example.com</code> &amp; <code>http://other.example.com</code></li>
+</ul>
+</li>
+<li>다른 오리진에서 일어난 요청은 <strong>CORS 헤더</strong>를 사용하여 요청을 허용하지 않는 한 처리되지 않음 (ex. <strong>Access-Control-Allow-Origin</strong>)</li>
+</ul>
+<p><img src="https://docs.aws.amazon.com/ko_kr/sdk-for-javascript/v2/developer-guide/images/cors-overview.png" alt="AWS CORS" /></p>
+<h3 id="s3---cors--allow-origin"><a class="header" href="#s3---cors--allow-origin">S3 - CORS ~ allow origin</a></h3>
+<ul>
+<li>만약 클라이언트가 cross-origin 요청을 S3 버킷에 보낸다면, 적절한 CORS 헤더를 활성화해야 함</li>
+<li>시험에 잘 나옴</li>
+<li>특정 오리진 또는 *(모든 오리진)을 허용할 수 있음</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

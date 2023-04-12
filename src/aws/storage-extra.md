@@ -106,3 +106,226 @@
   - Snow Family 디바이스들에서 인스턴스들을 실행하거나 관리
   - 디바이스 지표(metrics)를 모니터링 (스토리지 용량, 디바이스 내 활성된 인스턴스)
   - 디바이스에서 호환가능한 AWS 서비스 실행 (ex. EC2 인스턴스, AWS DataSync, Network File System(NFS))
+
+### Snow Family - Snowball into Glacier
+
+- **Snowball 그 자체만으로는 Glacier에 직접 임포트할 수 없음**
+- 반드시 S3를 먼저 사용하고, S3 라이프사이클 정책을 조합해야함
+
+## Amazon FSx
+
+### Amazon FSx - Overview
+
+- **AWS에서 높은 성능의 써드파티 파일 시스템을 실행**
+- 완전 관리형 서비스
+  - FSx for Lustre
+  - FSx for Windows File Server
+  - FSx for NetApp ONTAP
+  - FSx for OpenZFS
+
+### Amazon FSx - for Windows (File Server)
+
+- **FSx for Windows**는 완전관리형 Windows 파일 시스템 공유 드라이브
+- SMB 프로토콜 & Windows NTFS 지원
+- Microsoft Active Directory Integration, ACLs(접근 제어 목록), user quotas
+- **리눅스 EC2 인스턴스에 마운트**
+- **Microsoft의 Distrubted File System (DFS) 네임스페이스 지원 (여러 FS 간에 파일들을 그룹화)
+- 최대 10GB/s, 수백만의 IOPS, 100PB 규모의 데이터까지 확장
+- 스토리지 옵션
+  - **SSD** - 레이턴시 중점의 워크로드 (데이터베이스, 미디어 프로세싱, 데이터 분석, ...)
+  - **HDD** - 넓은 스펙트럼의 워크로드 (홈 디렉토리, CMS, ...)
+- 온-프리미스 인프라에 액세스 가능 (VPN or Direct Connect)
+- Multi-AZ로 설정 가능 (High availability)
+- 매일 S3로 데이터 백업 - 재해 복구
+
+### Amazon FSx - for Lustre
+
+- Lustre는 병렬 분산형 파일 시스템의 한 종류로, 대규모 컴퓨팅에 사용됨
+- Lustre = linux + cluster
+- 머신러닝, **고성능 컴퓨팅 (HPC - High Performance Computing)**
+- 비디오 프로세싱, 재무 모델링(Financial Modeling), 전자 설계 자동화(Electronic Design Automation)
+- 최대 100GB/s, 수백만의 IOPS, ms 미만의 레이턴시
+- 스토리지 옵션
+  - **SSD** - 낮은 레이턴시, IOPS 중점의 워크로드, 작고 무작위성인 파일 작업
+  - **HDD** - 대역폭 중점의 워크로드, 크고 순차적인 파일 작업
+- **S3와의 원활한 통합**
+  - 파일 시스템으로서 S3를 읽을 수 있음 (FSx를 통해서)
+  - 컴퓨팅 결과를 S3에 다시 작성할 수 있음 (FSx를 통해서)
+- 온-프리미스 서버로부터 사용될 수 있음 (VPN or Direct Connect)
+
+### Amazon FSx - File System Deployment Options
+
+- **Scratch File System**
+  - 임시 저장소
+  - 데이터가 복제되지 않음 (파일 서버가 디운되면 사라짐)
+  - High burst (6배 빠름, 200MBps per TiB)
+  - 사례: 단기간 프로세싱, 비용 최적화
+- **Persistent File System**
+  - 장기간 스토리지
+  - 동일 AZ 내에 데이터가 복제됨
+  - 몇분 안에 failed file들을 교체
+  - 사례: 장기간 프로세싱, 민감 데이터
+
+### Amazon FSx - for NetApp ONTAP
+
+- AWS에서 관리되는 NetApp ONTAP
+- **NFS, SMB, iSCSI 프로토콜과 호환되는 파일 시스템**
+- ONTAP 또는 NAS에서 실행되는 워크로드를 AWS로 이동
+- 다음과 호환
+  - Linux
+  - Windows
+  - MacOS
+  - VMware Cloud on AWS
+  - Amazon Workspaces & AppStream 2.0
+  - Amazon EC2, ECS and EKS
+- 스토리지 자동 축소/확장
+- 스냅샷, 복제, 저비용, 압축 및 데이터 중복 제거
+- **특정 시점 순간 복제(새로운 워크로드에 대한 테스트에 유용함)**
+
+### Amazon FSx - for OpenZFS
+
+- AWS에서 관리되는 OpenZFS 파일 시스템
+- 오직 NFS와 호환되는 파일 시스템 (v3, v4, v4.1, v4.2)
+- ZFS에서 실행중인 워크로드를 AWS로 이동
+- 다음과 호환
+  - Linux
+  - Windows
+  - MacOS
+  - VMware Cloud on AWS
+  - Amazon Workspaces & AppStream 2.0
+  - Amazon EC2, ECS and EKS
+- 0.5ms 미만의 레이턴시로 최대 1,000,000 IOPS
+- 스냅샷, 압축, 저비용
+- **특정 시점 순간 복제(새로운 워크로드에 대한 테스트에 유용함)**
+
+## Storage Gateway
+
+### Storage Gateway - Hybrid Cloud for Storage
+
+- AWS는 "하이브리드 클라우드"를 추진함
+  - 인프라의 일부는 클라우드로
+  - 인프라의 일부는 온-프레미스로
+- 이렇게 하는 이유는
+  - 장기적인 클라우드 마이그레이션
+  - 보안 요구사항 준수
+  - 규정 준수
+  - IT 전략
+- S3는 (EFS/NFS와 다르게) 독점적인 스토리지 기술인데, 어떻게 S3 데이터를 온-프레미스로 내보낼 수 있을까?
+- 그 역할을 해주는 것이 바로 *AWS Storage Gateway*
+
+### Storage Gateway - AWS Storage Cloud Native Options
+
+- Block - AWS EBS, EC2 Instance Store
+- File - AWS EFS, AWS FSx
+- Object - AWS S3, AWS Glacier
+
+### Storage Gateway - Overview
+
+- 온-프레미스 데이터와 클라우드 데이터 간의 브릿지
+- **사례**:
+  - 재해 복구
+  - 백업 & 복원
+  - 계층형 스토리지 (tiered storage)
+  - 온-프레미스 캐시 & 낮은 레이턴시의 파일 액세스
+
+- **Storage Gateway 종류**:
+  - **S3 File Gateway**
+  - **FSx File Gateway**
+  - **Volume Gateway**
+  - **Tape Gateway**
+
+### Storage Gateway - S3 File Gateway
+
+- NFS와 SMB 프로토콜을 사용하여 접근 가능한 설정된 S3 버킷
+- **가장 최근에 사용된 데이터는 file gateway 내에 캐시됨**
+- S3 Standard, S3 Standard IA, S3 One Zone A, S3 Intelligent Tiering 지원 (Glacier 제외)
+- **라이프사이클 정책을 통해 S3 Glacier로 전환 가능**
+- 각각의 File Gateway에 IAM 역할을 정의하여 버킷에 액세스
+- 이용자 인증을 위해 SMB 프로토콜은 Active Directory(AD)와 연동됨
+  
+### Storage Gateway - FSx File Gateway
+
+- FSx for Window File Server에 대한 네이티브 액세스
+- **자주 액세스되는 데이터에 대한 로컬 캐시** (사실 상 이를 사용하는 주된 이유)
+- Windows 네이티브 호환성 (SMB, NTFS, Active Directory, ...)
+- 그룹 파일 공유와 홈 디렉토리에 유용함
+
+### Storage Gateway - Volume Gateway
+
+- iSCSI 프로토콜을 사용하는 S3 지원 블록 스토리지
+- EBS 스냅샷을 지원하여 온-프레미스 볼륨을 복원하는데 도움을 줌
+- **Cached volumes**: 가장 최근에 액세스된 데이터에 대해 낮은 레이턴시를 보장
+- **Stored volumes**: 전체 데이터셋이 온-프레미스이며, S3로 스케줄된 백업(scheduled backup)
+
+### Storage Gateway - Tape Gateway
+
+- 일부 회사는 놀랍게도(?) 실물 테이프를 사용하는 백업 프로세스를 보유함
+- Tape Gateway는 동일한 프로세스를 클라우드에서 수행할 수 있도록 함
+- S3와 Glacier가 지원되는 Virtual Tape Library(VTL)
+- 기존에 존재하는 tape-based 프로세스를 사용하여 데이터를 백업 (+ iSCSI 인터페이스)
+- 주요 백업 소프트웨어 업체와 협력
+
+### Storage Gateway - Hardware appliance
+
+- Storage Gateway를 사용한다는 것은 온-프레미스 가상화가 필요하다는 것을 의미함
+- 그렇지 않은 경우, **Storage Gateway Hardware Appliance**를 사용할 수도 있음
+- amazon.com에서 구매
+- File Gateway, Volume Gateway, Tape Gateway와 함께 사용
+- 요구되는 CPU, 메모리, 네트워크, SSD 캐시 리소스를 보유하고 있음
+- 소규모 데이터 센터를 두고 매일 NFS 백업을 하기에 유용함
+
+### Storage Gateway - Summary
+
+![Storage Gateway Summary](https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_AWS-Storage-Gateway_HIW@2x.6df96d96cdbaa61ed3ce935262431aabcfb9e52d.png)
+
+## AWS Transfer Family
+
+![Transfer Family](https://d1.awsstatic.com/cloud-storage/product-page-diagram_AWS-Transfer-Family_HIW-Diagram.4af0b3b19477f22bc7e37995c43cf833b6db0ce9.png)
+
+- S3 또는 FTP 프로토콜을 사용하는 EFS 안팎으로 데이터를 전송할 수 있는 완전 관리형 서비스
+- 지원 프로토콜
+  - **AWS Transfer for FTP (File Transfer Protocol (FTP))
+  - **AWS Transfer for FTPS (File Transfer Protocol over SSL (FTPS))
+  - **AWS Transfer for SFTP (Secure File Transfer Protocol (SFTP))
+- 관리형 인프라, 확장 가능, 신뢰 가능, 고가용성 ~ High Available (multi-AZ)
+- 시간 별 프로비전된 엔드포인트마다 + 데이터 전송 GB 단위에 따라 비용 지불
+- 기존에 존재하는 인증 시스템과 호환됨 (Microsoft Active Directory, LDAP, Okta, Amazon Cognito, custom)
+- 사례: 파일 공유, 공용 데이터셋, CRM, ERP, ...
+
+## AWS DataSync
+
+- 많은 양의 데이터를 넘기거나, 받는 경우
+  - 온-프레미스 또는 다른 클라우드로부터 AWS로 이동 (NFS, SMB, HDFS, S3 API...) - 연결을 수행하기 위한 **에이전트 필요**
+  - AWS에서 AWS (다른 스토리지 서비스로) - 에이전트 필요 없음
+- 다음과 동기화 가능
+  - S3 (어떤 storage class든 - Glacier 포함)
+  - EFS
+  - FSx (Windows, Lustre, NetApp, OpenZFS...)
+- 복제 작업을 시간마다/일마다/주마다 수행할 수 있음
+- **파일 권한과 메타데이터가 보존됨** (NFS POSIX, SMB...)
+- 하나의 에이전트 작업은 10Gbps를 사용할 수 있으며, 대역폭 한계(bandwidth limit)를 설정할 수 있음
+
+### AWS DataSync - NFS / SMB to AWS (S3, EFS, FSx...)
+
+![NFS/SMB to AWS](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/Product-Page-Diagram_AWS-DataSync_On-Premises-to-AWS%402x.8769b9dea1615c18ee0597b236946cbe0103b2da.png)
+
+### AWS DataSync - Transfer between AWS storage services
+
+![AWS to AWS](https://d1.awsstatic.com/Digital%20Marketing/House/Editorial/products/DataSync/Product-Page-Diagram_AWS-DataSync-to-AWS-Storage-Services%402x.c9ae72a5d796feed1fd562b968fc133f9e66eec2.png)
+
+## Storage Comparison
+
+- **S3**: 객체 스토리지
+- **S3 Glacier**: 객체 아카이빙
+- **EBS volumes**: 한번에 하나의 EC2 인스턴스에만 존재하는 네트워크 스토리지
+- **Instance Storge**: EC2 인스턴스에 대한 실물 스토리지 (High IOPS)
+- **EFS**: 리눅스 인스턴스, POSIX 파일시스템을 위한 네트워크 파일 시스템
+- **FSx for Windows**: Windows servers를 위한 네트워크 파일 시스템
+- **FSx for Lustre**: 고성능 컴퓨팅 리눅스 파일 시스템
+- **FSx for NetApp ONTAP**: 높은 OS 호환성
+- **FSx for OpenZFS**: 관리형 ZFS 파일 시스템
+- **Storage Gateway**: S3 & FSx File Gateway, Volume Gateway (캐시 & 보관), Tape Gateway
+- **Transfer Family**: S3 또는 EFS 상위의 FTP, FTPS, SFTP 인터페이스
+- **DataSync**: 온-프레미스 to AWS 또는 AWS to AWS 데이터 싱크를 스케줄
+- **Snowcone / Snowball / Snowmobile**: 거대한 양의 물리적인 데이터를 클라우드로 이동
+- **Database**: 구체적인 워크로드 수행을 위함, 인덱싱 또는 쿼링

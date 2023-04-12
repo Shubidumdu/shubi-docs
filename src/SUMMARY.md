@@ -173,5 +173,6 @@
   - [Elastic Beanstalk](aws/eb.md)
   - [S3](aws/s3.md)
   - [CloudFront](aws/cf.md)
+  - [Storage Extras](aws/storage-extra.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

@@ -174,5 +174,6 @@
   - [S3](aws/s3.md)
   - [CloudFront](aws/cf.md)
   - [Storage Extras](aws/storage-extra.md)
+  - [Decoupling Applications](aws/decouple-applications.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

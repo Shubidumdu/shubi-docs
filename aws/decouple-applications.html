@@ -279,6 +279,338 @@
 <li>Exactly-once send capability (중복 제거)</li>
 <li>Consumer의 처리 순서를 보장할 수 있음</li>
 </ul>
+<h2 id="sns"><a class="header" href="#sns">SNS</a></h2>
+<ul>
+<li>만약 하나의 메시지를 많은 receiver들에게 전달하고자 한다면 어떻게 해야 할까?</li>
+<li>하나의 애플리케이션이 각각의 receiver들에게 직접 메시지를 전달하는 방법도 있겠지만, 이 경우, receiver가 추가될 때마다 일일이 애플리케이션 코드를 수정해야 하는 문제가 발생</li>
+<li>이를 해결하기 위한 방법이 Pub/Sub(게시/구독) 패턴</li>
+</ul>
+<p><img src="https://d1.awsstatic.com/Product-Page-Diagram_Amazon-SNS_Event-Driven-SNS-Compute%402x.03cb54865e1c586c26ee73f9dff0dc079125e9dc.png" alt="Pub/Sub Pattern with SNS" /></p>
+<h3 id="sns---overview"><a class="header" href="#sns---overview">SNS - Overview</a></h3>
+<ul>
+<li><strong>event producer</strong>는 오직 하나의 SNS topic에만 메시지를 보냄</li>
+<li><strong>event receiver</strong>(구독)는 원하는 만큼 많이 둘 수 있음</li>
+<li>해당 topic을 구독하는 각 subscriber(= receiver)는 모든 메시지를 수신함 (메시지 필터 기능을 쓰지 않는다면)</li>
+<li>각 topic 별로 최대 12,500,000 구독을 할 수 있음</li>
+<li>최대 100,000 topic</li>
+</ul>
+<h3 id="sns---sns-integrates-with-a-lot-of-aws-services"><a class="header" href="#sns---sns-integrates-with-a-lot-of-aws-services">SNS - SNS integrates with a lot of AWS services</a></h3>
+<ul>
+<li>여러 AWS 서비스들이 알림(notification)을 위해 직접 SNS에 데이터를 전송할 수 있음</li>
+</ul>
+<h3 id="sns---how-to-publish"><a class="header" href="#sns---how-to-publish">SNS - How to publish</a></h3>
+<ul>
+<li>
+<p>Topic Publish (SDK 사용)</p>
+<ul>
+<li>토픽 생성</li>
+<li>(하나 혹은 여러 개의) 구독 생성</li>
+<li>토픽을 구독</li>
+</ul>
+</li>
+<li>
+<p>Direct Publish (모바일 앱 SDK 사용)</p>
+<ul>
+<li>플랫폼 애플리케이션 생성</li>
+<li>플랫폼 엔드포인트 생성</li>
+<li>플랫폼 엔드포인트를 구독</li>
+<li>Google GCM, Apple APNS, Amazon ADM 등과 호환</li>
+</ul>
+</li>
+</ul>
+<h3 id="sns---security"><a class="header" href="#sns---security">SNS - Security</a></h3>
+<ul>
+<li>
+<p><strong>Encryption</strong>:</p>
+<ul>
+<li>HTTPS API를 통한 In-flight encryption</li>
+<li>KMS 키를 통한 At-rest encryption</li>
+<li>클라이언트가 자체적으로 암호화/복호화를 원하는 경우 클라이언트 측 암호화 가능</li>
+</ul>
+</li>
+<li>
+<p><strong>Access Controls</strong>: SNS API로의 액세스를 조정하는 IAM 정책</p>
+</li>
+<li>
+<p><strong>SNS Access Policies</strong> (S3 버킷 정책과 유사)</p>
+<ul>
+<li>서로 다른 계정 간의 SNS 토픽에 액세스해야 하는 경우 유용함</li>
+<li>다른 서비스(SNS, S3...)가 SQS 토픽에 작성해야 하는 경우 유용함</li>
+</ul>
+</li>
+</ul>
+<h2 id="sns--sqs"><a class="header" href="#sns--sqs">SNS + SQS</a></h2>
+<h3 id="fan-out"><a class="header" href="#fan-out">Fan Out</a></h3>
+<p><img src="https://miro.medium.com/v2/resize:fit:723/1*DRrTtdyah9NHwR0VCm6MWA.png" alt="Fan Out" /></p>
+<ul>
+<li>SNS에 한번 푸쉬하고, 모든 SQS 큐를 구독자로 두어 이를 수신하도록 하는 방법</li>
+<li>완전히 디커플링할 수 있음 / 데이터 손실 없음</li>
+<li>SQS는 다음과 같은 것들을 처리: Data Persistence(데이터 지속성), 지연 시간이 존재하는 처리 &amp; 동일 작업의 수행</li>
+<li>시간이 지남에 따라 더 많은 SQS 구독자를 추가할 수 있음</li>
+<li>SQS 큐의 <strong>Access Policy</strong>가 SNS에게 쓰기 권한을 허용하는지 확인할 것</li>
+<li>Cross-Region Delivery: SQS 큐는 다른 리전에서도 동작함</li>
+</ul>
+<h3 id="fan-out---application-s3-events-to-multiple-queues"><a class="header" href="#fan-out---application-s3-events-to-multiple-queues">Fan Out - Application: S3 Events to multiple queues</a></h3>
+<ul>
+<li><strong>event type(e.g., object create)</strong> 과 <strong>prefix(e.g., images/)</strong>
+<ul>
+<li>오직 하나의 <strong>S3 Event rule</strong>만 가질 수 있음</li>
+</ul>
+</li>
+<li>만약 여러 개의 SQS 큐에 동일한 S3 이벤트를 전달하고자 한다면, fan-out을 사용
+<ul>
+<li>SQS 큐 뿐만 아니라, Lambda로도 가능</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2022/05/23/fanout-S3-simple-usecase-diagram.png" alt="s3 fan out" /></p>
+<h3 id="application-sns-to-amazon-s3-through-kinesis-data-firehose"><a class="header" href="#application-sns-to-amazon-s3-through-kinesis-data-firehose">Application: SNS to Amazon S3 through Kinesis Data Firehose</a></h3>
+<ul>
+<li>SNS는 Kinesis로도 전송할 수 있으며, 이를 통해 아래와 같은 솔루션 아키텍처를 가질 수도 있음</li>
+</ul>
+<p><img src="https://docs.aws.amazon.com/images/sns/latest/dg/images/firehose-architecture-s3.png" alt="S3 through Kinesis Data Firehose" /></p>
+<h3 id="sns---fifo-topic"><a class="header" href="#sns---fifo-topic">SNS - FIFO Topic</a></h3>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2020/07/07/pub_sub_messaging.png" alt="SNS FIFO" /></p>
+<ul>
+<li>FIFO = First In First Out (토픽 내 메시지의 순서)</li>
+<li>SQS FIFO와 유사한 기능
+<ul>
+<li>메시지 그룹 ID 기반으로 <strong>정렬</strong> (동일한 그룹 내 모든 메시지가 정렬됨)</li>
+<li>Deduplication ID 또는 Content Based Deduplication를 통한 <strong>중복제거</strong></li>
+</ul>
+</li>
+<li><strong>오직 SQS FIFO 큐만을 구독자로 둘 수 있음</strong></li>
+<li>제한된 처리량 (SQS FIFO와 동일한 처리량)</li>
+</ul>
+<h3 id="sns---sns-fifo--sqs-fifo-fan-out"><a class="header" href="#sns---sns-fifo--sqs-fifo-fan-out">SNS - SNS FIFO + SQS FIFO: Fan Out</a></h3>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2020/07/07/sns_fifo_two_subscriptions-1024x422.png" alt="FIFO Fan Out" /></p>
+<ul>
+<li>Fan Out + 정렬 + 중복 제거가 모두 필요한 상황에서 사용</li>
+</ul>
+<h3 id="sns---message-filtering"><a class="header" href="#sns---message-filtering">SNS - Message Filtering</a></h3>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2022/11/21/Payload-filtering-example.png" alt="SNS message filtering" /></p>
+<ul>
+<li>SNS 토픽의 구독 대상들에게 전달되는 메시지를 필터링 하는 데에 사용하는 JSON 정책</li>
+<li>별도로 필터 정책이 없는 경우, 모든 메시지를 받게 됨</li>
+</ul>
+<h2 id="kinesis"><a class="header" href="#kinesis">Kinesis</a></h2>
+<h3 id="kinesis---overview"><a class="header" href="#kinesis---overview">Kinesis - Overview</a></h3>
+<ul>
+<li>실시간으로 데이터를 <strong>수집, 처리, 분석</strong>하기 쉽게 만들어 줌</li>
+<li>실시간으로 다음과 같은 데이터들을 수집:
+<ul>
+<li>애플리케이션 로그</li>
+<li>통계, 지표</li>
+<li>웹사이트 클릭스트림</li>
+<li>IoT 원격 측정 데이터</li>
+</ul>
+</li>
+<li><strong>Kinesis Data Streams</strong>: 데이터 스트림을 캡처, 처리, 보관</li>
+<li><strong>Kinesis Data Firehose</strong>: 데이터 스트림을 AWS 데이터 스토어로 불러옴</li>
+<li><strong>Kinesis Data Analytics</strong>: SQL 또는 Apache Flink로 데이터 스트림 분석</li>
+<li><strong>Kinesis Video Streams</strong>: 비디오 스트림을 캡처, 처리, 보관</li>
+</ul>
+<h3 id="kinesis-data-streams"><a class="header" href="#kinesis-data-streams">Kinesis Data Streams</a></h3>
+<p><img src="https://docs.aws.amazon.com/images/streams/latest/dev/images/architecture.png" alt="Kinesis Data Streams" /></p>
+<ul>
+<li>1일 ~ 365일 동안 보관</li>
+<li>데이터를 재처리(재실행)할 수 있음</li>
+<li>일단 데이터가 Kinesis로 삽입되고 나면, 삭제될 수 없음 (immutability)</li>
+<li>동일한 파티션을 공유하는 데이터는 동일한 샤드로 이동 (ordering)</li>
+<li>Producers: AWS SDK, Kinesis Producer Library (KPL), Kinesis Agent</li>
+<li>Consumers:
+<ul>
+<li>직접 작성: Kinesis Client Library (KCL), AWS SDK</li>
+<li>관리형: AWS Lambda, Kinesis Data Firehose, Kinesis Data Analytics</li>
+</ul>
+</li>
+</ul>
+<h3 id="kinesis-data-streams---capacity-modes"><a class="header" href="#kinesis-data-streams---capacity-modes">Kinesis Data Streams - Capacity Modes</a></h3>
+<ul>
+<li><strong>Provisioned mode</strong>:
+<ul>
+<li>프로비저닝 및 스케일링될 샤드의 개수를 직접 또는 API를 통해 선택</li>
+<li>각 샤드는 입력에 1MB/s (또는 매초 1000 레코드)</li>
+<li>갹 사드는 출력에 2MB/s (classic 또는 enhanced fan-out consumer의 경우)</li>
+<li>매 시간 프로비전된 샤드 마다 비용 지불</li>
+</ul>
+</li>
+<li><strong>On-demand mode</strong>:
+<ul>
+<li>프로비저닝이나 용량을 관리할 필요가 없음</li>
+<li>기본 용량으로 프로비전됨 (4MB/s 또는 매초 4000 레코드 입력)</li>
+<li>지난 30일 동안 관측한 최대 처리량에 기반하여 자동 스케일링</li>
+<li>시간 당 스트림 &amp; GB 당 데이터 in/out에 따라 비용 지불</li>
+</ul>
+</li>
+</ul>
+<h3 id="kinesis-data-streams---security"><a class="header" href="#kinesis-data-streams---security">Kinesis Data Streams - Security</a></h3>
+<ul>
+<li>IAM 정책을 통한 Control Access / Authorization</li>
+<li>HTTPS 엔드포인트를 통한 in-flight encryption</li>
+<li>KMS를 통한 at-rest encryption</li>
+<li>클라이언트 측에서 데이터 암호화/복호화 가능 (더 어렵긴 함)</li>
+<li>Kinesis가 VPC에 액세스할 수 있도록 하는 VPC Endpoint</li>
+<li>CloudTrail을 통한 모니터링 API 호출</li>
+</ul>
+<h3 id="kinesis-data-firehose"><a class="header" href="#kinesis-data-firehose">Kinesis Data Firehose</a></h3>
+<p><img src="https://d1.awsstatic.com/pdp-how-it-works-assets/product-page-diagram_Amazon-KDF_HIW-V2-Updated-Diagram@2x.6e531854393eabf782f5a6d6d3b63f2e74de0db4.png" alt="Kinesis Data Firehose" /></p>
+<h3 id="kinesis-data-firehose---overview"><a class="header" href="#kinesis-data-firehose---overview">Kinesis Data Firehose - Overview</a></h3>
+<ul>
+<li>완전 관리형 서비스, 관리할 필요 없음, 자동 스케일링, 서버리스
+<ul>
+<li>AWS: Redshift / S3 / OpenSearch</li>
+<li>3rd party partner: Splunk / MongoDB / DataDog / NewRelic / ...</li>
+<li>Custom: 어떤 HTTP 엔드포인트로든 전송 가능</li>
+</ul>
+</li>
+<li>Firehose를 통해 전송된 데이터 당 비용 지불</li>
+<li><strong>거의 실시간 (= 실시간 아님)</strong>
+<ul>
+<li>전체 배치(full batch)가 아닌 경우 최소 60초의 레이턴시 가짐</li>
+<li>또는 한번에 최소 1MB가 넘는 경우 약간 기다려야 함</li>
+</ul>
+</li>
+<li>여러 데이터 포맷, conversion, transformation, compression을 지원</li>
+<li><strong>AWS 람다를 통해 커스텀 데이터 변환 가능</strong></li>
+<li><strong>백업 S3 버킷으로 failed 또는 모든 데이터를 전송 가능</strong></li>
+</ul>
+<h3 id="kinesis-data-stream-vs-firehose"><a class="header" href="#kinesis-data-stream-vs-firehose">Kinesis Data Stream vs Firehose</a></h3>
+<ul>
+<li>Kinesis Data Streams
+<ul>
+<li>대규모 수집을 위한 스트리밍 서비스</li>
+<li>커스텀 코드 작성 (producer / consumer)</li>
+<li>실시간 (~200ms)</li>
+<li>스케일링 관리 (샤드 스플리팅 / 머징 ~ merging)</li>
+<li>1일 ~ 365일 동안 보관되는 데이터 스토리지</li>
+<li>리플레이 기능 지원</li>
+</ul>
+</li>
+<li>Kinesis Data Firehose
+<ul>
+<li>S3 / Redshift / OpenSearch / 써드파티 / 커스텀 HTTP로 스트리밍 데이터 로드</li>
+<li>완전 관리형</li>
+<li>거의 실시간 (버퍼 시간 최소 60초)</li>
+<li>자동 스케일링</li>
+<li>데이터 스토리지 없음</li>
+<li>리플레이 기능 지원하지 않음</li>
+</ul>
+</li>
+</ul>
+<h2 id="ordering-data"><a class="header" href="#ordering-data">Ordering Data</a></h2>
+<h3 id="ordering-data---kinesis"><a class="header" href="#ordering-data---kinesis">Ordering Data - Kinesis</a></h3>
+<ul>
+<li>만약 AWS에 길 위 100대 트럭(<code>truck_1</code>, <code>truck_2</code>, ...)의 GPS 위치를 주기적으로 전송해야 한다고 생각해보자</li>
+<li>여기서 트럭의 위치를 추적하기 위해, 각 트럭마다 순서대로 데이터를 consume하고자 하고자 한다</li>
+<li>어떻게 Kinesis에 데이터를 전송해야 할까?
+<ul>
+<li>답은 <strong><code>truck_id</code>를 &quot;Partion Key&quot; 값으로 사용하는 것</strong>이다.</li>
+<li><strong>똑같은 key는 항상 똑같은 shard에 저장되기 때문</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="ordering-data---into-sqs"><a class="header" href="#ordering-data---into-sqs">Ordering Data - into SQS</a></h3>
+<ul>
+<li>SQS standard에서는 정렬이 없음</li>
+<li>SQS FIFO의 경우, Group ID를 사용하지 않는다면 메시지는 도착한 순서대로 consume되며, <strong>이는 오직 하나의 consumer에 의해 이루어짐</strong></li>
+</ul>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2018/05/01/sqs_fifo_blog_img3-1024x256.png" alt="SQS FIFO Ordering 1" />
+<img src="https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2018/05/02/sqs_fifo_blog_img4-1024x256.png" alt="SQS FIFO Ordering 2" /></p>
+<ul>
+<li>consumer의 개수를 늘리면서, 또 메시지가 서로 관련되어 있을 때 그룹화 하는 것도 원한다면
+<ul>
+<li><strong>Group ID</strong>를 사용해야 함 (Kinesis에서의 Partition Key와 유사함)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2018/05/02/sqs_fifo_blog_img6-1-1024x341.png" alt="SQS FIFO using message group" /></p>
+<h3 id="ordering-data---kinesis-vs-sqs-ordering"><a class="header" href="#ordering-data---kinesis-vs-sqs-ordering">Ordering Data - Kinesis vs SQS Ordering</a></h3>
+<ul>
+<li><strong>100개의 트럭, 5 Kinesis shards, 1 SQS FIFO가 있다고 가정</strong></li>
+<li>*<strong>Kinesis Data Streams</strong>:
+<ul>
+<li>평균적으로 각 샤드 당 20개의 트럭 데이터</li>
+<li>각 샤드 내에서 데이터를 정렬하게 됨</li>
+<li>5개의 샤드가 있으므로, 병렬로 처리할 수 있는 최대 consumer 수는 5개
+<ul>
+<li>이에 따라, 최대 5MB/s를 수신할 수 있음</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>SQS FIFO</strong>
+<ul>
+<li>오직 하나의 SQS FIFO 큐</li>
+<li>100개의 Group ID</li>
+<li>최대 100개의 consumer 가질 수 있음 (Group ID가 100개이기 때문)</li>
+<li>매초 최대 300개의 메시지를 가질 수 있음 (또는, 배치를 사용할 경우 3000)</li>
+</ul>
+</li>
+</ul>
+<h2 id="sqs-vs-sns-vs-kinesis"><a class="header" href="#sqs-vs-sns-vs-kinesis">SQS vs SNS vs Kinesis</a></h2>
+<ul>
+<li>
+<p><strong>SQS</strong></p>
+<ul>
+<li>consumer가 데이터를 pull해야함</li>
+<li>데이터는 consume되고 나면 삭제되어야 함</li>
+<li>원하는 만큼 많은 워커(= consumer)들을 가질 수 있음</li>
+<li>처리량을 프로비전 할 필요 없음</li>
+<li>오직 FIFO 큐를 통해서 정렬을 보장할 수 있음</li>
+<li>개별 메시지 딜레이 기능</li>
+</ul>
+</li>
+<li>
+<p><strong>SNS</strong></p>
+<ul>
+<li>여러 subscriber들에게 데이터를 push</li>
+<li>최대 12,500,000 subscriber</li>
+<li>데이터는 지속(persist)되지 않음 (전송되지 않으면 사라짐)</li>
+<li>Pub/Sub (게시/구독)</li>
+<li>최대 100,000 topic</li>
+<li>처리량을 프로비전 할 필요 없음</li>
+<li>SQS와 함께 사용하여 fan-out 아키텍처 패턴을 구성할 수 있음</li>
+<li>SQS FIFO를 위한 FIFO 기능</li>
+</ul>
+</li>
+<li>
+<p><strong>Kinesis</strong></p>
+<ul>
+<li>Standard: 데이터 pull
+<ul>
+<li>샤드마다 2MB</li>
+</ul>
+</li>
+<li>Enhanced-fan out: 데이터 push
+<ul>
+<li>consumer별 샤드마다 2MB</li>
+</ul>
+</li>
+<li>데이터 리플레이 가능</li>
+<li>실시간 빅데이터 분석과 ETL(Extract, Transform, Load) 목적</li>
+<li>샤드 레벨에서 정렬됨</li>
+<li>X일 이후 데이터가 만료됨</li>
+<li>Provisioned mode 또는 On-demand capacity mode 선택</li>
+</ul>
+</li>
+</ul>
+<h2 id="amazon-mq"><a class="header" href="#amazon-mq">Amazon MQ</a></h2>
+<ul>
+<li>SQS, SNS는 클라우드 네이티브 서비스: AWS 독점(proprietary) 프로토콜</li>
+<li>온-프레미스를 통해 동작하는 기존 애플리케이션들은 다음과 같은 프로토콜을 사용했을 것임
+<ul>
+<li>MQTT, AMQP, STOMP, Openwire, WSS</li>
+</ul>
+</li>
+<li><strong>클라우드로 마이그레이팅 할 때</strong>, 애플리케이션을 SQS, SNS로 아예 다시 엔지니어링 하는 대신, Amazon MQ를 사용할 수 있음</li>
+<li><strong>Amazon MQ는 RabbitMQ, ActiveMQ에 대한 관리형 메시지 브로커 서비스</strong></li>
+<li>Amazon MQ은 SQS/SNS만큼 스케일링 할 수 없음</li>
+<li>Amazon MQ는 서버 위에서 동작하며, 장애 대처를 위해 Multi-AZ로 실행할 수 있음</li>
+<li>Amazon MQ queue 기능(~SQS)과, topic 기능(~SNS)를 모두 갖추고 있음</li>
+</ul>
+<h3 id="amazon-mq---high-availability"><a class="header" href="#amazon-mq---high-availability">Amazon MQ - High Availability</a></h3>
+<p><img src="https://docs.aws.amazon.com/images/amazon-mq/latest/developer-guide/images/amazon-mq-activemq-broker-architecture-active-standby.png" alt="MQ High Availability" /></p>
 
                     </main>
 

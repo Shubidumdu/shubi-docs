@@ -177,5 +177,6 @@
   - [Decoupling Applications](aws/decouple-applications.md)
   - [Containers](aws/containers.md)
   - [Serverless](aws/serverless.md)
+  - [Databases](aws/databases.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

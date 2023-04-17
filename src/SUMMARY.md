@@ -178,5 +178,6 @@
   - [Containers](aws/containers.md)
   - [Serverless](aws/serverless.md)
   - [Databases](aws/databases.md)
+  - [Data & Analytics](aws/data-analytics.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

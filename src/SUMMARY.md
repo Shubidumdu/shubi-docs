@@ -179,5 +179,6 @@
   - [Serverless](aws/serverless.md)
   - [Databases](aws/databases.md)
   - [Data & Analytics](aws/data-analytics.md)
+  - [Machine Learning](aws/machine-learning.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

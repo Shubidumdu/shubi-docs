@@ -17386,6 +17386,216 @@ User: (아무 그룹에도 속하지 않음)
 <li><strong>쿼리를 시작하기 위해 사용가능한 Redshift 클러스터를 보유해야함</strong></li>
 <li>쿼리는 수천개의 Redshift Spectrum 노드에 전달됨</li>
 </ul>
+<h2 id="amazon-opensearch-service"><a class="header" href="#amazon-opensearch-service">Amazon OpenSearch Service</a></h2>
+<ul>
+<li><strong>Amazon OpenSearch = Amazon ElasticSearch의 후속 서비스 (이름이 바뀜)</strong></li>
+<li>DynamoDB에서, 쿼리 작업은 반드시 primary key나 index를 포함해야 함</li>
+<li><strong>OpenSearch로, 어떤 필드든 검색 가능하고, 심지어 부분 일치에 대한 검색도 가능함</strong></li>
+<li>다른 DB를 보완하는 역할로 OpenSearch를 사용하는 것이 일반적임</li>
+<li>인스턴스들의 클러스터가 필요함 (서버리스가 아님)</li>
+<li>기본적으로는 SQL을 지원하지 않음 (플러그인을 통해 활성화할 수는 있음)</li>
+<li>Kinesis Data Firehose, AWS IoT, CloudWatch Log와 호환됨</li>
+<li>Cognito &amp; IAM, KMS 암호화, TLS를 통해 보안</li>
+<li>OpenSearch Dashboards(시각화)가 함께 제공됨</li>
+</ul>
+<h2 id="amazon-emr"><a class="header" href="#amazon-emr">Amazon EMR</a></h2>
+<ul>
+<li>EMR - Elastic MapReduce</li>
+<li>EMR은 **Hadoop 클러스터(빅데이터)**를 만드는 것을 도와 방대한 양의 데이터를 분석/처리하는 것에 도움을 줌</li>
+<li>클러스터는 <strong>몇 백개의 EC2 인스턴스</strong>들로 이루어질 수 있음</li>
+<li>EMR은 Apache Spark, HBase, Presto, Flink와 함께 번들로 제공됨</li>
+<li>EMR이 모든 프로비저닝과 설정을 처리해줌</li>
+<li>오토 스케일링 및 Spot instance와 호환됨</li>
+</ul>
+<blockquote>
+<p><strong>사례</strong>: 데이터 처리, 머신 러닝, 웹 인덱싱, 빅 데이터..</p>
+</blockquote>
+<h3 id="emr---node-types--purchasing"><a class="header" href="#emr---node-types--purchasing">EMR - Node types &amp; purchasing</a></h3>
+<ul>
+<li><strong>Master Node</strong>: 클러스터 관리, 좌표계(coordinate), health 관리 - 장기적으로 실행</li>
+<li><strong>Core Node</strong>: task 실행 및 데이터 저장 - 장기적으로 실행</li>
+<li><strong>Task Node (선택적)</strong>: 오직 task 실행 목적 - 주로 Spot</li>
+<li><strong>Purchasing options</strong>:
+<ul>
+<li>On-demand: reliable, predictable ~ 종료되지 않음</li>
+<li>Reserved (최소 1년): 비용 절감 (가능한 상황이라면 EMR은 이 쪽을 자동으로 사용)</li>
+<li>Spot Instances: 가격이 쌈, 종료될 가능성 있음, less reliable</li>
+</ul>
+</li>
+<li>long-running 클러스터 또는 transient(일시적인) 클러스터를 가질 수 있음</li>
+</ul>
+<h2 id="amazon-quicksight"><a class="header" href="#amazon-quicksight">Amazon QuickSight</a></h2>
+<ul>
+<li><strong>인터렉티브 대시보드를 만들기 위한 서버리스 머신러닝 기반의 business intelligence 서비스</strong></li>
+<li>빠름, 자동 확장 가능, 임베디드 가능, 세션 당 비용 지불</li>
+<li>사례:
+<ul>
+<li>비즈니스 분석</li>
+<li>시각화 구축</li>
+<li>ad-hoc 분석 수행</li>
+<li>데이터를 통한 비즈니스 인사이트 획득</li>
+</ul>
+</li>
+<li>RDS, Aurora, Athena, Redshift, S3... 등과 호환</li>
+<li>QuickSight로 데이터를 가져올 경우 <strong>SPICE 엔진을 통한 인-메모리 계산</strong></li>
+<li>Enterprise edition: Column-Level security(CLS) 설정 가능</li>
+</ul>
+<p><img src="https://d1.awsstatic.com/quicksight-refresh-2021/laptopMockup.06b3b5e4cf2be72f62d30bb5998649e3c93f7400.png" alt="Quicksight" /></p>
+<h3 id="quicksight---대시보드--분석"><a class="header" href="#quicksight---대시보드--분석">QuickSight - 대시보드 &amp; 분석</a></h3>
+<ul>
+<li>이용자 정의(standard version), 그룹 정의(enterprise version)
+<ul>
+<li>여기서 정의된 이용자 &amp; 그룹들은 오직 QuickSight 내에서만 존재, IAM이 아님!</li>
+</ul>
+</li>
+<li>대쉬보드?
+<ul>
+<li>공유가 가능한 읽기 전용 스냅샷</li>
+<li>분석에 대한 설정이 보존됨 (필터링, 파라미터, 컨트롤, 정렬)</li>
+</ul>
+</li>
+<li><strong>이용자나 그룹에게 분석이나 대시보드를 공유할 수 있음</strong></li>
+<li>대시보드를 공유하려면, 먼저 반드시 게시(publish)를 해야함</li>
+<li>대시보드를 보는 이용자들은 그 아래 놓인 데이터도 확인할 수 있음</li>
+</ul>
+<h2 id="aws-glue"><a class="header" href="#aws-glue">AWS Glue</a></h2>
+<ul>
+<li>관리형 ETL (extract, transform, load) 서비스</li>
+<li>분석을 위해 데이터를 준비/변형하는데 유용함</li>
+<li>완전한 <strong>서버리스</strong> 서비스</li>
+</ul>
+<h3 id="glue---data-catalog"><a class="header" href="#glue---data-catalog">Glue - Data Catalog</a></h3>
+<p><img src="https://docs.aws.amazon.com/ko_kr/glue/latest/dg/images/PopulateCatalog-overview.png" alt="Glue Data Catalog Example" /></p>
+<h3 id="glue---thinks-to-know-at-a-high-level"><a class="header" href="#glue---thinks-to-know-at-a-high-level">Glue - thinks to know at a high-level</a></h3>
+<ul>
+<li><strong>Glue Job Bookmarks</strong>: 기존 데이터의 재처리(re-processing)을 방지</li>
+<li><strong>Glue Elastic Views</strong>:
+<ul>
+<li>SQL을 통해 여러 데이터 스토어들 간에 데이터를 결합/복제</li>
+<li>커스텀 코드 없음, Glue가 소스 데이터 내 변화를 감지함, 서버리스</li>
+<li>&quot;virtual table&quot; 활용 (materialized view)</li>
+</ul>
+</li>
+<li><strong>Glue DataBrew</strong>: pre-built transformation으로 데이터를 정리 및 정규화</li>
+<li><strong>Glue Studio</strong>: Glue에서의 ETL 작업들을 생성/실행/모니터링하기 위한 GUI</li>
+<li><strong>Glue Streaming ETL</strong>(built on Apache Spark Structured Streaming): Kinesis Data Streaming, Kafka, MSK(관리형 Kafka)와 호환</li>
+</ul>
+<h2 id="aws-lake-formation"><a class="header" href="#aws-lake-formation">AWS Lake Formation</a></h2>
+<ul>
+<li><strong>Data lake = 분석 목적으로 모든 데이터들을 모아두는 중앙 위치(central place)</strong></li>
+<li>며칠 만에 <strong>data lake</strong>를 쉽게 설정할 수 있도록 해주는 완전 관리형 서비스</li>
+<li>Data Lake에다 데이터를 발견, 정화, 변형, 수집</li>
+<li>직접 처리하기 복잡한 여러 작업들(collecting, cleansing, moving, catalog data, ...)을 자동화시켜줌, 중복 제거(ML Transform을 사용)</li>
+<li>data lake 내에서 구조화/비구조화 데이터를 결합</li>
+<li><strong>out-of-the-box source blueprints</strong>: S3, RDS, Relational &amp; NoSQL DB...</li>
+<li><strong>애플리케이션에 대한 Fine-grained Access Control</strong>(<strong>row/column level</strong>)</li>
+<li><strong>AWS Glue</strong>를 기반으로 구축</li>
+</ul>
+<p><img src="https://d1.awsstatic.com/diagrams/Lake-formation-HIW.9ea3fab3b2ac697a42ae7a805b986278ffd4f41e.png" alt="AWS Lake Formation" /></p>
+<h2 id="kinesis-data-analytics"><a class="header" href="#kinesis-data-analytics">Kinesis Data Analytics</a></h2>
+<h3 id="kinesis-data-analytics---for-sql-applications"><a class="header" href="#kinesis-data-analytics---for-sql-applications">Kinesis Data Analytics - for SQL applications</a></h3>
+<ul>
+<li>SQL로 <strong>Kinesis Data Streams &amp; Firehose</strong>에서 실시간 분석</li>
+<li>Amazon S3에서 스트리밍 데이터를 풍부하게 하기 위해 레퍼런스 데이터를 추가</li>
+<li>완전 관리형, 프로비전해야하는 서버 없음</li>
+<li>자동 스케일링</li>
+<li>실제 사용률에 기반하여 비용 지불</li>
+<li>Output:
+<ul>
+<li>Kinesis Data Streams: 실시간 분석 쿼리의 결과에 대한 stream을 생성</li>
+<li>Kinesis Data Firehose: 목적지(destination)에 분석 쿼리 결과를 전송</li>
+</ul>
+</li>
+<li>사례:
+<ul>
+<li>시계열 분석</li>
+<li>실시간 대시보드</li>
+<li>실시간 통계</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2021/05/19/KinesisAnalyticsStudio-1.png" alt="Kinesis DA for SQL application" /></p>
+<h3 id="kinesis-data-analytics---for-apache-flink"><a class="header" href="#kinesis-data-analytics---for-apache-flink">Kinesis Data Analytics - for Apache Flink</a></h3>
+<ul>
+<li>스트리밍 데이터 처리 및 분석을 위해 Flink(Java, Scala or SQL)를 사용</li>
+<li>AWS 내에서 관리되는 클러스터에 Apach Flink 애플리케이션을 실행
+<ul>
+<li>프로비전된 컴퓨팅 리소스, 병렬 컴퓨팅, 자동 스케일링</li>
+<li>애플리케이션 백업 (체크포인트와 스냅샷으로 구현)</li>
+<li>어떤 Apache Flink 프로그래밍 기능이든 사용 가능</li>
+<li>Flink는 Firehose로부터 결과를 읽어올 수 없음 (이 경우 Kinesis Analytics for SQL을 사용해야 함)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/b6692ea5df920cad691c20319a6fffd7a4a766b8/2021/07/01/BDB1684-image001.jpg" alt="Kinesis DA for Apache Flink" /></p>
+<h2 id="amazon-managed-streaming-for-apache-kafka-amazon-msk"><a class="header" href="#amazon-managed-streaming-for-apache-kafka-amazon-msk">Amazon Managed Streaming for Apache Kafka (Amazon MSK)</a></h2>
+<ul>
+<li>Amazon Kinesis의 대체제</li>
+<li>AWS에서의 완전 관리형 Apache Kafka
+<ul>
+<li>클러스터를 생성/수정/삭제하도록 해줌</li>
+<li>MSK는 Kafka broker 노드와 Zookeeper 노드를 생성 &amp; 관리해줌</li>
+<li>내 VPC 내에 MSK 클러스터를 배포, multi-AZ (최대 3개 ~ HA)</li>
+<li>일반적인 Apache Kafka 장애로부터 자동 복구</li>
+<li><strong>원하는 기간만큼</strong> EBS 볼륨에 데이터를 저장</li>
+</ul>
+</li>
+<li><strong>MSK Serverless</strong>
+<ul>
+<li>capacity를 관리하지 않고도 MSK에 Apache Kafka를 실행</li>
+<li>MSK가 자동으로 리소스 프로비저닝 / 컴퓨팅 및 스토리지 스케일링을 처리해줌</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://d2908q01vomqb2.cloudfront.net/b6692ea5df920cad691c20319a6fffd7a4a766b8/2018/03/02/Kafka1_600px.png" alt="Apache Kafka on AWS" /></p>
+<h3 id="kinesis-data-streams-vs-amazon-msk"><a class="header" href="#kinesis-data-streams-vs-amazon-msk">Kinesis Data Streams vs. Amazon MSK</a></h3>
+<ul>
+<li>Kinesis Data Streams
+<ul>
+<li>메시지 사이즈가 1MB로 제한</li>
+<li>샤드로 데이터 스트리밍</li>
+<li>샤드 스플리팅 &amp; 머징</li>
+<li>TLS in-flight 암호화</li>
+<li>KMS at-rest 암호화</li>
+</ul>
+</li>
+<li>Amazon MSK
+<ul>
+<li>기본 1MB, 더 높게 설정 가능 (ex. 10MB)</li>
+<li>Kafka Topics with Partition</li>
+<li>Topic에만 파티션 추가 가능</li>
+<li>PLAINTEXT 또는 TLS in-flight 암호화</li>
+<li>KMS at-rest 암호화</li>
+</ul>
+</li>
+</ul>
+<h3 id="amazon-msk-consumers"><a class="header" href="#amazon-msk-consumers">Amazon MSK Consumers</a></h3>
+<ul>
+<li>Kinesis Data Analytics for Apache Flink</li>
+<li>AWS Glue - Apache Spark streaming으로 ETL 작업 스트리밍</li>
+<li>Lambda</li>
+<li>직접 구축한 애플리케이션 (ex. EC2/ECS/EKS)</li>
+</ul>
+<h2 id="big-data-ingestion-pipeline"><a class="header" href="#big-data-ingestion-pipeline">Big Data Ingestion Pipeline</a></h2>
+<ul>
+<li>완전한 서버리스로 수집 파이프라인을 구축하고 싶을 때</li>
+<li>실시간으로 데이터를 수집하고 싶을 때</li>
+<li>데이터 변형을 하고 싶을 때</li>
+<li>SQL로 변형된 데이터를 쿼리하고 싶을 때</li>
+<li>쿼리를 통해 생성된 리포트를 S3에 두고 싶을 때</li>
+<li>데이터를 웨어하우스로 불러와 대시보드를 만들고 싶을 때</li>
+</ul>
+<h3 id="big-data-ingestion-pipeline-discussion"><a class="header" href="#big-data-ingestion-pipeline-discussion">Big Data Ingestion Pipeline discussion</a></h3>
+<ul>
+<li>IoT Core는 IoT 디바이스로부터 데이터를 수확(harvest)할 수 있게 해줌</li>
+<li>Kinesis는 실시간 데이터 수집에 유용</li>
+<li>Firehose는 거의 실시간(1분) 내로 S3에 데이터를 전송하도록 해줌</li>
+<li>Lambda는 Firehose와 함께 사용하여 데이터 변형을 할 수 있게 해줌</li>
+<li>S3는 SQS로 notification을 트리거할 수 있음</li>
+<li>Lambda는 SQS를 구독할 수 있음 (S3 -&gt; Lambda로 connecter를 둘 수 있음)</li>
+<li>Athena는 서버리스 SQL 서비스로, 분석 결과를 S3에 보관할 수 있음</li>
+<li>리포팅 버킷(reporting bucket)은 분석된 데이터들을 포함하게 되며, 이는 AWS QuickSight, Redshift 같은 리포팅 툴과 함께 사용할 수 있음</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

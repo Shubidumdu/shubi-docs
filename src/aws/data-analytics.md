@@ -36,7 +36,7 @@
 ## Redshift
 
 - Redshift는 PostgreSQL 기반이지만, **OLTP(online transaction processing)를 위해 사용되는 것이 아님**
-- **OLAP**임 - **online analytical processing (분석 및 데이터 웨어하우싱)
+- **OLAP**임 - **online analytical processing** (분석 및 데이터 웨어하우싱)
 - 다른 데이터 웨어하우스보다 10배의 성능 & PB(페타바이트) 단위로 확장
 - **Columnar** storage of data (row 기반 대신) & 병렬 쿼리 엔진
 - 프로비전된 인스턴스에 기반하여 비용 지불

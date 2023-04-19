@@ -180,5 +180,6 @@
   - [Databases](aws/databases.md)
   - [Data & Analytics](aws/data-analytics.md)
   - [Machine Learning](aws/machine-learning.md)
+  - [Monitoring & Audit](aws/monitoring.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

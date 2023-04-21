@@ -182,5 +182,6 @@
   - [Machine Learning](aws/machine-learning.md)
   - [Monitoring & Audit](aws/monitoring.md)
   - [IAM Advanced](aws/iam-advanced.md)
+  - [Security & Encryption](aws/security.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

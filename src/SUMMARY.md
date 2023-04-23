@@ -184,5 +184,6 @@
   - [IAM Advanced](aws/iam-advanced.md)
   - [Security & Encryption](aws/security.md)
   - [Networking - VPC](aws/vpc.md)
+  - [Disaster Recovery & Migrations](aws/disaster-recovery.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

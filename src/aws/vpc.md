@@ -438,3 +438,110 @@
   - 이는 IPv6를 획득할 수 없기 때문이 아니라 (IPv6 공간은 매우 크기 때문)
   - 서브넷 내에서 이용가능한 IPv4이 없기 때문임
 - **해결책**: 내 서브넷에서 새로운 IPv4 CIDR을 생성
+
+## Egress-only Internet Gateway
+
+- **IPv6만을 사용하고 하고자 할 때 적용**
+- NAT Gateway와 유사하나, IPv6 전용
+- 내 VPC 안에 있는 인스턴스들이 IPv6로 아웃바운드 연결을 할 수 있도록 해줌
+  - 반면, 인터넷에서는 인스턴스에 IPv6 연결을 할 수 없도록 차단함
+- **반드시 Route Table을 업데이트 해야함**
+
+### IPv6 Routing
+
+![IPv6 Routing](https://velog.velcdn.com/images/chan9708/post/d1e7b1f0-2982-4d8f-83e5-99bab106188d/image.png)
+
+## VPC Section Summary
+
+- **CIDR** - IP 범위
+- **VPC** - Virtual Private Cloud => IPv4 & IPv6 CIDR의 목록을 정의
+- **Subnets** - 하나의 AZ에 묶임, 하나의 CIDR을 정의
+- **Internet Gateway** - VPC 레벨에서 IPv4 & IPv6 인터넷 액세스를 제공
+- **Route Tables** - 서브넷에서 IGW, VPC Peering 연결, VPC Endpoint 등으로의 라우트를 추가하기 위해서는 반드시 수정
+- **Bastion Host** - private 서브넷 내의 EC2 인스턴스와도 SSH 연결을 수행하기 위해, SSH로 접속할 수 있는 public EC2 인스턴스
+- **NAT Instances** - private 서브넷 내의 EC2 인스턴스에 인터넷 액세스를 부여(구식), 반드시 public 서브넷 내에서 설정되어야 하며, Source/Destination 체크 옵션을 반드시 비활성화 해야함
+- **NAT Gateway** - private EC2 인스턴스에 scalable한 인터넷 액세스를 제공, AWS에 의해 관리되며, IPv4 전용
+- **Private DNS + Route 53** - DNS Resolution + DNS Hostnames (VPC)를 활성화
+- **NACL** - stateless, 인바운드/아웃바운드 서브넷 룰, 임시 포트(Emphemeral Ports)
+- **Security Groups** - stateful, EC2 인스턴스 레벨에서 작업
+- **Reachability Analyzer** - AWS 리소스 간의 네트워크 연결성 테스트를 수행
+- **VPC Peering** - 중복되지 않는 CIDR을 갖는 두 VPC를 연결, 비전이적(non-transitive)
+- **VPC Endpoints** - VPC 내에서 AWS 서비스에 대한 private 액세스를 제공 (S3, DynamoDB, CloudFormation, SSM)
+- **VPC Flow Logs** - VPC / 서브넷 / ENI 레벨에서 설정될 수 있음, 트래픽의 ACCEPT/REJECT 여부 판단, Athena 또는 CloudWatch Log로 공격을 파악하거나 분석을 수행할 수 있음
+- **Site-to-Site VPN** - 데이터센터(DC)에 Customer Gateway, VPC에 Virtual Private Gateway, public 인터넷 간에 Site-to-Site VPN을 설정
+- **AWS VPN CloudHub** - 사이트에 연결하기 위한 hub-and-spoke VPN 모델
+- **Direct Connect** - VPC에 Virtual Private Gateway 설정, AWS Direct Connection Location에 direct private connection 구성
+- **Direct Connect Gateway** - 다른 AWS 리전들 내에 여러 VPC들에 대한 Direct Connect 설정
+- **AWS PrivateLink / VPC Endpoint Services**:
+  - 내 service VPC에서 customer VPC로 private하게 서비스를 연결
+  - VPC Peering, pulbic Internet, NAT Gateway, Route Table 같은 것이 필요 없음
+  - Network Load Balancer & ENI를 사용해야 함
+- **ClassicLink** - 내 VPC에 EC2와 Classic EC2 인스턴스를 private하게 연결
+- **Transit Gateway** - VPC, VPN & DX에 전이적인(transitive) peering 연결
+- **Traffic Mirroring** - 자세한 분석을 위해 ENI로부터의 네트워크 트래픽을 복사
+- **Egress-only Internet Gateway** - NAT Gateway와 유사하나, IPv6 전용
+
+## Networking Costs in AWS per GB - Simplified
+
+- 비용 절약과 더 좋은 네트워크 성능을 위해서는 Public IP 보다 Private IP를 사용하라
+- 최대의 비용 절약을 위해서는 동일한 AZ를 사용 (대신, High Availability와 트레이드 오프)
+
+![Network Costs in VPC](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EWbdP6GTByHg8nPT-aXMTA.png)
+
+## Minimizing egress traffic network cost
+
+- **Egress traffic**(송신 트래픽): 아웃바운드 트래픽 (AWS -> 외부)
+- **Ingress traffic**(유입 트래픽): 인바운드 트래픽 (외부 -> AWS, 일반적으로 무료)
+- 비용 절감을 위해서는 가능한 많은 인터넷 트래픽을 AWS 내부에 유지시키는 편이 좋음
+
+## S3 Data Transfer Pricing - Analysis for USA
+
+- **S3 Ingress**: 무료
+- **S3 to Internet**: GB 당 $0.09
+- **S3 Transfer Acceleration**:
+  - 빠른 전송 시간 (50~500% 더 나음)
+  - 데이터 전송에 대한 추가 비용 - GB 당 $0.04 ~ $0.08 추가
+- **S3 to CloudFront**: GB 당 $0.00
+- **CloudFront to Internet**: GB 당 $0.085 (S3보다 약간 쌈)
+  - 캐싱 가능 (낮은 레이턴시)
+  - S3 요청과 관련한 비용을 낮출 수 있음 (CloudFront와 함께 쓰는 경우 7배 정도 쌈)
+- **S3 Cross Region Replication**: GB 당 $0.02
+
+## Pricing: NAT Gateway vs. Gateway VPC Endpoint
+
+![Gateway VPC Endpoint](https://miro.medium.com/v2/resize:fit:1400/1*7qj79PNh_dy_zNtX8Qv43Q.png)
+
+- NAT Gateway를 이용하여 Private subnet과 소통하는 것보다, VPC Endpoint를 두는 편이 비용이 훨씬 더 절감
+
+## Network Protection on AWS
+
+- AWS에서의 네트워크를 보호하기 위해 지금껏 아래와 같은 서비스가 있었음
+  - Network Access Control Lists (NACLs)
+  - Amazon VPC security groups
+  - AWS WAF (악성 요청을 보호)
+  - AWS Shield & AWS Shield Advanced
+  - AWS Firewall Manager (cross account로 관리)
+- VPC 전체를 정교한 방식으로 보호하고자 한다면 어떻게 할까?
+
+## AWS Network Firewall
+
+- Amazon VPC 전체를 보호
+- layer 3부터 layer 7까지 보호
+- 다음의 어떤 형태의 전송이든 검사 가능
+  - VPC to VPC 트래픽
+  - 인터넷으로의 아웃바운드
+  - 인터넷으로부터의 인바운드
+  - Direct Connect 또는 Site-to-Site VPN의 인바운드/아웃바운드
+- 내부적으로, AWS Network Firewall은 AWS Gateway Load Balancer를 사용함
+- Rule들은 여러 VPC에 적용하기 위해 AWS Firewall Manager에 의해 cross-account로 중앙 집중식(centrally) 관리될 수 있음
+
+### Network Firewall - Fine Grained Controls
+
+- 1000개의 Rule 지원
+  - IP & Port - ex. 10,000개의 IP 필터링
+  - Protocol - ex. 아웃바운드 커뮤니케이션에 대해 SMB 프로토콜만 블록
+  - Stateful domain list rule groups: `*.mycorp.com` 또는 써드파티 소프트웨어 repo로 향하는 아웃바운드 트래픽을 허용
+  - Regex를 통한 정규표현식 매칭
+- **Traffic Filtering**: Rule과 매칭되는 트래픽을 허용/드롭/경고
+- **Active flow inspection**: 침입 차단 기능으로 네트워크 위협으로부터 보호 (Gateway Load Balancer와 유사하나, AWS에 의해 완전 관리됨)
+- Rule과 매치된 로그들을 Amazon S3, CloudWatch Logs, Kinesis Data Firehose로 전송

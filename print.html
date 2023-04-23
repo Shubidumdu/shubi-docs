@@ -19853,6 +19853,117 @@ User: (아무 그룹에도 속하지 않음)
 </li>
 <li><strong>해결책</strong>: 내 서브넷에서 새로운 IPv4 CIDR을 생성</li>
 </ul>
+<h2 id="egress-only-internet-gateway"><a class="header" href="#egress-only-internet-gateway">Egress-only Internet Gateway</a></h2>
+<ul>
+<li><strong>IPv6만을 사용하고 하고자 할 때 적용</strong></li>
+<li>NAT Gateway와 유사하나, IPv6 전용</li>
+<li>내 VPC 안에 있는 인스턴스들이 IPv6로 아웃바운드 연결을 할 수 있도록 해줌
+<ul>
+<li>반면, 인터넷에서는 인스턴스에 IPv6 연결을 할 수 없도록 차단함</li>
+</ul>
+</li>
+<li><strong>반드시 Route Table을 업데이트 해야함</strong></li>
+</ul>
+<h3 id="ipv6-routing"><a class="header" href="#ipv6-routing">IPv6 Routing</a></h3>
+<p><img src="https://velog.velcdn.com/images/chan9708/post/d1e7b1f0-2982-4d8f-83e5-99bab106188d/image.png" alt="IPv6 Routing" /></p>
+<h2 id="vpc-section-summary"><a class="header" href="#vpc-section-summary">VPC Section Summary</a></h2>
+<ul>
+<li><strong>CIDR</strong> - IP 범위</li>
+<li><strong>VPC</strong> - Virtual Private Cloud =&gt; IPv4 &amp; IPv6 CIDR의 목록을 정의</li>
+<li><strong>Subnets</strong> - 하나의 AZ에 묶임, 하나의 CIDR을 정의</li>
+<li><strong>Internet Gateway</strong> - VPC 레벨에서 IPv4 &amp; IPv6 인터넷 액세스를 제공</li>
+<li><strong>Route Tables</strong> - 서브넷에서 IGW, VPC Peering 연결, VPC Endpoint 등으로의 라우트를 추가하기 위해서는 반드시 수정</li>
+<li><strong>Bastion Host</strong> - private 서브넷 내의 EC2 인스턴스와도 SSH 연결을 수행하기 위해, SSH로 접속할 수 있는 public EC2 인스턴스</li>
+<li><strong>NAT Instances</strong> - private 서브넷 내의 EC2 인스턴스에 인터넷 액세스를 부여(구식), 반드시 public 서브넷 내에서 설정되어야 하며, Source/Destination 체크 옵션을 반드시 비활성화 해야함</li>
+<li><strong>NAT Gateway</strong> - private EC2 인스턴스에 scalable한 인터넷 액세스를 제공, AWS에 의해 관리되며, IPv4 전용</li>
+<li><strong>Private DNS + Route 53</strong> - DNS Resolution + DNS Hostnames (VPC)를 활성화</li>
+<li><strong>NACL</strong> - stateless, 인바운드/아웃바운드 서브넷 룰, 임시 포트(Emphemeral Ports)</li>
+<li><strong>Security Groups</strong> - stateful, EC2 인스턴스 레벨에서 작업</li>
+<li><strong>Reachability Analyzer</strong> - AWS 리소스 간의 네트워크 연결성 테스트를 수행</li>
+<li><strong>VPC Peering</strong> - 중복되지 않는 CIDR을 갖는 두 VPC를 연결, 비전이적(non-transitive)</li>
+<li><strong>VPC Endpoints</strong> - VPC 내에서 AWS 서비스에 대한 private 액세스를 제공 (S3, DynamoDB, CloudFormation, SSM)</li>
+<li><strong>VPC Flow Logs</strong> - VPC / 서브넷 / ENI 레벨에서 설정될 수 있음, 트래픽의 ACCEPT/REJECT 여부 판단, Athena 또는 CloudWatch Log로 공격을 파악하거나 분석을 수행할 수 있음</li>
+<li><strong>Site-to-Site VPN</strong> - 데이터센터(DC)에 Customer Gateway, VPC에 Virtual Private Gateway, public 인터넷 간에 Site-to-Site VPN을 설정</li>
+<li><strong>AWS VPN CloudHub</strong> - 사이트에 연결하기 위한 hub-and-spoke VPN 모델</li>
+<li><strong>Direct Connect</strong> - VPC에 Virtual Private Gateway 설정, AWS Direct Connection Location에 direct private connection 구성</li>
+<li><strong>Direct Connect Gateway</strong> - 다른 AWS 리전들 내에 여러 VPC들에 대한 Direct Connect 설정</li>
+<li><strong>AWS PrivateLink / VPC Endpoint Services</strong>:
+<ul>
+<li>내 service VPC에서 customer VPC로 private하게 서비스를 연결</li>
+<li>VPC Peering, pulbic Internet, NAT Gateway, Route Table 같은 것이 필요 없음</li>
+<li>Network Load Balancer &amp; ENI를 사용해야 함</li>
+</ul>
+</li>
+<li><strong>ClassicLink</strong> - 내 VPC에 EC2와 Classic EC2 인스턴스를 private하게 연결</li>
+<li><strong>Transit Gateway</strong> - VPC, VPN &amp; DX에 전이적인(transitive) peering 연결</li>
+<li><strong>Traffic Mirroring</strong> - 자세한 분석을 위해 ENI로부터의 네트워크 트래픽을 복사</li>
+<li><strong>Egress-only Internet Gateway</strong> - NAT Gateway와 유사하나, IPv6 전용</li>
+</ul>
+<h2 id="networking-costs-in-aws-per-gb---simplified"><a class="header" href="#networking-costs-in-aws-per-gb---simplified">Networking Costs in AWS per GB - Simplified</a></h2>
+<ul>
+<li>비용 절약과 더 좋은 네트워크 성능을 위해서는 Public IP 보다 Private IP를 사용하라</li>
+<li>최대의 비용 절약을 위해서는 동일한 AZ를 사용 (대신, High Availability와 트레이드 오프)</li>
+</ul>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EWbdP6GTByHg8nPT-aXMTA.png" alt="Network Costs in VPC" /></p>
+<h2 id="minimizing-egress-traffic-network-cost"><a class="header" href="#minimizing-egress-traffic-network-cost">Minimizing egress traffic network cost</a></h2>
+<ul>
+<li><strong>Egress traffic</strong>(송신 트래픽): 아웃바운드 트래픽 (AWS -&gt; 외부)</li>
+<li><strong>Ingress traffic</strong>(유입 트래픽): 인바운드 트래픽 (외부 -&gt; AWS, 일반적으로 무료)</li>
+<li>비용 절감을 위해서는 가능한 많은 인터넷 트래픽을 AWS 내부에 유지시키는 편이 좋음</li>
+</ul>
+<h2 id="s3-data-transfer-pricing---analysis-for-usa"><a class="header" href="#s3-data-transfer-pricing---analysis-for-usa">S3 Data Transfer Pricing - Analysis for USA</a></h2>
+<ul>
+<li><strong>S3 Ingress</strong>: 무료</li>
+<li><strong>S3 to Internet</strong>: GB 당 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">0.09</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">an</span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">A</span><span class="mord mathnormal">cce</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord hangul_fallback">빠른전송시간</span><span class="mopen">(</span><span class="mord">50</span><span class="mspace nobreak"> </span><span class="mord">500</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord hangul_fallback">데이터전송에대한추가비용</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">GB</span><span class="mord hangul_fallback">당</span></span></span></span>0.04 ~ <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord">0.08</span><span class="mord hangul_fallback">추가</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">3</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.01968em;">Cl</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">GB</span><span class="mord hangul_fallback">당</span></span></span></span>0.00</li>
+<li><strong>CloudFront to Internet</strong>: GB 당 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0.085</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">3</span><span class="mord hangul_fallback">보다약간쌈</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord hangul_fallback">캐싱가능</span><span class="mopen">(</span><span class="mord hangul_fallback">낮은레이턴시</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">3</span><span class="mord hangul_fallback">요청과관련한비용을낮출수있음</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">Cl</span><span class="mord mathnormal">o</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord hangul_fallback">와함께쓰는경우</span><span class="mord">7</span><span class="mord hangul_fallback">배정도쌈</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">ross</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">pl</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">GB</span><span class="mord hangul_fallback">당</span></span></span></span>0.02</li>
+</ul>
+<h2 id="pricing-nat-gateway-vs-gateway-vpc-endpoint"><a class="header" href="#pricing-nat-gateway-vs-gateway-vpc-endpoint">Pricing: NAT Gateway vs. Gateway VPC Endpoint</a></h2>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/1*7qj79PNh_dy_zNtX8Qv43Q.png" alt="Gateway VPC Endpoint" /></p>
+<ul>
+<li>NAT Gateway를 이용하여 Private subnet과 소통하는 것보다, VPC Endpoint를 두는 편이 비용이 훨씬 더 절감</li>
+</ul>
+<h2 id="network-protection-on-aws"><a class="header" href="#network-protection-on-aws">Network Protection on AWS</a></h2>
+<ul>
+<li>AWS에서의 네트워크를 보호하기 위해 지금껏 아래와 같은 서비스가 있었음
+<ul>
+<li>Network Access Control Lists (NACLs)</li>
+<li>Amazon VPC security groups</li>
+<li>AWS WAF (악성 요청을 보호)</li>
+<li>AWS Shield &amp; AWS Shield Advanced</li>
+<li>AWS Firewall Manager (cross account로 관리)</li>
+</ul>
+</li>
+<li>VPC 전체를 정교한 방식으로 보호하고자 한다면 어떻게 할까?</li>
+</ul>
+<h2 id="aws-network-firewall"><a class="header" href="#aws-network-firewall">AWS Network Firewall</a></h2>
+<ul>
+<li>Amazon VPC 전체를 보호</li>
+<li>layer 3부터 layer 7까지 보호</li>
+<li>다음의 어떤 형태의 전송이든 검사 가능
+<ul>
+<li>VPC to VPC 트래픽</li>
+<li>인터넷으로의 아웃바운드</li>
+<li>인터넷으로부터의 인바운드</li>
+<li>Direct Connect 또는 Site-to-Site VPN의 인바운드/아웃바운드</li>
+</ul>
+</li>
+<li>내부적으로, AWS Network Firewall은 AWS Gateway Load Balancer를 사용함</li>
+<li>Rule들은 여러 VPC에 적용하기 위해 AWS Firewall Manager에 의해 cross-account로 중앙 집중식(centrally) 관리될 수 있음</li>
+</ul>
+<h3 id="network-firewall---fine-grained-controls"><a class="header" href="#network-firewall---fine-grained-controls">Network Firewall - Fine Grained Controls</a></h3>
+<ul>
+<li>1000개의 Rule 지원
+<ul>
+<li>IP &amp; Port - ex. 10,000개의 IP 필터링</li>
+<li>Protocol - ex. 아웃바운드 커뮤니케이션에 대해 SMB 프로토콜만 블록</li>
+<li>Stateful domain list rule groups: <code>*.mycorp.com</code> 또는 써드파티 소프트웨어 repo로 향하는 아웃바운드 트래픽을 허용</li>
+<li>Regex를 통한 정규표현식 매칭</li>
+</ul>
+</li>
+<li><strong>Traffic Filtering</strong>: Rule과 매칭되는 트래픽을 허용/드롭/경고</li>
+<li><strong>Active flow inspection</strong>: 침입 차단 기능으로 네트워크 위협으로부터 보호 (Gateway Load Balancer와 유사하나, AWS에 의해 완전 관리됨)</li>
+<li>Rule과 매치된 로그들을 Amazon S3, CloudWatch Logs, Kinesis Data Firehose로 전송</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="osi-model"><a class="header" href="#osi-model">OSI Model</a></h1>
 <p>**OSI(Open Systems Interconnection)**은 다양한 통신 시스템이 표준 프로토콜을 사용하여 통신할 수 있도록 하는 국제 표준화 기구에 의해 만들어진 개념적인 모델(conceptual model)이다.</p>

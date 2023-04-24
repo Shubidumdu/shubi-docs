@@ -186,5 +186,6 @@
   - [Networking - VPC](aws/vpc.md)
   - [Disaster Recovery & Migrations](aws/disaster-recovery.md)
   - [More Solution Architectures](aws/more-solution-architectures.md)
+  - [Other Services](aws/other-services.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Other Services - Shubi Docs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../index.html">Introduction</a></li><li class="chapter-item "><div><strong aria-hidden="true">1.</strong> Web</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/web-performance/index.html"><strong aria-hidden="true">1.1.</strong> 웹 성능 최적화 기법</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../web/web-performance/what-is-web-performance.html"><strong aria-hidden="true">1.1.1.</strong> 웹 성능이란 무엇인가?</a></li><li class="chapter-item "><a href="../web/web-performance/web-optimization.html"><strong aria-hidden="true">1.1.2.</strong> 웹 최적화</a></li><li class="chapter-item "><a href="../web/web-performance/basic-optimization.html"><strong aria-hidden="true">1.1.3.</strong> 웹 사이트 성능을 개선하는 기본적인 방법</a></li></ol></li></ol></li><li class="chapter-item "><a href="../js/index.html"><strong aria-hidden="true">2.</strong> JavaScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/exec-ctx.html"><strong aria-hidden="true">2.1.</strong> 실행 컨텍스트</a></li><li class="chapter-item "><a href="../js/class.html"><strong aria-hidden="true">2.2.</strong> 클래스</a></li><li class="chapter-item "><a href="../js/arrow-func.html"><strong aria-hidden="true">2.3.</strong> 화살표 함수</a></li><li class="chapter-item "><a href="../js/binding-function.html"><strong aria-hidden="true">2.4.</strong> 함수 바인딩</a></li><li class="chapter-item "><a href="../js/call-apply.html"><strong aria-hidden="true">2.5.</strong> call, apply</a></li><li class="chapter-item "><a href="../js/closure.html"><strong aria-hidden="true">2.6.</strong> 클로저</a></li><li class="chapter-item "><a href="../js/func-exp-and-dec.html"><strong aria-hidden="true">2.7.</strong> 함수 표현식 vs 함수 선언문</a></li><li class="chapter-item "><a href="../js/event-loop.html"><strong aria-hidden="true">2.8.</strong> 이벤트 루프</a></li><li class="chapter-item "><a href="../js/new.html"><strong aria-hidden="true">2.9.</strong> new와 생성자 함수</a></li><li class="chapter-item "><a href="../js/properties.html"><strong aria-hidden="true">2.10.</strong> 프로퍼티</a></li><li class="chapter-item "><a href="../js/prototype.html"><strong aria-hidden="true">2.11.</strong> 프로토타입</a></li><li class="chapter-item "><a href="../js/this.html"><strong aria-hidden="true">2.12.</strong> this</a></li><li class="chapter-item "><a href="../js/var.html"><strong aria-hidden="true">2.13.</strong> var를 쓰지 않는 이유</a></li><li class="chapter-item "><a href="../js/babel.html"><strong aria-hidden="true">2.14.</strong> Babel</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.15.</strong> Web APIs</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/intersection.html"><strong aria-hidden="true">2.15.1.</strong> Intersection Observer</a></li><li class="chapter-item "><a href="../js/web-api/mutation.html"><strong aria-hidden="true">2.15.2.</strong> Mutation Observer</a></li><li class="chapter-item "><a href="../js/web-api/template.html"><strong aria-hidden="true">2.15.3.</strong> Template Element</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/intro.html"><strong aria-hidden="true">2.15.4.</strong> Shadow DOM</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/shadow-dom/slot.html"><strong aria-hidden="true">2.15.4.1.</strong> Slot</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/styling.html"><strong aria-hidden="true">2.15.4.2.</strong> Styling</a></li><li class="chapter-item "><a href="../js/web-api/shadow-dom/events.html"><strong aria-hidden="true">2.15.4.3.</strong> Events</a></li></ol></li><li class="chapter-item "><a href="../js/web-api/canvas/intro.html"><strong aria-hidden="true">2.15.5.</strong> Canvas API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/web-api/canvas/shapes.html"><strong aria-hidden="true">2.15.5.1.</strong> 도형 그리기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">2.16.</strong> Guides</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../js/guides/render-opt.html"><strong aria-hidden="true">2.16.1.</strong> 렌더링 최적화</a></li><li class="chapter-item "><a href="../js/guides/custom-el-checklist.html"><strong aria-hidden="true">2.16.2.</strong> Custom Element 체크리스트</a></li></ol></li></ol></li><li class="chapter-item "><a href="../ts/index.html"><strong aria-hidden="true">3.</strong> TypeScript</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/intro/index.html"><strong aria-hidden="true">3.1.</strong> 타입스크립트 알아보기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/intro/ts_js.html"><strong aria-hidden="true">3.1.1.</strong> TS와 JS의 관계</a></li><li class="chapter-item "><a href="../ts/intro/setting.html"><strong aria-hidden="true">3.1.2.</strong> TS 설정 이해하기</a></li><li class="chapter-item "><a href="../ts/intro/transpile.html"><strong aria-hidden="true">3.1.3.</strong> 코드 생성과 타입이 관계없음을 이해하기</a></li><li class="chapter-item "><a href="../ts/intro/typing.html"><strong aria-hidden="true">3.1.4.</strong> 구조적 타이핑에 익숙해지기</a></li><li class="chapter-item "><a href="../ts/intro/no_any.html"><strong aria-hidden="true">3.1.5.</strong> any 타입 지양하기</a></li></ol></li><li class="chapter-item "><a href="../ts/types/index.html"><strong aria-hidden="true">3.2.</strong> 타입스크립트의 타입 시스템</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/types/use_editor.html"><strong aria-hidden="true">3.2.1.</strong> 편집기를 사용하여 타입 시스템 탐색하기</a></li><li class="chapter-item "><a href="../ts/types/set.html"><strong aria-hidden="true">3.2.2.</strong> 타입이 값들의 집합이라고 생각하기</a></li><li class="chapter-item "><a href="../ts/types/symbol.html"><strong aria-hidden="true">3.2.3.</strong> 타입 공간과 값 공간의 심벌 구분하기</a></li><li class="chapter-item "><a href="../ts/types/type-def.html"><strong aria-hidden="true">3.2.4.</strong> 타입 단언보다는 타입 선언을 사용하기</a></li><li class="chapter-item "><a href="../ts/types/wrapper.html"><strong aria-hidden="true">3.2.5.</strong> 객체 래퍼 타입 피하기</a></li><li class="chapter-item "><a href="../ts/types/excess-type-check.html"><strong aria-hidden="true">3.2.6.</strong> 잉여 속성 체크의 한계 인지하기</a></li><li class="chapter-item "><a href="../ts/types/function-expression.html"><strong aria-hidden="true">3.2.7.</strong> 함수 표현식에 타입 적용하기</a></li><li class="chapter-item "><a href="../ts/types/type-and-interface.html"><strong aria-hidden="true">3.2.8.</strong> 타입과 인터페이스의 차이점 알기</a></li><li class="chapter-item "><a href="../ts/types/generics.html"><strong aria-hidden="true">3.2.9.</strong> 타입 연산과 제너릭 사용으로 반복 줄이기</a></li><li class="chapter-item "><a href="../ts/types/index-signature.html"><strong aria-hidden="true">3.2.10.</strong> 동적 데이터에 인덱스 시그니처 사용하기</a></li><li class="chapter-item "><a href="../ts/types/no-index-signature.html"><strong aria-hidden="true">3.2.11.</strong> number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기</a></li><li class="chapter-item "><a href="../ts/types/readonly.html"><strong aria-hidden="true">3.2.12.</strong> 변경 관련된 오류 방지를 위해 readonly 사용하기</a></li><li class="chapter-item "><a href="../ts/types/mapped-type.html"><strong aria-hidden="true">3.2.13.</strong> 매핑된 타입을 사용하여 값을 동기화하기</a></li></ol></li><li class="chapter-item "><a href="../ts/type-inference/index.html"><strong aria-hidden="true">3.3.</strong> 타입 추론</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/type-inference/use-inferable-types.html"><strong aria-hidden="true">3.3.1.</strong> 추론 가능한 타입을 사용해 장황한 코드 방지하기</a></li><li class="chapter-item "><a href="../ts/type-inference/use-const.html"><strong aria-hidden="true">3.3.2.</strong> 다른 타입에는 다른 변수 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/type-widening.html"><strong aria-hidden="true">3.3.3.</strong> 타입 넓히기</a></li><li class="chapter-item "><a href="../ts/type-inference/type-narrowing.html"><strong aria-hidden="true">3.3.4.</strong> 타입 좁히기</a></li><li class="chapter-item "><a href="../ts/type-inference/create-object-at-once.html"><strong aria-hidden="true">3.3.5.</strong> 한꺼번에 객체 생성하기</a></li><li class="chapter-item "><a href="../ts/type-inference/avoid-aliasing.html"><strong aria-hidden="true">3.3.6.</strong> 일관성있는 별칭 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/use-async.html"><strong aria-hidden="true">3.3.7.</strong> 비동기 코드에는 콜백 대신 async 함수 사용하기</a></li><li class="chapter-item "><a href="../ts/type-inference/context-inference.html"><strong aria-hidden="true">3.3.8.</strong> 타입 추론에 문맥이 어떻게 사용되는지 이해하기</a></li><li class="chapter-item "><a href="../ts/type-inference/well-typed-lib.html"><strong aria-hidden="true">3.3.9.</strong> 함수형 기법과 라이브러리로 타입 흐름 유지하기</a></li></ol></li><li class="chapter-item "><a href="../ts/design/index.html"><strong aria-hidden="true">3.4.</strong> 타입 설계</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/design/valid-states.html"><strong aria-hidden="true">3.4.1.</strong> 유효한 상태만 표현하는 타입을 지향하기</a></li><li class="chapter-item "><a href="../ts/design/loose-accept-strict-produce.html"><strong aria-hidden="true">3.4.2.</strong> 사용할 때는 너그럽게, 생성할 때는 엄격하게</a></li><li class="chapter-item "><a href="../ts/design/jsdoc-repeat.html"><strong aria-hidden="true">3.4.3.</strong> 문서에 타입 정보를 쓰지 않기</a></li><li class="chapter-item "><a href="../ts/design/null-values-to-perimeter.html"><strong aria-hidden="true">3.4.4.</strong> 타입 주변에 null값 배치하기</a></li><li class="chapter-item "><a href="../ts/design/union-of-interfaces.html"><strong aria-hidden="true">3.4.5.</strong> 유니온의 인터페이스보다는 인터페이스의 유니온 사용하기</a></li><li class="chapter-item "><a href="../ts/design/avoid-strings.html"><strong aria-hidden="true">3.4.6.</strong> string 타입보다 더 구체적인 타입 사용하기</a></li><li class="chapter-item "><a href="../ts/design/incomplete-over-innacurate.html"><strong aria-hidden="true">3.4.7.</strong> 부정확한 타입보다는 미완성 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/design/consider-codegen.html"><strong aria-hidden="true">3.4.8.</strong> 데이터가 아닌, API와 명세를 보고 타입 만들기</a></li><li class="chapter-item "><a href="../ts/design/language-of-domain.html"><strong aria-hidden="true">3.4.9.</strong> 해당 분야의 용어로 타입 이름 짓기</a></li><li class="chapter-item "><a href="../ts/design/brands.html"><strong aria-hidden="true">3.4.10.</strong> 공식 명칭에는 상표를 붙이기</a></li></ol></li><li class="chapter-item "><a href="../ts/any/index.html"><strong aria-hidden="true">3.5.</strong> any 다루기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/any/narrowest-any.html"><strong aria-hidden="true">3.5.1.</strong> any 타입은 가능한 한 좁은 범위에서만 사용하기</a></li><li class="chapter-item "><a href="../ts/any/specific-any.html"><strong aria-hidden="true">3.5.2.</strong> any를 구체적으로 변형해서 사용하기</a></li><li class="chapter-item "><a href="../ts/any/hide-unsafe-casts.html"><strong aria-hidden="true">3.5.3.</strong> 함수 안으로 타입 단언문 감추기</a></li><li class="chapter-item "><a href="../ts/any/evolving-any.html"><strong aria-hidden="true">3.5.4.</strong> any의 진화를 이해하기</a></li><li class="chapter-item "><a href="../ts/any/never-unknown.html"><strong aria-hidden="true">3.5.5.</strong> 모르는 타입의 값에는 any 대신 unknown을 사용하기</a></li><li class="chapter-item "><a href="../ts/any/type-safe-monkey.html"><strong aria-hidden="true">3.5.6.</strong> 몽키 패치보다는 안전한 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/any/type-percentage.html"><strong aria-hidden="true">3.5.7.</strong> 타입 커버리지를 추적하여 타입 안정성 유지하기</a></li></ol></li><li class="chapter-item "><a href="../ts/declarations/index.html"><strong aria-hidden="true">3.6.</strong> 타입 선언과 @types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/declarations/dev-dependencies.html"><strong aria-hidden="true">3.6.1.</strong> devDependencies에 typescript와 @types 추가하기</a></li><li class="chapter-item "><a href="../ts/declarations/understand-ts-types.html"><strong aria-hidden="true">3.6.2.</strong> 타입 선언과 관련된 세 가지 버전 이해하기</a></li><li class="chapter-item "><a href="../ts/declarations/export-your-types.html"><strong aria-hidden="true">3.6.3.</strong> 공개 API에 등장하는 모든 타입을 export하기</a></li><li class="chapter-item "><a href="../ts/declarations/use-tsdoc.html"><strong aria-hidden="true">3.6.4.</strong> API 주석에 TSDoc 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/this-in-callbacks.html"><strong aria-hidden="true">3.6.5.</strong> 콜백에서 this에 대한 타입 제공하기</a></li><li class="chapter-item "><a href="../ts/declarations/conditional-overload.html"><strong aria-hidden="true">3.6.6.</strong> 오버로딩 타입보다는 조건부 타입을 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/mirror-types-for-deps.html"><strong aria-hidden="true">3.6.7.</strong> 의존성 분리를 위해 미러 타입 사용하기</a></li><li class="chapter-item "><a href="../ts/declarations/test-your-types.html"><strong aria-hidden="true">3.6.8.</strong> 테스팅 타입의 함정에 주의하기</a></li></ol></li><li class="chapter-item "><a href="../ts/write-run/index.html"><strong aria-hidden="true">3.7.</strong> 코드를 작성하고 실행하기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/write-run/avoid-non-ecma.html"><strong aria-hidden="true">3.7.1.</strong> 타입스크립트 기능보다는 ECMASCript 기능을 사용하기</a></li><li class="chapter-item "><a href="../ts/write-run/iterate-objects.html"><strong aria-hidden="true">3.7.2.</strong> 객체를 순회하는 노하우</a></li><li class="chapter-item "><a href="../ts/write-run/understand-the-dom.html"><strong aria-hidden="true">3.7.3.</strong> DOM 계층 구조 이해하기</a></li><li class="chapter-item "><a href="../ts/write-run/private-rely.html"><strong aria-hidden="true">3.7.4.</strong> 정보를 감추는 목적으로 private 사용하지 않기</a></li><li class="chapter-item "><a href="../ts/write-run/source-maps-debug.html"><strong aria-hidden="true">3.7.5.</strong> 소스맵을 사용하여 타입스크립트 디버깅하기</a></li></ol></li><li class="chapter-item "><a href="../ts/migrate/index.html"><strong aria-hidden="true">3.8.</strong> 타입스크립트로 마이그레이션하기</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ts/migrate/write-modern-js.html"><strong aria-hidden="true">3.8.1.</strong> 모던 자바스크립트로 작성하기</a></li><li class="chapter-item "><a href="../ts/migrate/jsdoc-tscheck.html"><strong aria-hidden="true">3.8.2.</strong> 타입스크립트 도입 전에 @ts-check와 JsDoc으로 시험해 보기</a></li><li class="chapter-item "><a href="../ts/migrate/allow-js.html"><strong aria-hidden="true">3.8.3.</strong> allowJs로 타입스크립트와 자바스크립트 같이 사용하기</a></li><li class="chapter-item "><a href="../ts/migrate/convert-up-the-graph.html"><strong aria-hidden="true">3.8.4.</strong> 의존성 관계에 따라 모듈 단위로 전환하기</a></li><li class="chapter-item "><a href="../ts/migrate/start-loose.html"><strong aria-hidden="true">3.8.5.</strong> 마이그레이션의 완성을 위해 noImplicitAny 설정하기</a></li></ol></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">4.</strong> React</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../react/why.html"><strong aria-hidden="true">4.1.</strong> 왜 React인가?</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">5.</strong> Redux</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../redux/pure.html"><strong aria-hidden="true">5.1.</strong> 왜 Reducer는 순수해야 하는가?</a></li></ol></li><li class="chapter-item "><a href="../svelte/intro.html"><strong aria-hidden="true">6.</strong> Svelte</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../svelte/reactivity.html"><strong aria-hidden="true">6.1.</strong> Reactivity</a></li><li class="chapter-item "><a href="../svelte/props.html"><strong aria-hidden="true">6.2.</strong> Props</a></li><li class="chapter-item "><a href="../svelte/logic.html"><strong aria-hidden="true">6.3.</strong> Logic</a></li><li class="chapter-item "><a href="../svelte/events.html"><strong aria-hidden="true">6.4.</strong> Events</a></li><li class="chapter-item "><a href="../svelte/bindings.html"><strong aria-hidden="true">6.5.</strong> Bindings</a></li><li class="chapter-item "><a href="../svelte/lifecycle.html"><strong aria-hidden="true">6.6.</strong> Life Cycle</a></li><li class="chapter-item "><a href="../svelte/stores.html"><strong aria-hidden="true">6.7.</strong> Stores</a></li><li class="chapter-item "><a href="../svelte/motion.html"><strong aria-hidden="true">6.8.</strong> Motion</a></li><li class="chapter-item "><a href="../svelte/transition.html"><strong aria-hidden="true">6.9.</strong> Transitions</a></li><li class="chapter-item "><a href="../svelte/animations.html"><strong aria-hidden="true">6.10.</strong> Animations</a></li><li class="chapter-item "><a href="../svelte/actions.html"><strong aria-hidden="true">6.11.</strong> Actions</a></li><li class="chapter-item "><a href="../svelte/classes.html"><strong aria-hidden="true">6.12.</strong> Classes</a></li><li class="chapter-item "><a href="../svelte/composition.html"><strong aria-hidden="true">6.13.</strong> Component Composition</a></li><li class="chapter-item "><a href="../svelte/context.html"><strong aria-hidden="true">6.14.</strong> Context API</a></li><li class="chapter-item "><a href="../svelte/specials.html"><strong aria-hidden="true">6.15.</strong> Special Elements</a></li><li class="chapter-item "><a href="../svelte/module.html"><strong aria-hidden="true">6.16.</strong> Module Context</a></li><li class="chapter-item "><a href="../svelte/debug.html"><strong aria-hidden="true">6.17.</strong> Debugging</a></li></ol></li><li class="chapter-item "><a href="../graphql/intro.html"><strong aria-hidden="true">7.</strong> GraphQL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../graphql/execution.html"><strong aria-hidden="true">7.1.</strong> Execution</a></li><li class="chapter-item "><a href="../graphql/query-mutation.html"><strong aria-hidden="true">7.2.</strong> Query & Mutation</a></li><li class="chapter-item "><a href="../graphql/schema-type.html"><strong aria-hidden="true">7.3.</strong> Schema & Type</a></li><li class="chapter-item "><a href="../graphql/pagination.html"><strong aria-hidden="true">7.4.</strong> Pagination</a></li><li class="chapter-item "><a href="../graphql/http.html"><strong aria-hidden="true">7.5.</strong> HTTP에서의 GraphQL</a></li></ol></li><li class="chapter-item "><a href="../docker/setup.html"><strong aria-hidden="true">8.</strong> Docker</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../docker/sample.html"><strong aria-hidden="true">8.1.</strong> 샘플 애플리케이션</a></li><li class="chapter-item "><a href="../docker/update.html"><strong aria-hidden="true">8.2.</strong> 애플리케이션 수정</a></li><li class="chapter-item "><a href="../docker/share.html"><strong aria-hidden="true">8.3.</strong> 애플리케이션 공유</a></li><li class="chapter-item "><a href="../docker/persist.html"><strong aria-hidden="true">8.4.</strong> DB 유지</a></li><li class="chapter-item "><a href="../docker/bind-mounts.html"><strong aria-hidden="true">8.5.</strong> Bind Mounts</a></li><li class="chapter-item "><a href="../docker/multi.html"><strong aria-hidden="true">8.6.</strong> 멀티 컨테이너 앱</a></li><li class="chapter-item "><a href="../docker/docker-compose.html"><strong aria-hidden="true">8.7.</strong> Docker Compose</a></li><li class="chapter-item "><a href="../docker/best-practices.html"><strong aria-hidden="true">8.8.</strong> 실전 이미지 빌딩</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">9.</strong> Etc.</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../etc/ssh.html"><strong aria-hidden="true">9.1.</strong> SSH</a></li><li class="chapter-item "><a href="../etc/tdd.html"><strong aria-hidden="true">9.2.</strong> TDD</a></li><li class="chapter-item "><a href="../etc/fp.html"><strong aria-hidden="true">9.3.</strong> 함수형 프로그래밍</a></li><li class="chapter-item "><a href="../etc/rp.html"><strong aria-hidden="true">9.4.</strong> 반응형 프로그래밍</a></li></ol></li><li class="chapter-item "><a href="../ml/index.html"><strong aria-hidden="true">10.</strong> Machine Learning</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/problem-framing/index.html"><strong aria-hidden="true">10.1.</strong> Problem Framing</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/problem-framing/common-problems.html"><strong aria-hidden="true">10.1.1.</strong> Common ML Problems</a></li><li class="chapter-item "><a href="../ml/problem-framing/mindset.html"><strong aria-hidden="true">10.1.2.</strong> The ML Mindset</a></li><li class="chapter-item "><a href="../ml/problem-framing/good.html"><strong aria-hidden="true">10.1.3.</strong> Identifying Good Problems for ML</a></li><li class="chapter-item "><a href="../ml/problem-framing/hard.html"><strong aria-hidden="true">10.1.4.</strong> Hard ML Problems</a></li><li class="chapter-item "><a href="../ml/problem-framing/framing.html"><strong aria-hidden="true">10.1.5.</strong> Deciding on ML</a></li><li class="chapter-item "><a href="../ml/problem-framing/formulate.html"><strong aria-hidden="true">10.1.6.</strong> Formulate Your Problem as an ML Problem</a></li></ol></li><li class="chapter-item "><a href="../ml/crash-course/index.html"><strong aria-hidden="true">10.2.</strong> Crash Course</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../ml/crash-course/framing.html"><strong aria-hidden="true">10.2.1.</strong> Framing</a></li><li class="chapter-item "><a href="../ml/crash-course/descending-into-ml.html"><strong aria-hidden="true">10.2.2.</strong> Descending into ML</a></li><li class="chapter-item "><a href="../ml/crash-course/reducing-loss.html"><strong aria-hidden="true">10.2.3.</strong> Reducing Loss</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">11.</strong> AWS</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../aws/iam.html"><strong aria-hidden="true">11.1.</strong> IAM</a></li><li class="chapter-item "><a href="../aws/ec2.html"><strong aria-hidden="true">11.2.</strong> EC2</a></li><li class="chapter-item "><a href="../aws/ami.html"><strong aria-hidden="true">11.3.</strong> AMI</a></li><li class="chapter-item "><a href="../aws/ebs.html"><strong aria-hidden="true">11.4.</strong> EBS</a></li><li class="chapter-item "><a href="../aws/efs.html"><strong aria-hidden="true">11.5.</strong> EFS</a></li><li class="chapter-item "><a href="../aws/ebs-vs-efs.html"><strong aria-hidden="true">11.6.</strong> EBS vs. EFS</a></li><li class="chapter-item "><a href="../aws/elb.html"><strong aria-hidden="true">11.7.</strong> ELB</a></li><li class="chapter-item "><a href="../aws/rds.html"><strong aria-hidden="true">11.8.</strong> RDS</a></li><li class="chapter-item "><a href="../aws/route53.html"><strong aria-hidden="true">11.9.</strong> Route 53</a></li><li class="chapter-item "><a href="../aws/eb.html"><strong aria-hidden="true">11.10.</strong> Elastic Beanstalk</a></li><li class="chapter-item "><a href="../aws/s3.html"><strong aria-hidden="true">11.11.</strong> S3</a></li><li class="chapter-item "><a href="../aws/cf.html"><strong aria-hidden="true">11.12.</strong> CloudFront</a></li><li class="chapter-item "><a href="../aws/storage-extra.html"><strong aria-hidden="true">11.13.</strong> Storage Extras</a></li><li class="chapter-item "><a href="../aws/decouple-applications.html"><strong aria-hidden="true">11.14.</strong> Decoupling Applications</a></li><li class="chapter-item "><a href="../aws/containers.html"><strong aria-hidden="true">11.15.</strong> Containers</a></li><li class="chapter-item "><a href="../aws/serverless.html"><strong aria-hidden="true">11.16.</strong> Serverless</a></li><li class="chapter-item "><a href="../aws/databases.html"><strong aria-hidden="true">11.17.</strong> Databases</a></li><li class="chapter-item "><a href="../aws/data-analytics.html"><strong aria-hidden="true">11.18.</strong> Data & Analytics</a></li><li class="chapter-item "><a href="../aws/machine-learning.html"><strong aria-hidden="true">11.19.</strong> Machine Learning</a></li><li class="chapter-item "><a href="../aws/monitoring.html"><strong aria-hidden="true">11.20.</strong> Monitoring & Audit</a></li><li class="chapter-item "><a href="../aws/iam-advanced.html"><strong aria-hidden="true">11.21.</strong> IAM Advanced</a></li><li class="chapter-item "><a href="../aws/security.html"><strong aria-hidden="true">11.22.</strong> Security & Encryption</a></li><li class="chapter-item "><a href="../aws/vpc.html"><strong aria-hidden="true">11.23.</strong> Networking - VPC</a></li><li class="chapter-item "><a href="../aws/disaster-recovery.html"><strong aria-hidden="true">11.24.</strong> Disaster Recovery & Migrations</a></li><li class="chapter-item "><a href="../aws/more-solution-architectures.html"><strong aria-hidden="true">11.25.</strong> More Solution Architectures</a></li><li class="chapter-item expanded "><a href="../aws/other-services.html" class="active"><strong aria-hidden="true">11.26.</strong> Other Services</a></li></ol></li><li class="chapter-item "><div><strong aria-hidden="true">12.</strong> Network</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../network/osi-model.html"><strong aria-hidden="true">12.1.</strong> OSI Model</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Shubi Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="other-services"><a class="header" href="#other-services">Other Services</a></h1>
+<h2 id="cloudformation"><a class="header" href="#cloudformation">CloudFormation</a></h2>
+<ul>
+<li>어떤 리소스들(거의 대부분 지원)에 대해 AWS 인프라를 개괄적으로(declarative) 설명하는 선언적인 방법</li>
+<li>예를 들어, CloudFormation 템플릿에서는 다음과 같은 것을 정의할 수 있음
+<ul>
+<li>Security group</li>
+<li>Two EC2 instances using this security group</li>
+<li>S3 Bucket</li>
+<li>Load Balancer in front of these machines</li>
+</ul>
+</li>
+<li>그러면 CloudFormation에서는 이들을 <strong>올바른 순서대로</strong>, 내가 <strong>정의한 설정과 똑같이</strong> 리소스들을 생성해줌</li>
+</ul>
+<h3 id="benefits-of-aws-cloudformation"><a class="header" href="#benefits-of-aws-cloudformation">Benefits of AWS CloudFormation</a></h3>
+<ul>
+<li><strong>코드로 인프라를 작성할 수 있음</strong>
+<ul>
+<li>어떤 리소스도 수동으로 생성할 필요 없음 -&gt; 관리하기 편함</li>
+<li>인프라에 대한 변경사항이 코드를 통해 리뷰될 수 있음</li>
+</ul>
+</li>
+<li>비용
+<ul>
+<li>스택에 포함된 각각의 리소스들은  별도의 식별자로 태그되며, 각 스택의 비용이 어떻게 되는지 쉽게 파악할 수 있음</li>
+<li>CloudFormation 템플릿으로 리소스들의 비용을 추정할 수 있음</li>
+<li>Savings Strategy:
+<ul>
+<li>ex. Dev 환경에서, 5PM에 템플릿을 자동 삭제 / 8AM에 재생성</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>생산성
+<ul>
+<li>클라우드에서 즉시 사용 가능한 인프라를 생성 / 삭제 가능</li>
+<li>템플릿에 대한 다이어그램 자동 생성</li>
+<li>선언적 프로그래밍 (순서 / 오케스트레이션을 파악할 필요 없음)</li>
+</ul>
+</li>
+<li>Don't re-invent the wheel
+<ul>
+<li>웹에 존재하는 템플릿을 활용</li>
+<li>document를 활용</li>
+</ul>
+</li>
+<li><strong>(거의) 모든 AWS 리소스들을 지원</strong>:
+<ul>
+<li>(적어도 여기에 정리했던) 모든 리소스들을 지원함</li>
+<li>지원되지 않는 리소스들을 위해서 &quot;커스텀 리소스&quot;를 사용할 수 있음</li>
+</ul>
+</li>
+</ul>
+<h3 id="cloudformation-stack-designer"><a class="header" href="#cloudformation-stack-designer">CloudFormation Stack Designer</a></h3>
+<ul>
+<li>예시: WordPress CloudFormation Stack</li>
+<li>모든 <strong>리소스</strong>들을 볼 수 있음</li>
+<li>각 컴포넌트 간 <strong>관계</strong>를 파악할 수 있음</li>
+</ul>
+<h2 id="amazon-ses-simple-email-service"><a class="header" href="#amazon-ses-simple-email-service">Amazon SES (Simple Email Service)</a></h2>
+<ul>
+<li><strong>규모에 따라 이메일을 안전하게, 글로벌로 보낼 수 있는 완전 관리형 서비스</strong></li>
+<li>인바운드/아웃바운드 이메일 허용</li>
+<li>평판 대시보드, 성능 인사이트, 안티-스팸 피드백</li>
+<li>이메일 전송, 이메일 바운스, 피드백 루프 결과, 이메일 확인 여부 등의 통계 제공</li>
+<li>DKIM(DomainKeys Identified Mail)과 SPF(Sender Policy Framework) 지원</li>
+<li>Flexible IP 배포: shared / dedicated / customer-owned IP</li>
+<li>AWS 콘솔/API 또는 SMTP를 이용해 애플리케이션에서 메일을 전송할 수 있음</li>
+<li>사례: 트랜잭션, 마케팅 및 대량 이메일 커뮤니케이션</li>
+</ul>
+<h2 id="amazon-pinpoint"><a class="header" href="#amazon-pinpoint">Amazon Pinpoint</a></h2>
+<ul>
+<li>확장 가능한(scalable) <strong>2-way (아웃바운드/인바운드)</strong> 마케팅 커뮤니케이션 서비스</li>
+<li>이메일, SMS, 푸시, 보이스, 인앱 마케팅 지원</li>
+<li>고객들에게 올바른 컨텐츠를 제공하기 위해 메시지를 세분화 및 개인화할 수 있음</li>
+<li>응답 받기 가능</li>
+<li>매일 최대 10억(billion)개의 메시지까지 스케일링 가능</li>
+<li>사례: 마케팅/대량/거래 SMS 메시지 전송을 통한 캠페인 진행</li>
+<li><strong>Amazon SNS나 Amazon SES와의 차이점</strong>
+<ul>
+<li>SNS &amp; SES에서는 각 메시지의 수신자, 컨텐츠, 전달 스케줄을 관리</li>
+<li>Amazon Pinpoint에서는 메시지 템플릿, 전달 스케줄, 고도로 타겟팅된(highly-targeted) 세그먼트 및 전체 캠페인을 생성할 수 있음</li>
+</ul>
+</li>
+</ul>
+<h2 id="system-manager---ssm-session-manager"><a class="header" href="#system-manager---ssm-session-manager">System Manager - SSM Session Manager</a></h2>
+<ul>
+<li>
+<p>내 EC2와 온-프레미스 서버에 대한 Secure Shell 연결을 할 수 있도록 해줌</p>
+</li>
+<li>
+<p><strong>SSH 액세스나 Bastion Host, SSH Key 필요 없음</strong></p>
+</li>
+<li>
+<p><strong>22번 포트 필요 없음 (높은 보안)</strong></p>
+</li>
+<li>
+<p>Linux, macOS, Windows 지원</p>
+</li>
+<li>
+<p>S3나 CloudWatch Logs에 세션 로그 데이터를 전송할 수 있음</p>
+</li>
+</ul>
+<h3 id="system-manager---run-command"><a class="header" href="#system-manager---run-command">System Manager - Run Command</a></h3>
+<ul>
+<li>document(= script)를 실행하거나 그냥 커맨드를 실행할 수 있음</li>
+<li>여러 인스턴스 간에 커맨드를 실행 (리소스 그룹 사용 시)</li>
+<li>SSH 필요 없음</li>
+<li>AWS 콘솔을 통해 커맨드 결과를 볼 수 있고, S3 버킷 또는 CloudWatch Log로 전송</li>
+<li>커맨드의 상태(실행 중, 완료, 실패)에 대해 SNS에 알림으로 보낼 수 있음</li>
+<li>IAM &amp; CloudTrail과 호환됨</li>
+<li>EventBridge를 통해서도 실행될 수 있음</li>
+</ul>
+<h3 id="system-manager---patch-manager"><a class="header" href="#system-manager---patch-manager">System Manager - Patch Manager</a></h3>
+<ul>
+<li>관리 중인 인스턴스에 대한 패치(patch) 과정을 자동화
+<ul>
+<li>OS 업데이트, 애플리케이션 업데이트, 보안 업데이트 등</li>
+</ul>
+</li>
+<li>EC2 인스턴스 및 온-프레미스 서버 지원</li>
+<li>Linux, macOS, Windows 지원</li>
+<li>온-디맨드로 패치하거나, <strong>Maintenance Windows</strong>를 통해 패치를 스케줄링</li>
+<li>인스턴스 스캔하여 패치 compliance 리포트를 생성 (missing patches)</li>
+</ul>
+<h3 id="system-manager---maintenance-windows"><a class="header" href="#system-manager---maintenance-windows">System Manager - Maintenance Windows</a></h3>
+<ul>
+<li>내 인스턴스에 액션을 처리할 시점에 대한 스케줄을 정의
+<ul>
+<li>ex. OS 패칭, 드라이버 업데이트, 소프트웨어 설치 등..</li>
+</ul>
+</li>
+<li>Maintenance Window는 다음을 포함
+<ul>
+<li>Schedule</li>
+<li>Duration</li>
+<li>Set of registered instances</li>
+<li>Set of registered tasks</li>
+</ul>
+</li>
+</ul>
+<h3 id="system-manager---automation"><a class="header" href="#system-manager---automation">System Manager - Automation</a></h3>
+<ul>
+<li>EC2 인스턴스와 다른 AWS 리소스들의 일반적인 유지보수와 배포 작업을 단순화시켜줌
+<ul>
+<li>ex. 인스턴스 재시작, AMI 생성, EBS 스냅샷</li>
+</ul>
+</li>
+<li><strong>Automation Runbook</strong> - 내 EC2 인스턴스나 AWS 리소스에 수행될 액션을 정의하는 SSM Document (pre-defined 또는 custom)</li>
+<li>다음과 같은 것들을 통해 트리거될 수 있음
+<ul>
+<li>AWS 콘솔/CLI/SDK로 수동 트리거</li>
+<li>Amazon EventBridge</li>
+<li>Maintenance Window로 스케줄링</li>
+<li>AWS Config (Rule을 수정하고자 할 때)</li>
+</ul>
+</li>
+</ul>
+<h2 id="cost-explorer"><a class="header" href="#cost-explorer">Cost Explorer</a></h2>
+<ul>
+<li>AWS 비용과 사용 시간에 대한 시각화 / 이해 / 관리</li>
+<li>비용 및 사용 데이터에 대해 분석하는 커스텀 리포트를 생성할 수 있음</li>
+<li>고수준(high-level)에서 데이터를 분석: 전체 계정에서의 전체 비용 및 사용</li>
+<li>월/시간/리소스 단위로 세분화</li>
+<li>최적의 <strong>Savings Plan</strong> 선택 (요금 청구 가격을 더 낮추고자 할 때)</li>
+<li><strong>이전 사용량을 기준으로 최대 12개월까지의 사용량 예측</strong></li>
+</ul>
+<h2 id="amazon-elastic-transcoder"><a class="header" href="#amazon-elastic-transcoder">Amazon Elastic Transcoder</a></h2>
+<ul>
+<li>Elastic Transcoder는 <strong>S3에 저장된 미디어 파일들을 소비자들의 재생 디바이스(ex. 휴대폰)에서 요구하는 포맷으로 변환해줌</strong></li>
+<li>이점:
+<ul>
+<li>사용하기 쉬움</li>
+<li>Highly scalable - 많은 양의 미디어 파일 &amp; 큰 사이즈의 파일을 다룰 수 있음</li>
+<li>비용 효율적 - duration 기반의 비용 모델</li>
+<li>완전 관리형 &amp; 안전함, 쓴만큼 비용 지불 (온-디맨드)</li>
+</ul>
+</li>
+</ul>
+<h2 id="aws-batch"><a class="header" href="#aws-batch">AWS Batch</a></h2>
+<ul>
+<li><strong>규모에 관계 없는</strong> <strong>완전 관리형</strong> 배치 프로세싱</li>
+<li>AWS에서 100,000개까지의 batch job들을 효율적으로 실행</li>
+<li>batch job이란?
+<ul>
+<li>시작과 끝이 있는 작업 (continous와 반대됨)</li>
+</ul>
+</li>
+<li>Batch는 <strong>EC2 인스턴스</strong> 또는 <strong>Spot Instances</strong>를 동적으로 실행함</li>
+<li>AWS Batch는 적절한 양의 컴퓨팅과 메모리를 프로비저닝함</li>
+<li>batch job을 제출 또는 스케줄링하기만 하면, 나머지는 AWS Batch가 알아서 처리함</li>
+<li>Batch job은 <strong>Docker images</strong>로 정의되고, <strong>ECS에서 실행</strong></li>
+<li>비용 최적화 &amp; 인프라에 신경을 덜 써도 되도록 도와줌</li>
+</ul>
+<h3 id="batch-vs-lambda"><a class="header" href="#batch-vs-lambda">Batch vs Lambda</a></h3>
+<ul>
+<li>Lambda:
+<ul>
+<li>시간 제한 있음</li>
+<li>제한된 런타임</li>
+<li>제한된 임시 디스크 공간</li>
+<li>서버리스</li>
+</ul>
+</li>
+<li>Batch:
+<ul>
+<li>시간 제한 없음</li>
+<li>Docker image로 패키징되기만 하면 어떤 런타임이든 가능</li>
+<li>디스크 공간의 경우 EBS / instance store에 의존</li>
+<li>EC2에 의존 (AWS에 의해 관리될 수 있음)</li>
+</ul>
+</li>
+</ul>
+<h2 id="amazon-appflow"><a class="header" href="#amazon-appflow">Amazon AppFlow</a></h2>
+<ul>
+<li><strong>Software-as-a-Service (SaaS) 애플리케이션과 AWS 사이</strong>의 안전한 데이터 전송을 할 수 있게 해주는 완전 관리형 통합 서비스</li>
+<li><strong>Sources</strong>: <strong>Salesforce</strong>, SAP, Zendesk, Slack, ServiceNow</li>
+<li><strong>Destinations</strong>: <strong>Amazon S3, Amazon Redshift</strong>와 같은 AWS 서비스 또는 SnowFlak, Salesforce 같은 non-AWS 서비스</li>
+<li><strong>Frequency</strong>:
+<ul>
+<li>스케줄을 만들거나</li>
+<li>이벤트에 대한 응답으로 처리되거나</li>
+<li>온-디맨드로 직접 수행</li>
+</ul>
+</li>
+<li><strong>Data transformation</strong>: 필터링 또는 validation과 같은 기능</li>
+<li>public 인터넷 상으로 암호화 또는 AWS PrivateLink를 통해 private하게 암호화</li>
+<li>integration 작성에 시간을 소요하지 않고, 바로 API를 활용</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../aws/more-solution-architectures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../network/osi-model.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../aws/more-solution-architectures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../network/osi-model.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

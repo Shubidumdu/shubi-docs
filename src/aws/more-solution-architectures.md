@@ -94,7 +94,7 @@
   - 옵션 1: **Elastic Network Adapter (ENA)** ~ 최대 100Gbps
   - 옵션 2: Intel 82599 VF ~ 최대 10Gbps (레거시)
 - **Elastic Fabric Adapter (EFA)**
-  - HPA 목적의 향상된 ENA, **Linux**에서만 동작
+  - HPC 목적의 향상된 ENA, **Linux**에서만 동작
   - 노드 간의 커뮤니케이션, **강하게 커플링된 워크로드**에 유용함
   - MPI(Message Passing Interface) 표준 활용
   - 기본 Linux OS를 우회하여, 낮은 레이턴시와 안정적인 전송을 제공

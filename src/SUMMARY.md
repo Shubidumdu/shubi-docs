@@ -187,5 +187,6 @@
   - [Disaster Recovery & Migrations](aws/disaster-recovery.md)
   - [More Solution Architectures](aws/more-solution-architectures.md)
   - [Other Services](aws/other-services.md)
+  - [WhitePapers and Architectures](aws/white-paper.md)
 - [Network]()
   - [OSI Model](network/osi-model.md)

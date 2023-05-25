@@ -1,5 +1,7 @@
 # Change Preventers
 
+![change-preventers](https://refactoring.guru/images/refactoring/content/catalog/change-preventers-2x.png)
+
 이러한 종류의 냄새는 한 곳에서 어떤 변경이 일어날 경우 다른 곳에서도 많은 변경을 해야한다는 것을 의미한다.
 결과적으로 프로그램 개발이 훨씬 더 복잡해지고 비용이 많이 들게 된다.
 

@@ -1,5 +1,7 @@
 # Object-Orientation Abusers
 
+![Object-Orientation Abusers](https://refactoring.guru/images/refactoring/content/catalog/oo-abusers-2x.png)
+
 이러한 류의 코드 스멜은 객체 지향 프로그래밍(OOP)의 불완전하거나 잘못된 적용에 대한 것이다.
 
 ## 스위치 문(Switch Statements)

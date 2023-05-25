@@ -195,3 +195,4 @@
   - [Code Smells](refactoring/code-smells/index.md)
     - [Bloaters](refactoring/code-smells/bloaters/index.md)
     - [Object-Orientation Abusers](refactoring/code-smells/object-orientation-abusers/index.md)
+    - [Change Preventers](refactoring/code-smells/change-preventers/index.md)

@@ -192,3 +192,5 @@
   - [OSI Model](network/osi-model.md)
 - [Refactoring](refactoring/index.md)
   - [리팩토링이란?](refactoring/what-is-refactoring.md)
+  - [Code Smells](refactoring/code-smells/index.md)
+    - [Bloaters](refactoring/code-smells/bloaters/index.md)

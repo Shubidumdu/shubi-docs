@@ -21134,6 +21134,7 @@ User: (아무 그룹에도 속하지 않음)
 <h2 id="메서드-구성하기-composing-methods"><a class="header" href="#메서드-구성하기-composing-methods"><a href="refactoring/refactoring-techniques/./composing-methods/index.html">메서드 구성하기 (Composing Methods)</a></a></h2>
 <h2 id="객체-간-기능-이동하기-moving-features-between-objects"><a class="header" href="#객체-간-기능-이동하기-moving-features-between-objects"><a href="refactoring/refactoring-techniques/./moving-features-between-objects/index.html">객체 간 기능 이동하기 (Moving Features between Objects)</a></a></h2>
 <h2 id="데이터-체계화하기-organizing-data"><a class="header" href="#데이터-체계화하기-organizing-data"><a href="refactoring/refactoring-techniques/./organizing-data/index.html">데이터 체계화하기 (Organizing Data)</a></a></h2>
+<h2 id="조건식-단순화하기-simplifying-conditional-expressions"><a class="header" href="#조건식-단순화하기-simplifying-conditional-expressions"><a href="refactoring/refactoring-techniques/./simplifying-conditional-expressions/index.html">조건식 단순화하기 (Simplifying Conditional Expressions)</a></a></h2>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="composing-methods"><a class="header" href="#composing-methods">Composing Methods</a></h1>
 <hr />
@@ -22110,6 +22111,304 @@ class Person {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="simplifying-conditional-expressions"><a class="header" href="#simplifying-conditional-expressions">Simplifying Conditional Expressions</a></h1>
+<hr />
+<ul>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#simplifying-conditional-expressions">Simplifying Conditional Expressions</a>
+<ul>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EC%A1%B0%EA%B1%B4%EB%AC%B8-%EB%B6%84%ED%95%B4%ED%95%98%EA%B8%B0-decompose-conditional-expressions">조건문 분해하기 (Decompose Conditional Expressions)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EC%A1%B0%EA%B1%B4%EC%8B%9D-%ED%86%B5%ED%95%A9%ED%95%98%EA%B8%B0-consolidate-conditional-expression">조건식 통합하기 (Consolidate Conditional Expression)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EC%A4%91%EB%B3%B5-%EC%A1%B0%EA%B1%B4%EB%B6%80-%EC%A1%B0%EA%B0%81-%ED%86%B5%ED%95%A9%ED%95%98%EA%B8%B0-consolidate-duplicate-conditional-fragments">중복 조건부 조각 통합하기 (Consolidate Duplicate Conditional Fragments)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EC%A0%9C%EC%96%B4-%ED%94%8C%EB%9E%98%EA%B7%B8-%EC%A0%9C%EA%B1%B0-remove-control-flag">제어 플래그 제거 (Remove Control Flag)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EC%A4%91%EC%B2%A9-%EC%A1%B0%EA%B1%B4%EB%AC%B8%EC%9D%84-%EB%B3%B4%ED%98%B8-%EA%B5%AC%EB%AC%B8%EC%9C%BC%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0-replace-nested-conditional-with-guard-clauses">중첩 조건문을 보호 구문으로 바꾸기 (Replace Nested Conditional with Guard Clauses)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EC%A1%B0%EA%B1%B4%EC%9D%84-%EB%8B%A4%ED%98%95%EC%84%B1%EC%9C%BC%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0-replace-conditional-with-polymorphism">조건을 다형성으로 바꾸기 (Replace Conditional with Polymorphism)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#null-%EA%B0%9D%EC%B2%B4-%EB%8F%84%EC%9E%85-introduce-null-object">Null 객체 도입 (Introduce Null Object)</a></li>
+<li><a href="refactoring/refactoring-techniques/simplifying-conditional-expressions/index.html#%EB%8B%A8%EC%96%B8-%EB%8F%84%EC%9E%85-introduce-assertion">단언 도입 (Introduce Assertion)</a></li>
+</ul>
+</li>
+</ul>
+<p>조건문은 시간이 지남에 따라 점점 더 논리가 복잡해지는 경향이 있으며, 이를 해결하기 위한 기법도 많이 개발되어 왔다.</p>
+<h2 id="조건문-분해하기-decompose-conditional-expressions"><a class="header" href="#조건문-분해하기-decompose-conditional-expressions">조건문 분해하기 (Decompose Conditional Expressions)</a></h2>
+<blockquote>
+<p>복잡한 조건문이 있는 경우 (<code>if-then</code>, <code>else</code>, <code>switch</code>)</p>
+</blockquote>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">if (date.before(SUMMER_START) || date.after(SUMMER_END)) {
+  charge = quantity * winterRate + winterServiceCharge;
+} else {
+  charge = quantity * summerRate;
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">if (isSummer(date)) {
+  charge = summerCharge(quantity);
+} else {
+  charge = winterCharge(quantity);
+}
+</code></pre>
+<h2 id="조건식-통합하기-consolidate-conditional-expression"><a class="header" href="#조건식-통합하기-consolidate-conditional-expression">조건식 통합하기 (Consolidate Conditional Expression)</a></h2>
+<blockquote>
+<p>동일한 동작을 수행하거나, 동일한 결과를 반환하는 조건문이 여러 개로 나뉘어져 있는 경우</p>
+</blockquote>
+<p>해당 조건문을 하나의 표현식으로 통일한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">disabilityAmount(): number {
+  if (seniority &lt; 2) {
+    return 0;
+  }
+  if (monthsDisabled &gt; 12) {
+    return 0;
+  }
+  if (isPartTime) {
+    return 0;
+  }
+  // Compute the disability amount.
+  // ...
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">isNotEligibleForDisability(): boolean {
+  return seniority &lt; 2 || monthsDisabled &gt; 12 || isPartTime;
+}
+
+disabilityAmount(): number {
+  if (isNotEligibleForDisability()) {
+    return 0;
+  }
+  // Compute the disability amount.
+  // ...
+}
+</code></pre>
+<h2 id="중복-조건부-조각-통합하기-consolidate-duplicate-conditional-fragments"><a class="header" href="#중복-조건부-조각-통합하기-consolidate-duplicate-conditional-fragments">중복 조건부 조각 통합하기 (Consolidate Duplicate Conditional Fragments)</a></h2>
+<blockquote>
+<p>조건부의 각 줄기에서 똑같은 코드가 사용되고 있는 경우</p>
+</blockquote>
+<p>조건문의 바깥으로 해당 코드를 빼낸다. 이를 통해 코드 중복을 제거한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">if (isSpecialDeal()) {
+  total = price * 0.95;
+  send();
+}
+else {
+  total = price * 0.98;
+  send();
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">if (isSpecialDeal()) {
+  total = price * 0.95;
+}
+else {
+  total = price * 0.98;
+}
+send();
+</code></pre>
+<h2 id="제어-플래그-제거-remove-control-flag"><a class="header" href="#제어-플래그-제거-remove-control-flag">제어 플래그 제거 (Remove Control Flag)</a></h2>
+<blockquote>
+<p>여러 bool 표현식에 대한 제어 플래그 역할을 수행하는 bool 변수가 존재하는 경우</p>
+</blockquote>
+<p>따로 만든 변수 대신에 <code>break</code>, <code>continue</code>, <code>return</code>을 사용한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">let found = false;
+
+for (const p of people) {
+  if (!found) {
+    if (p === &quot;Don&quot;) {
+      sendAlert();
+      found = true;
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">for (const p of people) {
+  if (p === &quot;Don&quot;) {
+    sendAlert();
+    break;
+  }
+}
+</code></pre>
+<h2 id="중첩-조건문을-보호-구문으로-바꾸기-replace-nested-conditional-with-guard-clauses"><a class="header" href="#중첩-조건문을-보호-구문으로-바꾸기-replace-nested-conditional-with-guard-clauses">중첩 조건문을 보호 구문으로 바꾸기 (Replace Nested Conditional with Guard Clauses)</a></h2>
+<blockquote>
+<p>중첩된 조건문들이 있으나, 코드 실행의 일반적인 흐름을 파악하기 어려운 경우</p>
+</blockquote>
+<p>모든 특수한 경우와 엣지 케이스들을 주된 흐름 앞쪽으로 위치시킨다. 이상적인 조건문은 차례로 나열된 &quot;평평한&quot; 목록이다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">getPayAmount(): number {
+  let result: number;
+  if (isDead){
+    result = deadAmount();
+  }
+  else {
+    if (isSeparated){
+      result = separatedAmount();
+    }
+    else {
+      if (isRetired){
+        result = retiredAmount();
+      }
+      else{
+        result = normalPayAmount();
+      }
+    }
+  }
+  return result;
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">getPayAmount(): number {
+  if (isDead){
+    return deadAmount();
+  }
+  if (isSeparated){
+    return separatedAmount();
+  }
+  if (isRetired){
+    return retiredAmount();
+  }
+  return normalPayAmount();
+}
+</code></pre>
+<h2 id="조건을-다형성으로-바꾸기-replace-conditional-with-polymorphism"><a class="header" href="#조건을-다형성으로-바꾸기-replace-conditional-with-polymorphism">조건을 다형성으로 바꾸기 (Replace Conditional with Polymorphism)</a></h2>
+<blockquote>
+<p>객체의 타입 또는 속성에 따라 다른 동작을 수행하는 조건문이 있는 경우</p>
+</blockquote>
+<p>조건 분기와 일치하는 서브클래스를 만들고, 그 안에 공유 메서드를 생성하여 조건문 내의 코드를 해당 메서드로 옮긴다. 이후 해당 조건을 관련 메서드 호출로 변경한다. 이를 통해 객체 클래스에 따른 다형성으로 적절한 구현을 얻을 수 있다.</p>
+<p>새로운 객체 속성이나 유형이 나타나면, 유사한 조건문을 모두 검색하여 코드를 추가해야 하는데, 이 경우 모든 메서드에 여러 조건문이 흩어져 있는 경우 상당히 까다로워진다. 이런 상황에서 해당 테크닉이 빛을 발휘할 수 있다.</p>
+<p>이 테크닉은 객체의 상태를 물어보고 그를 기반으로 동작을 수행하는 대신, 객체가 수행해야 할 작업을 알려주고 그 방법은 스스로 처리하도록 하는 <strong>Tell-Don't-Ask</strong>(TDA) 원칙을 준수한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Bird {
+  // ...
+  getSpeed(): number {
+    switch (type) {
+      case EUROPEAN:
+        return getBaseSpeed();
+      case AFRICAN:
+        return getBaseSpeed() - getLoadFactor() * numberOfCoconuts;
+      case NORWEGIAN_BLUE:
+        return (isNailed) ? 0 : getBaseSpeed(voltage);
+    }
+    throw new Error(&quot;Should be unreachable&quot;);
+  }
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">abstract class Bird {
+  // ...
+  abstract getSpeed(): number;
+}
+
+class European extends Bird {
+  getSpeed(): number {
+    return getBaseSpeed();
+  }
+}
+class African extends Bird {
+  getSpeed(): number {
+    return getBaseSpeed() - getLoadFactor() * numberOfCoconuts;
+  }
+}
+class NorwegianBlue extends Bird {
+  getSpeed(): number {
+    return (isNailed) ? 0 : getBaseSpeed(voltage);
+  }
+}
+
+// Somewhere in client code
+let speed = bird.getSpeed();
+</code></pre>
+<h2 id="null-객체-도입-introduce-null-object"><a class="header" href="#null-객체-도입-introduce-null-object">Null 객체 도입 (Introduce Null Object)</a></h2>
+<blockquote>
+<p>실제 객체 대신 null을 반환하게 되어 코드의 많은 부분에서 null 체킹을 수행해야 하는 경우</p>
+</blockquote>
+<p>실제 null 대신, 기본적인 동작을 수행하는 null 객체를 반환하도록 한다.</p>
+<p>수십번이고 null을 체크하다보면 코드가 길고 지저분해진다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">if (customer === null) {
+  plan = BillingPlan.basic();
+}
+else {
+  plan = customer.getPlan();
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class NullCustomer extends Customer {
+  isNull(): boolean {
+    return true;
+  }
+  getPlan(): Plan {
+    return new NullPlan();
+  }
+  // Some other NULL functionality.
+}
+
+// Replace null values with Null-object.
+let customer = (order.customer !== null) ?
+  order.customer : new NullCustomer();
+
+// Use Null-object as if it's normal subclass.
+plan = customer.getPlan();
+</code></pre>
+<h2 id="단언-도입-introduce-assertion"><a class="header" href="#단언-도입-introduce-assertion">단언 도입 (Introduce Assertion)</a></h2>
+<blockquote>
+<p>코드의 일부가 올바르게 동작하기 위해 특정 조건이나 값이 반드시 참이어야 하는 경우</p>
+</blockquote>
+<p>이러한 가정을 구체적인 단언 체크(assertion check)로 대체한다. 단, JS/TS에는 빌트인 assertion이 없으므로, <code>console.error()</code> 등을 이용하여 assertion을 구현해야 한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">getExpenseLimit(): number {
+  // Should have either expense limit or
+  // a primary project.
+  return (expenseLimit != NULL_EXPENSE) ?
+    expenseLimit:
+    primaryProject.getMemberExpenseLimit();
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">getExpenseLimit(): number {
+  // TypeScript and JS doesn't have built-in assertions, so we'll use
+  // good-old console.error(). You can always extract this into a
+  // designated assertion function.
+  if (!(expenseLimit !== NULL_EXPENSE ||
+       (typeof primaryProject !== 'undefined' &amp;&amp; primaryProject))) {
+      console.error(&quot;Assertion failed: getExpenseLimit()&quot;);
+  }
+
+  return (expenseLimit !== NULL_EXPENSE) ?
+    expenseLimit:
+    primaryProject.getMemberExpenseLimit();
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="making-method-calls-simpler"><a class="header" href="#making-method-calls-simpler">Making Method Calls Simpler</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">

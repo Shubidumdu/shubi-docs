@@ -153,6 +153,15 @@
 <li><a href="#%EC%B0%B8%EC%A1%B0%EB%A5%BC-%EA%B0%9D%EC%B2%B4%EB%A1%9C-%EB%B0%94%EA%BE%B8%EA%B8%B0-change-reference-to-value">참조를 객체로 바꾸기 (Change Reference to Value)</a></li>
 <li><a href="#%EB%B0%B0%EC%97%B4%EC%9D%84-%EA%B0%9D%EC%B2%B4%EB%A1%9C-%EB%8C%80%EC%B2%B4%ED%95%98%EA%B8%B0-replace-array-with-object">배열을 객체로 대체하기 (Replace Array with Object)</a></li>
 <li><a href="#%EA%B4%80%EC%B0%B0%EB%90%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A4%91%EB%B3%B5-duplicate-observed-data">관찰된 데이터 중복 (Duplicate Observed Data)</a></li>
+<li><a href="#%EB%8B%A8%EB%B0%A9%ED%96%A5-%EC%97%B0%EA%B2%B0%EC%9D%84-%EC%96%91%EB%B0%A9%ED%96%A5%EC%9C%BC%EB%A1%9C-%EB%B3%80%EA%B2%BD-change-unidirectional-association-to-bidirectional">단방향 연결을 양방향으로 변경 (Change Unidirectional Association to Bidirectional)</a></li>
+<li><a href="#%EC%96%91%EB%B0%A9%ED%96%A5-%EC%97%B0%EA%B2%B0%EC%9D%84-%EB%8B%A8%EB%B0%A9%ED%96%A5%EC%9C%BC%EB%A1%9C-%EB%B3%80%EA%B2%BD-change-bidirectional-association-to-unidirectional">양방향 연결을 단방향으로 변경 (Change Bidirectional Association to Unidirectional)</a></li>
+<li><a href="#%EB%A7%A4%EC%A7%81-%EB%84%98%EB%B2%84%EB%A5%BC-%EA%B8%B0%ED%98%B8-%EC%83%81%EC%88%98%EB%A1%9C-%EB%8C%80%EC%B2%B4-replace-magic-number-with-symbolic-constant">매직 넘버를 기호 상수로 대체 (Replace Magic Number with Symbolic Constant)</a></li>
+<li><a href="#%ED%95%84%EB%93%9C-%EC%BA%A1%EC%8A%90%ED%99%94-encapsulate-field">필드 캡슐화 (Encapsulate Field)</a></li>
+<li><a href="#%EC%BB%AC%EB%A0%89%EC%85%98-%EC%BA%A1%EC%8A%90%ED%99%94-encapsulate-collection">컬렉션 캡슐화 (Encapsulate Collection)</a></li>
+<li><a href="#%ED%83%80%EC%9E%85-%EC%BD%94%EB%93%9C%EB%A5%BC-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C-%EB%8C%80%EC%B2%B4-replace-type-code-with-class">타입 코드를 클래스로 대체 (Replace Type Code with Class)</a></li>
+<li><a href="#%ED%83%80%EC%9E%85-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%84%9C%EB%B8%8C%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C-%EB%8C%80%EC%B2%B4-replace-type-code-with-subclasses">타입 코드를 서브클래스로 대체 (Replace Type Code with Subclasses)</a></li>
+<li><a href="#%ED%83%80%EC%9E%85-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%83%81%ED%83%9C%EC%A0%84%EB%9E%B5-%ED%8C%A8%ED%84%B4%EC%9C%BC%EB%A1%9C-%EB%8C%80%EC%B2%B4-replace-type-code-with-statestrategy">타입 코드를 상태/전략 패턴으로 대체 (Replace Type Code with State/Strategy)</a></li>
+<li><a href="#%EC%84%9C%EB%B8%8C%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A5%BC-%ED%95%84%EB%93%9C%EB%A1%9C-%EB%8C%80%EC%B2%B4-replace-subclass-with-fields">서브클래스를 필드로 대체 (Replace Subclass with Fields)</a></li>
 </ul>
 </li>
 </ul>
@@ -369,6 +378,346 @@ class Interval {
   calculateEnd() {
     // ...
   }
+}
+</code></pre>
+<h2 id="단방향-연결을-양방향으로-변경-change-unidirectional-association-to-bidirectional"><a class="header" href="#단방향-연결을-양방향으로-변경-change-unidirectional-association-to-bidirectional">단방향 연결을 양방향으로 변경 (Change Unidirectional Association to Bidirectional)</a></h2>
+<blockquote>
+<p>서로의 기능을 필요로 하는 두 클래스가 있지만, 두 클래스 간의 연결은 단방향으로 이루어져 있는 경우</p>
+</blockquote>
+<p>클래스가 필요로 하는 연결을 추가해준다.</p>
+<p>원래 클래스는 단방향의 연결을 가지지만, 시간이 지남에 따라 클라이언트 코드가 연결의 양쪽 모두에 액세스 가능해야 할 수 있다.</p>
+<p>단, 양방향 연결을 단방향보다 구현 및 유지관리가 훨씬 더 어렵고, 클래스를 상호 의존적으로 만든다는 문제가 있다. 단방향 연결은 둘 중 하나를 다른 클래스로부터 독립적으로 사용할 수 있게 해준다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Customer {
+  name: string;
+  order: Order;
+}
+
+class Order {}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Customer {
+  name: string;
+  order: Order;
+}
+
+class Order {
+  customer: Customer;
+}
+</code></pre>
+<h2 id="양방향-연결을-단방향으로-변경-change-bidirectional-association-to-unidirectional"><a class="header" href="#양방향-연결을-단방향으로-변경-change-bidirectional-association-to-unidirectional">양방향 연결을 단방향으로 변경 (Change Bidirectional Association to Unidirectional)</a></h2>
+<blockquote>
+<p>두 클래스 간의 양방향 연결이 구성되어 있으나, 둘 중 하나의 클래스가 다른 클래스의 기능을 필요로 하지 않는 경우</p>
+</blockquote>
+<p>사용하지 않는 쪽의 연결을 없앤다.</p>
+<p>양방향 연결을 일반적으로 단방향 연결보다 유지 관리가 어렵고, 관련된 객체를 올바르게 생성 및 삭제하기 위한 추가적인 코드가 필요하다. 이에 따라 프로그램이 더 복잡해진다. 또한 다음과 같은 문제점이 생길 수 있다.</p>
+<p>또한, 양방향 연결을 잘못 구현하는 경우 가비지 컬렉션에 문제가 발생할 수 있으며, 결국 사용하지 않는 객체로 인해 메모리가 팽창할 수 있다.</p>
+<p>또, 클래스의 상호 의존성 문제로, 클래스가 서로에 대해 알고있어야 하므로 분리되어 사용할 수 없고, 이러한 연결이 많아질 경우 프로그램의 여러 부분이 서로 지나치게 의존하게 됨에 따라 한 컴포넌트의 변경 사항이 다른 컴포넌트에 영향을 미칠 수 있다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Customer {
+  name: string;
+  order: Order;
+}
+
+class Order {
+  customer: Customer;
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Customer {
+  name: string;
+  order: Order;
+}
+
+class Order {}
+</code></pre>
+<h2 id="매직-넘버를-기호-상수로-대체-replace-magic-number-with-symbolic-constant"><a class="header" href="#매직-넘버를-기호-상수로-대체-replace-magic-number-with-symbolic-constant">매직 넘버를 기호 상수로 대체 (Replace Magic Number with Symbolic Constant)</a></h2>
+<blockquote>
+<p>코드에 특정한 의미를 담고있는 수가 사용되고 있는 경우</p>
+</blockquote>
+<p>해당 수가 어떤 의미인지에 대해 설명해주는 인간 친화적인 이름을 부여한 상수에 이를 할당한다.</p>
+<p>매직넘버는 소스에서 발견되지만 명확한 의미를 알 수 없는 숫자값으로, 이러한 안티 패턴은 프로그램의 이해와 리팩터링을 어렵게 만든다.</p>
+<p>무엇보다도, 이 매직넘버를 변경해야 하는 상황에서 문제는 더 심각해지는데, 같은 숫자가 다른 위치에서 다른 용도로 사용될 수 있으므로, 이 숫자를 사용하는 모든 코드 라인을 확인해야만 한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">potentialEnergy(mass: number, height: number): number {
+  return mass * height * 9.81;
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">static const GRAVITATIONAL_CONSTANT = 9.81;
+
+potentialEnergy(mass: number, height: number): number {
+  return mass * height * GRAVITATIONAL_CONSTANT;
+}
+</code></pre>
+<h2 id="필드-캡슐화-encapsulate-field"><a class="header" href="#필드-캡슐화-encapsulate-field">필드 캡슐화 (Encapsulate Field)</a></h2>
+<blockquote>
+<p>퍼블릭 필드를 보유하고 있는 경우</p>
+</blockquote>
+<p>필드를 프라이빗으로 만들고, 필드를 읽고 쓰는 접근자 메서드를 만든다.</p>
+<p>OOP의 이점 중 하나는 캡슐화로, 객체의 데이터를 외부에게서 숨길 수 있다는 것이다. 모든 객체 데이터가 공개되는 경우, 객체가 서로 직접 데이터를 참조 및 수정할수 있게 되어 프로그램의 모듈성이 손상되고 유지 관리가 복잡해진다.</p>
+<p>단, 경우에 따라서는 성능에 대한 고려사항으로 인해 캡슐화를 적용하는 것이 적절하지 않을 수도 있다. 이를테면, x/y 좌표축을 갖는 객체들이 무수하게 많이 포함된 그래픽 편집기가 있다고 가정하자. 이들 좌표에 액세스하는 별도의 메서드들을 각각 두기보다는, 좌표 필드에 직접 액세스할 수 있도록 구성한다면, 액세스 메서드를 호출할 때 차지할 상당한 CPU 사이클을 절약할 수 있다. (ex. Java의 Point 클래스)</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Person {
+  name: string;
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Person {
+  private _name: string;
+
+  get name() {
+    return this._name;
+  }
+
+  setName(name: string): void {
+    this._name = name;
+  }
+}
+</code></pre>
+<h2 id="컬렉션-캡슐화-encapsulate-collection"><a class="header" href="#컬렉션-캡슐화-encapsulate-collection">컬렉션 캡슐화 (Encapsulate Collection)</a></h2>
+<blockquote>
+<p>클래스에 컬렉션 필드와 컬렉션 작업을 위한 간단한 getter/setter가 존재하는 경우</p>
+</blockquote>
+<p>getter가 반환하는 값을 읽기 전용으로 만들고 컬렉션 요소를 추가/삭제하는 메서드를 만든다.</p>
+<p>클래스 내에 컬렉션을 포함하는 필드가 존재하는 경우, 이 때는 일반적인 필드와는 다르게 다루어야 한다. 만약 getter를 통해 컬렉션 자체가 직접 전달되는 경우, 클라이언트가 클래스도 모르게 임의로 컬렉션의 내용을 수정할 수도 있고, 필요 이상으로 많은 데이터가 클라이언트에게 노출되기 때문이다.</p>
+<p>따라서, 컬렉션 요소를 가져오는 getter 메서드의 경우, 컬렉션을 변경할 수 없는 형태로 반환하거나, 컬렉션 구조에 대한 과도한 데이터를 공개하지 말아야 한다. 또한, 컬렉션 값을 할당하는 메서드 대신, 컬렉션 내에 요소를 추가/삭제할 수 있는 메서드를 제공해야 한다. 이를 통해 클라이언트가 아닌, 클래스 본인이 요소의 추가 및 삭제에 대한 제어권을 갖도록 할 수 있다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Person {
+  private _courses: Set&lt;Course&gt;;
+
+  getCourses() {
+    return this._courses;
+  }
+
+  setCourses(courses: Set&lt;Course&gt;) {
+    this._courses = courses;
+  }
+}
+
+class Course {}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Person {
+  private _courses: Set&lt;Course&gt;;
+
+  getCourses() {
+    return [...this._courses];
+  }
+
+  addCourse(course: Course) {
+    this._courses.add(course);
+  }
+
+  removeCourse(course: Course) {
+    this._courses.delete(course);
+  }
+}
+
+class Course {}
+</code></pre>
+<h2 id="타입-코드를-클래스로-대체-replace-type-code-with-class"><a class="header" href="#타입-코드를-클래스로-대체-replace-type-code-with-class">타입 코드를 클래스로 대체 (Replace Type Code with Class)</a></h2>
+<blockquote>
+<p>어떤 클래스가 타입 코드를 포함하는 필드를 갖추었으나, 해당 타입 코드들은 연산자 조건에 사용되지 않고, 프로그램 동작에도 영향을 주지 않는 경우</p>
+</blockquote>
+<p>새로운 클래스를 생성하여, 타입 코드 대신 해당 클래스의 객체를 사용한다.</p>
+<p>타입 코드가 필요한 일반적인 이유 중 하나는 숫자나 문자열로 코딩된 복잡한 개념이 있는 필드가 있는 데이터베이스 작업을 해야하는 경우다.</p>
+<p>필드 설정자는 보통 어떤 값이 전달되는지에 대해서는 체크하지 않으므로, 누군가 의도치 않은 값이나 잘못된 값을 이들 필드에 전달하게 되면 커다란 문제가 발생할 수 있다.</p>
+<p>타입 코드가 숫자/문자열 등 primitive 타입인 경우, 적절한 타입 체크가 이루어지지 않는다는 문제점도 있다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Person {
+  static O = 0;
+  static A = 1;
+  static B = 2;
+  static AB = 3;
+  private _bloodGroup: number;
+
+  get bloodGroup() {
+    return this._bloodGroup;
+  }
+
+  set bloodGroup(bloodGroup: string) {
+    this._bloodGroup = bloodGroup;
+  }
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Person {
+  private _bloodGroup: BloodGroup;
+
+  get bloodGroup() {
+    return this._bloodGroup;
+  }
+
+  set bloodGroup(bloodGroup: BloodGroup) {
+    this._bloodGroup = bloodGroup;
+  }
+}
+
+class BloodGroup {
+  static O: BloodGroup;
+  static A: BloodGroup;
+  static B: BloodGroup;
+  static AB: BloodGroup;
+}
+</code></pre>
+<h2 id="타입-코드를-서브클래스로-대체-replace-type-code-with-subclasses"><a class="header" href="#타입-코드를-서브클래스로-대체-replace-type-code-with-subclasses">타입 코드를 서브클래스로 대체 (Replace Type Code with Subclasses)</a></h2>
+<blockquote>
+<p>프로그램 동작에 직접적인 영향을 미치는 타입 코드가 존재하는 경우 (해당 필드의 값이 조건부로 다양한 코드를 트리거하는 경우)</p>
+</blockquote>
+<p>코딩된 타입의 각 값에 대한 하위 클래스를 만든다. 이후 기존 클래스에서 새로 만든 하위 클래스로 관련 동작을 추출해낸다. 그리고 제어 흐름 코드를 다형성으로 대체한다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Employee {
+  static ENGINEER: number = 0;
+  static SALESMAN: number = 1;
+  private _type: number;
+
+  get employeeType() {
+    return this._type;
+  }
+
+  set employeeType(type: number) {
+    this._type = type;
+  }
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Employee {
+  // ...
+}
+
+class Engineer extends Employee {
+  // ...
+}
+
+class Salesman extends Employee {
+  // ...
+}
+</code></pre>
+<h2 id="타입-코드를-상태전략-패턴으로-대체-replace-type-code-with-statestrategy"><a class="header" href="#타입-코드를-상태전략-패턴으로-대체-replace-type-code-with-statestrategy">타입 코드를 상태/전략 패턴으로 대체 (Replace Type Code with State/Strategy)</a></h2>
+<blockquote>
+<p>동작에 영향을 주는 타입 코드가 있지만, 서브클래스를 사용하여 타입 코드를 대체할 수 없는 경우</p>
+</blockquote>
+<p>타입 코드를 상태 객체로 대체한다. 만약 필드 값을 타입 코드로 바꾸는 것이 필수적인 경우 다른 상태 객체가 연결되도록 한다. 이는 아래와 같은 경우에 적절하다.</p>
+<ol>
+<li>
+<p>타입 코드가 있고, 클래스의 동작에 영향을 미치고 있어 타입 코드를 클래스로 바꿀 수 없는 경우</p>
+</li>
+<li>
+<p>타입 코드가 클래스의 동작에 영향을 주지만 기존 클래스 계층 구조 또는 다른 이유로 인해 타입 코드에 대한 서브클래스를 만들 수 없는 경우</p>
+</li>
+</ol>
+<p>해당 리팩터링 테크닉은 타입 코드의 필드값이 객체의 라이프타임 동안에 변경되는 것을 막아준다. 이 때 값의 교체는 원래 클래스가 참조하는 상태 객체를 교체하여 이루어져야 한다.</p>
+<p>코드 타입에 새로운 값을 추가해야 하는 경우, 기존 코드를 변경하지 않고 새로운 상태 하위 클래스를 추가하기만 하면 된다. (OCP ~ Open/Closed Principle)</p>
+<p>다만 해당 리팩터링 테크닉은 불필요한 클래스가 많이 추가된다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">class Employee {
+  static ENGINEER: number = 0;
+  static SALESMAN: number = 1;
+  private _type: number;
+
+  get employeeType() {
+    return this._type;
+  }
+
+  set employeeType(type: number) {
+    this._type = type;
+  }
+}
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">class Employee {
+  private _type: EmployeeType;
+
+  get employeeType() {
+    return this._type;
+  }
+
+  set employeeType(type: EmployeeType) {
+    this._type = type;
+  }
+}
+
+class EmployeeType {
+}
+
+class Engineer extends EmployeeType {
+
+}
+
+class Salesman extends EmployeeType {
+
+}
+</code></pre>
+<h2 id="서브클래스를-필드로-대체-replace-subclass-with-fields"><a class="header" href="#서브클래스를-필드로-대체-replace-subclass-with-fields">서브클래스를 필드로 대체 (Replace Subclass with Fields)</a></h2>
+<blockquote>
+<p>서브클래스들이 단순히 상수 데이터(반환이 항상 같음)를 반환하는 메서드만을 가지고 있을 때</p>
+</blockquote>
+<p>해당 메서드를 상위 클래스의 필드로 바꾸고, 하위 클래스를 삭제한다.</p>
+<p>때때로 리팩터링은 타입 코드를 피하기 위한 단순한 티켓이 된다.</p>
+<p>이러한 경우, 서브클래스의 계층 구조는 오직 특정한 메서드의 반환값에 대한 차이만 갖게된다. 이러한 메서드들은 어떤 연산의 결과도 아니며, 오직 메서드 자체적으로 엄격하게 설정된 값일 뿐이다. 클래스 구조를 단순화하기 위해서는 구조를 하나의 클래스로 압축하고 상황에 따라 필요한 값을 가진 하나 또는 여러 개의 필드를 추가한다.</p>
+<p>이러한 테크닉은 클래스 계층 구조에서 다른 곳으로 많은 기능들을 이동하고 난 이후에 필요할 수 있다. 이 경우 계층 구조가 그다지 가치가 없어지고, 하위 클래스가 쓸모없어지는 경우가 생길 수 있기 때문이다.</p>
+<ul>
+<li>Before</li>
+</ul>
+<pre><code class="language-ts">type Code = 'M' | 'F';
+
+abstract class Person {
+  abstract getCode: () =&gt; Code;
+}
+
+class Male extends Person {
+    getCode = (): Code =&gt; 'M';
+}
+
+class Female extends Person {
+    getCode = (): Code =&gt; 'F';
+}
+
+</code></pre>
+<ul>
+<li>After</li>
+</ul>
+<pre><code class="language-ts">type Code = 'M' | 'F';
+
+class Person {
+  private _code: Code;
+
+  getCode(): Code {
+    return this._code;
+  };
 }
 </code></pre>
 

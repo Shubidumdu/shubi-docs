@@ -204,5 +204,5 @@
     - [Moving Features Between Objects](refactoring/refactoring-techniques/moving-features-between-objects/index.md)
     - [Organizing Data](refactoring/refactoring-techniques/organizing-data/index.md)
     - [Simplifying Conditional Expressions](refactoring/refactoring-techniques/simplifying-conditional-expressions/index.md)
-    - [Making Method Calls Simpler](refactoring/refactoring-techniques/making-method-calls-simpler/index.md)
+    - [Simplifying Method Calls](refactoring/refactoring-techniques/simplifying-method-calls/index.md)
     - [Dealing with Generalization](refactoring/refactoring-techniques/dealing-with-generalization/index.md)

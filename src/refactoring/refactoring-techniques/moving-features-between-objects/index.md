@@ -72,6 +72,10 @@ ___
 
 이를테면, 아래의 `nextDay`의 경우, 유틸리티인 Date 클래스에 포함되는 것이 이상적이지만, 네이티브 클래스인 Date에 이를 추가하는 것이 어려우므로 클라이언트 클래스인 `Report`에 이 `nextDay` 메서드를 추가하고, 매개변수 및 반환값으로 `Date` 객체를 사용한다.
 
+이는 메서드가 적절한 위치에 있는 것이 아니더라도, 그를 통한 중복 제거가 더 유용하다고 보는 관점으로 적용하는 리팩터링이다.
+
+다만, 기본적으로 이는 메서드를 적절한 클래스 위치에 두는 것이 아니므로, 아래의 [로컬 확장 도입](#로컬-확장-도입-introduce-local-extension)을 사용하는 편이 일반적으로는 더 좋다.
+
 - Before
 
 ```ts
@@ -110,3 +114,26 @@ class Report {
 1. **서브 클래스**로 사용하는 경우, 부모로부터의 모든 것을 상속받기 때문에 쉬운 방법이지만, 유틸리티 클래스 자체적으로 이것이 차단되어 있는 경우에는 적용이 어렵다.
 
 2. **래퍼 클래스**로 사용하는 경우, 모든 새 메서드를 포함하는 래퍼 클래스를 만들고, 그 외의 기본 사양은 원본 객체에 위임한다. 이는 객체 간 관계를 유지하기 위한 코드를 작성해야 할 뿐만 아니라, 유틸리티 클래스로 위임하는 여러 메서드들을 추가해야하기 때문에 보다 번거로운 작업이 된다.
+
+- Before
+
+```ts
+class ClientClass {
+  // ...
+  private static nextDay(arg: Date): Date {
+    return new Date(arg.getFullYear(), arg.getMonth(), arg.getDate() + 1);
+  }
+}
+```
+
+- After
+
+```ts
+class MfDate extends Date {
+  // ...
+  nextDay(): Date {
+    return new Date(this.getFullYear(), this.getMonth(), this.getDate() + 1);
+  }
+}
+```
+

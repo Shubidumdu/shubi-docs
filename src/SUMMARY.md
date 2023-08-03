@@ -206,3 +206,5 @@
     - [Simplifying Conditional Expressions](refactoring/refactoring-techniques/simplifying-conditional-expressions/index.md)
     - [Simplifying Method Calls](refactoring/refactoring-techniques/simplifying-method-calls/index.md)
     - [Dealing with Generalization](refactoring/refactoring-techniques/dealing-with-generalization/index.md)
+- [Graphics]()
+  - [What is GLTF](graphics/what-is-gltf.md)

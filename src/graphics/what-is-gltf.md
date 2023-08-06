@@ -436,3 +436,50 @@ Metallic-Roughness-Model을 통해 정의된 프로퍼티들에 더해, 머테�
 
 한 노드가 한 카메라를 참조할 때, 카메라 인스턴스가 생성된다.
 이 인스턴스의 카메라 매트릭스는 곧 노드의 전역 트랜스폼 매트릭스에 전달된다.
+
+## Textures, Images, Samplers
+
+**textures**는 렌더될 오브젝트에 적용될 텍스처에 대한 정보를 담는다.
+머테리얼은 오브젝트의 기본 컬러 뿐만 아니라 오브젝트 형상에 영향을 미칠 물리적 속성을 정의하기 위해서 텍스처를 참조한다.
+
+```JSON
+"textures": [
+  {
+    "source": 4, // 아래의 index 4에 해당하는 `file01.png` 이미지를 참조
+    "sampler": 2 // 아래의 index 2에 해당하는 `samplers`를 참조
+  }
+  ...
+]
+```
+
+```JSON
+"images": [
+  ...
+  {
+    "uri": "file01.png"
+  },
+  {
+    "bufferView": 3,
+    "mimeType": "image/jpeg"
+  }
+]
+```
+
+```JSON
+"samplers": [
+  ...
+  {
+    "magFilter": 9729,
+    "minFilter": 9987,
+    "wrapS": 10497,
+    "wrapT": 10497
+  }
+]
+```
+
+텍스처는 에셋 이미지 중 하나를 가리키는 텍스처 소스(**source**)에 대한 참조와, 샘플러(**sampler**)에 대한 참조로 구성된다.
+
+**images**는 텍스처에 사용될 이미지 데이터를 정의한다.
+이 데이터는 이미지 파일 위치를 가리키는 **uri** 속성을 통해 참조할 수도 있고, **bufferView**에 대한 참조와 버퍼 뷰에 저장된 이미지 데이터의 타입을 정의하는 **MIME Type** 속성을 통해 참조할 수도 있다.
+
+**samplers**는 텍스처의 스케일링과 텍스처 좌표의 래핑을 정의한다. (= `glTexParameter`에 넘겨지는 OpenGL 상수값)

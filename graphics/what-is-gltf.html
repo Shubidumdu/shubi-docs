@@ -482,6 +482,42 @@ glTF의 코어는 JSON 파일이며, 3D 모델들을 포함한 하나의 씬 구
 해당 값이 없다면, 카메라가 무한한 프로젝션에 사용되는 특별한 프로젝션 매트릭스를 사용된다.</p>
 <p>한 노드가 한 카메라를 참조할 때, 카메라 인스턴스가 생성된다.
 이 인스턴스의 카메라 매트릭스는 곧 노드의 전역 트랜스폼 매트릭스에 전달된다.</p>
+<h2 id="textures-images-samplers"><a class="header" href="#textures-images-samplers">Textures, Images, Samplers</a></h2>
+<p><strong>textures</strong>는 렌더될 오브젝트에 적용될 텍스처에 대한 정보를 담는다.
+머테리얼은 오브젝트의 기본 컬러 뿐만 아니라 오브젝트 형상에 영향을 미칠 물리적 속성을 정의하기 위해서 텍스처를 참조한다.</p>
+<pre><code class="language-JSON">&quot;textures&quot;: [
+  {
+    &quot;source&quot;: 4, // 아래의 index 4에 해당하는 `file01.png` 이미지를 참조
+    &quot;sampler&quot;: 2 // 아래의 index 2에 해당하는 `samplers`를 참조
+  }
+  ...
+]
+</code></pre>
+<pre><code class="language-JSON">&quot;images&quot;: [
+  ...
+  {
+    &quot;uri&quot;: &quot;file01.png&quot;
+  },
+  {
+    &quot;bufferView&quot;: 3,
+    &quot;mimeType&quot;: &quot;image/jpeg&quot;
+  }
+]
+</code></pre>
+<pre><code class="language-JSON">&quot;samplers&quot;: [
+  ...
+  {
+    &quot;magFilter&quot;: 9729,
+    &quot;minFilter&quot;: 9987,
+    &quot;wrapS&quot;: 10497,
+    &quot;wrapT&quot;: 10497
+  }
+]
+</code></pre>
+<p>텍스처는 에셋 이미지 중 하나를 가리키는 텍스처 소스(<strong>source</strong>)에 대한 참조와, 샘플러(<strong>sampler</strong>)에 대한 참조로 구성된다.</p>
+<p><strong>images</strong>는 텍스처에 사용될 이미지 데이터를 정의한다.
+이 데이터는 이미지 파일 위치를 가리키는 <strong>uri</strong> 속성을 통해 참조할 수도 있고, <strong>bufferView</strong>에 대한 참조와 버퍼 뷰에 저장된 이미지 데이터의 타입을 정의하는 <strong>MIME Type</strong> 속성을 통해 참조할 수도 있다.</p>
+<p><strong>samplers</strong>는 텍스처의 스케일링과 텍스처 좌표의 래핑을 정의한다. (= <code>glTexParameter</code>에 넘겨지는 OpenGL 상수값)</p>
 
                     </main>
 

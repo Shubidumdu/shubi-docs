@@ -399,7 +399,7 @@ glTF의 코어는 JSON 파일이며, 3D 모델들을 포함한 하나의 씬 구
 </code></pre>
 <p>Metallic-Roughness-Model 머테리얼은 <strong>pbrMetallicRoughness</strong> 객체에 정의된다.</p>
 <p><strong>baseColorTexture</strong>는 오브젝트에 적용될 메인 텍스처다.
-<strong>baseColorFactor</strong>는 색의 RGBA에 대한 스케일링 팩터를 담고 있다. 
+<strong>baseColorFactor</strong>는 색의 RGBA에 대한 스케일링 팩터를 담고 있다.
 따로 텍스처가 사용되지 않는다면, 오브젝트 전체가 해당 색이 적용될 것이다.</p>
 <p><strong>metallicRoughnessTexture</strong>는 &quot;blue&quot; 컬러 채널에 metalness 값을, &quot;green&quot; 컬러 채널에 roughness 값을 담고 있는 텍스처를 의미한다.
 <strong>metallicFactor</strong>와 <strong>roughnessFactor</strong>는 이러한 값에 해당 수치 만큼 곱셈을 적용한다.
@@ -454,6 +454,34 @@ glTF의 코어는 JSON 파일이며, 3D 모델들을 포함한 하나의 씬 구
 <p>하나의 머테리얼 내 텍스처 참조는 항상 텍스처의 <strong>index</strong>를 포함해야 한다.
 또, 특정 index가 설정된 <strong>texCoord</strong>를 포함하기도 한다.
 이는 해당 텍스처의 텍스처 좌표(coordinate)를 포함하는 메쉬 프리미티브의 어트리뷰트(<code>TEXCOORD_&lt;n&gt;</code>)를 결정하는 값이며, 이는 기본값으로는 <code>0</code>이다.</p>
+<h2 id="cameras"><a class="header" href="#cameras">Cameras</a></h2>
+<p>각 노드에 glTF 에셋에 정의된 <strong>카메라</strong> 중 하나를 참조할 수 있다.</p>
+<pre><code class="language-JSON">&quot;cameras&quot;: [
+  {
+    &quot;type&quot;: &quot;perspective&quot;,
+    &quot;perspective&quot;: {
+      &quot;aspectRatio&quot;: 1.5,
+      &quot;yfov&quot;: 0.65,
+      &quot;zfar&quot;: 100,
+      &quot;znear&quot;: 0.01
+    }
+  },
+  {
+    &quot;type&quot;: &quot;orthographic&quot;,
+    &quot;orthographic&quot;: {
+      &quot;xmag&quot;: 1.0,
+      &quot;ymag&quot;: 1.0,
+      &quot;zfar&quot;: 100,
+      &quot;znear&quot;: 0.01
+    }
+  }
+]
+</code></pre>
+<p>카메라에는 두가지 타입, <strong>perspective</strong>와 <strong>orthographic</strong>이 있으며, 이는 프로젝션 매트릭스(projection matrix)를 정의한다.</p>
+<p><strong>zfar</strong>는 perspective 카메라의 far clipping plane 거리의 값에 해당하며, 이는 옵셔널하다.
+해당 값이 없다면, 카메라가 무한한 프로젝션에 사용되는 특별한 프로젝션 매트릭스를 사용된다.</p>
+<p>한 노드가 한 카메라를 참조할 때, 카메라 인스턴스가 생성된다.
+이 인스턴스의 카메라 매트릭스는 곧 노드의 전역 트랜스폼 매트릭스에 전달된다.</p>
 
                     </main>
 

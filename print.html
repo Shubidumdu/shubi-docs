@@ -23852,6 +23852,70 @@ output은 각 키프레임에서 애니메이션이 적용되는 프로퍼티 �
 <p><img src="graphics/image-12.png" alt="Animation channel target 1" /></p>
 <p>노드에 연결된 메쉬의 프리미티브에 정의된 모프 타깃에 적용된 <strong>weights</strong> 애니메이션은 다음과 같은 형태로 동작한다.</p>
 <p><img src="graphics/image-13.png" alt="Weights animation" /></p>
+<h2 id="binary-gltf-files"><a class="header" href="#binary-gltf-files">Binary glTF files</a></h2>
+<p>일반적인 glTF 포맷의 경우, 버퍼 데이터와 텍스처 같은 외부 바이너리 리소스를 포함하는 두 가지 방법이 있다.</p>
+<p>하나는 URI를 통해 참조하는 방법이고, 다른 하나는 데이터 URI를 통해 인라인으로 포함하는 방법이다.</p>
+<p>URI를 통해 참조하는 경우, 각각의 외부 리소스에 대한 다운로드 요청이 이루어져야 한다.</p>
+<p>데이터 URI로 첨부되는 경우, 바이너리 데이터에 대한 base64 인코딩이 필요하며, 이 경우 파일 사이즈가 상당히 커질 수 있다.</p>
+<p>이러한 단점을 극복하기 위해, glTF JSON과 바이너리 데이터를 하나의 단일 <strong>바이너리 glTF</strong> 파일로 합치는 방법이 있다.</p>
+<p>이는 리틀-엔디언(little-endian) 파일이며, <code>.glb</code> 확장자를 가진다.</p>
+<p>여기엔 <strong>헤더</strong>(<strong>header</strong>)가 포함되는데, 이는 데이터의 버전과 구조에 대한 기본 정보를 제공한다.</p>
+<p>또, 하나 이상의 <strong>청크</strong>(<strong>chunks</strong>)가 있으며, 여기에 실질적인 데이터가 포함된다.</p>
+<p>첫번째 청크는 항상 JSON 데이터를 포함하며, 그 외의 나머지 청크에는 바이너리 데이터가 포함된다.</p>
+<p><img src="graphics/image-14.png" alt="glb structure" /></p>
+<h3 id="extensions"><a class="header" href="#extensions">Extensions</a></h3>
+<p>glTF 포맷은 새로운 기능의 추가 또는 일반적으로 사용되는 프로퍼티의 정의를 단순화하기 위해 익스텐션을 허용한다.</p>
+<pre><code class="language-JSON">&quot;extensionsUsed&quot;: [
+  &quot;KHR_lights_common&quot;,
+  &quot;CUSTOM_EXTENSION&quot;
+],
+&quot;extensionsRequired&quot;: [
+  &quot;KHR_lights_common&quot;
+],
+&quot;textures&quot;: [
+  {
+    ...
+    &quot;extensions&quot;: {
+      &quot;KHR_lights_common&quot;: {
+        &quot;lightSource&quot;: true,
+      },
+      &quot;CUSTOM_EXTENSION&quot;: {
+        &quot;customProperty&quot;: &quot;customValue&quot;
+      }
+    }
+  }
+]
+</code></pre>
+<p>익스텐션이 glTF 에셋에서 사용되는 경우, 최상위에 <code>extensionsUsed</code> 배열에 익스텐션의 이름이 추가되어야 한다.</p>
+<p><code>extensionsRequired</code> 배열에 추가된 익스텐션의 경우 에셋을 적절하게 불러오기 위해 엄격하게 요구된다.</p>
+<p>익스텐션은 다른 오브젝트의 <code>extensions</code> 프로퍼티 내에서 임의의 오브젝트를 추가하는 것을 허용한다.</p>
+<p>해당 오브젝트의 명칭은 익스텐션의 이름과 동일하며, 익스텐션에서 임의로 사용하는 프로퍼티가 추가로 있을 수 있다.</p>
+<h4 id="khronos-group에-의해-유지보수되는-익스텐션-목록"><a class="header" href="#khronos-group에-의해-유지보수되는-익스텐션-목록">Khronos Group에 의해 유지보수되는 익스텐션 목록</a></h4>
+<p>전체 목록은 <a href="https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos">여기</a>를 확인하자.</p>
+<ul>
+<li>Specular-Glossiness Materials</li>
+</ul>
+<blockquote>
+<p>기본 Metallic-Roughness 머테리얼 모델의 대체재로, specular와 glossiness 값에 기반하여 머테리얼 속성을 정의한다.</p>
+</blockquote>
+<ul>
+<li>Unlit Materials</li>
+</ul>
+<blockquote>
+<p>물리적인 빛 연산이 필요없는 머테리얼을 정의할 수 있도록 해준다.</p>
+</blockquote>
+<ul>
+<li>Punctual Lights</li>
+</ul>
+<blockquote>
+<p>씬 구조에 다양한 형태의 라이트를 추가할 수 있도록 해준다. Point/Spot/Directional 이 있으며, 이러한 라이트들은 씬 구조의 노드에 첨부될 수 있다.</p>
+</blockquote>
+<ul>
+<li>Texture transforms</li>
+</ul>
+<blockquote>
+<p>텍스처에 대한 오프셋, 회전, 스케일을 정의할 수 있도록 해준다. 이를 이용하여 텍스처 아틀라스(texture atlas)를 생성하기 위해 여러 텍스처를 결합할 수 있다.</p>
+</blockquote>
 
                     </main>
 

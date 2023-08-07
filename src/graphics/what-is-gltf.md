@@ -696,3 +696,76 @@ output은 각 키프레임에서 애니메이션이 적용되는 프로퍼티 �
 노드에 연결된 메쉬의 프리미티브에 정의된 모프 타깃에 적용된 **weights** 애니메이션은 다음과 같은 형태로 동작한다.
 
 ![Weights animation](image-13.png)
+
+## Binary glTF files
+
+일반적인 glTF 포맷의 경우, 버퍼 데이터와 텍스처 같은 외부 바이너리 리소스를 포함하는 두 가지 방법이 있다.
+
+하나는 URI를 통해 참조하는 방법이고, 다른 하나는 데이터 URI를 통해 인라인으로 포함하는 방법이다.
+
+URI를 통해 참조하는 경우, 각각의 외부 리소스에 대한 다운로드 요청이 이루어져야 한다.
+
+데이터 URI로 첨부되는 경우, 바이너리 데이터에 대한 base64 인코딩이 필요하며, 이 경우 파일 사이즈가 상당히 커질 수 있다.
+
+이러한 단점을 극복하기 위해, glTF JSON과 바이너리 데이터를 하나의 단일 **바이너리 glTF** 파일로 합치는 방법이 있다.
+
+이는 리틀-엔디언(little-endian) 파일이며, `.glb` 확장자를 가진다.
+
+여기엔 **헤더**(**header**)가 포함되는데, 이는 데이터의 버전과 구조에 대한 기본 정보를 제공한다.
+
+또, 하나 이상의 **청크**(**chunks**)가 있으며, 여기에 실질적인 데이터가 포함된다.
+
+첫번째 청크는 항상 JSON 데이터를 포함하며, 그 외의 나머지 청크에는 바이너리 데이터가 포함된다.
+
+![glb structure](image-14.png)
+
+### Extensions
+
+glTF 포맷은 새로운 기능의 추가 또는 일반적으로 사용되는 프로퍼티의 정의를 단순화하기 위해 익스텐션을 허용한다.
+
+```JSON
+"extensionsUsed": [
+  "KHR_lights_common",
+  "CUSTOM_EXTENSION"
+],
+"extensionsRequired": [
+  "KHR_lights_common"
+],
+"textures": [
+  {
+    ...
+    "extensions": {
+      "KHR_lights_common": {
+        "lightSource": true,
+      },
+      "CUSTOM_EXTENSION": {
+        "customProperty": "customValue"
+      }
+    }
+  }
+]
+```
+
+익스텐션이 glTF 에셋에서 사용되는 경우, 최상위에 `extensionsUsed` 배열에 익스텐션의 이름이 추가되어야 한다.
+
+`extensionsRequired` 배열에 추가된 익스텐션의 경우 에셋을 적절하게 불러오기 위해 엄격하게 요구된다.
+
+익스텐션은 다른 오브젝트의 `extensions` 프로퍼티 내에서 임의의 오브젝트를 추가하는 것을 허용한다.
+
+해당 오브젝트의 명칭은 익스텐션의 이름과 동일하며, 익스텐션에서 임의로 사용하는 프로퍼티가 추가로 있을 수 있다.
+
+#### Khronos Group에 의해 유지보수되는 익스텐션 목록
+
+전체 목록은 [여기](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos)를 확인하자.
+
+- Specular-Glossiness Materials
+> 기본 Metallic-Roughness 머테리얼 모델의 대체재로, specular와 glossiness 값에 기반하여 머테리얼 속성을 정의한다.
+
+- Unlit Materials
+> 물리적인 빛 연산이 필요없는 머테리얼을 정의할 수 있도록 해준다.
+
+- Punctual Lights
+> 씬 구조에 다양한 형태의 라이트를 추가할 수 있도록 해준다. Point/Spot/Directional 이 있으며, 이러한 라이트들은 씬 구조의 노드에 첨부될 수 있다.
+
+- Texture transforms
+> 텍스처에 대한 오프셋, 회전, 스케일을 정의할 수 있도록 해준다. 이를 이용하여 텍스처 아틀라스(texture atlas)를 생성하기 위해 여러 텍스처를 결합할 수 있다.

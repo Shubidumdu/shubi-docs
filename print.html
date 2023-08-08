@@ -23832,10 +23832,10 @@ void main(void) {
 ]
 </code></pre>
 <p>각각의 애니메이션은 두 요소를 갖는다. 하나의 <strong>채널</strong>(<strong>channels</strong>) 배열과 하나의 <strong>샘플러</strong>(<strong>samplers</strong>) 배열이다.</p>
-<p>각 채널은 애니메이션의 <strong>타겟</strong>(<strong>target</strong>)을 정의한다. 이 타겟은 대부분 인덱스를 통해 하나의 <strong>노드</strong>(<strong>node</strong>)를 참조하고, <strong>패스</strong>(<strong>path</strong>)는 해당 노드의 어떤 프로퍼티가 애니메이션의 대상인지를 정의한다. 
+<p>각 채널은 애니메이션의 <strong>타겟</strong>(<strong>target</strong>)을 정의한다. 이 타겟은 대부분 인덱스를 통해 하나의 <strong>노드</strong>(<strong>node</strong>)를 참조하고, <strong>패스</strong>(<strong>path</strong>)는 해당 노드의 어떤 프로퍼티가 애니메이션의 대상인지를 정의한다.
 패스는 노드에 로컬 트랜스폼을 적용하는 <code>translation</code>, <code>rotation</code>, 또는 <code>scale</code>이 되거나, 또는 노드에 의해 참조되는 메쉬의 모프 타겟의 가중치에 애니메이션을 적용하기 위해선 <code>weights</code>가 된다.
 채널은 또한 하나의 <strong>샘플러</strong>(<strong>sampler</strong>)를 참조하며, 이는 실제 애니메이션 데이터를 요약한다.</p>
-<p>샘플러는 <strong>입력</strong>(<strong>input</strong>)과 <strong>출력</strong>(<strong>output</strong>)을 가지며, 데이터를 제공하는 액세서의 인덱스를 통해 참조한다. 
+<p>샘플러는 <strong>입력</strong>(<strong>input</strong>)과 <strong>출력</strong>(<strong>output</strong>)을 가지며, 데이터를 제공하는 액세서의 인덱스를 통해 참조한다.
 input은 스칼라 부동소수점을 가진 액세서를 참조하며, 애니메이션의 키프레임에 해당하는 시간들에 해당한다.
 output은 각 키프레임에서 애니메이션이 적용되는 프로퍼티 값을 담고 있는 액세서를 참조한다.
 샘플러는 또한 애니메이션의 <strong>보간</strong>(<strong>interpolation</strong>) 모드를 정의하며, 여기서는 <code>LINEAR</code>, <code>STEP</code>, <code>CUBICSPLINE</code>이 될 수 있다.</p>
